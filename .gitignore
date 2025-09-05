@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/EventDriven.Project.Enrollment/obj
+/EventDriven.Project.Enrollment/bin/Debug/net8.0-windows
+/EventDriven.Project.DB/obj/Debug
+/EventDriven.Project.Logic/obj
+/EventDriven.Project.Model/obj
+/EventDriven.Project.UI/obj
+/EventDriven.Project.DB/EventDriven.Project.DB.jfm
+/EventDriven.Project.DB/EventDriven.Project.DB.dbmdl
