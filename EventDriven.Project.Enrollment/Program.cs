@@ -1,4 +1,4 @@
-namespace EventDriven.Project.Enrollment
+namespace EventDriven.Project.UI
 {
     internal static class Program
     {
@@ -10,8 +10,20 @@ namespace EventDriven.Project.Enrollment
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            using (TempLogin loginForm = new TempLogin())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new Form1());
+                }
+                else
+                {
+                    Application.Exit();
+
+                }
+            }
         }
     }
 }
