@@ -33,6 +33,7 @@
             btnLogin = new Button();
             LbName = new Label();
             lbPass = new Label();
+            CBSeePW = new CheckBox();
             SuspendLayout();
             // 
             // TBName
@@ -77,11 +78,23 @@
             lbPass.TabIndex = 4;
             lbPass.Text = "Password";
             // 
+            // CBSeePW
+            // 
+            CBSeePW.AutoSize = true;
+            CBSeePW.Location = new Point(324, 170);
+            CBSeePW.Name = "CBSeePW";
+            CBSeePW.Size = new Size(120, 24);
+            CBSeePW.TabIndex = 5;
+            CBSeePW.Text = "See Password";
+            CBSeePW.UseVisualStyleBackColor = true;
+            CBSeePW.CheckedChanged += CBSeePW_CheckedChanged;
+            // 
             // TempLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(CBSeePW);
             Controls.Add(lbPass);
             Controls.Add(LbName);
             Controls.Add(btnLogin);
@@ -89,6 +102,7 @@
             Controls.Add(TBName);
             Name = "TempLogin";
             Text = "TempLogin";
+            KeyDown += TempLogin_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -100,5 +114,6 @@
         private Button btnLogin;
         private Label LbName;
         private Label lbPass;
+        private CheckBox CBSeePW;
     }
 }

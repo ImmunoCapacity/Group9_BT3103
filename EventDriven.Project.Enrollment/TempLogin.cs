@@ -18,6 +18,9 @@ namespace EventDriven.Project.UI
         {
             InitializeComponent();
             userController = new UserController();
+            TBPassword.UseSystemPasswordChar = true;
+            this.KeyPreview = true;
+
         }
 
 
@@ -35,11 +38,11 @@ namespace EventDriven.Project.UI
                 else throw new Exception("Invalid Credentials");
 
                 //UserModel matchingUser = new UserModel();
-                //using (SqlConnection Hotel = new SqlConnection(CONNECTIONSTRING))
+                //using (SqlConnection Enroll = new SqlConnection(CONNECTIONSTRING))
                 //{
-                //    Hotel.Open();
+                //    Enroll.Open();
                 //    string query = "SELECT * FROM dbo.[User] WHERE name ='" + TBName.Text + "'AND password ='" + TBPassword.Text + "'";
-                //    SqlCommand command = new SqlCommand(query, Hotel);
+                //    SqlCommand command = new SqlCommand(query, Enroll);
 
 
                 //    SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -62,9 +65,49 @@ namespace EventDriven.Project.UI
             }
         }
 
-        private void btnLogin_Click_1(object sender, EventArgs e)
+        private void CBSeePW_CheckedChanged(object sender, EventArgs e)
         {
+            if (CBSeePW.Checked)
+            {
+                TBPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                TBPassword.UseSystemPasswordChar = true;
+            }
+        }
+        private void TBPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Move focus to the next control
+                this.SelectNextControl((Control)sender, true, true, true, true);
 
+                // Prevent the "ding" sound
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+      
+        private void TempLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!(this.ActiveControl is TextBox))
+                return;
+
+            bool forward = e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down || e.KeyCode == Keys.Right;
+            bool backward = e.KeyCode == Keys.Up || e.KeyCode == Keys.Left;
+
+            if (forward || backward)
+            {
+                e.SuppressKeyPress = true; // prevent system beep
+                e.Handled = true;
+
+                // Move focus safely
+                this.SelectNextControl(this.ActiveControl, forward, true, true, true);
+
+
+            }
         }
     }
 }

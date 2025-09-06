@@ -1,27 +1,32 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 using EventDriven.Project.Model;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace EventDriven.Project.Logic.Repository
 {
     internal class UserRepository
     {
-        private string CONNECTIONSTRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=myLogTest;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
-
-          public UserModel ValidateUser(string Username, string Password)//Form1 Validate User
+        private readonly string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EnrollmentDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        public UserModel ValidateUser(string Username, string Password)//Form1 Validate User
         {
-            
+
             try
             {
                 UserModel matchingUser = new UserModel();
-                using (SqlConnection Hotel = new SqlConnection(CONNECTIONSTRING))
+                using (SqlConnection Enroll = new SqlConnection(CONNECTIONSTRING))
                 {
-                    Hotel.Open();
-                    string query = "SELECT * FROM dbo.[User] WHERE name = @name AND Password = @password";
-                    SqlCommand command = new SqlCommand(query, Hotel);
-                    command.Parameters.AddWithValue("@name", Username);
-                    command.Parameters.AddWithValue("@password", Password);
-                    
+                    Enroll.Open();
+                    string query = "SELECT * FROM [dbo].[Users] WHERE Username = @password and PasswordHash = HASHBYTES('SHA2_256', @Password);";
+                    Console.WriteLine(query);
+                    SqlCommand command = new SqlCommand(query, Enroll);
+                    command.Parameters.AddWithValue("@username", Username);
+                    //command.Parameters.AddWithValue("@password", Password);
+                    command.Parameters.Add("@Password", SqlDbType.VarChar, 50).Value = Password;
+
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataTable table = new DataTable();
@@ -34,9 +39,9 @@ namespace EventDriven.Project.Logic.Repository
                             Password = Password
                         };
                         return matchingUser;
-                        
 
-                    }                   
+
+                    }
                 }
             }
 
@@ -47,50 +52,75 @@ namespace EventDriven.Project.Logic.Repository
             return null;
 
         }
-        public UserModel getUserByUserId(string UserIdParam)
+
+
+        //trial
+        public UserModel GetUserByUserId(int userId)
         {
-            try { 
-            UserModel matchingUser = new UserModel();
-            using (SqlConnection myConnection = new SqlConnection(CONNECTIONSTRING))
+            try
             {
-                string oString = "SELECT * FROM User WHERE Id = @userId";
-                using (SqlCommand oCmd = new SqlCommand(oString, myConnection))
+                using (SqlConnection conn = new SqlConnection(CONNECTIONSTRING))
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT Id, Username, Role FROM dbo.[User] WHERE Id = @UserId",
+                    conn))
                 {
-                    oCmd.Parameters.AddWithValue("@UserId", UserIdParam);
-                    myConnection.Open();
-                    using (SqlDataReader oReader = oCmd.ExecuteReader())
+                    cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (oReader.Read())
+                        if (reader.Read())
                         {
-
-                            matchingUser.Id = (int)oReader["Id"];
-                            matchingUser.Username = oReader["Username"].ToString();
-                            matchingUser.Password = oReader["Password"].ToString();
+                            return new UserModel
+                            {
+                                Id = (int)reader["Id"],
+                                Username = reader["Username"].ToString(),
+                                Role = reader["Role"].ToString()
+                            };
                         }
-                        myConnection.Close();
-
                     }
                 }
-                
-            }
-            
-                if (matchingUser.Id == 0)
-                {
-                    throw new Exception("User does not exist");
-                }
 
-                return matchingUser;
+                throw new Exception("User does not exist");
             }
-            
             catch (Exception ex)
             {
-                
                 throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
-       
+        public UserModel ValidateRole(string username, string role)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECTIONSTRING))
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT Id, Username FROM dbo.[User] WHERE Username = @Username AND Role = @Role",
+                    conn))
+                {
+                    cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50).Value = username;
+                    cmd.Parameters.Add("@Role", SqlDbType.NVarChar, 50).Value = role;
+
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UserModel
+                            {
+                                Id = (int)reader["Id"],
+                                Username = reader["Username"].ToString(),
+                                Role = role
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
     }
 }
-        
-    

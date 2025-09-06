@@ -9,10 +9,10 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO [dbo].[User]
-(
-[id],
-[name], 
-[password])
-VALUES(1,'admin','admin'),(2, 'Hanz', 'Hanz')
+INSERT INTO [dbo].[Users] ([Username], [PasswordHash], [Role])
+VALUES
+    ('admin', HASHBYTES('SHA2_256', 'admin'), 'admin'),
+    ('Hanz', HASHBYTES('SHA2_256', 'Hanz'), 'Cashier');
+
+
 

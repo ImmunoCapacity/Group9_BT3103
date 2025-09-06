@@ -1,6 +1,7 @@
-﻿CREATE TABLE [dbo].[user]
+﻿CREATE TABLE [dbo].[Users]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [name] NCHAR(50) NULL, 
-    [password] NCHAR(50) NULL
-)
+    [Id] INT IDENTITY(1,1) PRIMARY KEY, 
+    [Username] NVARCHAR(50) NOT NULL, 
+    [PasswordHash] VARBINARY(64) NOT NULL, -- hashed password storage
+    [Role] NVARCHAR(50) NOT NULL
+);
