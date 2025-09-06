@@ -11,3 +11,5 @@
 /EventDriven.Project.UI/obj
 /EventDriven.Project.DB/EventDriven.Project.DB.jfm
 /EventDriven.Project.DB/EventDriven.Project.DB.dbmdl
+/EventDriven.Project.DB/bin/Debug
+/EventDriven.Project.DB/EventDriven.Project.DB.publish.xml
