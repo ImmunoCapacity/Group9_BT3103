@@ -11,4 +11,10 @@
 /EventDriven.Project.UI/obj
 /EventDriven.Project.DB/EventDriven.Project.DB.jfm
 /EventDriven.Project.DB/EventDriven.Project.DB.dbmdl
+<<<<<<< HEAD
 /EventDriven.Project.DB
+=======
+/EventDriven.Project.DB/bin/Debug
+/EventDriven.Project.DB/EventDriven.Project.DB.publish.xml
+/EventDriven.Project.UI/bin/Debug/net8.0-windows
+>>>>>>> origin/main
