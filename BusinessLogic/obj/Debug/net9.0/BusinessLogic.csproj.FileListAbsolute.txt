@@ -1,5 +1,0 @@
-C:\Users\Hanz Llenard Kim A.S\Source\Repos\Group9_BT3103\BusinessLogic\obj\Debug\net9.0\BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Hanz Llenard Kim A.S\Source\Repos\Group9_BT3103\BusinessLogic\obj\Debug\net9.0\BusinessLogic.AssemblyInfoInputs.cache
-C:\Users\Hanz Llenard Kim A.S\Source\Repos\Group9_BT3103\BusinessLogic\obj\Debug\net9.0\BusinessLogic.AssemblyInfo.cs
-C:\Users\Hanz Llenard Kim A.S\Source\Repos\Group9_BT3103\BusinessLogic\obj\Debug\net9.0\BusinessLogic.csproj.CoreCompileInputs.cache
-C:\Users\Hanz Llenard Kim A.S\Source\Repos\Group9_BT3103\BusinessLogic\obj\Debug\net9.0\BusinessLogic.sourcelink.json

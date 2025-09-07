@@ -9,7 +9,7 @@ namespace EventDriven.Project.UI
 {
     public partial class TempLogin : Form
     {
-        private string CONNECTIONSTRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=myLogTest;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        //private string CONNECTIONSTRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=myLogTest;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
         //private string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=myLogTest;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
