@@ -10,7 +10,7 @@ namespace EventDriven.Project.Logic.Repository
 {
     internal class UserRepository
     {
-        private readonly string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EnrollmentDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        private readonly string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventDriven.Project.DB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
         public UserModel ValidateUser(string Username, string Password)//Form1 Validate User
         {
 
@@ -19,13 +19,14 @@ namespace EventDriven.Project.Logic.Repository
                 UserModel matchingUser = new UserModel();
                 using (SqlConnection Enroll = new SqlConnection(CONNECTIONSTRING))
                 {
+
                     Enroll.Open();
-                    string query = "SELECT * FROM [dbo].[Users] WHERE Username = @password and PasswordHash = HASHBYTES('SHA2_256', @Password);";
+                    string query = "SELECT * FROM [dbo].[tblUser] WHERE username = @username and userPassword = HASHBYTES('SHA2_256', @password);";
                     Console.WriteLine(query);
                     SqlCommand command = new SqlCommand(query, Enroll);
                     command.Parameters.AddWithValue("@username", Username);
                     //command.Parameters.AddWithValue("@password", Password);
-                    command.Parameters.Add("@Password", SqlDbType.VarChar, 50).Value = Password;
+                    command.Parameters.Add("@password", SqlDbType.VarChar, 50).Value = Password;
 
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -37,6 +38,7 @@ namespace EventDriven.Project.Logic.Repository
                         {
                             Username = Username,
                             Password = Password
+                            
                         };
                         return matchingUser;
 

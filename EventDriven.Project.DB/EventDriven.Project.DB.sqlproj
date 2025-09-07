@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{296440d8-9906-426c-a6ae-fb7af7b02975}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -61,7 +61,10 @@
     <Folder Include="dbo\tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\tables\Table1.sql" />
+    <Build Include="dbo\tables\tblUser.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\tables\user.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\scripts\Script.PostDeployment1.sql" />

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36327.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.UI", "EventDriven.Project.Enrollment\EventDriven.Project.UI.csproj", "{62CDCAF5-729D-4848-94B5-9A0A565E2887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.UI", "EventDriven.Project.UI\EventDriven.Project.UI.csproj", "{62CDCAF5-729D-4848-94B5-9A0A565E2887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Enrollment", "EventDriven.Project.UI\EventDriven.Project.Enrollment.csproj", "{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Enrollment", "EventDriven.Project.Enrollment\EventDriven.Project.Enrollment.csproj", "{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EnrollmentDB", "EventDriven.Project.DB\EnrollmentDB.sqlproj", "{296440D8-9906-426C-A6AE-FB7AF7B02975}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EventDriven.Project.DB", "EventDriven.Project.DB\EventDriven.Project.DB.sqlproj", "{296440D8-9906-426C-A6AE-FB7AF7B02975}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Model", "EventDriven.Project.Model\EventDriven.Project.Model.csproj", "{21C83437-3279-47C3-AF20-E725681ECB21}"
 EndProject
