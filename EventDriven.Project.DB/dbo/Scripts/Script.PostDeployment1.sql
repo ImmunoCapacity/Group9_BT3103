@@ -9,8 +9,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO tblUser (username, userPassword) 
+INSERT INTO tblUser (username, userPassword, Role) 
 VALUES 
-    ('admin', 'admin123'),
-    ('registrar', 'registrar123'),
-    ('cashier', 'cashier123');
+    ('admin',     CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'admin123'), 2), 'Admin'),
+    ('registrar', CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'admin123'), 2), 'Registrar'),
+    ('cashier',   CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'admin123'), 2), 'Cashier');
