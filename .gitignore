@@ -12,9 +12,12 @@
 /EventDriven.Project.DB/EventDriven.Project.DB.jfm
 /EventDriven.Project.DB/EventDriven.Project.DB.dbmdl
 <<<<<<< HEAD
+<<<<<<< HEAD
 /EventDriven.Project.DB
 =======
 /EventDriven.Project.DB/bin/Debug
 /EventDriven.Project.DB/EventDriven.Project.DB.publish.xml
 /EventDriven.Project.UI/bin/Debug/net8.0-windows
 >>>>>>> origin/main
+=======
+>>>>>>> parent of 53f1241 (Implemented Password Incognito, optimized users database,  and implemented Hash encyption Passwords)
