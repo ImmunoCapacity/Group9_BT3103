@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Model",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Logic", "EventDriven.Project.Logic\EventDriven.Project.Logic.csproj", "{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.DB", "EventDriven.Project.DB\EventDriven.Project.DB.sqlproj", "{296440D8-9906-426C-A6AE-FB7AF7B02975}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +27,6 @@ Global
 		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Release|Any CPU.Build.0 = Release|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Release|Any CPU.Build.0 = Release|Any CPU
-		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296440D8-9906-426C-A6AE-FB7AF7B02975}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
