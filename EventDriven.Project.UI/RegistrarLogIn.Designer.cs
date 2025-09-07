@@ -123,6 +123,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.ErrorImage = Properties.Resources.Screenshot_2025_09_07_155916_removebg_preview;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(416, 71);
             pictureBox1.Name = "pictureBox1";

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminLogIn));
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
             AdminbtnLogin = new Button();
@@ -44,7 +43,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Image = Properties.Resources.Screenshot_2025_09_07_155916_removebg_preview;
             pictureBox1.Location = new Point(418, 74);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(379, 127);
