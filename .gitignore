@@ -21,3 +21,5 @@
 >>>>>>> origin/main
 =======
 >>>>>>> parent of 53f1241 (Implemented Password Incognito, optimized users database,  and implemented Hash encyption Passwords)
+/EnrollmentDB/bin/Debug
+/EnrollmentDB/obj/Debug
