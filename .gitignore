@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
@@ -9,11 +9,8 @@
 /EventDriven.Project.Logic/obj
 /EventDriven.Project.Model/obj
 /EventDriven.Project.UI/obj
-/EventDriven.Project.DB/EventDriven.Project.DB.jfm
-/EventDriven.Project.DB/EventDriven.Project.DB.dbmdl
 <<<<<<< HEAD
 <<<<<<< HEAD
-/EventDriven.Project.DB
 =======
 /EventDriven.Project.DB/bin/Debug
 /EventDriven.Project.DB/EventDriven.Project.DB.publish.xml
@@ -23,3 +20,6 @@
 >>>>>>> parent of 53f1241 (Implemented Password Incognito, optimized users database,  and implemented Hash encyption Passwords)
 /EnrollmentDB/bin/Debug
 /EnrollmentDB/obj/Debug
+/EnrollmentDB
+/EventDrive.Project.DB/obj/Debug
+/EventDrive.Project.DB/bin/Debug
