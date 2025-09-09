@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Model",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Logic", "EventDriven.Project.Logic\EventDriven.Project.Logic.csproj", "{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EnrollmentDB", "EnrollmentDB\EnrollmentDB.sqlproj", "{732B92C4-740D-4DB1-90DD-8E73A1C97335}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EventDriven.Project.DB", "EventDriven.Project.DB\EventDriven.Project.DB.sqlproj", "{732B92C4-740D-4DB1-90DD-8E73A1C97335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
