@@ -63,7 +63,7 @@
             Adminbtn.FlatAppearance.BorderSize = 2;
             Adminbtn.FlatStyle = FlatStyle.Flat;
             Adminbtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Adminbtn.ForeColor = Color.White;
+            Adminbtn.ForeColor = Color.WhiteSmoke;
             Adminbtn.Location = new Point(268, 398);
             Adminbtn.Name = "Adminbtn";
             Adminbtn.Size = new Size(168, 93);
@@ -80,7 +80,7 @@
             Cashierbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             Cashierbtn.FlatStyle = FlatStyle.Flat;
             Cashierbtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Cashierbtn.ForeColor = Color.White;
+            Cashierbtn.ForeColor = Color.WhiteSmoke;
             Cashierbtn.Location = new Point(509, 398);
             Cashierbtn.Name = "Cashierbtn";
             Cashierbtn.Size = new Size(169, 93);
@@ -95,7 +95,7 @@
             Registrarbtn.FlatAppearance.BorderSize = 2;
             Registrarbtn.FlatStyle = FlatStyle.Flat;
             Registrarbtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Registrarbtn.ForeColor = Color.White;
+            Registrarbtn.ForeColor = Color.WhiteSmoke;
             Registrarbtn.Location = new Point(747, 398);
             Registrarbtn.Name = "Registrarbtn";
             Registrarbtn.Size = new Size(170, 93);
