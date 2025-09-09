@@ -26,7 +26,9 @@ namespace EventDriven.Project.UI
 
         private void Adminbtn_Click(object sender, EventArgs e)
         {
-
+            AdminLogIn adminlogin = new AdminLogIn();
+            adminlogin.Show();
+            this.Close();
         }
     }
 }
