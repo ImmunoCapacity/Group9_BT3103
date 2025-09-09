@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace EventDriven.Project.UI
 {
-    public partial class Form1 : Form
+    public partial class FormUserRoles : Form
     {
-        public Form1()
+        public FormUserRoles()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
     }
 }
