@@ -12,11 +12,11 @@ namespace EventDriven.Project.UI
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-            using (TempLogin loginForm = new TempLogin())
+            using (FormUserRoles loginForm = new FormUserRoles())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
-                    Application.Run(new Form1());
+                    Application.Run(new FormUserRoles());
                 }
                 else
                 {
