@@ -11,7 +11,7 @@ namespace EventDriven.Project.Logic.Repository
     internal class UserRepository
     {
         private readonly string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventDriven.Project.DB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
-        public UserModel ValidateUser(string Username, string Password)//Form1 Validate User
+        public UserModel ValidateUser(string Username, string Password, string role)//Form1 Validate User
         {
 
             try
@@ -21,12 +21,13 @@ namespace EventDriven.Project.Logic.Repository
                 {
 
                     Enroll.Open();
-                    string query = "SELECT * FROM [dbo].[tblUser] WHERE username = @username and userPassword = HASHBYTES('SHA2_256', @password);";
+                    string query = "SELECT * FROM [dbo].[tblUser] WHERE username = @username and userPassword = HASHBYTES('SHA2_256', @password) and Role=@role;";
                     Console.WriteLine(query);
                     SqlCommand command = new SqlCommand(query, Enroll);
                     command.Parameters.AddWithValue("@username", Username);
                     //command.Parameters.AddWithValue("@password", Password);
                     command.Parameters.Add("@password", SqlDbType.VarChar, 50).Value = Password;
+                    command.Parameters.AddWithValue("@role", role);
 
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
