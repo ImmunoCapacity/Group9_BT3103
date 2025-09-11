@@ -20,5 +20,4 @@ The **Rosewood Academy Enrollment System** is a digital solution designed to sim
 ## 🚀 Installation & Setup  
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-repo/rosewood-academy-enrollment.git
-   cd rosewood-academy-enrollment
+   https://github.com/ImmunoCapacity/Group9_BT3103.git
