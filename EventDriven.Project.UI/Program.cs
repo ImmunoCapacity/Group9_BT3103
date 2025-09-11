@@ -12,18 +12,7 @@ namespace EventDriven.Project.UI
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-            using (FormUserRoles loginForm = new FormUserRoles())
-            {
-                if (loginForm.ShowDialog() == DialogResult.OK)
-                {
-                    Application.Run(new FormUserRoles());
-                }
-                else
-                {
-                    Application.Exit();
-
-                }
-            }
+            Application.Run(new MainForm());
         }
     }
 }

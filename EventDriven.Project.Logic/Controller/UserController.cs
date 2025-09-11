@@ -21,7 +21,7 @@ namespace EventDriven.Project.Logic.Controller
             return new List<UserModel> { new UserModel() };
         }
 
-        public UserModel ValidateUser(string Username, string Password)
+        public UserModel ValidateUser(string Username, string Password, string role)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace EventDriven.Project.Logic.Controller
             {
                 Console.WriteLine(ex.Message);
             }
-            return userRepo.ValidateUser(Username, Password);
+            return userRepo.ValidateUser(Username, Password, role);
         }
     }
 }

@@ -69,7 +69,7 @@
             Adminbtn.TabIndex = 2;
             Adminbtn.Text = "ADMIN";
             Adminbtn.UseVisualStyleBackColor = true;
-            Adminbtn.Click += this.Adminbtn_Click_1;
+            Adminbtn.Click += Adminbtn_Click;
             // 
             // Cashierbtn
             // 
@@ -84,6 +84,7 @@
             Cashierbtn.TabIndex = 3;
             Cashierbtn.Text = "CASHIER";
             Cashierbtn.UseVisualStyleBackColor = true;
+            Cashierbtn.Click += Cashierbtn_Click;
             // 
             // Regstrarbtn
             // 
@@ -99,6 +100,7 @@
             Regstrarbtn.TabIndex = 4;
             Regstrarbtn.Text = "REGISTRAR";
             Regstrarbtn.UseVisualStyleBackColor = true;
+            Regstrarbtn.Click += Regstrarbtn_Click;
             // 
             // FormUserRoles
             // 
@@ -111,6 +113,7 @@
             Controls.Add(Adminbtn);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormUserRoles";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormUserRoles";
