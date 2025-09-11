@@ -36,7 +36,7 @@ namespace EventDriven.Project.UI
             // Set the new child form's properties and show it
             childForm.MdiParent = this;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            
+            this.Text = childForm.Text;
             childForm.Show();
             this.ClientSize = childForm.Size;
             childForm.Dock = DockStyle.Fill;

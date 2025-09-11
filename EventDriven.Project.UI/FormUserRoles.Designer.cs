@@ -53,7 +53,7 @@
             label1.Location = new Point(401, 359);
             label1.Name = "label1";
             label1.Size = new Size(660, 46);
-            label1.TabIndex = 1;
+            label1.TabIndex = 4;
             label1.Text = "WELCOME. PLEASE CHOOSE YOUR ROLE";
             // 
             // Adminbtn
@@ -66,7 +66,7 @@
             Adminbtn.Location = new Point(443, 493);
             Adminbtn.Name = "Adminbtn";
             Adminbtn.Size = new Size(151, 60);
-            Adminbtn.TabIndex = 2;
+            Adminbtn.TabIndex = 1;
             Adminbtn.Text = "ADMIN";
             Adminbtn.UseVisualStyleBackColor = true;
             Adminbtn.Click += Adminbtn_Click;
@@ -81,7 +81,7 @@
             Cashierbtn.Location = new Point(664, 493);
             Cashierbtn.Name = "Cashierbtn";
             Cashierbtn.Size = new Size(151, 60);
-            Cashierbtn.TabIndex = 3;
+            Cashierbtn.TabIndex = 2;
             Cashierbtn.Text = "CASHIER";
             Cashierbtn.UseVisualStyleBackColor = true;
             Cashierbtn.Click += Cashierbtn_Click;
@@ -97,7 +97,7 @@
             Regstrarbtn.Name = "Regstrarbtn";
             Regstrarbtn.RightToLeft = RightToLeft.No;
             Regstrarbtn.Size = new Size(151, 60);
-            Regstrarbtn.TabIndex = 4;
+            Regstrarbtn.TabIndex = 3;
             Regstrarbtn.Text = "REGISTRAR";
             Regstrarbtn.UseVisualStyleBackColor = true;
             Regstrarbtn.Click += Regstrarbtn_Click;

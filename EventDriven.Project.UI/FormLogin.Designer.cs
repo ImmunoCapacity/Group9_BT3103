@@ -1,4 +1,3 @@
-﻿
 namespace EventDriven.Project.UI
 {
     partial class FormLogin
@@ -78,8 +77,8 @@ namespace EventDriven.Project.UI
             showBtn.Location = new Point(476, 141);
             showBtn.Margin = new Padding(3, 2, 3, 2);
             showBtn.Name = "showBtn";
-            showBtn.Size = new Size(82, 22);
-            showBtn.TabIndex = 5;
+            showBtn.Size = new Size(94, 29);
+            showBtn.TabIndex = 3;
             showBtn.Text = "Show";
             showBtn.UseVisualStyleBackColor = false;
             showBtn.Click += showBtn_Click;
@@ -94,8 +93,8 @@ namespace EventDriven.Project.UI
             btnLogin.Location = new Point(274, 217);
             btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(113, 39);
-            btnLogin.TabIndex = 2;
+            btnLogin.Size = new Size(129, 52);
+            btnLogin.TabIndex = 4;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += Loginbtn_Click;
@@ -127,17 +126,16 @@ namespace EventDriven.Project.UI
             TBPassword.Location = new Point(80, 142);
             TBPassword.Margin = new Padding(3, 2, 3, 2);
             TBPassword.Name = "TBPassword";
-            TBPassword.Size = new Size(478, 23);
-            TBPassword.TabIndex = 3;
+            TBPassword.Size = new Size(546, 27);
+            TBPassword.TabIndex = 2;
             // 
             // TBUsername
             // 
             TBUsername.Location = new Point(80, 78);
             TBUsername.Margin = new Padding(3, 2, 3, 2);
             TBUsername.Name = "TBUsername";
-            TBUsername.Size = new Size(478, 23);
-            TBUsername.TabIndex = 2;
-            TBUsername.TextChanged += TBUsername_TextChanged;
+            TBUsername.Size = new Size(546, 27);
+            TBUsername.TabIndex = 1;
             // 
             // lblLogin
             // 
@@ -185,8 +183,6 @@ namespace EventDriven.Project.UI
             panel1.PerformLayout();
             ResumeLayout(false);
         }
-
-
 
         #endregion
 
