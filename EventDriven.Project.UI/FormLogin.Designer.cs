@@ -76,7 +76,7 @@ namespace EventDriven.Project.UI
             showBtn.Location = new Point(544, 188);
             showBtn.Name = "showBtn";
             showBtn.Size = new Size(94, 29);
-            showBtn.TabIndex = 5;
+            showBtn.TabIndex = 3;
             showBtn.Text = "Show";
             showBtn.UseVisualStyleBackColor = false;
             showBtn.Click += showBtn_Click;
@@ -91,7 +91,7 @@ namespace EventDriven.Project.UI
             btnLogin.Location = new Point(313, 289);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(129, 52);
-            btnLogin.TabIndex = 2;
+            btnLogin.TabIndex = 4;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += Loginbtn_Click;
@@ -123,14 +123,14 @@ namespace EventDriven.Project.UI
             TBPassword.Location = new Point(92, 190);
             TBPassword.Name = "TBPassword";
             TBPassword.Size = new Size(546, 27);
-            TBPassword.TabIndex = 3;
+            TBPassword.TabIndex = 2;
             // 
             // TBUsername
             // 
             TBUsername.Location = new Point(92, 104);
             TBUsername.Name = "TBUsername";
             TBUsername.Size = new Size(546, 27);
-            TBUsername.TabIndex = 2;
+            TBUsername.TabIndex = 1;
             // 
             // lblLogin
             // 
