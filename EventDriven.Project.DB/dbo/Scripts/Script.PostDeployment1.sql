@@ -12,6 +12,6 @@ Post-Deployment Script Template
 INSERT INTO tblUser (username, userPassword, Role) 
 VALUES
     ('admin',    HASHBYTES('SHA2_256', 'admin123'), 'Admin'),
-    ('registrar', HASHBYTES('SHA2_256', 'admin123'), 'Registrar'),
-    ('cashier',  HASHBYTES('SHA2_256', 'admin123'), 'Cashier');
+    ('registrar', HASHBYTES('SHA2_256', 'registrar123'), 'Registrar'),
+    ('cashier',  HASHBYTES('SHA2_256', 'cashier123'), 'Cashier');
 

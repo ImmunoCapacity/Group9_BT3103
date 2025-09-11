@@ -64,5 +64,10 @@ namespace EventDriven.Project.UI
                 TBPassword.UseSystemPasswordChar = true;
             }
         }
+
+        private void TBUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

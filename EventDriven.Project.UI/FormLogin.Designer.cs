@@ -46,9 +46,10 @@ namespace EventDriven.Project.UI
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.logo;
-            pictureBox1.Location = new Point(538, 160);
+            pictureBox1.Location = new Point(471, 120);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(388, 135);
+            pictureBox1.Size = new Size(340, 101);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -62,9 +63,10 @@ namespace EventDriven.Project.UI
             panel1.Controls.Add(TBPassword);
             panel1.Controls.Add(TBUsername);
             panel1.Controls.Add(lblLogin);
-            panel1.Location = new Point(361, 357);
+            panel1.Location = new Point(316, 268);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(733, 360);
+            panel1.Size = new Size(641, 270);
             panel1.TabIndex = 1;
             // 
             // showBtn
@@ -73,9 +75,10 @@ namespace EventDriven.Project.UI
             showBtn.FlatStyle = FlatStyle.Popup;
             showBtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             showBtn.ForeColor = Color.Firebrick;
-            showBtn.Location = new Point(544, 188);
+            showBtn.Location = new Point(476, 141);
+            showBtn.Margin = new Padding(3, 2, 3, 2);
             showBtn.Name = "showBtn";
-            showBtn.Size = new Size(94, 29);
+            showBtn.Size = new Size(82, 22);
             showBtn.TabIndex = 5;
             showBtn.Text = "Show";
             showBtn.UseVisualStyleBackColor = false;
@@ -88,9 +91,10 @@ namespace EventDriven.Project.UI
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.Firebrick;
-            btnLogin.Location = new Point(313, 289);
+            btnLogin.Location = new Point(274, 217);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(129, 52);
+            btnLogin.Size = new Size(113, 39);
             btnLogin.TabIndex = 2;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = true;
@@ -101,9 +105,9 @@ namespace EventDriven.Project.UI
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(330, 220);
+            label3.Location = new Point(289, 165);
             label3.Name = "label3";
-            label3.Size = new Size(92, 25);
+            label3.Size = new Size(76, 20);
             label3.TabIndex = 4;
             label3.Text = "Password";
             // 
@@ -112,34 +116,37 @@ namespace EventDriven.Project.UI
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(64, 64, 64);
-            label2.Location = new Point(325, 134);
+            label2.Location = new Point(284, 100);
             label2.Name = "label2";
-            label2.Size = new Size(97, 25);
+            label2.Size = new Size(80, 20);
             label2.TabIndex = 2;
             label2.Text = "Username";
             // 
             // TBPassword
             // 
-            TBPassword.Location = new Point(92, 190);
+            TBPassword.Location = new Point(80, 142);
+            TBPassword.Margin = new Padding(3, 2, 3, 2);
             TBPassword.Name = "TBPassword";
-            TBPassword.Size = new Size(546, 27);
+            TBPassword.Size = new Size(478, 23);
             TBPassword.TabIndex = 3;
             // 
             // TBUsername
             // 
-            TBUsername.Location = new Point(92, 104);
+            TBUsername.Location = new Point(80, 78);
+            TBUsername.Margin = new Padding(3, 2, 3, 2);
             TBUsername.Name = "TBUsername";
-            TBUsername.Size = new Size(546, 27);
+            TBUsername.Size = new Size(478, 23);
             TBUsername.TabIndex = 2;
+            TBUsername.TextChanged += TBUsername_TextChanged;
             // 
             // lblLogin
             // 
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLogin.ForeColor = Color.Firebrick;
-            lblLogin.Location = new Point(269, 30);
+            lblLogin.Location = new Point(235, 22);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(209, 38);
+            lblLogin.Size = new Size(162, 30);
             lblLogin.TabIndex = 2;
             lblLogin.Text = "ADMIN LOGIN";
             // 
@@ -150,9 +157,10 @@ namespace EventDriven.Project.UI
             btnBack.FlatStyle = FlatStyle.Flat;
             btnBack.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBack.ForeColor = Color.FromArgb(64, 64, 64);
-            btnBack.Location = new Point(42, 779);
+            btnBack.Location = new Point(37, 584);
+            btnBack.Margin = new Padding(3, 2, 3, 2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(107, 49);
+            btnBack.Size = new Size(94, 37);
             btnBack.TabIndex = 5;
             btnBack.Text = "BACK";
             btnBack.UseVisualStyleBackColor = true;
@@ -160,14 +168,15 @@ namespace EventDriven.Project.UI
             // 
             // FormLogin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
-            ClientSize = new Size(1482, 853);
+            ClientSize = new Size(1213, 591);
             Controls.Add(btnBack);
             Controls.Add(panel1);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormAdminLogIn";
