@@ -37,6 +37,7 @@ namespace EventDriven.Project.Logic.Repository
                     {
                         matchingUser = new UserModel
                         {
+                            Id = Convert.ToInt32(table.Rows[0]["Id"]),
                             Username = Username,
                             Password = Password
                             
