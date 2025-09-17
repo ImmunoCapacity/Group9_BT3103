@@ -24,6 +24,8 @@ namespace EventDriven.Project.UI
             this.AutoScroll = false;
             //this.scrollBars
             OpenChildForm(new FormUserRoles(this));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         public void OpenChildForm(Form childForm)
