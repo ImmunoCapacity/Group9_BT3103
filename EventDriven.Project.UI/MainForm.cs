@@ -23,7 +23,8 @@ namespace EventDriven.Project.UI
         {
             this.AutoScroll = false;
             //this.scrollBars
-            OpenChildForm(new FormUserRoles(this));
+            //OpenChildForm(new FormUserRoles(this));
+            OpenChildForm(new MainBody("Administration", this));
         }
 
         public void OpenChildForm(Form childForm)

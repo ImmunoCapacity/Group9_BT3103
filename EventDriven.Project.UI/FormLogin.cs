@@ -42,7 +42,7 @@ namespace EventDriven.Project.UI
 
                 if (matchingUser != null)
                 {
-                    main.OpenChildForm(new TempLoggedIn(role));
+                    main.OpenChildForm(new MainBody(role, main));
                 }
                 else throw new Exception("Invalid Credentials");
             }
