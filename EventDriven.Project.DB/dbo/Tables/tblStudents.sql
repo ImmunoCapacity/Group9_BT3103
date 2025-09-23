@@ -1,14 +1,22 @@
 ﻿CREATE TABLE [dbo].[tblStudents]
 (
-	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     
     [FirstName] NVARCHAR(50) NOT NULL,
     [MiddleName] NVARCHAR(50) NULL,
     [LastName] NVARCHAR(50) NOT NULL,
+    [Suffix] NVARCHAR(20) NULL,
     [Status] NVARCHAR(20) NOT NULL,            
     [BirthDate] DATE NOT NULL,
-    [GradeLevel] NVARCHAR(20) NOT NULL,        
+    [GradeLevel] NVARCHAR(20) NOT NULL,
+    [Section] NVARCHAR(20) NULL,
+    [Gender] NVARCHAR(10) NULL,
     [Nationality] NVARCHAR(50) NULL,
+    [Email] NVARCHAR(100) NULL,
+    [LastSchool] NVARCHAR(255) NULL,
+    [LastGrade] NVARCHAR(50) NULL,
+    [Address] NVARCHAR(255) NULL,
+    [Contact] NVARCHAR(20) NULL,
 
     [FatherName] NVARCHAR(100) NULL,
     [FatherContact] NVARCHAR(20) NULL,
@@ -21,5 +29,6 @@
     [GuardianContact] NVARCHAR(20) NULL,
     [GuardianAddress] NVARCHAR(255) NULL,
 
-    [CreatedAt] DATETIME DEFAULT GETDATE()
+    [CreatedAt] DATETIME DEFAULT GETDATE(), 
+    [GWA] DECIMAL(4, 2) NULL
 )

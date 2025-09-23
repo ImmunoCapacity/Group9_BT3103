@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36327.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.UI", "EventDriven.Project.UI\EventDriven.Project.UI.csproj", "{62CDCAF5-729D-4848-94B5-9A0A565E2887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Enrollment", "EventDriven.Project.Enrollment\EventDriven.Project.Enrollment.csproj", "{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Model", "EventDriven.Project.Model\EventDriven.Project.Model.csproj", "{21C83437-3279-47C3-AF20-E725681ECB21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDriven.Project.Logic", "EventDriven.Project.Logic\EventDriven.Project.Logic.csproj", "{E21F7CBA-496A-421F-9EE9-7FA6933A7D6D}"
@@ -23,10 +21,6 @@ Global
 		{62CDCAF5-729D-4848-94B5-9A0A565E2887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62CDCAF5-729D-4848-94B5-9A0A565E2887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62CDCAF5-729D-4848-94B5-9A0A565E2887}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEDCEC31-BBD8-404E-AE42-AC97CD2D9A10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21C83437-3279-47C3-AF20-E725681ECB21}.Release|Any CPU.ActiveCfg = Release|Any CPU

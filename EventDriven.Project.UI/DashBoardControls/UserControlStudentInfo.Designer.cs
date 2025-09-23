@@ -28,40 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox14 = new TextBox();
+            txtMiddleName = new TextBox();
             label21 = new Label();
-            textBox1 = new TextBox();
+            txtLastName = new TextBox();
             label20 = new Label();
             button2 = new Button();
             button1 = new Button();
-            checkBox3 = new CheckBox();
-            checkBox2 = new CheckBox();
-            checkBox1 = new CheckBox();
-            comboBox4 = new ComboBox();
+            cbOld = new CheckBox();
+            cbTransferee = new CheckBox();
+            cbNew = new CheckBox();
+            cmbSection = new ComboBox();
             label19 = new Label();
-            comboBox3 = new ComboBox();
-            textBox13 = new TextBox();
+            cmbGradeLevel = new ComboBox();
+            txtGWA = new TextBox();
             label18 = new Label();
-            textBox12 = new TextBox();
-            textBox11 = new TextBox();
-            textBox10 = new TextBox();
-            textBox9 = new TextBox();
-            textBox8 = new TextBox();
-            textBox7 = new TextBox();
-            textBox6 = new TextBox();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
+            txtLastGrade = new TextBox();
+            txtLastSchool = new TextBox();
+            txtRelationship = new TextBox();
+            txtMotherContact = new TextBox();
+            txtFatherContactNo = new TextBox();
+            txtEmail = new TextBox();
+            txtGuardian = new TextBox();
+            txtMotherName = new TextBox();
+            txtFatherName = new TextBox();
             label17 = new Label();
             label16 = new Label();
             label15 = new Label();
             label14 = new Label();
             dateTimePicker1 = new DateTimePicker();
-            comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
+            cmbGender = new ComboBox();
+            cmbSuffix = new ComboBox();
             label13 = new Label();
             label12 = new Label();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
+            txtContactNo = new TextBox();
+            txtAddress = new TextBox();
             txtFullname = new TextBox();
             label11 = new Label();
             label10 = new Label();
@@ -75,20 +75,20 @@
             label2 = new Label();
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            btnDeleteStudInfo = new Button();
-            btnEditStudInfo = new Button();
             btnAddStudInfo = new Button();
+            btnEditStudInfo = new Button();
+            btnDeleteStudInfo = new Button();
             txtboxSearchStudInfo = new TextBox();
             btnSearchStudInfo = new Button();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox14
+            // txtMiddleName
             // 
-            textBox14.Location = new Point(836, 134);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(183, 27);
-            textBox14.TabIndex = 94;
+            txtMiddleName.Location = new Point(836, 134);
+            txtMiddleName.Name = "txtMiddleName";
+            txtMiddleName.Size = new Size(183, 27);
+            txtMiddleName.TabIndex = 94;
             // 
             // label21
             // 
@@ -100,12 +100,12 @@
             label21.TabIndex = 93;
             label21.Text = "Middle Name:";
             // 
-            // textBox1
+            // txtLastName
             // 
-            textBox1.Location = new Point(494, 134);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(192, 27);
-            textBox1.TabIndex = 92;
+            txtLastName.Location = new Point(494, 134);
+            txtLastName.Name = "txtLastName";
+            txtLastName.Size = new Size(192, 27);
+            txtLastName.TabIndex = 92;
             // 
             // label20
             // 
@@ -143,46 +143,49 @@
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // cbOld
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBox3.Location = new Point(522, 656);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(64, 29);
-            checkBox3.TabIndex = 89;
-            checkBox3.Text = "Old";
-            checkBox3.UseVisualStyleBackColor = true;
+            cbOld.AutoSize = true;
+            cbOld.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbOld.Location = new Point(522, 656);
+            cbOld.Name = "cbOld";
+            cbOld.Size = new Size(64, 29);
+            cbOld.TabIndex = 89;
+            cbOld.Text = "Old";
+            cbOld.UseVisualStyleBackColor = true;
+            cbOld.CheckedChanged += cbOld_CheckedChanged;
             // 
-            // checkBox2
+            // cbTransferee
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBox2.Location = new Point(361, 656);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(121, 29);
-            checkBox2.TabIndex = 88;
-            checkBox2.Text = "Transferee";
-            checkBox2.UseVisualStyleBackColor = true;
+            cbTransferee.AutoSize = true;
+            cbTransferee.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbTransferee.Location = new Point(361, 656);
+            cbTransferee.Name = "cbTransferee";
+            cbTransferee.Size = new Size(121, 29);
+            cbTransferee.TabIndex = 88;
+            cbTransferee.Text = "Transferee";
+            cbTransferee.UseVisualStyleBackColor = true;
+            cbTransferee.CheckedChanged += cbTransferee_CheckedChanged;
             // 
-            // checkBox1
+            // cbNew
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(254, 656);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(72, 29);
-            checkBox1.TabIndex = 87;
-            checkBox1.Text = "New";
-            checkBox1.UseVisualStyleBackColor = true;
+            cbNew.AutoSize = true;
+            cbNew.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbNew.Location = new Point(254, 656);
+            cbNew.Name = "cbNew";
+            cbNew.Size = new Size(72, 29);
+            cbNew.TabIndex = 87;
+            cbNew.Text = "New";
+            cbNew.UseVisualStyleBackColor = true;
+            cbNew.CheckedChanged += cbNew_CheckedChanged;
             // 
-            // comboBox4
+            // cmbSection
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(690, 602);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(329, 28);
-            comboBox4.TabIndex = 86;
+            cmbSection.FormattingEnabled = true;
+            cmbSection.Location = new Point(690, 602);
+            cmbSection.Name = "cmbSection";
+            cmbSection.Size = new Size(329, 28);
+            cmbSection.TabIndex = 86;
             // 
             // label19
             // 
@@ -194,20 +197,20 @@
             label19.TabIndex = 85;
             label19.Text = "Section:\r\n";
             // 
-            // comboBox3
+            // cmbGradeLevel
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(254, 606);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(332, 28);
-            comboBox3.TabIndex = 84;
+            cmbGradeLevel.FormattingEnabled = true;
+            cmbGradeLevel.Location = new Point(254, 606);
+            cmbGradeLevel.Name = "cmbGradeLevel";
+            cmbGradeLevel.Size = new Size(332, 28);
+            cmbGradeLevel.TabIndex = 84;
             // 
-            // textBox13
+            // txtGWA
             // 
-            textBox13.Location = new Point(667, 558);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(352, 27);
-            textBox13.TabIndex = 83;
+            txtGWA.Location = new Point(667, 558);
+            txtGWA.Name = "txtGWA";
+            txtGWA.Size = new Size(352, 27);
+            txtGWA.TabIndex = 83;
             // 
             // label18
             // 
@@ -219,68 +222,68 @@
             label18.TabIndex = 82;
             label18.Text = "GWA:\r\n";
             // 
-            // textBox12
+            // txtLastGrade
             // 
-            textBox12.Location = new Point(262, 561);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(324, 27);
-            textBox12.TabIndex = 81;
+            txtLastGrade.Location = new Point(262, 561);
+            txtLastGrade.Name = "txtLastGrade";
+            txtLastGrade.Size = new Size(324, 27);
+            txtLastGrade.TabIndex = 81;
             // 
-            // textBox11
+            // txtLastSchool
             // 
-            textBox11.Location = new Point(254, 516);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(765, 27);
-            textBox11.TabIndex = 80;
+            txtLastSchool.Location = new Point(254, 516);
+            txtLastSchool.Name = "txtLastSchool";
+            txtLastSchool.Size = new Size(765, 27);
+            txtLastSchool.TabIndex = 80;
             // 
-            // textBox10
+            // txtRelationship
             // 
-            textBox10.Location = new Point(729, 459);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(290, 27);
-            textBox10.TabIndex = 79;
+            txtRelationship.Location = new Point(729, 459);
+            txtRelationship.Name = "txtRelationship";
+            txtRelationship.Size = new Size(290, 27);
+            txtRelationship.TabIndex = 79;
             // 
-            // textBox9
+            // txtMotherContact
             // 
-            textBox9.Location = new Point(690, 405);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(329, 27);
-            textBox9.TabIndex = 78;
+            txtMotherContact.Location = new Point(690, 405);
+            txtMotherContact.Name = "txtMotherContact";
+            txtMotherContact.Size = new Size(329, 27);
+            txtMotherContact.TabIndex = 78;
             // 
-            // textBox8
+            // txtFatherContactNo
             // 
-            textBox8.Location = new Point(690, 355);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(329, 27);
-            textBox8.TabIndex = 77;
+            txtFatherContactNo.Location = new Point(690, 355);
+            txtFatherContactNo.Name = "txtFatherContactNo";
+            txtFatherContactNo.Size = new Size(329, 27);
+            txtFatherContactNo.TabIndex = 77;
             // 
-            // textBox7
+            // txtEmail
             // 
-            textBox7.Location = new Point(670, 301);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(349, 27);
-            textBox7.TabIndex = 76;
+            txtEmail.Location = new Point(670, 301);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(349, 27);
+            txtEmail.TabIndex = 76;
             // 
-            // textBox6
+            // txtGuardian
             // 
-            textBox6.Location = new Point(153, 459);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(433, 27);
-            textBox6.TabIndex = 75;
+            txtGuardian.Location = new Point(153, 459);
+            txtGuardian.Name = "txtGuardian";
+            txtGuardian.Size = new Size(433, 27);
+            txtGuardian.TabIndex = 75;
             // 
-            // textBox5
+            // txtMotherName
             // 
-            textBox5.Location = new Point(205, 407);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(381, 27);
-            textBox5.TabIndex = 74;
+            txtMotherName.Location = new Point(205, 407);
+            txtMotherName.Name = "txtMotherName";
+            txtMotherName.Size = new Size(381, 27);
+            txtMotherName.TabIndex = 74;
             // 
-            // textBox4
+            // txtFatherName
             // 
-            textBox4.Location = new Point(192, 357);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(394, 27);
-            textBox4.TabIndex = 73;
+            txtFatherName.Location = new Point(192, 357);
+            txtFatherName.Name = "txtFatherName";
+            txtFatherName.Size = new Size(394, 27);
+            txtFatherName.TabIndex = 73;
             // 
             // label17
             // 
@@ -329,21 +332,21 @@
             dateTimePicker1.Size = new Size(403, 27);
             dateTimePicker1.TabIndex = 68;
             // 
-            // comboBox2
+            // cmbGender
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(692, 187);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(108, 28);
-            comboBox2.TabIndex = 67;
+            cmbGender.FormattingEnabled = true;
+            cmbGender.Location = new Point(692, 187);
+            cmbGender.Name = "cmbGender";
+            cmbGender.Size = new Size(108, 28);
+            cmbGender.TabIndex = 67;
             // 
-            // comboBox1
+            // cmbSuffix
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(923, 186);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(96, 28);
-            comboBox1.TabIndex = 66;
+            cmbSuffix.FormattingEnabled = true;
+            cmbSuffix.Location = new Point(923, 186);
+            cmbSuffix.Name = "cmbSuffix";
+            cmbSuffix.Size = new Size(96, 28);
+            cmbSuffix.TabIndex = 66;
             // 
             // label13
             // 
@@ -365,19 +368,19 @@
             label12.TabIndex = 64;
             label12.Text = "Suffix:";
             // 
-            // textBox3
+            // txtContactNo
             // 
-            textBox3.Location = new Point(180, 303);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(406, 27);
-            textBox3.TabIndex = 63;
+            txtContactNo.Location = new Point(180, 303);
+            txtContactNo.Name = "txtContactNo";
+            txtContactNo.Size = new Size(406, 27);
+            txtContactNo.TabIndex = 63;
             // 
-            // textBox2
+            // txtAddress
             // 
-            textBox2.Location = new Point(144, 248);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(875, 27);
-            textBox2.TabIndex = 62;
+            txtAddress.Location = new Point(144, 248);
+            txtAddress.Name = "txtAddress";
+            txtAddress.Size = new Size(875, 27);
+            txtAddress.TabIndex = 62;
             // 
             // txtFullname
             // 
@@ -506,19 +509,19 @@
             flowLayoutPanel1.Size = new Size(402, 75);
             flowLayoutPanel1.TabIndex = 95;
             // 
-            // btnDeleteStudInfo
+            // btnAddStudInfo
             // 
-            btnDeleteStudInfo.FlatAppearance.BorderColor = Color.Firebrick;
-            btnDeleteStudInfo.FlatStyle = FlatStyle.Flat;
-            btnDeleteStudInfo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDeleteStudInfo.ForeColor = Color.FromArgb(64, 64, 64);
-            btnDeleteStudInfo.Location = new Point(265, 3);
-            btnDeleteStudInfo.Margin = new Padding(3, 3, 10, 3);
-            btnDeleteStudInfo.Name = "btnDeleteStudInfo";
-            btnDeleteStudInfo.Size = new Size(118, 56);
-            btnDeleteStudInfo.TabIndex = 7;
-            btnDeleteStudInfo.Text = "Delete";
-            btnDeleteStudInfo.UseVisualStyleBackColor = true;
+            btnAddStudInfo.FlatAppearance.BorderColor = Color.Firebrick;
+            btnAddStudInfo.FlatStyle = FlatStyle.Flat;
+            btnAddStudInfo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddStudInfo.ForeColor = Color.FromArgb(64, 64, 64);
+            btnAddStudInfo.Location = new Point(3, 3);
+            btnAddStudInfo.Margin = new Padding(3, 3, 10, 3);
+            btnAddStudInfo.Name = "btnAddStudInfo";
+            btnAddStudInfo.Size = new Size(118, 56);
+            btnAddStudInfo.TabIndex = 5;
+            btnAddStudInfo.Text = "Add";
+            btnAddStudInfo.UseVisualStyleBackColor = true;
             // 
             // btnEditStudInfo
             // 
@@ -534,19 +537,19 @@
             btnEditStudInfo.Text = "Edit";
             btnEditStudInfo.UseVisualStyleBackColor = true;
             // 
-            // btnAddStudInfo
+            // btnDeleteStudInfo
             // 
-            btnAddStudInfo.FlatAppearance.BorderColor = Color.Firebrick;
-            btnAddStudInfo.FlatStyle = FlatStyle.Flat;
-            btnAddStudInfo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddStudInfo.ForeColor = Color.FromArgb(64, 64, 64);
-            btnAddStudInfo.Location = new Point(3, 3);
-            btnAddStudInfo.Margin = new Padding(3, 3, 10, 3);
-            btnAddStudInfo.Name = "btnAddStudInfo";
-            btnAddStudInfo.Size = new Size(118, 56);
-            btnAddStudInfo.TabIndex = 5;
-            btnAddStudInfo.Text = "Add";
-            btnAddStudInfo.UseVisualStyleBackColor = true;
+            btnDeleteStudInfo.FlatAppearance.BorderColor = Color.Firebrick;
+            btnDeleteStudInfo.FlatStyle = FlatStyle.Flat;
+            btnDeleteStudInfo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDeleteStudInfo.ForeColor = Color.FromArgb(64, 64, 64);
+            btnDeleteStudInfo.Location = new Point(265, 3);
+            btnDeleteStudInfo.Margin = new Padding(3, 3, 10, 3);
+            btnDeleteStudInfo.Name = "btnDeleteStudInfo";
+            btnDeleteStudInfo.Size = new Size(118, 56);
+            btnDeleteStudInfo.TabIndex = 7;
+            btnDeleteStudInfo.Text = "Delete";
+            btnDeleteStudInfo.UseVisualStyleBackColor = true;
             // 
             // txtboxSearchStudInfo
             // 
@@ -577,40 +580,40 @@
             Controls.Add(txtboxSearchStudInfo);
             Controls.Add(btnSearchStudInfo);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(textBox14);
+            Controls.Add(txtMiddleName);
             Controls.Add(label21);
-            Controls.Add(textBox1);
+            Controls.Add(txtLastName);
             Controls.Add(label20);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(checkBox3);
-            Controls.Add(checkBox2);
-            Controls.Add(checkBox1);
-            Controls.Add(comboBox4);
+            Controls.Add(cbOld);
+            Controls.Add(cbTransferee);
+            Controls.Add(cbNew);
+            Controls.Add(cmbSection);
             Controls.Add(label19);
-            Controls.Add(comboBox3);
-            Controls.Add(textBox13);
+            Controls.Add(cmbGradeLevel);
+            Controls.Add(txtGWA);
             Controls.Add(label18);
-            Controls.Add(textBox12);
-            Controls.Add(textBox11);
-            Controls.Add(textBox10);
-            Controls.Add(textBox9);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
+            Controls.Add(txtLastGrade);
+            Controls.Add(txtLastSchool);
+            Controls.Add(txtRelationship);
+            Controls.Add(txtMotherContact);
+            Controls.Add(txtFatherContactNo);
+            Controls.Add(txtEmail);
+            Controls.Add(txtGuardian);
+            Controls.Add(txtMotherName);
+            Controls.Add(txtFatherName);
             Controls.Add(label17);
             Controls.Add(label16);
             Controls.Add(label15);
             Controls.Add(label14);
             Controls.Add(dateTimePicker1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbGender);
+            Controls.Add(cmbSuffix);
             Controls.Add(label13);
             Controls.Add(label12);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(txtContactNo);
+            Controls.Add(txtAddress);
             Controls.Add(txtFullname);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -632,40 +635,40 @@
 
         #endregion
 
-        private TextBox textBox14;
+        private TextBox txtMiddleName;
         private Label label21;
-        private TextBox textBox1;
+        private TextBox txtLastName;
         private Label label20;
         private Button button2;
         private Button button1;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
-        private ComboBox comboBox4;
+        private CheckBox cbOld;
+        private CheckBox cbTransferee;
+        private CheckBox cbNew;
+        private ComboBox cmbSection;
         private Label label19;
-        private ComboBox comboBox3;
-        private TextBox textBox13;
+        private ComboBox cmbGradeLevel;
+        private TextBox txtGWA;
         private Label label18;
-        private TextBox textBox12;
-        private TextBox textBox11;
-        private TextBox textBox10;
-        private TextBox textBox9;
-        private TextBox textBox8;
-        private TextBox textBox7;
-        private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
+        private TextBox txtLastGrade;
+        private TextBox txtLastSchool;
+        private TextBox txtRelationship;
+        private TextBox txtMotherContact;
+        private TextBox txtFatherContactNo;
+        private TextBox txtEmail;
+        private TextBox txtGuardian;
+        private TextBox txtMotherName;
+        private TextBox txtFatherName;
         private Label label17;
         private Label label16;
         private Label label15;
         private Label label14;
         private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cmbGender;
+        private ComboBox cmbSuffix;
         private Label label13;
         private Label label12;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox txtContactNo;
+        private TextBox txtAddress;
         private TextBox txtFullname;
         private Label label11;
         private Label label10;

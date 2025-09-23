@@ -7,20 +7,21 @@ namespace EventDriven.Project.Businesslogic.Controller
 {
     public class StudentController
     {
-        private StudentRepository studentRepo;
+        private readonly StudentRepository studentRepository;
 
         public StudentController()
         {
-            studentRepo = new StudentRepository();
+            studentRepository = new StudentRepository();
         }
 
-        public int Add(StudentModel model)
+        // ADD student
+        public StudentModel Add(StudentModel model)
         {
             if (model == null) throw new Exception("Missing parameter: student");
 
             try
             {
-                return studentRepo.Insert(model);
+                return studentRepository.Insert(model);
             }
             catch (Exception ex)
             {
@@ -28,11 +29,42 @@ namespace EventDriven.Project.Businesslogic.Controller
             }
         }
 
+        // UPDATE student
+        public StudentModel Update(StudentModel model)
+        {
+            if (model == null) throw new Exception("Missing parameter: student");
+
+            try
+            {
+                return studentRepository.Update(model);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating student: {ex.Message}");
+            }
+        }
+
+        // DELETE student
+        public StudentModel Delete(int id)
+        {
+            if (id <= 0) throw new Exception("Missing parameter: student ID");
+
+            try
+            {
+                return studentRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error deleting student: {ex.Message}");
+            }
+        }
+
+        // GET all students
         public List<StudentModel> GetAll()
         {
             try
             {
-                return studentRepo.GetAll();
+                return studentRepository.GetAll();
             }
             catch (Exception ex)
             {
@@ -40,29 +72,18 @@ namespace EventDriven.Project.Businesslogic.Controller
             }
         }
 
+        // GET student by Id
         public StudentModel GetById(int id)
         {
-            if (id <= 0) throw new Exception("Invalid student Id");
+            if (id <= 0) throw new Exception("Missing parameter: student ID");
 
             try
             {
-                return studentRepo.GetById(id);
+                return studentRepository.GetById(id);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error retrieving student by Id: {ex.Message}");
-            }
-        }
-
-        public int GetCount()
-        {
-            try
-            {
-                return studentRepo.GetCount();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error counting students: {ex.Message}");
+                throw new Exception($"Error retrieving student: {ex.Message}");
             }
         }
     }

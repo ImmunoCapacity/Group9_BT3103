@@ -13,9 +13,11 @@ namespace EventDriven.Project.UI
     public partial class FormDashboard : Form
     {
         MainForm main;
+        string role;
         public FormDashboard(string role, MainForm main)
         {
             this.main = main;
+            this.role = role;
 
             InitializeComponent();
             this.Text = role + " Dashboard";
@@ -32,7 +34,7 @@ namespace EventDriven.Project.UI
         private void btnStudentReg_Click(object sender, EventArgs e)
         {
             highlightButton(sender as Button);
-            ShowControl(new UserControlStudentInfo());
+            ShowControl(new UserControlStudentInfo(role, main));
         }
 
         private void visibleRole(string role)
@@ -45,10 +47,8 @@ namespace EventDriven.Project.UI
             btnReports.Visible = true;
             if (role.Equals("Registrar"))
             {
-                btnStudentInfo.Visible = false;
-                btnStudentReg.Visible = false;
-                btnAssessment.Visible = false;
-                btnReports.Visible = false;
+                btnHistory.Visible = false;
+                btnPayments.Visible = false;
             }
             else if (role.Equals("Cashier"))
             {
