@@ -97,7 +97,7 @@ namespace EventDriven.Project.Businesslogic.Repository
             var query = @"SELECT Id, FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
                                  FatherName, FatherContact, MotherName, MotherContact, ParentAddress,
                                  GuardianName, GuardianRelationship, GuardianContact, GuardianAddress,
-                                 Suffix, Section, Gender, Email, LastSchool, LastGrade, Address, Contact
+                                 Suffix, Section, Gender, Email, LastSchool, LastGrade, Address, Contact, Gwa
                           FROM tblStudents";
 
             var list = new List<StudentModel>();

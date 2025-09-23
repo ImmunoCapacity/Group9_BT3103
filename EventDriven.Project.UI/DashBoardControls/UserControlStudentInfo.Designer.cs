@@ -32,8 +32,8 @@
             label21 = new Label();
             txtLastName = new TextBox();
             label20 = new Label();
-            button2 = new Button();
-            button1 = new Button();
+            btnPrint = new Button();
+            btnSave = new Button();
             cbOld = new CheckBox();
             cbTransferee = new CheckBox();
             cbNew = new CheckBox();
@@ -80,6 +80,8 @@
             btnDeleteStudInfo = new Button();
             txtboxSearchStudInfo = new TextBox();
             btnSearchStudInfo = new Button();
+            printDialog1 = new PrintDialog();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -117,31 +119,33 @@
             label20.TabIndex = 91;
             label20.Text = "Last Name:";
             // 
-            // button2
+            // btnPrint
             // 
-            button2.FlatAppearance.BorderColor = Color.Firebrick;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.FromArgb(64, 64, 64);
-            button2.Location = new Point(604, 737);
-            button2.Name = "button2";
-            button2.Size = new Size(178, 56);
-            button2.TabIndex = 90;
-            button2.Text = "Print";
-            button2.UseVisualStyleBackColor = true;
+            btnPrint.FlatAppearance.BorderColor = Color.Firebrick;
+            btnPrint.FlatStyle = FlatStyle.Flat;
+            btnPrint.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
+            btnPrint.Location = new Point(604, 737);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(178, 56);
+            btnPrint.TabIndex = 90;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = true;
+            btnPrint.Click += btnPrint_Click;
             // 
-            // button1
+            // btnSave
             // 
-            button1.FlatAppearance.BorderColor = Color.Firebrick;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(64, 64, 64);
-            button1.Location = new Point(310, 737);
-            button1.Name = "button1";
-            button1.Size = new Size(178, 56);
-            button1.TabIndex = 52;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
+            btnSave.FlatAppearance.BorderColor = Color.Firebrick;
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSave.ForeColor = Color.FromArgb(64, 64, 64);
+            btnSave.Location = new Point(310, 737);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(178, 56);
+            btnSave.TabIndex = 52;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // cbOld
             // 
@@ -522,6 +526,7 @@
             btnAddStudInfo.TabIndex = 5;
             btnAddStudInfo.Text = "Add";
             btnAddStudInfo.UseVisualStyleBackColor = true;
+            btnAddStudInfo.Click += BtnAddStudInfo_Click;
             // 
             // btnEditStudInfo
             // 
@@ -536,6 +541,7 @@
             btnEditStudInfo.TabIndex = 6;
             btnEditStudInfo.Text = "Edit";
             btnEditStudInfo.UseVisualStyleBackColor = true;
+            btnEditStudInfo.Click += BtnEditStudInfo_Click;
             // 
             // btnDeleteStudInfo
             // 
@@ -550,6 +556,7 @@
             btnDeleteStudInfo.TabIndex = 7;
             btnDeleteStudInfo.Text = "Delete";
             btnDeleteStudInfo.UseVisualStyleBackColor = true;
+            btnDeleteStudInfo.Click += BtnDeleteStudInfo_Click;
             // 
             // txtboxSearchStudInfo
             // 
@@ -572,6 +579,15 @@
             btnSearchStudInfo.TabIndex = 97;
             btnSearchStudInfo.Text = "Search";
             btnSearchStudInfo.UseVisualStyleBackColor = true;
+            btnSearchStudInfo.Click += BtnSearchStudInfo_Click;
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += PrintDocument1_PrintPage;
             // 
             // UserControlStudentInfo
             // 
@@ -584,8 +600,8 @@
             Controls.Add(label21);
             Controls.Add(txtLastName);
             Controls.Add(label20);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnPrint);
+            Controls.Add(btnSave);
             Controls.Add(cbOld);
             Controls.Add(cbTransferee);
             Controls.Add(cbNew);
@@ -628,6 +644,7 @@
             Controls.Add(label1);
             Name = "UserControlStudentInfo";
             Size = new Size(1033, 808);
+            Load += UserControlStudentInfo_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -639,8 +656,8 @@
         private Label label21;
         private TextBox txtLastName;
         private Label label20;
-        private Button button2;
-        private Button button1;
+        private Button btnPrint;
+        private Button btnSave;
         private CheckBox cbOld;
         private CheckBox cbTransferee;
         private CheckBox cbNew;
@@ -687,5 +704,7 @@
         private Button btnDeleteStudInfo;
         private TextBox txtboxSearchStudInfo;
         private Button btnSearchStudInfo;
+        private PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

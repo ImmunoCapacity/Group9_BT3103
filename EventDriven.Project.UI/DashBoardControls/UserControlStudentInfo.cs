@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
 using EventDriven.Project.Model;
+using System.Drawing.Printing;
+ 
 
 namespace EventDriven.Project.UI
 {
@@ -11,16 +14,19 @@ namespace EventDriven.Project.UI
         private readonly StudentController studentController;
         private int selectedStudentId = 0;
         string status = "";
+        string action = "Add";
         MainForm main;
+        private List<StudentModel> studentsToPrint = new List<StudentModel>();
+        private int currentPrintIndex = 0; 
+
+
+
         public UserControlStudentInfo(string role, MainForm main)
         {
             InitializeComponent();
+            highlightButton(btnAddStudInfo);
             studentController = new StudentController();
 
-            btnAddStudInfo.Click += BtnAddStudInfo_Click;
-            btnSearchStudInfo.Click += BtnSearchStudInfo_Click;
-            btnEditStudInfo.Click += BtnEditStudInfo_Click;
-            btnDeleteStudInfo.Click += BtnDeleteStudInfo_Click;
             this.main = main;
             if (role != "Admin")
             {
@@ -36,8 +42,7 @@ namespace EventDriven.Project.UI
                 MiddleName = txtMiddleName.Text,
                 LastName = txtLastName.Text,
                 Suffix = cmbSuffix.Text,
-                Status = cbNew.Checked ? "New" :
-                         cbTransferee.Checked ? "Transferee" : "Old",
+                Status = status,
                 BirthDate = dateTimePicker1.Value,
                 GradeLevel = cmbGradeLevel.Text,
                 Section = cmbSection.Text,
@@ -64,34 +69,15 @@ namespace EventDriven.Project.UI
 
         private void BtnAddStudInfo_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var student = GetStudentFromForm();
-                var result = studentController.Add(student);
-                MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            highlightButton(sender as Button);
+            action = "Add";
         }
+
 
         private void BtnEditStudInfo_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (selectedStudentId <= 0) { MessageBox.Show("Please search and select a student first."); return; }
-
-                var student = GetStudentFromForm();
-                student.Id = selectedStudentId;
-
-                var result = studentController.Update(student);
-                MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            highlightButton(sender as Button);
+            action = "Edit";
         }
 
         private void BtnDeleteStudInfo_Click(object sender, EventArgs e)
@@ -173,26 +159,75 @@ namespace EventDriven.Project.UI
             }
         }
 
+        private void highlightButton(Button selected)
+        {
+            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    btn.BackColor = flowLayoutPanel1.BackColor;
+                    btn.ForeColor = Color.FromArgb(64, 64, 64);
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderColor = Color.Firebrick;
+                    btn.UseVisualStyleBackColor = false;
+                }
+            }
+
+            if (selected != null)
+            {
+                selected.BackColor = Color.LightGray;
+                selected.ForeColor = Color.Firebrick;
+                selected.FlatStyle = FlatStyle.Flat;
+                selected.FlatAppearance.BorderColor = Color.Firebrick;
+                selected.UseVisualStyleBackColor = false;
+            }
+        }
+
 
         private void ClearForm()
         {
+            // Basic info
             txtFullname.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
+            cmbSuffix.Text = "";
             dateTimePicker1.Value = DateTime.Now;
-            cmbGradeLevel.SelectedIndex = -1;
-            cmbGender.SelectedIndex = -1;
-            txtFatherName.Clear();
+            cmbGradeLevel.Text = "";
+            cmbSection.Text = "";
+            cmbGender.Text = "";
+
+            // Contact info
             txtEmail.Clear();
-            txtMotherName.Clear();
-            txtFatherContactNo.Clear();
+            txtAddress.Clear();
+            txtContactNo.Clear();
+
+            // Academic info
             txtLastSchool.Clear();
+            txtLastGrade.Clear();
+            txtGWA.Clear();
+
+            // Parents
+            txtFatherName.Clear();
+            txtFatherContactNo.Clear();
+            txtMotherName.Clear();
+            txtMotherContact.Clear();
+            //txtParentAddress.Clear(); 
+
+            // Guardian
             txtGuardian.Clear();
             txtRelationship.Clear();
-            txtMotherContact.Clear();
-            txtLastGrade.Clear();
+            //txtGuardianContact.Clear();
+            //txtGuardianAddress.Clear();
+
+            // Status checkboxes
+            cbNew.Checked = false;
+            cbTransferee.Checked = false;
+            cbOld.Checked = false;
+
+            // Reset selected student
             selectedStudentId = 0;
         }
+
         #region checked button
         private void cbNew_CheckedChanged(object sender, EventArgs e)
         {
@@ -215,5 +250,125 @@ namespace EventDriven.Project.UI
             status = "Old";
         }
         #endregion
+
+        private void UserControlStudentInfo_Load(object sender, EventArgs e)
+        {
+            // Gender
+            string[] genders = { "Male", "Female" };
+            cmbGender.Items.AddRange(genders);
+
+            // Grade Levels
+            string[] gradeLevels = { "Grade 7", "Grade 8", "Grade 9", "Grade 10" };
+            cmbGradeLevel.Items.AddRange(gradeLevels);
+
+            // Suffixes
+            string[] suffixes = { "", "Jr.", "II", "III", "IV", "V" };
+            cmbSuffix.Items.AddRange(suffixes);
+
+            // Sections
+            string[] sections = {
+            "Section Aster","Section Azalea","Section Camellia","Section Chrysanthemum","Section Dahlia","Section Hyacinth", };
+            cmbSection.Items.AddRange(sections);
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            switch (action)
+            {
+                case "Add":
+                    try
+                    {
+                        var student = GetStudentFromForm();
+                        var result = studentController.Add(student);
+                        MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    break;
+                case "Edit":
+                    try
+                    {
+                        if (selectedStudentId <= 0) { MessageBox.Show("Please search and select a student first."); return; }
+
+                        var student = GetStudentFromForm();
+                        student.Id = selectedStudentId;
+
+                        var result = studentController.Update(student);
+                        MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    break;
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                studentsToPrint = studentController.GetAll(); // Get all students
+                if (studentsToPrint.Count == 0)
+                {
+                    MessageBox.Show("No students to print.");
+                    return;
+                }
+
+                currentPrintIndex = 0; // Reset page index
+
+                PrintPreviewDialog preview = new PrintPreviewDialog();
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.PrintPage += PrintDocument1_PrintPage;
+                preview.Document = printDoc;
+                preview.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void PrintDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            int yPos = e.MarginBounds.Top;
+            Font headerFont = new Font("Arial", 10, FontStyle.Bold);
+            Font itemFont = new Font("Arial", 10);
+
+            // Header
+            string header = "ID | Firstname | Lastname | Grade | Section | Gender | GWA";
+            e.Graphics.DrawString(header, headerFont, Brushes.Black, e.MarginBounds.Left, yPos);
+            yPos += headerFont.Height + 5;
+
+            // Print students
+            while (currentPrintIndex < studentsToPrint.Count)
+            {
+                StudentModel s = studentsToPrint[currentPrintIndex];
+
+                string line = $"{s.Id,-3} | {s.FirstName,-10} | {s.LastName,-10} | {s.GradeLevel,-6} | {s.Section,-12} | {s.Gender,-6} | {s.GWA?.ToString("0.00") ?? "-"}";
+                e.Graphics.DrawString(line, itemFont, Brushes.Black, e.MarginBounds.Left, yPos);
+                yPos += itemFont.Height + 5;
+
+                // Check if we need a new page
+                if (yPos + itemFont.Height > e.MarginBounds.Bottom)
+                {
+                    currentPrintIndex++; // next student on next page
+                    e.HasMorePages = true;
+                    return;
+                }
+
+                currentPrintIndex++;
+            }
+
+            // Finished printing
+            e.HasMorePages = false;
+            currentPrintIndex = 0;
+        }
+
+
+
     }
 }

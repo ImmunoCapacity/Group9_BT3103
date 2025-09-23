@@ -1,4 +1,24 @@
-﻿INSERT INTO [dbo].[tblStudents]
+﻿/*
+Post-Deployment Script Template							
+--------------------------------------------------------------------------------------
+ This file contains SQL statements that will be appended to the build script.		
+ Use SQLCMD syntax to include a file in the post-deployment script.			
+ Example:      :r .\myfile.sql								
+ Use SQLCMD syntax to reference a variable in the post-deployment script.		
+ Example:      :setvar TableName MyTable							
+               SELECT * FROM [$(TableName)]					
+--------------------------------------------------------------------------------------
+*/
+INSERT INTO tblUser (username, userPassword, Role) 
+VALUES
+    ('Admin',    HASHBYTES('SHA2_256', 'admin123'), 'Admin'),
+    ('Registrar', HASHBYTES('SHA2_256', 'registrar123'), 'Registrar'),
+    ('Cashier',  HASHBYTES('SHA2_256', 'cashier123'), 'Cashier');
+
+
+
+
+INSERT INTO [dbo].[tblStudents]
 (FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
  FatherName, FatherContact, MotherName, MotherContact, ParentAddress,
  GuardianName, GuardianRelationship, GuardianContact, GuardianAddress,
