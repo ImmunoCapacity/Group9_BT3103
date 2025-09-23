@@ -4,5 +4,6 @@
     <TargetDatabase>EventDriven.Project.DB_1</TargetDatabase>
     <StartupScript>(Blank)</StartupScript>
     <StartAction>StartNone</StartAction>
+    <CreateNewDatabase>True</CreateNewDatabase>
   </PropertyGroup>
 </Project>
