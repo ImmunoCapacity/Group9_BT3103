@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace EventDriven.Project.UI
 {
-    public partial class FormAdminDashboard : Form
+    public partial class UserControlStudentInfo : UserControl
     {
-        public FormAdminDashboard()
+        public UserControlStudentInfo()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
