@@ -86,7 +86,11 @@
             button4.Name = "button4";
             button4.Size = new Size(348, 75);
             button4.TabIndex = 3;
+<<<<<<< HEAD
             button4.Text = "Payment History";
+=======
+            button4.Text = "Paymeny History";
+>>>>>>> 81f6b26e6db7b697ad54bf3696f4fd9909096059
             button4.UseVisualStyleBackColor = true;
             // 
             // button5
@@ -109,9 +113,15 @@
             // 
             // panelContainer
             // 
+<<<<<<< HEAD
             panelContainer.Location = new Point(465, 12);
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(1011, 829);
+=======
+            panelContainer.Location = new Point(465, 96);
+            panelContainer.Name = "panelContainer";
+            panelContainer.Size = new Size(948, 648);
+>>>>>>> 81f6b26e6db7b697ad54bf3696f4fd9909096059
             panelContainer.TabIndex = 6;
             // 
             // button1
