@@ -67,7 +67,7 @@ namespace EventDriven.Project.UI
 
             catch (Exception EX)
             {
-                MessageBox.Show(EX.Message + "error");
+                MessageBox.Show(EX.Message,": Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
