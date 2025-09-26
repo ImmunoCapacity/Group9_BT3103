@@ -19,6 +19,9 @@ namespace EventDriven.Project.UI
             this.main = main;
             this.role = role;
 
+            MaximizeBox = false;
+            MinimizeBox = false;
+
             InitializeComponent();
             this.Text = role + " Dashboard";
             visibleRole(role);
@@ -35,6 +38,12 @@ namespace EventDriven.Project.UI
         {
             highlightButton(sender as Button);
             ShowControl(new UserControlStudentInfo(role, main));
+
+            StudentInfoList studentInfoList = new StudentInfoList();
+            studentInfoList.TopLevel = false;
+            panel2.Controls.Add(studentInfoList);
+            studentInfoList.BringToFront();
+            studentInfoList.Show();
         }
 
         private void visibleRole(string role)
@@ -118,6 +127,12 @@ namespace EventDriven.Project.UI
         private void btnAdminDashboardLogout_Click(object sender, EventArgs e)
         {
             main.OpenChildForm(new FormUserRoles(main));
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddStudentInfo addStudentInfo = new AddStudentInfo();
+            addStudentInfo.ShowDialog();
         }
     }
 }
