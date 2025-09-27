@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EventDriven.Project.UI.DashBoardControls;
 
 namespace EventDriven.Project.UI
 {
@@ -37,13 +38,16 @@ namespace EventDriven.Project.UI
         private void btnStudentReg_Click(object sender, EventArgs e)
         {
             highlightButton(sender as Button);
-            ShowControl(new UserControlStudentInfo(role, main));
+            //ShowControl(new UserControlStudentRegistration(role, main));
+            ShowControl(new UserControlStudentInfoList(role, main));
 
-            StudentInfoList studentInfoList = new StudentInfoList();
-            studentInfoList.TopLevel = false;
-            panel2.Controls.Add(studentInfoList);
-            studentInfoList.BringToFront();
-            studentInfoList.Show();
+            //ShowControl(new StudentInfoList());
+
+            //StudentInfoList studentInfoList = new StudentInfoList();
+            //studentInfoList.TopLevel = false;
+            //panel2.Controls.Add(studentInfoList);
+            //studentInfoList.BringToFront();
+            //studentInfoList.Show();
         }
 
         private void visibleRole(string role)

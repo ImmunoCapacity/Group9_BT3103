@@ -19,7 +19,8 @@ namespace EventDriven.Project.UI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            //this.Dispose();
+            this.Height = 0;
         }
     }
 }
