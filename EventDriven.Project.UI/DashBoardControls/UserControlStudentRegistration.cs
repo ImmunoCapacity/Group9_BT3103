@@ -9,19 +9,19 @@ using System.Drawing.Printing;
 
 namespace EventDriven.Project.UI
 {
-    public partial class UserControlStudentInfo : UserControl
+    public partial class UserControlStudentRegistration : UserControl
     {
         private readonly StudentController studentController;
-        private int selectedStudentId = 0;
+        public int selectedStudentId = 0;
         string status = "";
         string action = "Add";
         MainForm main;
         private List<StudentModel> studentsToPrint = new List<StudentModel>();
         private int currentPrintIndex = 0; 
 
+        
 
-
-        public UserControlStudentInfo(string role, MainForm main)
+        public UserControlStudentRegistration(string role, MainForm main)
         {
             InitializeComponent();
             highlightButton(btnAddStudInfo);
@@ -69,15 +69,13 @@ namespace EventDriven.Project.UI
 
         private void BtnAddStudInfo_Click(object sender, EventArgs e)
         {
-            highlightButton(sender as Button);
-            action = "Add";
+            selectAdd();
         }
 
 
         private void BtnEditStudInfo_Click(object sender, EventArgs e)
         {
-            highlightButton(sender as Button);
-            action = "Edit";
+            selectEdit();
         }
 
         private void BtnDeleteStudInfo_Click(object sender, EventArgs e)
@@ -106,9 +104,13 @@ namespace EventDriven.Project.UI
 
         private void BtnSearchStudInfo_Click(object sender, EventArgs e)
         {
+            search();
+        }
+        public void search()
+        {
             try
             {
-                if (!int.TryParse(txtboxSearchStudInfo.Text, out int id)) { MessageBox.Show("Invalid ID."); return; }
+                if (!int.TryParse(txtSearchStudentIn.Text, out int id)) { MessageBox.Show("Invalid ID."); return; }
 
                 var student = studentController.GetById(id);
                 if (student == null) { MessageBox.Show("Student not found."); return; }
@@ -184,7 +186,7 @@ namespace EventDriven.Project.UI
         }
 
 
-        private void ClearForm()
+        public void ClearForm()
         {
             // Basic info
             txtFullname.Clear();
@@ -306,7 +308,16 @@ namespace EventDriven.Project.UI
                     break;
             }
         }
+        public void selectEdit() {
 
+            highlightButton(btnEditStudInfo);
+            action = "Edit";
+        }
+        public void selectAdd()
+        {
+            highlightButton(btnAddStudInfo);
+            action = "Add";
+        }
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try

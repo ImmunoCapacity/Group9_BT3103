@@ -1,6 +1,6 @@
 ﻿namespace EventDriven.Project.UI
 {
-    partial class UserControlStudentInfo
+    partial class UserControlStudentRegistration
     {
         /// <summary> 
         /// Required designer variable.
@@ -78,7 +78,7 @@
             btnAddStudInfo = new Button();
             btnEditStudInfo = new Button();
             btnDeleteStudInfo = new Button();
-            txtboxSearchStudInfo = new TextBox();
+            txtSearchStudentIn = new TextBox();
             btnSearchStudInfo = new Button();
             printDialog1 = new PrintDialog();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -87,7 +87,7 @@
             // 
             // txtMiddleName
             // 
-            txtMiddleName.Location = new Point(836, 134);
+            txtMiddleName.Location = new Point(819, 134);
             txtMiddleName.Name = "txtMiddleName";
             txtMiddleName.Size = new Size(183, 27);
             txtMiddleName.TabIndex = 94;
@@ -96,7 +96,7 @@
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label21.Location = new Point(701, 136);
+            label21.Location = new Point(684, 136);
             label21.Name = "label21";
             label21.Size = new Size(129, 25);
             label21.TabIndex = 93;
@@ -104,7 +104,7 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(494, 134);
+            txtLastName.Location = new Point(477, 134);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(192, 27);
             txtLastName.TabIndex = 92;
@@ -113,7 +113,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label20.Location = new Point(385, 136);
+            label20.Location = new Point(368, 136);
             label20.Name = "label20";
             label20.Size = new Size(103, 25);
             label20.TabIndex = 91;
@@ -125,7 +125,7 @@
             btnPrint.FlatStyle = FlatStyle.Flat;
             btnPrint.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPrint.Location = new Point(604, 737);
+            btnPrint.Location = new Point(587, 708);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(178, 56);
             btnPrint.TabIndex = 90;
@@ -139,7 +139,7 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSave.ForeColor = Color.FromArgb(64, 64, 64);
-            btnSave.Location = new Point(310, 737);
+            btnSave.Location = new Point(293, 708);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(178, 56);
             btnSave.TabIndex = 52;
@@ -151,7 +151,7 @@
             // 
             cbOld.AutoSize = true;
             cbOld.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cbOld.Location = new Point(522, 656);
+            cbOld.Location = new Point(505, 656);
             cbOld.Name = "cbOld";
             cbOld.Size = new Size(64, 29);
             cbOld.TabIndex = 89;
@@ -163,7 +163,7 @@
             // 
             cbTransferee.AutoSize = true;
             cbTransferee.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cbTransferee.Location = new Point(361, 656);
+            cbTransferee.Location = new Point(344, 656);
             cbTransferee.Name = "cbTransferee";
             cbTransferee.Size = new Size(121, 29);
             cbTransferee.TabIndex = 88;
@@ -175,7 +175,7 @@
             // 
             cbNew.AutoSize = true;
             cbNew.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cbNew.Location = new Point(254, 656);
+            cbNew.Location = new Point(237, 656);
             cbNew.Name = "cbNew";
             cbNew.Size = new Size(72, 29);
             cbNew.TabIndex = 87;
@@ -186,7 +186,7 @@
             // cmbSection
             // 
             cmbSection.FormattingEnabled = true;
-            cmbSection.Location = new Point(690, 602);
+            cmbSection.Location = new Point(673, 602);
             cmbSection.Name = "cmbSection";
             cmbSection.Size = new Size(329, 28);
             cmbSection.TabIndex = 86;
@@ -195,7 +195,7 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label19.Location = new Point(607, 605);
+            label19.Location = new Point(590, 605);
             label19.Name = "label19";
             label19.Size = new Size(78, 25);
             label19.TabIndex = 85;
@@ -204,14 +204,14 @@
             // cmbGradeLevel
             // 
             cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(254, 606);
+            cmbGradeLevel.Location = new Point(237, 606);
             cmbGradeLevel.Name = "cmbGradeLevel";
             cmbGradeLevel.Size = new Size(332, 28);
             cmbGradeLevel.TabIndex = 84;
             // 
             // txtGWA
             // 
-            txtGWA.Location = new Point(667, 558);
+            txtGWA.Location = new Point(650, 558);
             txtGWA.Name = "txtGWA";
             txtGWA.Size = new Size(352, 27);
             txtGWA.TabIndex = 83;
@@ -220,7 +220,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label18.Location = new Point(604, 560);
+            label18.Location = new Point(587, 560);
             label18.Name = "label18";
             label18.Size = new Size(57, 25);
             label18.TabIndex = 82;
@@ -228,63 +228,63 @@
             // 
             // txtLastGrade
             // 
-            txtLastGrade.Location = new Point(262, 561);
+            txtLastGrade.Location = new Point(245, 561);
             txtLastGrade.Name = "txtLastGrade";
             txtLastGrade.Size = new Size(324, 27);
             txtLastGrade.TabIndex = 81;
             // 
             // txtLastSchool
             // 
-            txtLastSchool.Location = new Point(254, 516);
+            txtLastSchool.Location = new Point(237, 516);
             txtLastSchool.Name = "txtLastSchool";
             txtLastSchool.Size = new Size(765, 27);
             txtLastSchool.TabIndex = 80;
             // 
             // txtRelationship
             // 
-            txtRelationship.Location = new Point(729, 459);
+            txtRelationship.Location = new Point(712, 459);
             txtRelationship.Name = "txtRelationship";
             txtRelationship.Size = new Size(290, 27);
             txtRelationship.TabIndex = 79;
             // 
             // txtMotherContact
             // 
-            txtMotherContact.Location = new Point(690, 405);
+            txtMotherContact.Location = new Point(673, 405);
             txtMotherContact.Name = "txtMotherContact";
             txtMotherContact.Size = new Size(329, 27);
             txtMotherContact.TabIndex = 78;
             // 
             // txtFatherContactNo
             // 
-            txtFatherContactNo.Location = new Point(690, 355);
+            txtFatherContactNo.Location = new Point(673, 355);
             txtFatherContactNo.Name = "txtFatherContactNo";
             txtFatherContactNo.Size = new Size(329, 27);
             txtFatherContactNo.TabIndex = 77;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(670, 301);
+            txtEmail.Location = new Point(653, 301);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(349, 27);
             txtEmail.TabIndex = 76;
             // 
             // txtGuardian
             // 
-            txtGuardian.Location = new Point(153, 459);
+            txtGuardian.Location = new Point(136, 459);
             txtGuardian.Name = "txtGuardian";
             txtGuardian.Size = new Size(433, 27);
             txtGuardian.TabIndex = 75;
             // 
             // txtMotherName
             // 
-            txtMotherName.Location = new Point(205, 407);
+            txtMotherName.Location = new Point(188, 407);
             txtMotherName.Name = "txtMotherName";
             txtMotherName.Size = new Size(381, 27);
             txtMotherName.TabIndex = 74;
             // 
             // txtFatherName
             // 
-            txtFatherName.Location = new Point(192, 357);
+            txtFatherName.Location = new Point(175, 357);
             txtFatherName.Name = "txtFatherName";
             txtFatherName.Size = new Size(394, 27);
             txtFatherName.TabIndex = 73;
@@ -293,7 +293,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label17.Location = new Point(604, 461);
+            label17.Location = new Point(587, 461);
             label17.Name = "label17";
             label17.Size = new Size(119, 25);
             label17.TabIndex = 72;
@@ -303,7 +303,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(604, 407);
+            label16.Location = new Point(587, 407);
             label16.Name = "label16";
             label16.Size = new Size(80, 25);
             label16.TabIndex = 71;
@@ -313,7 +313,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.Location = new Point(604, 357);
+            label15.Location = new Point(587, 357);
             label15.Name = "label15";
             label15.Size = new Size(80, 25);
             label15.TabIndex = 70;
@@ -323,7 +323,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.Location = new Point(604, 303);
+            label14.Location = new Point(587, 303);
             label14.Name = "label14";
             label14.Size = new Size(60, 25);
             label14.TabIndex = 69;
@@ -331,7 +331,7 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(183, 188);
+            dateTimePicker1.Location = new Point(166, 188);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(403, 27);
             dateTimePicker1.TabIndex = 68;
@@ -339,7 +339,7 @@
             // cmbGender
             // 
             cmbGender.FormattingEnabled = true;
-            cmbGender.Location = new Point(692, 187);
+            cmbGender.Location = new Point(675, 187);
             cmbGender.Name = "cmbGender";
             cmbGender.Size = new Size(108, 28);
             cmbGender.TabIndex = 67;
@@ -347,7 +347,7 @@
             // cmbSuffix
             // 
             cmbSuffix.FormattingEnabled = true;
-            cmbSuffix.Location = new Point(923, 186);
+            cmbSuffix.Location = new Point(906, 186);
             cmbSuffix.Name = "cmbSuffix";
             cmbSuffix.Size = new Size(96, 28);
             cmbSuffix.TabIndex = 66;
@@ -356,7 +356,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(607, 190);
+            label13.Location = new Point(590, 190);
             label13.Name = "label13";
             label13.Size = new Size(79, 25);
             label13.TabIndex = 65;
@@ -366,7 +366,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.Location = new Point(832, 189);
+            label12.Location = new Point(815, 189);
             label12.Name = "label12";
             label12.Size = new Size(63, 25);
             label12.TabIndex = 64;
@@ -374,21 +374,21 @@
             // 
             // txtContactNo
             // 
-            txtContactNo.Location = new Point(180, 303);
+            txtContactNo.Location = new Point(163, 303);
             txtContactNo.Name = "txtContactNo";
             txtContactNo.Size = new Size(406, 27);
             txtContactNo.TabIndex = 63;
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(144, 248);
+            txtAddress.Location = new Point(127, 248);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(875, 27);
             txtAddress.TabIndex = 62;
             // 
             // txtFullname
             // 
-            txtFullname.Location = new Point(169, 134);
+            txtFullname.Location = new Point(152, 134);
             txtFullname.Name = "txtFullname";
             txtFullname.Size = new Size(196, 27);
             txtFullname.TabIndex = 53;
@@ -397,7 +397,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(79, 660);
+            label11.Location = new Point(62, 660);
             label11.Name = "label11";
             label11.Size = new Size(120, 25);
             label11.TabIndex = 61;
@@ -407,7 +407,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.Location = new Point(55, 606);
+            label10.Location = new Point(38, 606);
             label10.Name = "label10";
             label10.Size = new Size(190, 25);
             label10.TabIndex = 60;
@@ -417,7 +417,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(55, 560);
+            label9.Location = new Point(38, 560);
             label9.Name = "label9";
             label9.Size = new Size(201, 25);
             label9.TabIndex = 59;
@@ -427,7 +427,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(55, 515);
+            label8.Location = new Point(38, 515);
             label8.Name = "label8";
             label8.Size = new Size(193, 25);
             label8.TabIndex = 58;
@@ -437,7 +437,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(55, 461);
+            label7.Location = new Point(38, 461);
             label7.Name = "label7";
             label7.Size = new Size(92, 25);
             label7.TabIndex = 57;
@@ -447,7 +447,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(55, 407);
+            label6.Location = new Point(38, 407);
             label6.Name = "label6";
             label6.Size = new Size(144, 25);
             label6.TabIndex = 56;
@@ -457,7 +457,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(55, 357);
+            label5.Location = new Point(38, 357);
             label5.Name = "label5";
             label5.Size = new Size(133, 25);
             label5.TabIndex = 55;
@@ -467,7 +467,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(55, 302);
+            label4.Location = new Point(38, 302);
             label4.Name = "label4";
             label4.Size = new Size(119, 25);
             label4.TabIndex = 54;
@@ -477,7 +477,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(55, 247);
+            label3.Location = new Point(38, 247);
             label3.Name = "label3";
             label3.Size = new Size(83, 25);
             label3.TabIndex = 51;
@@ -487,7 +487,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(55, 190);
+            label2.Location = new Point(38, 190);
             label2.Name = "label2";
             label2.Size = new Size(123, 25);
             label2.TabIndex = 50;
@@ -497,7 +497,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(55, 133);
+            label1.Location = new Point(38, 133);
             label1.Name = "label1";
             label1.Size = new Size(106, 25);
             label1.TabIndex = 49;
@@ -558,13 +558,13 @@
             btnDeleteStudInfo.UseVisualStyleBackColor = true;
             btnDeleteStudInfo.Click += BtnDeleteStudInfo_Click;
             // 
-            // txtboxSearchStudInfo
+            // txtSearchStudentIn
             // 
-            txtboxSearchStudInfo.Location = new Point(411, 26);
-            txtboxSearchStudInfo.Margin = new Padding(3, 3, 10, 3);
-            txtboxSearchStudInfo.Name = "txtboxSearchStudInfo";
-            txtboxSearchStudInfo.Size = new Size(447, 27);
-            txtboxSearchStudInfo.TabIndex = 96;
+            txtSearchStudentIn.Location = new Point(411, 26);
+            txtSearchStudentIn.Margin = new Padding(3, 3, 10, 3);
+            txtSearchStudentIn.Name = "txtSearchStudentIn";
+            txtSearchStudentIn.Size = new Size(447, 27);
+            txtSearchStudentIn.TabIndex = 96;
             // 
             // btnSearchStudInfo
             // 
@@ -589,11 +589,11 @@
             // 
             printDocument1.PrintPage += PrintDocument1_PrintPage;
             // 
-            // UserControlStudentInfo
+            // UserControlStudentRegistration
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(txtboxSearchStudInfo);
+            Controls.Add(txtSearchStudentIn);
             Controls.Add(btnSearchStudInfo);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(txtMiddleName);
@@ -642,7 +642,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "UserControlStudentInfo";
+            Name = "UserControlStudentRegistration";
             Size = new Size(1033, 808);
             Load += UserControlStudentInfo_Load;
             flowLayoutPanel1.ResumeLayout(false);
@@ -702,7 +702,7 @@
         private Button btnAddStudInfo;
         private Button btnEditStudInfo;
         private Button btnDeleteStudInfo;
-        private TextBox txtboxSearchStudInfo;
+        public TextBox txtSearchStudentIn;
         private Button btnSearchStudInfo;
         private PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
