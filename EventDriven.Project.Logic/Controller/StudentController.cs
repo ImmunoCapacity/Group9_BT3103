@@ -15,13 +15,13 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // ADD student
-        public StudentModel Add(StudentModel model)
+        public async Task<StudentModel> AddAsync(StudentModel model)
         {
             if (model == null) throw new Exception("Missing parameter: student");
 
             try
             {
-                return studentRepository.Insert(model);
+                return await studentRepository.InsertAsync(model);
             }
             catch (Exception ex)
             {
@@ -30,13 +30,13 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // UPDATE student
-        public StudentModel Update(StudentModel model)
+        public async Task<StudentModel> UpdateAsync(StudentModel model)
         {
             if (model == null) throw new Exception("Missing parameter: student");
 
             try
             {
-                return studentRepository.Update(model);
+                return await studentRepository.UpdateAsync(model);
             }
             catch (Exception ex)
             {
@@ -45,13 +45,13 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // DELETE student
-        public StudentModel Delete(int id)
+        public async Task<StudentModel> DeleteAsync(int id)
         {
             if (id <= 0) throw new Exception("Missing parameter: student ID");
 
             try
             {
-                return studentRepository.Delete(id);
+                return await studentRepository.DeleteAsync(id);
             }
             catch (Exception ex)
             {
@@ -60,11 +60,11 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // GET all students
-        public List<StudentModel> GetAll()
+        public async Task<List<StudentModel>> GetAllAsync()
         {
             try
             {
-                return studentRepository.GetAll();
+                return await studentRepository.GetAllAsync();
             }
             catch (Exception ex)
             {
@@ -73,13 +73,13 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // GET student by Id
-        public StudentModel GetById(int id)
+        public async Task<StudentModel> GetByIdAsync(int id)
         {
             if (id <= 0) throw new Exception("Missing parameter: student ID");
 
             try
             {
-                return studentRepository.GetById(id);
+                return await studentRepository.GetByIdAsync(id);
             }
             catch (Exception ex)
             {

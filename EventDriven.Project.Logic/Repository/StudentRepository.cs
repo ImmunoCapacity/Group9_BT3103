@@ -11,7 +11,7 @@ namespace EventDriven.Project.Businesslogic.Repository
             "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventDriven.Project.DB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
         // INSERT student
-        public StudentModel Insert(StudentModel student)
+        public async Task<StudentModel> InsertAsync(StudentModel student)
         {
             var query = @"INSERT INTO tblStudents
                           (FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
@@ -40,7 +40,7 @@ namespace EventDriven.Project.Businesslogic.Repository
         }
 
         // UPDATE student
-        public StudentModel Update(StudentModel student)
+        public async Task<StudentModel> UpdateAsync(StudentModel student)
         {
             var query = @"UPDATE tblStudents SET
                           FirstName=@FirstName, MiddleName=@MiddleName, LastName=@LastName, Status=@Status,
@@ -67,13 +67,13 @@ namespace EventDriven.Project.Businesslogic.Repository
                 }
             }
 
-            return GetById(student.Id);
+            return await GetByIdAsync(student.Id);
         }
 
         // DELETE student
-        public StudentModel Delete(int id)
+        public async Task<StudentModel> DeleteAsync(int id)
         {
-            var studentToDelete = GetById(id);
+            var studentToDelete = GetByIdAsync(id);
             var query = "DELETE FROM tblStudents WHERE Id=@Id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -88,11 +88,11 @@ namespace EventDriven.Project.Businesslogic.Repository
                 }
             }
 
-            return studentToDelete;
+            return await studentToDelete;
         }
 
         // GET all students
-        public List<StudentModel> GetAll()
+        public async Task<List<StudentModel>> GetAllAsync()
         {
             var query = @"SELECT Id, FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
                                  FatherName, FatherContact, MotherName, MotherContact, ParentAddress,
@@ -118,7 +118,7 @@ namespace EventDriven.Project.Businesslogic.Repository
         }
 
         // GET student by Id
-        public StudentModel GetById(int id)
+        public async Task<StudentModel> GetByIdAsync(int id)
         {
             var query = @"SELECT Id, FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
                          FatherName, FatherContact, MotherName, MotherContact, ParentAddress,
@@ -146,7 +146,7 @@ namespace EventDriven.Project.Businesslogic.Repository
 
 
         // COUNT students
-        public int GetCount()
+        public async Task<int> GetCountAsync()
         {
             var query = "SELECT COUNT(*) FROM tblStudents";
             using (SqlConnection connection = new SqlConnection(connectionString))

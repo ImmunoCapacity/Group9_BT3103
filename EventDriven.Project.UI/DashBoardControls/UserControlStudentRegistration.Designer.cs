@@ -157,7 +157,7 @@
             cbOld.TabIndex = 89;
             cbOld.Text = "Old";
             cbOld.UseVisualStyleBackColor = true;
-            cbOld.CheckedChanged += cbOld_CheckedChanged;
+            cbOld.Click += cbOld_CheckedChanged;
             // 
             // cbTransferee
             // 
@@ -169,7 +169,7 @@
             cbTransferee.TabIndex = 88;
             cbTransferee.Text = "Transferee";
             cbTransferee.UseVisualStyleBackColor = true;
-            cbTransferee.CheckedChanged += cbTransferee_CheckedChanged;
+            cbTransferee.Click += cbTransferee_CheckedChanged;
             // 
             // cbNew
             // 
@@ -181,7 +181,7 @@
             cbNew.TabIndex = 87;
             cbNew.Text = "New";
             cbNew.UseVisualStyleBackColor = true;
-            cbNew.CheckedChanged += cbNew_CheckedChanged;
+            cbNew.Click += cbNew_CheckedChanged;
             // 
             // cmbSection
             // 

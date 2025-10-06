@@ -26,13 +26,14 @@ namespace EventDriven.Project.UI.DashBoardControls
             InitializeComponent();
             studentController = new StudentController();
             LoadStudents();
+            
         }
-        private void LoadStudents()
+        private async void LoadStudents()
         {
             try
             {
                 dataGridView1.Rows.Clear();
-                List<StudentModel> students = studentController.GetAll();
+                List<StudentModel> students = await studentController.GetAllAsync();
 
                 foreach (var student in students)
                 {
@@ -49,6 +50,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -68,7 +70,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             studentRegistrationControl.search();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // ignore header clicks
 
@@ -95,7 +97,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (confirm == DialogResult.Yes)
                 {
-                    studentController.Delete(studentId);
+                    await studentController.DeleteAsync(studentId);
                     LoadStudents(); // refresh grid
                 }
             }
@@ -112,17 +114,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             SearchStudent(txtSearch.Text.Trim());
         }
-        private void SearchInGrid(string idText)
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    bool match = row.Cells["Column1"].Value.ToString().Contains(idText);
-                    row.Visible = match;
-                }
-            }
-        }
+
 
         private void SearchStudent(string searchValue)
         {
