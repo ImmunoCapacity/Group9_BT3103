@@ -7,10 +7,13 @@
     <Compile Update="DashBoardControls\UserControlStudentInfoList.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="DashBoardControls\UserControlStudentRegistration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="FormDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DashBoardControls\StudentInfoList.cs">
+    <Compile Update="Unnecessary\StudentInfoList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Unnecessary\FormAdminStudentInfo.cs">
@@ -40,7 +43,7 @@
     <Compile Update="TempLoggedIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DashBoardControls\UserControlStudentRegistration.cs">
+    <Compile Update="DashBoardControls\UserControlStudentInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

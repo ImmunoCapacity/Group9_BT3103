@@ -60,8 +60,8 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(btnStudentInfo);
-            flowLayoutPanel1.Controls.Add(btnHistory);
             flowLayoutPanel1.Controls.Add(btnStudentReg);
+            flowLayoutPanel1.Controls.Add(btnHistory);
             flowLayoutPanel1.Controls.Add(btnPayments);
             flowLayoutPanel1.Controls.Add(btnAssessment);
             flowLayoutPanel1.Controls.Add(btnReports);
@@ -93,7 +93,7 @@
             btnHistory.FlatStyle = FlatStyle.Flat;
             btnHistory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHistory.ForeColor = Color.FromArgb(64, 64, 64);
-            btnHistory.Location = new Point(3, 88);
+            btnHistory.Location = new Point(3, 173);
             btnHistory.Margin = new Padding(3, 29, 3, 3);
             btnHistory.Name = "btnHistory";
             btnHistory.Size = new Size(386, 53);
@@ -109,7 +109,7 @@
             btnStudentReg.FlatStyle = FlatStyle.Flat;
             btnStudentReg.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStudentReg.ForeColor = Color.FromArgb(64, 64, 64);
-            btnStudentReg.Location = new Point(3, 173);
+            btnStudentReg.Location = new Point(3, 88);
             btnStudentReg.Margin = new Padding(3, 29, 3, 3);
             btnStudentReg.Name = "btnStudentReg";
             btnStudentReg.Size = new Size(386, 53);

@@ -16,7 +16,7 @@ namespace EventDriven.Project.UI.DashBoardControls
     public partial class UserControlStudentInfoList : UserControl
     {
         private readonly StudentController studentController;
-        private UserControlStudentRegistration studentRegistrationControl;
+        private UserControlStudentInfo studentRegistrationControl;
         private string role;
         private MainForm main;
         public UserControlStudentInfoList(string role, MainForm main)
@@ -103,7 +103,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void UserControlStudentInfoList_Load(object sender, EventArgs e)
         {
-            studentRegistrationControl = new UserControlStudentRegistration(role, main);
+            studentRegistrationControl = new UserControlStudentInfo(role, main);
             panel1.Controls.Clear();
             studentRegistrationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
             panel1.Controls.Add(studentRegistrationControl);
