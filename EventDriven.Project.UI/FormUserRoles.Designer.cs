@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUserRoles));
             pictureBox1 = new PictureBox();
             label1 = new Label();
             Adminbtn = new Button();
@@ -36,18 +37,18 @@
             panel1 = new Panel();
             pictureBox5 = new PictureBox();
             pictureBox4 = new PictureBox();
-            pictureBox3 = new PictureBox();
             panel2 = new Panel();
             label3 = new Label();
             pictureBox2 = new PictureBox();
             label2 = new Label();
+            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -71,7 +72,7 @@
             label1.Size = new Size(718, 49);
             label1.TabIndex = 4;
             label1.Text = "WELCOME. PLEASE CHOOSE YOUR ROLE";
-            label1.Click += label1_Click;
+            
             // 
             // Adminbtn
             // 
@@ -129,9 +130,9 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.SeaShell;
+            panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(pictureBox4);
-            panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(Regstrarbtn);
             panel1.Controls.Add(Cashierbtn);
             panel1.Controls.Add(Adminbtn);
@@ -141,7 +142,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1281, 756);
             panel1.TabIndex = 5;
-            panel1.Paint += panel1_Paint;
+            
             // 
             // pictureBox5
             // 
@@ -162,16 +163,6 @@
             pictureBox4.Size = new Size(268, 265);
             pictureBox4.TabIndex = 6;
             pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox3.Image = Properties.Resources.user__2_;
-            pictureBox3.Location = new Point(55, 368);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(268, 265);
-            pictureBox3.TabIndex = 5;
-            pictureBox3.TabStop = false;
             // 
             // panel2
             // 
@@ -204,7 +195,7 @@
             pictureBox2.Size = new Size(100, 126);
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+           
             // 
             // label2
             // 
@@ -216,7 +207,17 @@
             label2.Size = new Size(234, 49);
             label2.TabIndex = 0;
             label2.Text = "ROSEWOOD ";
-            label2.Click += label2_Click;
+            
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(48, 368);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(268, 265);
+            pictureBox3.TabIndex = 8;
+            pictureBox3.TabStop = false;
             // 
             // FormUserRoles
             // 
@@ -235,10 +236,10 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
         }
 
@@ -254,8 +255,8 @@
         private PictureBox pictureBox2;
         private Label label2;
         private Label label3;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
+        private PictureBox pictureBox3;
     }
 }
