@@ -78,7 +78,7 @@ namespace EventDriven.Project.UI
             selectEdit();
         }
 
-        private void BtnDeleteStudInfo_Click(object sender, EventArgs e)
+        private async void BtnDeleteStudInfo_Click(object sender, EventArgs e)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace EventDriven.Project.UI
 
                 if (MessageBox.Show("Are you sure you want to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    var result = studentController.Delete(selectedStudentId);
+                    var result = await studentController.DeleteAsync(selectedStudentId);
                     if (result != null)
                     {
                         MessageBox.Show("Student deleted successfully!");
@@ -106,15 +106,15 @@ namespace EventDriven.Project.UI
         {
             search();
         }
-        public void search()
+        public async void search()
         {
             try
             {
                 if (!int.TryParse(txtSearchStudentIn.Text, out int id)) { MessageBox.Show("Invalid ID."); return; }
 
-                var student = studentController.GetById(id);
+                var student = await studentController.GetByIdAsync(id);
                 if (student == null) { MessageBox.Show("Student not found."); return; }
-
+                ClearForm();
                 selectedStudentId = student.Id;
 
                 txtFullname.Text = student.FirstName;
@@ -236,6 +236,7 @@ namespace EventDriven.Project.UI
             cbTransferee.Checked = false;
             cbOld.Checked = false;
             status = "New";
+            if (!cbNew.Checked) status = "";
         }
 
         private void cbTransferee_CheckedChanged(object sender, EventArgs e)
@@ -243,6 +244,7 @@ namespace EventDriven.Project.UI
             cbNew.Checked = false;
             cbOld.Checked = false;
             status = "Transferee";
+            if (!cbTransferee.Checked) status = "";
         }
 
         private void cbOld_CheckedChanged(object sender, EventArgs e)
@@ -250,6 +252,7 @@ namespace EventDriven.Project.UI
             cbTransferee.Checked = false;
             cbNew.Checked = false;
             status = "Old";
+            if(!cbOld.Checked) status = "";
         }
         #endregion
 
@@ -282,7 +285,7 @@ namespace EventDriven.Project.UI
                     try
                     {
                         var student = GetStudentFromForm();
-                        var result = studentController.Add(student);
+                        var result = studentController.AddAsync(student);
                         MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
                     }
                     catch (Exception ex)
@@ -298,7 +301,7 @@ namespace EventDriven.Project.UI
                         var student = GetStudentFromForm();
                         student.Id = selectedStudentId;
 
-                        var result = studentController.Update(student);
+                        var result = studentController.UpdateAsync(student);
                         MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
                     }
                     catch (Exception ex)
@@ -318,11 +321,11 @@ namespace EventDriven.Project.UI
             highlightButton(btnAddStudInfo);
             action = "Add";
         }
-        private void btnPrint_Click(object sender, EventArgs e)
+        private async void btnPrint_Click(object sender, EventArgs e)
         {
             try
             {
-                studentsToPrint = studentController.GetAll(); // Get all students
+                studentsToPrint = await studentController.GetAllAsync(); // Get all students
                 if (studentsToPrint.Count == 0)
                 {
                     MessageBox.Show("No students to print.");
