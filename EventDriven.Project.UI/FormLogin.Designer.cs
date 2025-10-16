@@ -73,7 +73,7 @@ namespace EventDriven.Project.UI
             showBtn.FlatStyle = FlatStyle.Popup;
             showBtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             showBtn.ForeColor = Color.Firebrick;
-            showBtn.Location = new Point(544, 188);
+            showBtn.Location = new Point(544, 189);
             showBtn.Name = "showBtn";
             showBtn.Size = new Size(94, 29);
             showBtn.TabIndex = 3;

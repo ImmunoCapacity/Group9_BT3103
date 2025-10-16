@@ -40,6 +40,7 @@ namespace EventDriven.Project.UI
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             Load += MainForm_Load;
             ResumeLayout(false);
         }
