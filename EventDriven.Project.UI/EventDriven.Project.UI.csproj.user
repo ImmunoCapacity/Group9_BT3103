@@ -40,7 +40,7 @@
     <Compile Update="TempLoggedIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DashBoardControls\UserControlStudentRegistration.cs">
+    <Compile Update="DashBoardControls\UserControlStudentInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

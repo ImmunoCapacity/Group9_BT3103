@@ -16,7 +16,7 @@ namespace EventDriven.Project.UI.DashBoardControls
     public partial class UserControlStudentInfoList : UserControl
     {
         private readonly StudentController studentController;
-        private UserControlStudentRegistration studentRegistrationControl;
+        private UserControlStudentInformation studentRegistrationControl;
         private string role;
         private MainForm main;
         public UserControlStudentInfoList(string role, MainForm main)
@@ -51,6 +51,10 @@ namespace EventDriven.Project.UI.DashBoardControls
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
+        }
+        private void refresh(object sender, EventArgs e)
+        {
+            LoadStudents();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -105,10 +109,12 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void UserControlStudentInfoList_Load(object sender, EventArgs e)
         {
-            studentRegistrationControl = new UserControlStudentRegistration(role, main);
+            UserControlStudentInformation info = new UserControlStudentInformation(role, main);
+            studentRegistrationControl = info;
             panel1.Controls.Clear();
             studentRegistrationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
             panel1.Controls.Add(studentRegistrationControl);
+            info.btnSave.Click += refresh;
         }
         private void btnSearchStuIn_Click(object sender, EventArgs e)
         {
