@@ -35,5 +35,9 @@ namespace EventDriven.Project.UI
         {
             main.OpenChildForm(new FormLogin("Registrar", main));
         }
+
+      
+
+        }
     }
-}
+

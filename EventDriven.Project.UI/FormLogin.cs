@@ -67,7 +67,7 @@ namespace EventDriven.Project.UI
 
             catch (Exception EX)
             {
-                MessageBox.Show(EX.Message,": Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(EX.Message, ": Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -82,6 +82,36 @@ namespace EventDriven.Project.UI
             isLocked = false;
             resetTimer.Stop();
             MessageBox.Show("You can try logging in again.");
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLogin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
