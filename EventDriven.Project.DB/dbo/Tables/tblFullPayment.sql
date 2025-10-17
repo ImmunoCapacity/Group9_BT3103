@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[tblFullPayment]
+(
+	[Id] INT IDENTITY(100,1) PRIMARY KEY,
+	[AmountPaid] DECIMAL(10,2) NOT NULL,
+	[DatePaid] DATETIME NOT NULL DEFAULT GETDATE(),
+	[PaymentMethod] NVARCHAR(50) NULL
+);
