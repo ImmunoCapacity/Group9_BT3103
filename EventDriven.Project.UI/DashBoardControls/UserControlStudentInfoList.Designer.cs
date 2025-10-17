@@ -30,6 +30,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentInfoList));
             printDialog2 = new PrintDialog();
             printDocument2 = new System.Drawing.Printing.PrintDocument();
             printDialog1 = new PrintDialog();
@@ -75,7 +76,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1037, 818);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Student Registration";
+            tabPage2.Text = "Student Information";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -94,7 +95,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             tabPage1.Padding = new Padding(3, 4, 3, 4);
             tabPage1.Size = new Size(1037, 818);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Student Information";
+            tabPage1.Text = "Student List";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -187,7 +188,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             // 
             ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColEdit.HeaderText = "";
-            ColEdit.Image = new Bitmap(Properties.Resources.pencil, new Size(32, 32)); 
+            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
             ColEdit.MinimumWidth = 6;
             ColEdit.Name = "ColEdit";
             ColEdit.ReadOnly = true;
@@ -197,7 +198,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             // 
             ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColDelete.HeaderText = "";
-            ColDelete.Image = new Bitmap(Properties.Resources.close1, new Size(32, 32)); 
+            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
             ColDelete.MinimumWidth = 6;
             ColDelete.Name = "ColDelete";
             ColDelete.ReadOnly = true;

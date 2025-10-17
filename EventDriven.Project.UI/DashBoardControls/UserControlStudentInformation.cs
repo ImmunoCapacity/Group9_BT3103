@@ -9,7 +9,7 @@ using System.Drawing.Printing;
 
 namespace EventDriven.Project.UI
 {
-    public partial class UserControlStudentRegistration : UserControl
+    public partial class UserControlStudentInformation : UserControl
     {
         private readonly StudentController studentController;
         public int selectedStudentId = 0;
@@ -21,7 +21,7 @@ namespace EventDriven.Project.UI
 
         
 
-        public UserControlStudentRegistration(string role, MainForm main)
+        public UserControlStudentInformation(string role, MainForm main)
         {
             InitializeComponent();
             highlightButton(btnAddStudInfo);

@@ -1,6 +1,6 @@
 ﻿namespace EventDriven.Project.UI
 {
-    partial class UserControlStudentRegistration
+    partial class UserControlStudentInformation
     {
         /// <summary> 
         /// Required designer variable.
@@ -657,7 +657,7 @@
         private TextBox txtLastName;
         private Label label20;
         private Button btnPrint;
-        private Button btnSave;
+        public Button btnSave;
         private CheckBox cbOld;
         private CheckBox cbTransferee;
         private CheckBox cbNew;
