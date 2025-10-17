@@ -1,31 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="AddStudentInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="DashBoardControls\UserControlStudentInfoList.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="FormDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="DashBoardControls\StudentInfoList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Unnecessary\FormAdminStudentInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Unnecessary\FormCashierDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Unnecessary\FormCashierStudInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Unnecessary\FormRegistrarDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Unnecessary\FormRegistrarStudInfo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.cs">
@@ -35,9 +14,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormUserRoles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="TempLoggedIn.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlStudentRegistration.cs">

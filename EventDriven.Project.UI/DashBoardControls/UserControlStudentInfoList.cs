@@ -15,7 +15,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 {
     public partial class UserControlStudentInfoList : UserControl
     {
-        private readonly StudentController studentController;
+        private readonly StudentInformationController studentController;
         private UserControlStudentRegistration studentRegistrationControl;
         private string role;
         private MainForm main;
@@ -24,7 +24,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.role = role;
             this.main = main;
             InitializeComponent();
-            studentController = new StudentController();
+            studentController = new StudentInformationController();
             LoadStudents();
             
         }

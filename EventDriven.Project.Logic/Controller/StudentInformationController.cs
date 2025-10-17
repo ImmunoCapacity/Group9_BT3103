@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace EventDriven.Project.Businesslogic.Controller
 {
-    public class StudentController
+    public class StudentInformationController
     {
         private readonly StudentRepository studentRepository;
 
-        public StudentController()
+        public StudentInformationController()
         {
             studentRepository = new StudentRepository();
         }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[tblStudents]
 (
-    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY(100,1) NOT NULL PRIMARY KEY,
     
     [FirstName] NVARCHAR(50) NOT NULL,
     [MiddleName] NVARCHAR(50) NULL,

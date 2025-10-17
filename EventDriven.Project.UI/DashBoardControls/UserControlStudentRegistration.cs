@@ -11,7 +11,7 @@ namespace EventDriven.Project.UI
 {
     public partial class UserControlStudentRegistration : UserControl
     {
-        private readonly StudentController studentController;
+        private readonly StudentInformationController studentController;
         public int selectedStudentId = 0;
         string status = "";
         string action = "Add";
@@ -25,7 +25,7 @@ namespace EventDriven.Project.UI
         {
             InitializeComponent();
             highlightButton(btnAddStudInfo);
-            studentController = new StudentController();
+            studentController = new StudentInformationController();
 
             this.main = main;
             if (role != "Admin")

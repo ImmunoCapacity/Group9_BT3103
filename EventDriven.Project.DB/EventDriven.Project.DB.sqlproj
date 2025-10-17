@@ -60,13 +60,20 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\Tables\Academic Infomation Table" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\tblStudents.sql" />
+    <Build Include="dbo\Tables\tblStudentRegistration.sql" />
+    <Build Include="dbo\Tables\tblFullPayment.sql" />
+    <Build Include="dbo\Tables\tblPartialPayment.sql" />
+    <Build Include="dbo\Tables\Academic Infomation Table\tblSubjects.sql" />
+    <Build Include="dbo\Tables\Academic Infomation Table\tblRooms.sql" />
+    <Build Include="dbo\Tables\Academic Infomation Table\tblTeachers.sql" />
+    <Build Include="dbo\Tables\Academic Infomation Table\tblSchedule.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />
-    <None Include="dbo\Scripts\StudentScript.PostDeployment2.sql" />
   </ItemGroup>
 </Project>

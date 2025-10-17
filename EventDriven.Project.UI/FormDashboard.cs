@@ -135,8 +135,7 @@ namespace EventDriven.Project.UI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddStudentInfo addStudentInfo = new AddStudentInfo();
-            addStudentInfo.ShowDialog();
+
         }
     }
 }
