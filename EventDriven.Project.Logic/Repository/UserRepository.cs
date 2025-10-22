@@ -39,7 +39,8 @@ namespace EventDriven.Project.Logic.Repository
                         {
                             Id = Convert.ToInt32(table.Rows[0]["Id"]),
                             Username = Username,
-                            Password = Password
+                            Password = Password,
+                            Role = role
                             
                         };
                         return matchingUser;

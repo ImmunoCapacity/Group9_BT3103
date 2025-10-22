@@ -18,11 +18,13 @@ namespace EventDriven.Project.UI.DashBoardControls
         private readonly StudentController studentController;
         private UserControlStudentInformation studentRegistrationControl;
         private string role;
+        private UserModel authenticationKey;
         private MainForm main;
-        public UserControlStudentInfoList(string role, MainForm main)
+        public UserControlStudentInfoList(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
             this.main = main;
+            this.authenticationKey = authenticationKey;
             InitializeComponent();
             studentController = new StudentController();
             LoadStudents();
@@ -33,7 +35,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             try
             {
                 dataGridView1.Rows.Clear();
-                List<StudentModel> students = await studentController.GetAllAsync();
+                List<StudentModel> students = await studentController.GetAllAsync(authenticationKey);
 
                 foreach (var student in students)
                 {
@@ -101,7 +103,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (confirm == DialogResult.Yes)
                 {
-                    await studentController.DeleteAsync(studentId);
+                    await studentController.DeleteAsync(studentId,  authenticationKey);
                     LoadStudents(); // refresh grid
                 }
             }
@@ -109,7 +111,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void UserControlStudentInfoList_Load(object sender, EventArgs e)
         {
-            UserControlStudentInformation info = new UserControlStudentInformation(role, main);
+            UserControlStudentInformation info = new UserControlStudentInformation(role, main, authenticationKey);
             studentRegistrationControl = info;
             panel1.Controls.Clear();
             studentRegistrationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
