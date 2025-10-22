@@ -11,6 +11,6 @@ namespace EventDriven.Project.Model
         public  int Id { get; set; }
         public string Section { get; set; }
         public string Requirements { get; set; }
-        public 
+       
     }
 }
