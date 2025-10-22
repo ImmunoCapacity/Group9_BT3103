@@ -54,7 +54,7 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(437, 808);
+            panel1.Size = new Size(437, 1035);
             panel1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -173,7 +173,7 @@
             btnAdminDashboardLogout.FlatStyle = FlatStyle.Flat;
             btnAdminDashboardLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAdminDashboardLogout.ForeColor = Color.FromArgb(64, 64, 64);
-            btnAdminDashboardLogout.Location = new Point(261, 740);
+            btnAdminDashboardLogout.Location = new Point(260, 870);
             btnAdminDashboardLogout.Name = "btnAdminDashboardLogout";
             btnAdminDashboardLogout.Size = new Size(150, 53);
             btnAdminDashboardLogout.TabIndex = 9;
@@ -187,7 +187,7 @@
             btnAdminDashboardBack.FlatStyle = FlatStyle.Flat;
             btnAdminDashboardBack.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAdminDashboardBack.ForeColor = Color.FromArgb(64, 64, 64);
-            btnAdminDashboardBack.Location = new Point(24, 740);
+            btnAdminDashboardBack.Location = new Point(23, 870);
             btnAdminDashboardBack.Name = "btnAdminDashboardBack";
             btnAdminDashboardBack.Size = new Size(150, 53);
             btnAdminDashboardBack.TabIndex = 8;
@@ -208,7 +208,7 @@
             panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Location = new Point(433, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1050, 808);
+            panel2.Size = new Size(1470, 1035);
             panel2.TabIndex = 1;
             // 
             // FormDashboard
@@ -216,7 +216,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1483, 808);
+            ClientSize = new Size(1902, 1033);
             Controls.Add(panel2);
             Controls.Add(panel1);
             MaximizeBox = false;

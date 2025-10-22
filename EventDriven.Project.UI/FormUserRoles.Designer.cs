@@ -28,27 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUserRoles));
             pictureBox1 = new PictureBox();
             label1 = new Label();
             Adminbtn = new Button();
             Cashierbtn = new Button();
             Regstrarbtn = new Button();
             panel1 = new Panel();
+            pictureBox3 = new PictureBox();
             pictureBox5 = new PictureBox();
             pictureBox4 = new PictureBox();
             panel2 = new Panel();
             label3 = new Label();
             pictureBox2 = new PictureBox();
             label2 = new Label();
-            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -69,10 +68,9 @@
             label1.ForeColor = Color.FromArgb(64, 64, 64);
             label1.Location = new Point(310, 233);
             label1.Name = "label1";
-            label1.Size = new Size(718, 49);
+            label1.Size = new Size(717, 49);
             label1.TabIndex = 4;
             label1.Text = "WELCOME. PLEASE CHOOSE YOUR ROLE";
-            
             // 
             // Adminbtn
             // 
@@ -142,7 +140,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1281, 756);
             panel1.TabIndex = 5;
-            
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox3.Image = Properties.Resources.user;
+            pictureBox3.Location = new Point(48, 368);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(268, 265);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 8;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
             // 
             // pictureBox5
             // 
@@ -153,6 +162,7 @@
             pictureBox5.Size = new Size(268, 265);
             pictureBox5.TabIndex = 7;
             pictureBox5.TabStop = false;
+            pictureBox5.Click += pictureBox5_Click;
             // 
             // pictureBox4
             // 
@@ -163,6 +173,7 @@
             pictureBox4.Size = new Size(268, 265);
             pictureBox4.TabIndex = 6;
             pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
             // 
             // panel2
             // 
@@ -195,7 +206,6 @@
             pictureBox2.Size = new Size(100, 126);
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
-           
             // 
             // label2
             // 
@@ -207,17 +217,6 @@
             label2.Size = new Size(234, 49);
             label2.TabIndex = 0;
             label2.Text = "ROSEWOOD ";
-            
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(48, 368);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(268, 265);
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
             // 
             // FormUserRoles
             // 
@@ -234,12 +233,12 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
         }
 

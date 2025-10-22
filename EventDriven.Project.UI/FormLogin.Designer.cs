@@ -38,17 +38,17 @@ namespace EventDriven.Project.UI
             TBPassword = new TextBox();
             TBUsername = new TextBox();
             lblLogin = new Label();
+            panel3 = new Panel();
             btnBack = new Button();
             panel2 = new Panel();
             label1 = new Label();
             pictureBox2 = new PictureBox();
             label4 = new Label();
-            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -73,7 +73,7 @@ namespace EventDriven.Project.UI
             panel1.Controls.Add(TBUsername);
             panel1.Controls.Add(lblLogin);
             panel1.Controls.Add(panel3);
-            panel1.Location = new Point(429, 264);
+            panel1.Location = new Point(593, 264);
             panel1.Name = "panel1";
             panel1.Size = new Size(733, 516);
             panel1.TabIndex = 1;
@@ -157,6 +157,15 @@ namespace EventDriven.Project.UI
             lblLogin.Text = "Admin Login";
             lblLogin.Click += lblLogin_Click;
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.SeaShell;
+            panel3.Controls.Add(pictureBox1);
+            panel3.Location = new Point(126, 28);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(481, 154);
+            panel3.TabIndex = 5;
+            // 
             // btnBack
             // 
             btnBack.FlatAppearance.BorderColor = Color.Firebrick;
@@ -164,7 +173,7 @@ namespace EventDriven.Project.UI
             btnBack.FlatStyle = FlatStyle.System;
             btnBack.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBack.ForeColor = Color.FromArgb(64, 64, 64);
-            btnBack.Location = new Point(33, 1019);
+            btnBack.Location = new Point(30, 918);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(107, 49);
             btnBack.TabIndex = 5;
@@ -217,15 +226,6 @@ namespace EventDriven.Project.UI
             label4.TabIndex = 0;
             label4.Text = "ROSEWOOD ";
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.SeaShell;
-            panel3.Controls.Add(pictureBox1);
-            panel3.Location = new Point(126, 28);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(481, 154);
-            panel3.TabIndex = 5;
-            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -242,10 +242,10 @@ namespace EventDriven.Project.UI
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 

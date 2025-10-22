@@ -36,8 +36,20 @@ namespace EventDriven.Project.UI
             main.OpenChildForm(new FormLogin("Registrar", main));
         }
 
-      
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            main.OpenChildForm(new FormLogin("Admin", main));
+        }
 
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            main.OpenChildForm(new FormLogin("Cashier", main));
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            main.OpenChildForm(new FormLogin("Registrar", main));
         }
     }
+}
 

@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EventDriven.Project.UI
+namespace EventDriven.Project.UI.DashBoardControls
 {
-    public partial class StudentInfoList : Form
+    public partial class UserControlTemplate : UserControl
     {
-        public StudentInfoList()
+        public UserControlTemplate()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            //this.Dispose();
-            this.Height = 0;
         }
     }
 }
