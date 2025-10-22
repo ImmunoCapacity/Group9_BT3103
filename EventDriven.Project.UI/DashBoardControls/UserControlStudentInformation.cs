@@ -4,7 +4,6 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
 using EventDriven.Project.Model;
-using System.Drawing.Printing;
  
 
 namespace EventDriven.Project.UI
@@ -17,15 +16,17 @@ namespace EventDriven.Project.UI
         string action = "Add";
         MainForm main;
         private List<StudentModel> studentsToPrint = new List<StudentModel>();
-        private int currentPrintIndex = 0; 
+        private int currentPrintIndex = 0;
+        private UserModel authenticationKey;
 
         
 
-        public UserControlStudentInformation(string role, MainForm main)
+        public UserControlStudentInformation(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
             highlightButton(btnAddStudInfo);
             studentController = new StudentController();
+            this.authenticationKey = authenticationKey;
 
             this.main = main;
             if (role != "Admin")
@@ -86,7 +87,7 @@ namespace EventDriven.Project.UI
 
                 if (MessageBox.Show("Are you sure you want to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    var result = await studentController.DeleteAsync(selectedStudentId);
+                    var result = await studentController.DeleteAsync(selectedStudentId, authenticationKey);
                     if (result != null)
                     {
                         MessageBox.Show("Student deleted successfully!");
@@ -112,7 +113,7 @@ namespace EventDriven.Project.UI
             {
                 if (!int.TryParse(txtSearchStudentIn.Text, out int id)) { MessageBox.Show("Invalid ID."); return; }
 
-                var student = await studentController.GetByIdAsync(id);
+                var student = await studentController.GetByIdAsync(id, authenticationKey);
                 if (student == null) { MessageBox.Show("Student not found."); return; }
                 ClearForm();
                 selectedStudentId = student.Id;
@@ -285,7 +286,7 @@ namespace EventDriven.Project.UI
                     try
                     {
                         var student = GetStudentFromForm();
-                        var result = studentController.AddAsync(student);
+                        var result = studentController.AddAsync(student, authenticationKey);
                         MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
                     }
                     catch (Exception ex)
@@ -301,7 +302,7 @@ namespace EventDriven.Project.UI
                         var student = GetStudentFromForm();
                         student.Id = selectedStudentId;
 
-                        var result = studentController.UpdateAsync(student);
+                        var result = studentController.UpdateAsync(student,authenticationKey);
                         MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
                     }
                     catch (Exception ex)
@@ -325,7 +326,7 @@ namespace EventDriven.Project.UI
         {
             try
             {
-                studentsToPrint = await studentController.GetAllAsync(); // Get all students
+                studentsToPrint = await studentController.GetAllAsync(authenticationKey); // Get all students
                 if (studentsToPrint.Count == 0)
                 {
                     MessageBox.Show("No students to print.");

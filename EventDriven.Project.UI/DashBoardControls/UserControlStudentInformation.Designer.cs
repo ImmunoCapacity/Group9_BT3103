@@ -589,7 +589,7 @@
             // 
             printDocument1.PrintPage += PrintDocument1_PrintPage;
             // 
-            // UserControlStudentRegistration
+            // UserControlStudentInformation
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -642,8 +642,8 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "UserControlStudentRegistration";
-            Size = new Size(1033, 808);
+            Name = "UserControlStudentInformation";
+            Size = new Size(1470, 1035);
             Load += UserControlStudentInfo_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

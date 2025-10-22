@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EventDriven.Project.Model;
 using EventDriven.Project.UI.DashBoardControls;
 
 namespace EventDriven.Project.UI
@@ -15,10 +16,12 @@ namespace EventDriven.Project.UI
     {
         MainForm main;
         string role;
-        public FormDashboard(string role, MainForm main)
+        public UserModel authenticationKey;
+        public FormDashboard(string role, MainForm main, UserModel authenticationKey)
         {
             this.main = main;
             this.role = role;
+            this.authenticationKey = authenticationKey;
 
             MaximizeBox = false;
             MinimizeBox = false;
@@ -39,7 +42,7 @@ namespace EventDriven.Project.UI
         {
             highlightButton(sender as Button);
             //ShowControl(new UserControlStudentRegistration(role, main));
-            ShowControl(new UserControlStudentInfoList(role, main));
+            ShowControl(new UserControlStudentInfoList(role, main, authenticationKey));
 
             //ShowControl(new StudentInfoList());
 

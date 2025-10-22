@@ -60,7 +60,7 @@ namespace EventDriven.Project.UI
                 if (matchingUser != null)
                 {
                     attempt = 0;
-                    main.OpenChildForm(new FormDashboard(role, main));
+                    main.OpenChildForm(new FormDashboard(role, main, matchingUser));
                 }
                 else throw new Exception("Invalid Credentials");
             }

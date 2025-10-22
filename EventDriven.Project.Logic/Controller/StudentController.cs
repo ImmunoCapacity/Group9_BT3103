@@ -1,24 +1,37 @@
 ﻿using EventDriven.Project.Businesslogic.Repository;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace EventDriven.Project.Businesslogic.Controller
 {
     public class StudentController
     {
         private readonly StudentRepository studentRepository;
+        private readonly UserController userController;
 
         public StudentController()
         {
+            userController = new UserController();
             studentRepository = new StudentRepository();
+        }
+        private bool authenticate(UserModel authenticationKey)
+        {
+            UserModel matching = userController.ValidateUser(authenticationKey.Username, authenticationKey.Password, authenticationKey.Role);
+            if (matching != null){
+                return true;
+            }
+            return false;
         }
 
         // ADD student
-        public async Task<StudentModel> AddAsync(StudentModel model)
+        public async Task<StudentModel> AddAsync(StudentModel model, UserModel authenticationKey)
         {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
             if (model == null) throw new Exception("Missing parameter: student");
-
+            
             try
             {
                 return await studentRepository.InsertAsync(model);
@@ -30,8 +43,9 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // UPDATE student
-        public async Task<StudentModel> UpdateAsync(StudentModel model)
+        public async Task<StudentModel> UpdateAsync(StudentModel model, UserModel authenticationKey)
         {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
             if (model == null) throw new Exception("Missing parameter: student");
 
             try
@@ -45,8 +59,9 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // DELETE student
-        public async Task<StudentModel> DeleteAsync(int id)
+        public async Task<StudentModel> DeleteAsync(int id, UserModel authenticationKey)
         {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
             if (id <= 0) throw new Exception("Missing parameter: student ID");
 
             try
@@ -60,8 +75,9 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // GET all students
-        public async Task<List<StudentModel>> GetAllAsync()
+        public async Task<List<StudentModel>> GetAllAsync(UserModel authenticationKey)
         {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
             try
             {
                 return await studentRepository.GetAllAsync();
@@ -73,8 +89,9 @@ namespace EventDriven.Project.Businesslogic.Controller
         }
 
         // GET student by Id
-        public async Task<StudentModel> GetByIdAsync(int id)
+        public async Task<StudentModel> GetByIdAsync(int id, UserModel authenticationKey)
         {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
             if (id <= 0) throw new Exception("Missing parameter: student ID");
 
             try
