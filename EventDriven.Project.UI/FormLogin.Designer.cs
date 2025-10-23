@@ -173,7 +173,7 @@ namespace EventDriven.Project.UI
             btnBack.FlatStyle = FlatStyle.System;
             btnBack.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBack.ForeColor = Color.FromArgb(64, 64, 64);
-            btnBack.Location = new Point(30, 918);
+            btnBack.Location = new Point(32, 1001);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(107, 49);
             btnBack.TabIndex = 5;
