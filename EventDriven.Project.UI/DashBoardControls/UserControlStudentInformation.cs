@@ -71,12 +71,15 @@ namespace EventDriven.Project.UI
         private void BtnAddStudInfo_Click(object sender, EventArgs e)
         {
             selectAdd();
+            MessageBox.Show("Add Mode");
+            ClearForm();
         }
 
 
         private void BtnEditStudInfo_Click(object sender, EventArgs e)
         {
             selectEdit();
+            MessageBox.Show("Edit Mode");
         }
 
         private async void BtnDeleteStudInfo_Click(object sender, EventArgs e)
@@ -198,6 +201,7 @@ namespace EventDriven.Project.UI
             cmbGradeLevel.Text = "";
             cmbSection.Text = "";
             cmbGender.Text = "";
+            txtSearchStudentIn.Text = "";
 
             // Contact info
             txtEmail.Clear();
