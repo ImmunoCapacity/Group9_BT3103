@@ -37,12 +37,6 @@
             tabPage1 = new TabPage();
             panel2 = new Panel();
             dataGridView1 = new DataGridView();
-            panel4 = new Panel();
-            btnSearchStuIn = new Button();
-            txtSearch = new TextBox();
-            btnAddStuIn = new Button();
-            tabPage2 = new TabPage();
-            panel1 = new Panel();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
@@ -50,6 +44,12 @@
             Column5 = new DataGridViewTextBoxColumn();
             ColEdit = new DataGridViewImageColumn();
             ColDelete = new DataGridViewImageColumn();
+            panel4 = new Panel();
+            btnSearchStuIn = new Button();
+            txtSearch = new TextBox();
+            btnAddStuIn = new Button();
+            tabPage2 = new TabPage();
+            panel1 = new Panel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel2.SuspendLayout();
@@ -68,6 +68,7 @@
             tabControl1.Margin = new Padding(3, 4, 3, 4);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
+            tabControl1.ShowToolTips = true;
             tabControl1.Size = new Size(1470, 1035);
             tabControl1.TabIndex = 3;
             // 
@@ -146,6 +147,70 @@
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column1.HeaderText = "ID";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Width = 54;
+            // 
+            // Column2
+            // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column2.HeaderText = "Name";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column3.HeaderText = "Requirements";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            Column3.Width = 136;
+            // 
+            // Column4
+            // 
+            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column4.HeaderText = "Grade Level";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            Column4.Width = 122;
+            // 
+            // Column5
+            // 
+            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column5.HeaderText = "Payment Mode";
+            Column5.MinimumWidth = 6;
+            Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            Column5.Width = 141;
+            // 
+            // ColEdit
+            // 
+            ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColEdit.HeaderText = "";
+            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
+            ColEdit.MinimumWidth = 6;
+            ColEdit.Name = "ColEdit";
+            ColEdit.ReadOnly = true;
+            ColEdit.Width = 6;
+            // 
+            // ColDelete
+            // 
+            ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColDelete.HeaderText = "";
+            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
+            ColDelete.MinimumWidth = 6;
+            ColDelete.Name = "ColDelete";
+            ColDelete.ReadOnly = true;
+            ColDelete.Width = 6;
+            // 
             // panel4
             // 
             panel4.BackColor = Color.White;
@@ -216,70 +281,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1456, 996);
             panel1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "ID";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            Column1.Width = 54;
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column2.HeaderText = "Name";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column3.HeaderText = "Requirements";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            Column3.Width = 136;
-            // 
-            // Column4
-            // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column4.HeaderText = "Grade Level";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
-            Column4.Width = 122;
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column5.HeaderText = "Payment Mode";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.ReadOnly = true;
-            Column5.Width = 141;
-            // 
-            // ColEdit
-            // 
-            ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ColEdit.HeaderText = "";
-            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
-            ColEdit.MinimumWidth = 6;
-            ColEdit.Name = "ColEdit";
-            ColEdit.ReadOnly = true;
-            ColEdit.Width = 6;
-            // 
-            // ColDelete
-            // 
-            ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ColDelete.HeaderText = "";
-            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
-            ColDelete.MinimumWidth = 6;
-            ColDelete.Name = "ColDelete";
-            ColDelete.ReadOnly = true;
-            ColDelete.Width = 6;
             // 
             // UserControlTemplate
             // 
