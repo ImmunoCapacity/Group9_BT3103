@@ -52,7 +52,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox1.Image = Properties.Resources.logo;
             pictureBox1.Location = new Point(450, 45);
             pictureBox1.Name = "pictureBox1";
@@ -62,7 +62,7 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             label1.AutoSize = true;
             label1.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(64, 64, 64);
@@ -74,7 +74,7 @@
             // 
             // Adminbtn
             // 
-            Adminbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Adminbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
             Adminbtn.Cursor = Cursors.Hand;
             Adminbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Adminbtn.FlatAppearance.BorderSize = 3;
@@ -91,7 +91,7 @@
             // 
             // Cashierbtn
             // 
-            Cashierbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Cashierbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
             Cashierbtn.Cursor = Cursors.Hand;
             Cashierbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Cashierbtn.FlatAppearance.BorderSize = 3;
@@ -108,7 +108,7 @@
             // 
             // Regstrarbtn
             // 
-            Regstrarbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Regstrarbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
             Regstrarbtn.Cursor = Cursors.Hand;
             Regstrarbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Regstrarbtn.FlatAppearance.BorderSize = 3;
@@ -126,7 +126,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             panel1.BackColor = Color.SeaShell;
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(pictureBox5);
@@ -143,7 +143,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox3.Image = Properties.Resources.user;
             pictureBox3.Location = new Point(48, 368);
             pictureBox3.Name = "pictureBox3";
@@ -155,7 +155,7 @@
             // 
             // pictureBox5
             // 
-            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox5.Image = Properties.Resources.registered;
             pictureBox5.Location = new Point(966, 368);
             pictureBox5.Name = "pictureBox5";
@@ -166,7 +166,7 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox4.Image = Properties.Resources.cash_machine;
             pictureBox4.Location = new Point(533, 368);
             pictureBox4.Name = "pictureBox4";
@@ -199,7 +199,7 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox2.Image = Properties.Resources.logo;
             pictureBox2.Location = new Point(3, -14);
             pictureBox2.Name = "pictureBox2";

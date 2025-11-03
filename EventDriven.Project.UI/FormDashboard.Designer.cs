@@ -28,7 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            panel2 = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            pictureBox2 = new PictureBox();
+            panel3 = new Panel();
+            btnAdminDashboardLogout = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnStudentInfo = new Button();
             btnHistory = new Button();
@@ -36,27 +41,79 @@
             btnPayments = new Button();
             btnAssessment = new Button();
             btnReports = new Button();
-            btnAdminDashboardLogout = new Button();
-            panel2 = new Panel();
-            label3 = new Label();
-            pictureBox2 = new PictureBox();
-            label2 = new Label();
-            panel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            panel1 = new Panel();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel3.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // panel2
             // 
-            panel1.BackColor = Color.SeaShell;
-            panel1.Controls.Add(flowLayoutPanel1);
-            panel1.Controls.Add(btnAdminDashboardLogout);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 92);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(437, 941);
-            panel1.TabIndex = 0;
+            panel2.BackColor = Color.SeaShell;
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(pictureBox2);
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1920, 107);
+            panel2.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(330, 26);
+            label3.Name = "label3";
+            label3.Size = new Size(275, 49);
+            label3.TabIndex = 6;
+            label3.Text = "ACADEMY INC.";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Firebrick;
+            label2.Location = new Point(106, 27);
+            label2.Name = "label2";
+            label2.Size = new Size(234, 49);
+            label2.TabIndex = 0;
+            label2.Text = "ROSEWOOD ";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.logo;
+            pictureBox2.Location = new Point(0, -13);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(104, 130);
+            pictureBox2.TabIndex = 5;
+            pictureBox2.TabStop = false;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel3.BackColor = Color.SeaShell;
+            panel3.Controls.Add(btnAdminDashboardLogout);
+            panel3.Controls.Add(flowLayoutPanel1);
+            panel3.Location = new Point(0, 107);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(450, 926);
+            panel3.TabIndex = 8;
+            // 
+            // btnAdminDashboardLogout
+            // 
+            btnAdminDashboardLogout.Cursor = Cursors.Hand;
+            btnAdminDashboardLogout.FlatAppearance.BorderColor = Color.Firebrick;
+            btnAdminDashboardLogout.FlatStyle = FlatStyle.System;
+            btnAdminDashboardLogout.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAdminDashboardLogout.ForeColor = Color.FromArgb(64, 64, 64);
+            btnAdminDashboardLogout.Location = new Point(26, 764);
+            btnAdminDashboardLogout.Name = "btnAdminDashboardLogout";
+            btnAdminDashboardLogout.Size = new Size(388, 53);
+            btnAdminDashboardLogout.TabIndex = 12;
+            btnAdminDashboardLogout.Text = "Log Out";
+            btnAdminDashboardLogout.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -66,12 +123,11 @@
             flowLayoutPanel1.Controls.Add(btnPayments);
             flowLayoutPanel1.Controls.Add(btnAssessment);
             flowLayoutPanel1.Controls.Add(btnReports);
-            flowLayoutPanel1.Location = new Point(23, 104);
+            flowLayoutPanel1.Location = new Point(23, 88);
             flowLayoutPanel1.Margin = new Padding(101, 100, 101, 100);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(391, 484);
-            flowLayoutPanel1.TabIndex = 10;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            flowLayoutPanel1.TabIndex = 11;
             // 
             // btnStudentInfo
             // 
@@ -87,7 +143,7 @@
             btnStudentInfo.Text = "Student Information";
             btnStudentInfo.UseVisualStyleBackColor = true;
             btnStudentInfo.Visible = false;
-            btnStudentInfo.Click += btnStudentReg_Click;
+            btnStudentInfo.Click += btnStudentInfo_Click;
             // 
             // btnHistory
             // 
@@ -100,11 +156,11 @@
             btnHistory.Margin = new Padding(3, 29, 3, 3);
             btnHistory.Name = "btnHistory";
             btnHistory.Size = new Size(386, 53);
-            btnHistory.TabIndex = 12;
+            btnHistory.TabIndex = 8;
             btnHistory.Text = "Payment History";
             btnHistory.UseVisualStyleBackColor = true;
             btnHistory.Visible = false;
-            btnHistory.Click += btnHistory_Click;
+            btnHistory.Click += btnHistory_Click_1;
             // 
             // btnStudentReg
             // 
@@ -121,7 +177,6 @@
             btnStudentReg.Text = "Student Registration";
             btnStudentReg.UseVisualStyleBackColor = true;
             btnStudentReg.Visible = false;
-            btnStudentReg.Click += btnStudentReg_Click_1;
             // 
             // btnPayments
             // 
@@ -138,7 +193,6 @@
             btnPayments.Text = "Payment";
             btnPayments.UseVisualStyleBackColor = true;
             btnPayments.Visible = false;
-            btnPayments.Click += btnPayments_Click;
             // 
             // btnAssessment
             // 
@@ -155,7 +209,6 @@
             btnAssessment.Text = "Assessment";
             btnAssessment.UseVisualStyleBackColor = true;
             btnAssessment.Visible = false;
-            btnAssessment.Click += btnAssessment_Click;
             // 
             // btnReports
             // 
@@ -172,66 +225,13 @@
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Visible = false;
-            btnReports.Click += btnReports_Click;
             // 
-            // btnAdminDashboardLogout
+            // panel1
             // 
-            btnAdminDashboardLogout.Cursor = Cursors.Hand;
-            btnAdminDashboardLogout.FlatAppearance.BorderColor = Color.Firebrick;
-            btnAdminDashboardLogout.FlatStyle = FlatStyle.System;
-            btnAdminDashboardLogout.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAdminDashboardLogout.ForeColor = Color.FromArgb(64, 64, 64);
-            btnAdminDashboardLogout.Location = new Point(26, 835);
-            btnAdminDashboardLogout.Name = "btnAdminDashboardLogout";
-            btnAdminDashboardLogout.Size = new Size(388, 53);
-            btnAdminDashboardLogout.TabIndex = 9;
-            btnAdminDashboardLogout.Text = "Log Out";
-            btnAdminDashboardLogout.UseVisualStyleBackColor = true;
-            btnAdminDashboardLogout.Click += btnAdminDashboardLogout_Click;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.SeaShell;
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(pictureBox2);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1902, 92);
-            panel2.TabIndex = 7;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(340, 20);
-            label3.Name = "label3";
-            label3.Size = new Size(275, 49);
-            label3.TabIndex = 6;
-            label3.Text = "ACADEMY INC.";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox2.Image = Properties.Resources.logo;
-            pictureBox2.Location = new Point(0, -13);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(110, 105);
-            pictureBox2.TabIndex = 5;
-            pictureBox2.TabStop = false;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Firebrick;
-            label2.Location = new Point(116, 21);
-            label2.Name = "label2";
-            label2.Size = new Size(234, 49);
-            label2.TabIndex = 0;
-            label2.Text = "ROSEWOOD ";
+            panel1.Location = new Point(450, 107);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1470, 943);
+            panel1.TabIndex = 9;
             // 
             // FormDashboard
             // 
@@ -241,33 +241,34 @@
             ClientSize = new Size(1902, 1033);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            Controls.Add(panel3);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormDashboard";
             Text = "FormAdminDashboard";
             Load += FormDashboard_Load;
-            panel1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel3.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel1;
+        private Panel panel2;
+        private Label label3;
+        private PictureBox pictureBox2;
+        private Label label2;
+        private Panel panel3;
         private Button btnAdminDashboardLogout;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Button btnReports;
         private Button btnStudentInfo;
         private Button btnHistory;
         private Button btnStudentReg;
         private Button btnPayments;
         private Button btnAssessment;
-        private Panel panel2;
-        private Label label3;
-        private PictureBox pictureBox2;
-        private Label label2;
+        private Button btnReports;
+        private Panel panel1;
     }
 }

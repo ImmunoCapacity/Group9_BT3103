@@ -19,19 +19,21 @@ namespace EventDriven.Project.UI
         private int currentPrintIndex = 0;
         private UserModel authenticationKey;
 
-        
+
 
         public UserControlStudentInformation(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
-            highlightButton(btnAddStudInfo);
+            //highlightButton(BtnAddStudInfo);
+            highlightPicture(pictureBox1);
             studentController = new StudentController();
             this.authenticationKey = authenticationKey;
 
             this.main = main;
             if (role != "Admin")
             {
-                btnDeleteStudInfo.Visible = false;
+                //btnDeleteStudInfo.Visible = false;
+                pictureBox3.Visible = false;
             }
         }
 
@@ -162,27 +164,42 @@ namespace EventDriven.Project.UI
             }
         }
 
-        private void highlightButton(Button selected)
+        //private void highlightButton(Button selected)
+        //{
+        //    foreach (Control ctrl in flowLayoutPanel1.Controls)
+        //    {
+        //        if (ctrl is Button btn)
+        //        {
+        //            btn.BackColor = flowLayoutPanel1.BackColor;
+        //            btn.ForeColor = Color.FromArgb(64, 64, 64);
+        //            btn.FlatStyle = FlatStyle.Flat;
+        //            btn.FlatAppearance.BorderColor = Color.Firebrick;
+        //            btn.UseVisualStyleBackColor = false;
+        //        }
+        //    }
+
+        //    if (selected != null)
+        //    {
+        //        selected.BackColor = Color.LightGray;
+        //        selected.ForeColor = Color.Firebrick;
+        //        selected.FlatStyle = FlatStyle.Flat;
+        //        selected.FlatAppearance.BorderColor = Color.Firebrick;
+        //        selected.UseVisualStyleBackColor = false;
+        //    }
+        //}
+
+        private void highlightPicture(PictureBox selected)
         {
-            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            foreach (Control control in flowLayoutPanel1.Controls)
             {
-                if (ctrl is Button btn)
+                if (control is PictureBox pb)
                 {
-                    btn.BackColor = flowLayoutPanel1.BackColor;
-                    btn.ForeColor = Color.FromArgb(64, 64, 64);
-                    btn.FlatStyle = FlatStyle.Flat;
-                    btn.FlatAppearance.BorderColor = Color.Firebrick;
-                    btn.UseVisualStyleBackColor = false;
+                    pb.BackColor = flowLayoutPanel1.BackColor;
                 }
             }
-
             if (selected != null)
             {
-                selected.BackColor = Color.LightGray;
-                selected.ForeColor = Color.Firebrick;
-                selected.FlatStyle = FlatStyle.Flat;
-                selected.FlatAppearance.BorderColor = Color.Firebrick;
-                selected.UseVisualStyleBackColor = false;
+                selected.BackColor = Color.Gray;
             }
         }
 
@@ -253,7 +270,7 @@ namespace EventDriven.Project.UI
             cbTransferee.Checked = false;
             cbNew.Checked = false;
             status = "Old";
-            if(!cbOld.Checked) status = "";
+            if (!cbOld.Checked) status = "";
         }
         #endregion
 
@@ -302,7 +319,7 @@ namespace EventDriven.Project.UI
                         var student = GetStudentFromForm();
                         student.Id = selectedStudentId;
 
-                        var result = studentController.UpdateAsync(student,authenticationKey);
+                        var result = studentController.UpdateAsync(student, authenticationKey);
                         MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
                     }
                     catch (Exception ex)
@@ -312,14 +329,14 @@ namespace EventDriven.Project.UI
                     break;
             }
         }
-        public void selectEdit() {
+        public void selectEdit()
+        {
 
-            highlightButton(btnEditStudInfo);
-            action = "Edit";
+
         }
         public void selectAdd()
         {
-            highlightButton(btnAddStudInfo);
+            //highlightButton(btnAddStudInfo);
             action = "Add";
         }
         private async void btnPrint_Click(object sender, EventArgs e)
@@ -384,6 +401,23 @@ namespace EventDriven.Project.UI
         }
 
 
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            highlightPicture(pictureBox1);
+            action = "Add";
+        }
 
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            highlightPicture(pictureBox3);
+            action = "Edit";
+        }
+
+       
+
+        private void pictureBox4_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

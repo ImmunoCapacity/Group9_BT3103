@@ -226,7 +226,7 @@
             // 
             // btnSearchStuIn
             // 
-            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnSearchStuIn.BackColor = Color.White;
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
