@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EventDriven.Project.UI.DashBoardControls
 {
-    public partial class Payment_Form : Form
+    public partial class UserControlStudentPayment : UserControl
     {
-        public Payment_Form()
+        public UserControlStudentPayment()
         {
             InitializeComponent();
         }

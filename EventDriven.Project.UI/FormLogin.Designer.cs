@@ -63,7 +63,7 @@ namespace EventDriven.Project.UI
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             panel1.BackColor = Color.BurlyWood;
             panel1.Controls.Add(showBtn);
             panel1.Controls.Add(btnLogin);
@@ -206,7 +206,7 @@ namespace EventDriven.Project.UI
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox2.Image = Properties.Resources.logo;
             pictureBox2.Location = new Point(0, -14);
             pictureBox2.Name = "pictureBox2";

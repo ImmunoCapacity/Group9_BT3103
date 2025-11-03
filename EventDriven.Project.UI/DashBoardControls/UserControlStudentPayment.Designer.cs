@@ -1,6 +1,6 @@
 ﻿namespace EventDriven.Project.UI.DashBoardControls
 {
-    partial class Payment_Form
+    partial class UserControlStudentPayment
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Payment_Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentPayment));
             splitContainerPayment = new SplitContainer();
             dataGridView1 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
@@ -237,7 +237,7 @@
             // 
             // btnSearchStuIn
             // 
-            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnSearchStuIn.BackColor = Color.White;
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -385,7 +385,7 @@
             // 
             // btnPay
             // 
-            btnPay.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPay.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnPay.BackColor = Color.White;
             btnPay.FlatStyle = FlatStyle.System;
             btnPay.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -400,7 +400,7 @@
             // 
             // btnSave
             // 
-            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnSave.BackColor = Color.White;
             btnSave.FlatStyle = FlatStyle.System;
             btnSave.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -415,7 +415,7 @@
             // 
             // btnPrint
             // 
-            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnPrint.BackColor = Color.White;
             btnPrint.FlatStyle = FlatStyle.System;
             btnPrint.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);

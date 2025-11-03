@@ -39,6 +39,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             printDialog1 = new PrintDialog();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             tabPage2 = new TabPage();
+            panel1 = new Panel();
             tabPage1 = new TabPage();
             panel2 = new Panel();
             dataGridView1 = new DataGridView();
@@ -54,7 +55,6 @@ namespace EventDriven.Project.UI.DashBoardControls
             txtSearch = new TextBox();
             btnAddStuIn = new Button();
             tabControl1 = new TabControl();
-            panel1 = new Panel();
             tabPage2.SuspendLayout();
             tabPage1.SuspendLayout();
             panel2.SuspendLayout();
@@ -81,6 +81,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Student Information";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.SeaShell;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1456, 996);
+            panel1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -237,7 +246,6 @@ namespace EventDriven.Project.UI.DashBoardControls
             // 
             // btnSearchStuIn
             // 
-            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnSearchStuIn.BackColor = Color.White;
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -286,15 +294,6 @@ namespace EventDriven.Project.UI.DashBoardControls
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1470, 1035);
             tabControl1.TabIndex = 2;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.SeaShell;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1456, 996);
-            panel1.TabIndex = 0;
             // 
             // UserControlStudentInfoList
             // 

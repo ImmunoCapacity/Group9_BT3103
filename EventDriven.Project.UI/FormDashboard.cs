@@ -33,9 +33,10 @@ namespace EventDriven.Project.UI
         private void ShowControl(UserControl control)
         {
             //papaltan natin yung control ng panel sa user control bawt press ng btn
-            panel2.Controls.Clear();
+            panel1.Controls.Clear();
             control.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
-            panel2.Controls.Add(control);
+            panel1.Controls.Add(control);
+
         }
 
         private void btnStudentReg_Click(object sender, EventArgs e)
@@ -139,6 +140,24 @@ namespace EventDriven.Project.UI
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnStudentInfo_Click(object sender, EventArgs e)
+        {
+            highlightButton(sender as Button);
+            //ShowControl(new UserControlStudentRegistration(role, main));
+            ShowControl(new UserControlStudentInfoList(role, main, authenticationKey));
+        }
+
+        private void btnHistory_Click_1(object sender, EventArgs e)
+        {
+            highlightButton((sender as Button) );
+            ShowControl(new UserControlStudentPayment());
         }
     }
 }
