@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentPayment));
             splitContainerPayment = new SplitContainer();
             dataGridView1 = new DataGridView();
@@ -40,30 +40,30 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
-            ColEdit = new DataGridViewImageColumn();
-            ColDelete = new DataGridViewImageColumn();
+            //ColEdit = new DataGridViewImageColumn();
+            //ColDelete = new DataGridViewImageColumn();
             panel1 = new Panel();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
+            btnPrint = new Button();
+            label1 = new Label();
+            btnSave = new Button();
+            btnPay = new Button();
+            lblBalance = new Label();
+            label8 = new Label();
+            lblChange = new Label();
+            label7 = new Label();
+            txtPaymentReceived = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             panel2 = new Panel();
-            label1 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            txtPaymentReceived = new TextBox();
-            label7 = new Label();
-            lblChange = new Label();
-            label8 = new Label();
-            lblBalance = new Label();
-            btnPay = new Button();
-            btnSave = new Button();
-            btnPrint = new Button();
-            panel3 = new Panel();
-            pictureBox1 = new PictureBox();
-            label9 = new Label();
             label10 = new Label();
+            label9 = new Label();
+            pictureBox1 = new PictureBox();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).BeginInit();
             splitContainerPayment.Panel1.SuspendLayout();
             splitContainerPayment.Panel2.SuspendLayout();
@@ -112,35 +112,35 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle25.BackColor = Color.SeaShell;
-            dataGridViewCellStyle25.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle25.ForeColor = Color.Black;
-            dataGridViewCellStyle25.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle25.SelectionForeColor = SystemColors.HighlightText;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.BackColor = Color.SeaShell;
+            dataGridViewCellStyle1.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.BurlyWood;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.BackgroundColor = Color.SeaShell;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = Color.SeaShell;
-            dataGridViewCellStyle26.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle26.ForeColor = Color.Black;
-            dataGridViewCellStyle26.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle26.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.SeaShell;
+            dataGridViewCellStyle2.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.BurlyWood;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColEdit, ColDelete });
-            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = Color.SeaShell;
-            dataGridViewCellStyle27.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle27.ForeColor = Color.Black;
-            dataGridViewCellStyle27.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5});
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.SeaShell;
+            dataGridViewCellStyle3.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.BurlyWood;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.Dock = DockStyle.Left;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SeaShell;
@@ -148,14 +148,14 @@
             dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = Color.SeaShell;
-            dataGridViewCellStyle28.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle28.ForeColor = Color.Black;
-            dataGridViewCellStyle28.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle28.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.SeaShell;
+            dataGridViewCellStyle4.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.BurlyWood;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(856, 911);
@@ -207,23 +207,23 @@
             // 
             // ColEdit
             // 
-            ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ColEdit.HeaderText = "";
-            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
-            ColEdit.MinimumWidth = 6;
-            ColEdit.Name = "ColEdit";
-            ColEdit.ReadOnly = true;
-            ColEdit.Width = 6;
+            //ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //ColEdit.HeaderText = "";
+            //ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
+            //ColEdit.MinimumWidth = 6;
+            //ColEdit.Name = "ColEdit";
+            //ColEdit.ReadOnly = true;
+            //ColEdit.Width = 6;
             // 
             // ColDelete
             // 
-            ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ColDelete.HeaderText = "";
-            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
-            ColDelete.MinimumWidth = 6;
-            ColDelete.Name = "ColDelete";
-            ColDelete.ReadOnly = true;
-            ColDelete.Width = 6;
+            //ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //ColDelete.HeaderText = "";
+            //ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
+            //ColDelete.MinimumWidth = 6;
+            //ColDelete.Name = "ColDelete";
+            //ColDelete.ReadOnly = true;
+            //ColDelete.Width = 6;
             // 
             // panel1
             // 
@@ -237,7 +237,6 @@
             // 
             // btnSearchStuIn
             // 
-            btnSearchStuIn.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             btnSearchStuIn.BackColor = Color.White;
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -249,6 +248,7 @@
             btnSearchStuIn.TabIndex = 148;
             btnSearchStuIn.Text = "Search";
             btnSearchStuIn.UseVisualStyleBackColor = false;
+            btnSearchStuIn.Click += btnSearchStuIn_Click;
             // 
             // txtSearch
             // 
@@ -257,6 +257,142 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(499, 27);
             txtSearch.TabIndex = 147;
+            // 
+            // btnPrint
+            // 
+            btnPrint.BackColor = Color.White;
+            btnPrint.FlatStyle = FlatStyle.System;
+            btnPrint.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPrint.ForeColor = Color.SteelBlue;
+            btnPrint.Location = new Point(326, 862);
+            btnPrint.Margin = new Padding(3, 4, 3, 4);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(120, 45);
+            btnPrint.TabIndex = 161;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(26, 169);
+            label1.Name = "label1";
+            label1.Size = new Size(268, 33);
+            label1.TabIndex = 0;
+            label1.Text = "Payment Information:";
+            // 
+            // btnSave
+            // 
+            btnSave.BackColor = Color.White;
+            btnSave.FlatStyle = FlatStyle.System;
+            btnSave.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSave.ForeColor = Color.SteelBlue;
+            btnSave.Location = new Point(154, 862);
+            btnSave.Margin = new Padding(3, 4, 3, 4);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(120, 45);
+            btnSave.TabIndex = 160;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
+            // 
+            // btnPay
+            // 
+            btnPay.BackColor = Color.White;
+            btnPay.FlatStyle = FlatStyle.System;
+            btnPay.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPay.ForeColor = Color.SteelBlue;
+            btnPay.Location = new Point(394, 533);
+            btnPay.Margin = new Padding(3, 4, 3, 4);
+            btnPay.Name = "btnPay";
+            btnPay.Size = new Size(120, 45);
+            btnPay.TabIndex = 159;
+            btnPay.Text = "Pay";
+            btnPay.UseVisualStyleBackColor = false;
+            btnPay.Click += btnPay_Click;
+            // 
+            // lblBalance
+            // 
+            lblBalance.AutoSize = true;
+            lblBalance.BackColor = Color.SeaShell;
+            lblBalance.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblBalance.Location = new Point(85, 754);
+            lblBalance.Name = "lblBalance";
+            lblBalance.Size = new Size(150, 29);
+            lblBalance.TabIndex = 158;
+            lblBalance.Text = "Balance (int):";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.SeaShell;
+            label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(85, 701);
+            label8.Name = "label8";
+            label8.Size = new Size(211, 29);
+            label8.TabIndex = 157;
+            label8.Text = "Remaining Balance:";
+            // 
+            // lblChange
+            // 
+            lblChange.AutoSize = true;
+            lblChange.BackColor = Color.SeaShell;
+            lblChange.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblChange.Location = new Point(85, 643);
+            lblChange.Name = "lblChange";
+            lblChange.Size = new Size(146, 29);
+            lblChange.TabIndex = 156;
+            lblChange.Text = "Change (int):";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.SeaShell;
+            label7.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(85, 589);
+            label7.Name = "label7";
+            label7.Size = new Size(94, 29);
+            label7.TabIndex = 155;
+            label7.Text = "Change:";
+            // 
+            // txtPaymentReceived
+            // 
+            txtPaymentReceived.Location = new Point(85, 543);
+            txtPaymentReceived.Margin = new Padding(3, 3, 10, 3);
+            txtPaymentReceived.Name = "txtPaymentReceived";
+            txtPaymentReceived.Size = new Size(277, 27);
+            txtPaymentReceived.TabIndex = 154;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.SeaShell;
+            label6.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(85, 498);
+            label6.Name = "label6";
+            label6.Size = new Size(200, 29);
+            label6.TabIndex = 153;
+            label6.Text = "Payment Received:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(207, 281);
+            label5.Name = "label5";
+            label5.Size = new Size(337, 29);
+            label5.TabIndex = 152;
+            label5.Text = "Full Payment or Partial Payment";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(26, 281);
+            label4.Name = "label4";
+            label4.Size = new Size(175, 29);
+            label4.TabIndex = 151;
+            label4.Text = "Payment Status:";
             // 
             // label3
             // 
@@ -290,160 +426,16 @@
             panel2.Size = new Size(592, 122);
             panel2.TabIndex = 149;
             // 
-            // label1
+            // label10
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(26, 169);
-            label1.Name = "label1";
-            label1.Size = new Size(268, 33);
-            label1.TabIndex = 0;
-            label1.Text = "Payment Information:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(26, 281);
-            label4.Name = "label4";
-            label4.Size = new Size(175, 29);
-            label4.TabIndex = 151;
-            label4.Text = "Payment Status:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(207, 281);
-            label5.Name = "label5";
-            label5.Size = new Size(337, 29);
-            label5.TabIndex = 152;
-            label5.Text = "Full Payment or Partial Payment";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.SeaShell;
-            label6.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(85, 498);
-            label6.Name = "label6";
-            label6.Size = new Size(200, 29);
-            label6.TabIndex = 153;
-            label6.Text = "Payment Received:";
-            // 
-            // txtPaymentReceived
-            // 
-            txtPaymentReceived.Location = new Point(85, 543);
-            txtPaymentReceived.Margin = new Padding(3, 3, 10, 3);
-            txtPaymentReceived.Name = "txtPaymentReceived";
-            txtPaymentReceived.Size = new Size(277, 27);
-            txtPaymentReceived.TabIndex = 154;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.SeaShell;
-            label7.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(85, 589);
-            label7.Name = "label7";
-            label7.Size = new Size(94, 29);
-            label7.TabIndex = 155;
-            label7.Text = "Change:";
-            // 
-            // lblChange
-            // 
-            lblChange.AutoSize = true;
-            lblChange.BackColor = Color.SeaShell;
-            lblChange.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblChange.Location = new Point(85, 643);
-            lblChange.Name = "lblChange";
-            lblChange.Size = new Size(146, 29);
-            lblChange.TabIndex = 156;
-            lblChange.Text = "Change (int):";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.SeaShell;
-            label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(85, 701);
-            label8.Name = "label8";
-            label8.Size = new Size(211, 29);
-            label8.TabIndex = 157;
-            label8.Text = "Remaining Balance:";
-            // 
-            // lblBalance
-            // 
-            lblBalance.AutoSize = true;
-            lblBalance.BackColor = Color.SeaShell;
-            lblBalance.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblBalance.Location = new Point(85, 754);
-            lblBalance.Name = "lblBalance";
-            lblBalance.Size = new Size(150, 29);
-            lblBalance.TabIndex = 158;
-            lblBalance.Text = "Balance (int):";
-            // 
-            // btnPay
-            // 
-            btnPay.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
-            btnPay.BackColor = Color.White;
-            btnPay.FlatStyle = FlatStyle.System;
-            btnPay.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPay.ForeColor = Color.SteelBlue;
-            btnPay.Location = new Point(394, 533);
-            btnPay.Margin = new Padding(3, 4, 3, 4);
-            btnPay.Name = "btnPay";
-            btnPay.Size = new Size(120, 45);
-            btnPay.TabIndex = 159;
-            btnPay.Text = "Pay";
-            btnPay.UseVisualStyleBackColor = false;
-            // 
-            // btnSave
-            // 
-            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
-            btnSave.BackColor = Color.White;
-            btnSave.FlatStyle = FlatStyle.System;
-            btnSave.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSave.ForeColor = Color.SteelBlue;
-            btnSave.Location = new Point(154, 862);
-            btnSave.Margin = new Padding(3, 4, 3, 4);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(120, 45);
-            btnSave.TabIndex = 160;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = false;
-            // 
-            // btnPrint
-            // 
-            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
-            btnPrint.BackColor = Color.White;
-            btnPrint.FlatStyle = FlatStyle.System;
-            btnPrint.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPrint.ForeColor = Color.SteelBlue;
-            btnPrint.Location = new Point(326, 862);
-            btnPrint.Margin = new Padding(3, 4, 3, 4);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(120, 45);
-            btnPrint.TabIndex = 161;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.SeaShell;
-            panel3.Location = new Point(47, 453);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(497, 510);
-            panel3.TabIndex = 162;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.logo;
-            pictureBox1.Location = new Point(2, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(105, 121);
-            pictureBox1.TabIndex = 163;
-            pictureBox1.TabStop = false;
+            label10.AutoSize = true;
+            label10.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.FromArgb(64, 64, 64);
+            label10.Location = new Point(317, 40);
+            label10.Name = "label10";
+            label10.Size = new Size(275, 49);
+            label10.TabIndex = 165;
+            label10.Text = "ACADEMY INC.";
             // 
             // label9
             // 
@@ -456,25 +448,30 @@
             label9.TabIndex = 164;
             label9.Text = "ROSEWOOD ";
             // 
-            // label10
+            // pictureBox1
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.FromArgb(64, 64, 64);
-            label10.Location = new Point(317, 40);
-            label10.Name = "label10";
-            label10.Size = new Size(275, 49);
-            label10.TabIndex = 165;
-            label10.Text = "ACADEMY INC.";
+            pictureBox1.Image = Properties.Resources.logo;
+            pictureBox1.Location = new Point(2, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(105, 121);
+            pictureBox1.TabIndex = 163;
+            pictureBox1.TabStop = false;
             // 
-            // Payment_Form
+            // panel3
+            // 
+            panel3.BackColor = Color.SeaShell;
+            panel3.Location = new Point(47, 453);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(497, 510);
+            panel3.TabIndex = 162;
+            // 
+            // UserControlStudentPayment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1452, 988);
             Controls.Add(splitContainerPayment);
-            Name = "Payment_Form";
-            Text = "Payment_Form";
+            Name = "UserControlStudentPayment";
+            Size = new Size(1452, 988);
             splitContainerPayment.Panel1.ResumeLayout(false);
             splitContainerPayment.Panel2.ResumeLayout(false);
             splitContainerPayment.Panel2.PerformLayout();
