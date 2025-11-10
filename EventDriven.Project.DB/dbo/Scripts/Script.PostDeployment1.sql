@@ -123,3 +123,12 @@ VALUES
 ('Samantha', 'Mae', 'Aquino', 'Active', '2011-06-29', 'Grade 8', 'Filipino',
  'Vicente Aquino', '09173332222', 'Adela Mae', '09182229999', 'Balayan, Batangas',
  'Josefina Garcia', 'Aunt', '09176664444', 'Calaca, Batangas', '', '8-A', 'Female', 'samantha.aquino@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas', '09173332222', 90.6);
+
+ INSERT INTO tblFeeStructure (GradeLevel, TuitionFee)
+VALUES 
+('Grade 7', 45000.00),
+('Grade 8', 47000.00),
+('Grade 9', 50000.00),
+('Grade 10', 52000.00),
+('Grade 11', 55000.00),
+('Grade 12', 57000.00);
