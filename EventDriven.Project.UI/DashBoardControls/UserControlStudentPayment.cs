@@ -67,7 +67,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                     return;
                 }
                 decimal change = 0;
-                int studentId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["column1"].Value);
+                int studentId = Convert.ToInt32(lbId.Text);
 
                 // 2️⃣ Get payment info from UI
                 if (!decimal.TryParse(txtPaymentReceived.Text, out decimal paymentAmount))
@@ -184,6 +184,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
                 lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "0.00";
+                lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (rbFullPayment.Checked)
                 {
                     txtPaymentReceived.Text = lbBalance.Text;

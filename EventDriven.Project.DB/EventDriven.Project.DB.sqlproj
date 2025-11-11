@@ -76,6 +76,7 @@
     <Build Include="dbo\Tables\tblPayments.sql" />
     <Build Include="tblFeeStructure.sql" />
     <Build Include="dbo\Views\vwStudentPaymentBalance.sql" />
+    <Build Include="dbo\Views\vwStudentPaymentHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />
