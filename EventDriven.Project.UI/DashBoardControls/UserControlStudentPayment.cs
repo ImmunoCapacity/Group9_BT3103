@@ -109,7 +109,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 UpdatePayment(change, paymentAmount, currentBalance);
 
                 // Clear payment input
-                txtPaymentReceived.Text = "";
+                txtPaymentReceived.Text = "0.00";
 
                 rbFullPayment.Checked = rbFullPayment.Checked;
             }
@@ -118,7 +118,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 MessageBox.Show($"Error processing payment: {ex.Message}");
             }
         }
-        private void UpdatePayment(decimal change, decimal paymentAmount,  decimal currentBalance)
+        private void UpdatePayment(decimal change, decimal paymentAmount, decimal currentBalance)
         {
             currentBalance = currentBalance - paymentAmount;
             // Update the UI labels
@@ -171,7 +171,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
