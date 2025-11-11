@@ -1,4 +1,5 @@
-﻿using EventDriven.Project.Model;
+﻿using EventDriven.Project.Logic.Repository;
+using EventDriven.Project.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,8 +8,7 @@ namespace EventDriven.Project.Businesslogic.Repository
 {
     internal class StudentRepository
     {
-        private readonly string connectionString =
-            "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventDriven.Project.DB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        
 
         // INSERT student
         public async Task<StudentModel> InsertAsync(StudentModel student)
@@ -25,7 +25,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                            @Suffix, @Section, @Gender, @Email, @LastSchool, @LastGrade, @Address, @Contact, @GWA);
                           SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -53,7 +53,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                           LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, GWA=@GWA
                           WHERE Id=@Id";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -76,7 +76,7 @@ namespace EventDriven.Project.Businesslogic.Repository
             var studentToDelete = GetByIdAsync(id);
             var query = "DELETE FROM tblStudents WHERE Id=@Id";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -101,7 +101,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                           FROM tblStudents";
 
             var list = new List<StudentModel>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -127,7 +127,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                   FROM tblStudents
                   WHERE Id=@Id";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -149,7 +149,7 @@ namespace EventDriven.Project.Businesslogic.Repository
         public async Task<int> GetCountAsync()
         {
             var query = "SELECT COUNT(*) FROM tblStudents";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))

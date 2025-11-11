@@ -61,6 +61,7 @@
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Tables\Academic Information Table" />
+    <Folder Include="dbo\Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
@@ -72,6 +73,9 @@
     <Build Include="dbo\Tables\Academic Information Table\tblSubjects.sql" />
     <Build Include="dbo\Tables\Academic Information Table\tblTeachers.sql" />
     <Build Include="dbo\Tables\Academic Information Table\tblSchedule.sql" />
+    <Build Include="dbo\Tables\tblPayments.sql" />
+    <Build Include="tblFeeStructure.sql" />
+    <Build Include="dbo\Views\vwStudentPaymentBalance.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />

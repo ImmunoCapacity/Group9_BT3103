@@ -193,6 +193,7 @@
             btnPayments.Text = "Payment";
             btnPayments.UseVisualStyleBackColor = true;
             btnPayments.Visible = false;
+            btnPayments.Click += btnPayments_Click_1;
             // 
             // btnAssessment
             // 
