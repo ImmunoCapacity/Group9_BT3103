@@ -157,7 +157,7 @@ namespace EventDriven.Project.UI
         private void btnHistory_Click_1(object sender, EventArgs e)
         {
             highlightButton((sender as Button));
-            ShowControl(new UserControlStudentPayment(role, main, authenticationKey));
+            ShowControl(new UserControlPaymentHistory(role, main, authenticationKey));
         }
 
         private void btnPayments_Click_1(object sender, EventArgs e)

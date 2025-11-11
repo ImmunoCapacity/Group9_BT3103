@@ -41,8 +41,34 @@ namespace EventDriven.Project.Logic.Controller
                     throw new Exception($"Error adding payment: {ex.Message}");
                 }
             }
+        public async Task<decimal> GetTotalPaidByStudentIdAsync(int studentId,UserModel authenticationKey)
+        {
+            if (!authenticate(authenticationKey)) throw new Exception("You are not logged in.");
 
-            
+            try
+            {
+                return await paymentRepository.GetTotalPaidByStudentIdAsync(studentId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving payments: {ex.Message}");
+            }
+        }
+        public async Task<List<PaymentHistoryModel>> GetAllPayments(UserModel authenticationKey)
+        {
+            if (!authenticate(authenticationKey)) throw new Exception("You are not logged in.");
+
+            try
+            {
+                return await paymentRepository.GetAllPayments();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving payments: {ex.Message}");
+            }
+        }
+
+
 
         public async Task<List<StudentPaymentInfo>> GetAllStudentPayment(UserModel authenticationKey)
         {

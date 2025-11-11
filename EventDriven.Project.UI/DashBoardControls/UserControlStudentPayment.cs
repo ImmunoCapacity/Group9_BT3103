@@ -67,7 +67,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                     return;
                 }
                 decimal change = 0;
-                int studentId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["column1"].Value);
+                int studentId = Convert.ToInt32(lbId.Text);
 
                 // 2️⃣ Get payment info from UI
                 if (!decimal.TryParse(txtPaymentReceived.Text, out decimal paymentAmount))
@@ -109,7 +109,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 UpdatePayment(change, paymentAmount, currentBalance);
 
                 // Clear payment input
-                txtPaymentReceived.Text = "";
+                txtPaymentReceived.Text = "0.00";
 
                 rbFullPayment.Checked = rbFullPayment.Checked;
             }
@@ -118,7 +118,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 MessageBox.Show($"Error processing payment: {ex.Message}");
             }
         }
-        private void UpdatePayment(decimal change, decimal paymentAmount,  decimal currentBalance)
+        private void UpdatePayment(decimal change, decimal paymentAmount, decimal currentBalance)
         {
             currentBalance = currentBalance - paymentAmount;
             // Update the UI labels
@@ -171,7 +171,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -184,6 +184,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
                 lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "0.00";
+                lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (rbFullPayment.Checked)
                 {
                     txtPaymentReceived.Text = lbBalance.Text;

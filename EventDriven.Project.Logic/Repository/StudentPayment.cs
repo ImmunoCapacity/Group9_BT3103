@@ -31,14 +31,13 @@ namespace EventDriven.Project.Logic.Repository
 
             return payment;
         }
-        public async Task<List<StudentPaymentInfo>>  GetAllStudentPayments()
+        public async Task<List<StudentPaymentInfo>> GetAllStudentPayments()
         {
             var payments = new List<StudentPaymentInfo>();
 
             using (SqlConnection conn = new SqlConnection(connect.connectionString))
             {
                 string query = "SELECT * FROM vwStudentPaymentBalance ORDER BY StudentName";
-
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
 
@@ -53,6 +52,40 @@ namespace EventDriven.Project.Logic.Repository
                             GradeLevel = reader["GradeLevel"].ToString(),
                             TuitionFee = Convert.ToDecimal(reader["TuitionFee"]),
                             TotalPaid = Convert.ToDecimal(reader["TotalPaid"]),
+                            RemainingBalance = Convert.ToDecimal(reader["RemainingBalance"]),
+                            LastPaymentDate = reader["LastPaymentDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["LastPaymentDate"]),
+                            LastPaymentType = reader["LastPaymentType"] == DBNull.Value ? "" : reader["LastPaymentType"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return payments;
+        }
+        public async Task<List<PaymentHistoryModel>> GetAllPayments()
+        {
+            var payments = new List<PaymentHistoryModel>();
+
+            using (SqlConnection conn = new SqlConnection(connect.connectionString))
+            {
+                string query = "SELECT * FROM vwStudentPaymentHistory ORDER BY StudentName, DatePaid DESC";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                await conn.OpenAsync();
+
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        payments.Add(new PaymentHistoryModel
+                        {
+                            PaymentId = Convert.ToInt32(reader["PaymentId"]),
+                            StudentId = Convert.ToInt32(reader["StudentId"]),
+                            StudentName = reader["StudentName"].ToString(),
+                            GradeLevel = reader["GradeLevel"].ToString(),
+                            DatePaid = Convert.ToDateTime(reader["DatePaid"]),
+                            PaymentType = reader["PaymentType"].ToString(),
+                            AmountPaid = Convert.ToDecimal(reader["AmountPaid"]),
                             RemainingBalance = Convert.ToDecimal(reader["RemainingBalance"])
                         });
                     }
@@ -61,8 +94,10 @@ namespace EventDriven.Project.Logic.Repository
 
             return payments;
         }
+
+
         // UPDATE payment
-        
+
 
         // GET all payments
         public async Task<List<PaymentModel>> GetAllAsync()
@@ -87,6 +122,8 @@ namespace EventDriven.Project.Logic.Repository
             return list;
         }
 
+
+
         // GET payment by Id
         public async Task<PaymentModel> GetByIdAsync(int id)
         {
@@ -110,6 +147,30 @@ namespace EventDriven.Project.Logic.Repository
                 }
             }
         }
+
+        public async Task<decimal> GetTotalPaidByStudentIdAsync(int studentId)
+        {
+            decimal totalPaid = 0;
+
+            using (SqlConnection conn = new SqlConnection(connect.connectionString))
+            {
+                string query = @"SELECT ISNULL(SUM(AmountPaid), 0)
+                         FROM tblPayments
+                         WHERE StudentId = @StudentId";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@StudentId", studentId);
+
+                await conn.OpenAsync();
+                object result = await cmd.ExecuteScalarAsync();
+
+                if (result != DBNull.Value)
+                    totalPaid = Convert.ToDecimal(result);
+            }
+
+            return totalPaid;
+        }
+
 
         // Helper method to add parameters
         private void AddParameters(SqlCommand command, PaymentModel payment)

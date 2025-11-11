@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace EventDriven.Project.Model
 {
-    public class StudentPaymentInfo
+    public class PaymentHistoryModel
     {
+        public int PaymentId { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public string GradeLevel { get; set; }
-        public decimal TuitionFee { get; set; }
-        public decimal TotalPaid { get; set; }
+        public DateTime DatePaid { get; set; }
+        public string PaymentType { get; set; }
+        public decimal AmountPaid { get; set; }
         public decimal RemainingBalance { get; set; }
-        public DateTime? LastPaymentDate { get; set; }
-        public string LastPaymentType { get; set; }
     }
 }
