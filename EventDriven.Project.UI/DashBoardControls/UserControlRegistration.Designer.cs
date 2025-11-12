@@ -194,6 +194,7 @@
             cmbSection.AccessibleRole = AccessibleRole.IpAddress;
             cmbSection.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbSection.FormattingEnabled = true;
+            cmbSection.Items.AddRange(new object[] { "7-A", "7-B", "7-C", "8-A", "8-B", "8-C", "9-A", "9-B", "9-C", "10-A", "10-B", "10-C" });
             cmbSection.Location = new Point(877, 534);
             cmbSection.Name = "cmbSection";
             cmbSection.Size = new Size(329, 32);
@@ -215,6 +216,7 @@
             cmbGradeLevel.AccessibleRole = AccessibleRole.IpAddress;
             cmbGradeLevel.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbGradeLevel.FormattingEnabled = true;
+            cmbGradeLevel.Items.AddRange(new object[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
             cmbGradeLevel.Location = new Point(441, 538);
             cmbGradeLevel.Name = "cmbGradeLevel";
             cmbGradeLevel.Size = new Size(332, 32);

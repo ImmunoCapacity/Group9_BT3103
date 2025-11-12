@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
 
 namespace EventDriven.Project.UI.DashBoardControls
@@ -15,18 +16,20 @@ namespace EventDriven.Project.UI.DashBoardControls
     public partial class UserControlRegistration : UserControl
     {
         private readonly StudentController studentController;
+        private readonly RegistrationController registrationController;
         private readonly UserModel authenticationKey;
         private readonly MainForm main;
 
 
         public int selectedStudentId = 0;
         private string status = "";
-        private string action = "Add";
+        private string action = "Edit";
 
         public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
             studentController = new StudentController();
+            registrationController = new RegistrationController();
             this.authenticationKey = authenticationKey;
             this.main = main;
         }
@@ -97,12 +100,35 @@ namespace EventDriven.Project.UI.DashBoardControls
                         student.Id = selectedStudentId;
 
                         var result = await studentController.UpdateAsync(student, authenticationKey);
-                        MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
-                        if (result != null) ClearForm();
+                        //MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error updating student: {ex.Message}");
+                    }
+                    try
+                    {
+                        // Example usage
+                        var (requirements, paymentMethod) = GetCheckedOptions();
+
+                       
+
+                        // You can now include these values in your RegistrationModel:
+                        var registration = new RegistrationModel
+                        {
+                            StudentId = selectedStudentId,
+                            Section = cmbSection.Text,
+                            Requirements = requirements,
+                            PaymentMethod = paymentMethod
+                        };
+
+                        // Call your controller (if you have one):
+                         var result = await registrationController.UpsertAsync(registration, authenticationKey);
+                        if (result != null) { MessageBox.Show($"Requirements: {requirements}\nPayment Method: {paymentMethod}"); }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error saving registration: {ex.Message}");
                     }
                     break;
             }
@@ -136,6 +162,65 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void SetCheckedOptions(string requirements, string paymentMethod)
+        {
+            // Split the comma-separated strings into lists (handle "None" gracefully)
+            var requirementItems = requirements != null && requirements != "None"
+                ? requirements.Split(',').Select(r => r.Trim()).ToList()
+                : new List<string>();
+
+            var paymentItems = paymentMethod != null && paymentMethod != "None"
+                ? paymentMethod.Split(',').Select(p => p.Trim()).ToList()
+                : new List<string>();
+
+            // Clear all current checks
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+                checkedListBox2.SetItemChecked(i, false);
+
+            // Re-check items that match the stored values
+            foreach (var req in requirementItems)
+            {
+                int index = checkedListBox1.Items.IndexOf(req);
+                if (index >= 0)
+                    checkedListBox1.SetItemChecked(index, true);
+            }
+
+            foreach (var pay in paymentItems)
+            {
+                int index = checkedListBox2.Items.IndexOf(pay);
+                if (index >= 0)
+                    checkedListBox2.SetItemChecked(index, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the selected requirements and payment method from the checked list boxes.
+        /// </summary>
+        private (string Requirements, string PaymentMethod) GetCheckedOptions()
+        {
+            // Collect all checked items from the requirements list
+            List<string> selectedRequirements = new List<string>();
+            foreach (var item in checkedListBox1.CheckedItems)
+            {
+                selectedRequirements.Add(item.ToString());
+            }
+
+            // Collect all checked items from the payment method list
+            List<string> selectedPaymentMethods = new List<string>();
+            foreach (var item in checkedListBox2.CheckedItems)
+            {
+                selectedPaymentMethods.Add(item.ToString());
+            }
+
+            // Convert to comma-separated strings for saving or displaying
+            string requirements = selectedRequirements.Count > 0 ? string.Join(", ", selectedRequirements) : "None";
+            string paymentMethod = selectedPaymentMethods.Count > 0 ? string.Join(", ", selectedPaymentMethods) : "None";
+
+            return (requirements, paymentMethod);
+        }
+
         public async void search()
         {
             try
@@ -146,6 +231,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                     return;
                 }
 
+                // Get student
                 var student = await studentController.GetByIdAsync(id, authenticationKey);
                 if (student == null)
                 {
@@ -155,6 +241,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 selectedStudentId = student.Id;
 
+                // Fill student fields
                 txtFirstname.Text = student.FirstName;
                 txtMiddleName.Text = student.MiddleName;
                 txtLastName.Text = student.LastName;
@@ -171,12 +258,34 @@ namespace EventDriven.Project.UI.DashBoardControls
                 cbNew.Checked = student.Status == "New";
                 cbOld.Checked = student.Status == "Old";
                 cbTransferee.Checked = student.Status == "Transferee";
+
+                // --- NEW: Also get registration data ---
+                var registration = await registrationController.GetByIdAsync(student.Id, authenticationKey);
+                //MessageBox.Show("Requirements" + registration.Requirements + " Payment" + registration.PaymentMethod);
+                if (registration != null)
+                {
+                    // Fill registration section dropdown (if not already)
+                    cmbSection.Text = registration.Section;
+
+                    // Use your earlier helper to restore checked items
+                    SetCheckedOptions(registration.Requirements, registration.PaymentMethod);
+                    
+                }
+                else
+                {
+                    // Clear if no registration record found
+                    for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                        checkedListBox1.SetItemChecked(i, false);
+                    for (int i = 0; i < checkedListBox2.Items.Count; i++)
+                        checkedListBox2.SetItemChecked(i, false);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error searching student: {ex.Message}");
             }
         }
+
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {

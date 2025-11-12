@@ -8,7 +8,7 @@ using EventDriven.Project.Model;
 
 namespace EventDriven.Project.Logic.Controller
 {
-    internal class RegistrationController
+    public class RegistrationController
     {
         private readonly StudentRegistrationRepository registrationRepository;
         private readonly UserController userController;
@@ -54,6 +54,21 @@ namespace EventDriven.Project.Logic.Controller
             try
             {
                 return await registrationRepository.UpdateAsync(model);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating registration: {ex.Message}");
+            }
+        }
+
+        public async Task<RegistrationModel> UpsertAsync(RegistrationModel model, UserModel authenticationKey)
+        {
+            if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
+            if (model == null) throw new Exception("Missing parameter: registration");
+
+            try
+            {
+                return await registrationRepository.UpsertAsync(model);
             }
             catch (Exception ex)
             {

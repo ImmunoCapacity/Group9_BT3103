@@ -34,6 +34,63 @@ namespace EventDriven.Project.Logic.Repository
                 }
             }
         }
+        public async Task<RegistrationModel> UpsertAsync(RegistrationModel registration)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                await conn.OpenAsync();
+
+                // Check if record exists
+                string checkQuery = "SELECT COUNT(*) FROM tblStudentRegistration WHERE StudentId = @Id";
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@Id", registration.StudentId);
+                    int count = (int)await checkCmd.ExecuteScalarAsync();
+
+                    if (count > 0)
+                    {
+                        // Record exists → update
+                        string updateQuery = @"
+                    UPDATE tblStudentRegistration
+                    SET Section = @Section,
+                        Requirements = @Requirements,
+                        PaymentMethod = @PaymentMethod
+                    WHERE StudentId = @Id";
+
+                        using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
+                        {
+                            updateCmd.Parameters.AddWithValue("@Section", registration.Section);
+                            updateCmd.Parameters.AddWithValue("@Requirements", registration.Requirements);
+                            updateCmd.Parameters.AddWithValue("@PaymentMethod", registration.PaymentMethod);
+                            updateCmd.Parameters.AddWithValue("@Id", registration.Id);
+
+                            int rows = await updateCmd.ExecuteNonQueryAsync();
+                            return rows > 0 ? registration : null;
+                        }
+                    }
+                    else
+                    {
+                        // Record doesn’t exist → insert new
+                        string insertQuery = @"
+                    INSERT INTO tblStudentRegistration (StudentId, Section, Requirements, PaymentMethod)
+                    OUTPUT INSERTED.Id
+                    VALUES (@StudentId, @Section, @Requirements, @PaymentMethod)";
+
+                        using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                        {
+                            insertCmd.Parameters.AddWithValue("@StudentId", registration.StudentId);
+                            insertCmd.Parameters.AddWithValue("@Section", registration.Section);
+                            insertCmd.Parameters.AddWithValue("@Requirements", registration.Requirements);
+                            insertCmd.Parameters.AddWithValue("@PaymentMethod", registration.PaymentMethod);
+
+                            registration.Id = (int)await insertCmd.ExecuteScalarAsync();
+                            return registration;
+                        }
+                    }
+                }
+            }
+        }
+
 
         public async Task<RegistrationModel> UpdateAsync(RegistrationModel registration)
         {
@@ -80,7 +137,7 @@ namespace EventDriven.Project.Logic.Repository
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM tblStudentRegistration WHERE Id = @Id";
+                string query = "SELECT * FROM tblStudentRegistration WHERE StudentId = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
