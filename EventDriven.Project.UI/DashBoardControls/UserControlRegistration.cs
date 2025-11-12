@@ -18,11 +18,12 @@ namespace EventDriven.Project.UI.DashBoardControls
         private readonly UserModel authenticationKey;
         private readonly MainForm main;
 
-        private int selectedStudentId = 0;
+
+        public int selectedStudentId = 0;
         private string status = "";
         private string action = "Add";
 
-        public UserControlRegistration(MainForm main, UserModel authenticationKey)
+        public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
             studentController = new StudentController();
@@ -81,19 +82,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             switch (action)
             {
-                case "Add":
-                    try
-                    {
-                        var student = GetStudentFromForm();
-                        var result = await studentController.AddAsync(student, authenticationKey);
-                        MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
-                        if (result != null) ClearForm();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error adding student: {ex.Message}");
-                    }
-                    break;
+                
 
                 case "Edit":
                     try
@@ -119,7 +108,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        private async void btnDelete_Click(object sender, EventArgs e)
+        public async void Delete()
         {
             try
             {
@@ -147,7 +136,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        private async void btnSearch_Click(object sender, EventArgs e)
+        public async void search()
         {
             try
             {
@@ -187,6 +176,11 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error searching student: {ex.Message}");
             }
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            search();
         }
 
         #region Checkbox logic
@@ -231,5 +225,34 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             action = "Edit";
         }
+
+        
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            highlightPicture(pictureBox1);
+            action = "Add";
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            highlightPicture(pictureBox3);
+            action = "Edit";
+        }
+        private void highlightPicture(PictureBox selected)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                if (control is PictureBox pb)
+                {
+                    pb.BackColor = flowLayoutPanel1.BackColor;
+                }
+            }
+            if (selected != null)
+            {
+                selected.BackColor = Color.Gray;
+            }
+        }
+
     }
 }

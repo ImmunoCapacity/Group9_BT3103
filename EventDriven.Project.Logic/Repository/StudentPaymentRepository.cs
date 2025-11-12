@@ -8,7 +8,7 @@ using EventDriven.Project.Model;
 
 namespace EventDriven.Project.Logic.Repository
 {
-    internal class StudentPayment
+    internal class StudentPaymentRepository
     {
         // INSERT payment
         public async Task<PaymentModel> InsertAsync(PaymentModel payment)

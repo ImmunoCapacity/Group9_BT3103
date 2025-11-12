@@ -166,7 +166,9 @@ namespace EventDriven.Project.UI
 
         private void btnStudentReg_Click_2(object sender, EventArgs e)
         {
-
+            highlightButton(sender as Button);
+            //ShowControl(new UserControlStudentRegistration(role, main));
+            ShowControl(new UserControlRegistrationList(role, main, authenticationKey));
         }
     }
 }

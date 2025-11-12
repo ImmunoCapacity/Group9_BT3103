@@ -70,10 +70,10 @@
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
-            clbModeOfPayment_AdminStudentRegistrationAdd = new CheckedListBox();
-            clbRequirements_AdminStudentRegistrationAdd = new CheckedListBox();
             label8 = new Label();
             label9 = new Label();
+            checkedListBox1 = new CheckedListBox();
+            checkedListBox2 = new CheckedListBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             flowLayoutPanel1.SuspendLayout();
@@ -428,6 +428,7 @@
             btnSearchStudInfo.TabIndex = 97;
             btnSearchStudInfo.Text = "Search";
             btnSearchStudInfo.UseVisualStyleBackColor = true;
+            btnSearchStudInfo.Click += btnSearch_Click;
             // 
             // printDialog1
             // 
@@ -502,6 +503,7 @@
             pictureBox1.Size = new Size(66, 69);
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click_1;
             // 
             // pictureBox3
             // 
@@ -512,6 +514,7 @@
             pictureBox3.Size = new Size(66, 69);
             pictureBox3.TabIndex = 4;
             pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
             // 
             // pictureBox4
             // 
@@ -522,24 +525,6 @@
             pictureBox4.Size = new Size(66, 69);
             pictureBox4.TabIndex = 5;
             pictureBox4.TabStop = false;
-            // 
-            // clbModeOfPayment_AdminStudentRegistrationAdd
-            // 
-            clbModeOfPayment_AdminStudentRegistrationAdd.FormattingEnabled = true;
-            clbModeOfPayment_AdminStudentRegistrationAdd.Items.AddRange(new object[] { "Low Down Payment", "Low Monthly Payment", "Cash" });
-            clbModeOfPayment_AdminStudentRegistrationAdd.Location = new Point(940, 638);
-            clbModeOfPayment_AdminStudentRegistrationAdd.Name = "clbModeOfPayment_AdminStudentRegistrationAdd";
-            clbModeOfPayment_AdminStudentRegistrationAdd.Size = new Size(179, 70);
-            clbModeOfPayment_AdminStudentRegistrationAdd.TabIndex = 283;
-            // 
-            // clbRequirements_AdminStudentRegistrationAdd
-            // 
-            clbRequirements_AdminStudentRegistrationAdd.FormattingEnabled = true;
-            clbRequirements_AdminStudentRegistrationAdd.Items.AddRange(new object[] { "Good Moral", "Form 137", "Birth Certificate" });
-            clbRequirements_AdminStudentRegistrationAdd.Location = new Point(441, 638);
-            clbRequirements_AdminStudentRegistrationAdd.Name = "clbRequirements_AdminStudentRegistrationAdd";
-            clbRequirements_AdminStudentRegistrationAdd.Size = new Size(159, 70);
-            clbRequirements_AdminStudentRegistrationAdd.TabIndex = 281;
             // 
             // label8
             // 
@@ -563,12 +548,34 @@
             label9.TabIndex = 285;
             label9.Text = "Mode of Payment:";
             // 
+            // checkedListBox1
+            // 
+            checkedListBox1.CheckOnClick = true;
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Items.AddRange(new object[] { "Good Moral", "Form 137", "Birth Certificate" });
+            checkedListBox1.Location = new Point(436, 638);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(159, 70);
+            checkedListBox1.TabIndex = 286;
+            // 
+            // checkedListBox2
+            // 
+            checkedListBox2.CheckOnClick = true;
+            checkedListBox2.FormattingEnabled = true;
+            checkedListBox2.Items.AddRange(new object[] { "Partial", "Full" });
+            checkedListBox2.Location = new Point(940, 638);
+            checkedListBox2.Name = "checkedListBox2";
+            checkedListBox2.Size = new Size(179, 70);
+            checkedListBox2.TabIndex = 287;
+            // 
             // UserControlRegistration
             // 
             AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
+            Controls.Add(checkedListBox2);
+            Controls.Add(checkedListBox1);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(flowLayoutPanel1);
@@ -606,11 +613,8 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(clbModeOfPayment_AdminStudentRegistrationAdd);
-            Controls.Add(clbRequirements_AdminStudentRegistrationAdd);
             Name = "UserControlRegistration";
             Size = new Size(1470, 973);
-            Load += UserControlRegistration_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -667,11 +671,10 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
-        private CheckedListBox clbModeOfPayment_AdminStudentRegistrationAdd;
-        //private Label label24;
-        private CheckedListBox clbRequirements_AdminStudentRegistrationAdd;
         private Label label8;
         private Label label9;
+        private CheckedListBox checkedListBox1;
+        private CheckedListBox checkedListBox2;
         //private Label label25;
     }
 }

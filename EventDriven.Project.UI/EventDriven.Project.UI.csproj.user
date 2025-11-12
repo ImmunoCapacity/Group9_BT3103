@@ -10,6 +10,9 @@
     <Compile Update="DashBoardControls\UserControlRegistration.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="DashBoardControls\UserControlRegistrationList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="DashBoardControls\UserControlReports.cs">
       <SubType>UserControl</SubType>
     </Compile>

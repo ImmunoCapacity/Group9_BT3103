@@ -10,7 +10,7 @@ namespace EventDriven.Project.Logic.Repository
 {
     internal class UserRepository
     {
-        private readonly string CONNECTIONSTRING = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=EventDriven.Project.DB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        private readonly string CONNECTIONSTRING = connect.connectionString;
         public UserModel ValidateUser(string Username, string Password, string role)//Form1 Validate User
         {
 
