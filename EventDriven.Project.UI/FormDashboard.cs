@@ -137,15 +137,6 @@ namespace EventDriven.Project.UI
             main.OpenChildForm(new FormUserRoles(main));
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnStudentInfo_Click(object sender, EventArgs e)
         {
@@ -164,6 +155,20 @@ namespace EventDriven.Project.UI
         {
             highlightButton((sender as Button));
             ShowControl(new UserControlStudentPayment(role, main, authenticationKey));
+        }
+
+
+
+        private void btnAdminDashboardLogout_Click_1(object sender, EventArgs e)
+        {
+            main.OpenChildForm(new FormLogin(role, main));
+        }
+
+        private void btnStudentReg_Click_2(object sender, EventArgs e)
+        {
+            highlightButton(sender as Button);
+            //ShowControl(new UserControlStudentRegistration(role, main));
+            ShowControl(new UserControlRegistrationList(role, main, authenticationKey));
         }
     }
 }

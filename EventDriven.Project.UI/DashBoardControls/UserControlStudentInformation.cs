@@ -281,17 +281,14 @@ namespace EventDriven.Project.UI
             cmbGender.Items.AddRange(genders);
 
             // Grade Levels
-            string[] gradeLevels = { "Grade 7", "Grade 8", "Grade 9", "Grade 10" };
-            cmbGradeLevel.Items.AddRange(gradeLevels);
+            
 
             // Suffixes
             string[] suffixes = { "", "Jr.", "II", "III", "IV", "V" };
             cmbSuffix.Items.AddRange(suffixes);
 
             // Sections
-            string[] sections = {
-            "Section Aster","Section Azalea","Section Camellia","Section Chrysanthemum","Section Dahlia","Section Hyacinth", };
-            cmbSection.Items.AddRange(sections);
+            
 
         }
 

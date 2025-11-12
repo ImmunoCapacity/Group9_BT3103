@@ -11,13 +11,13 @@ namespace EventDriven.Project.Logic.Controller
 
         public class PaymentController
         {
-            private readonly StudentPayment paymentRepository;
+            private readonly StudentPaymentRepository paymentRepository;
             private readonly UserController userController;
 
             public PaymentController()
             {
                 userController = new UserController();
-                paymentRepository = new StudentPayment();
+                paymentRepository = new StudentPaymentRepository();
             }
 
             private bool authenticate(UserModel authenticationKey)
