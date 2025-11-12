@@ -1,6 +1,6 @@
-﻿namespace EventDriven.Project.UI
+﻿namespace EventDriven.Project.UI.DashBoardControls
 {
-    partial class UserControlStudentInformation
+    partial class UserControlRegistration
     {
         /// <summary> 
         /// Required designer variable.
@@ -19,7 +19,6 @@
             }
             base.Dispose(disposing);
         }
-
         #region Component Designer generated code
 
         /// <summary> 
@@ -32,6 +31,7 @@
             label21 = new Label();
             txtLastName = new TextBox();
             label20 = new Label();
+            btnPrint = new Button();
             btnSave = new Button();
             cbOld = new CheckBox();
             cbTransferee = new CheckBox();
@@ -39,20 +39,8 @@
             cmbSection = new ComboBox();
             label19 = new Label();
             cmbGradeLevel = new ComboBox();
-            txtGWA = new TextBox();
-            label18 = new Label();
-            txtLastGrade = new TextBox();
-            txtLastSchool = new TextBox();
-            txtRelationship = new TextBox();
-            txtMotherContact = new TextBox();
-            txtFatherContactNo = new TextBox();
             txtEmail = new TextBox();
             txtGuardian = new TextBox();
-            txtMotherName = new TextBox();
-            txtFatherName = new TextBox();
-            label17 = new Label();
-            label16 = new Label();
-            label15 = new Label();
             label14 = new Label();
             dateTimePicker1 = new DateTimePicker();
             cmbGender = new ComboBox();
@@ -61,14 +49,10 @@
             label12 = new Label();
             txtContactNo = new TextBox();
             txtAddress = new TextBox();
-            txtFullname = new TextBox();
+            txtFirstname = new TextBox();
             label11 = new Label();
             label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
             label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -86,7 +70,10 @@
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
-            btnPrint = new Button();
+            clbModeOfPayment_AdminStudentRegistrationAdd = new CheckedListBox();
+            clbRequirements_AdminStudentRegistrationAdd = new CheckedListBox();
+            label8 = new Label();
+            label9 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             flowLayoutPanel1.SuspendLayout();
@@ -135,6 +122,21 @@
             label20.TabIndex = 91;
             label20.Text = "Last Name:";
             // 
+            // btnPrint
+            // 
+            btnPrint.AccessibleRole = AccessibleRole.IpAddress;
+            btnPrint.Anchor = AnchorStyles.Left;
+            btnPrint.FlatAppearance.BorderColor = Color.Firebrick;
+            btnPrint.FlatStyle = FlatStyle.System;
+            btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
+            btnPrint.Location = new Point(791, 851);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(178, 56);
+            btnPrint.TabIndex = 90;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = true;
+            // 
             // btnSave
             // 
             btnSave.AccessibleRole = AccessibleRole.IpAddress;
@@ -156,46 +158,43 @@
             cbOld.AccessibleRole = AccessibleRole.IpAddress;
             cbOld.AutoSize = true;
             cbOld.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbOld.Location = new Point(709, 781);
+            cbOld.Location = new Point(709, 588);
             cbOld.Name = "cbOld";
             cbOld.Size = new Size(61, 28);
             cbOld.TabIndex = 89;
             cbOld.Text = "Old";
             cbOld.UseVisualStyleBackColor = true;
-            cbOld.Click += cbOld_CheckedChanged;
             // 
             // cbTransferee
             // 
             cbTransferee.AccessibleRole = AccessibleRole.IpAddress;
             cbTransferee.AutoSize = true;
             cbTransferee.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbTransferee.Location = new Point(548, 781);
+            cbTransferee.Location = new Point(548, 588);
             cbTransferee.Name = "cbTransferee";
             cbTransferee.Size = new Size(122, 28);
             cbTransferee.TabIndex = 88;
             cbTransferee.Text = "Transferee";
             cbTransferee.UseVisualStyleBackColor = true;
-            cbTransferee.Click += cbTransferee_CheckedChanged;
             // 
             // cbNew
             // 
             cbNew.AccessibleRole = AccessibleRole.IpAddress;
             cbNew.AutoSize = true;
             cbNew.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbNew.Location = new Point(441, 781);
+            cbNew.Location = new Point(441, 588);
             cbNew.Name = "cbNew";
             cbNew.Size = new Size(69, 28);
             cbNew.TabIndex = 87;
             cbNew.Text = "New";
             cbNew.UseVisualStyleBackColor = true;
-            cbNew.Click += cbNew_CheckedChanged;
             // 
             // cmbSection
             // 
             cmbSection.AccessibleRole = AccessibleRole.IpAddress;
             cmbSection.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbSection.FormattingEnabled = true;
-            cmbSection.Location = new Point(877, 727);
+            cmbSection.Location = new Point(877, 534);
             cmbSection.Name = "cmbSection";
             cmbSection.Size = new Size(329, 32);
             cmbSection.TabIndex = 86;
@@ -205,7 +204,7 @@
             label19.AccessibleRole = AccessibleRole.IpAddress;
             label19.AutoSize = true;
             label19.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label19.Location = new Point(794, 730);
+            label19.Location = new Point(794, 537);
             label19.Name = "label19";
             label19.Size = new Size(77, 24);
             label19.TabIndex = 85;
@@ -216,75 +215,10 @@
             cmbGradeLevel.AccessibleRole = AccessibleRole.IpAddress;
             cmbGradeLevel.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(441, 731);
+            cmbGradeLevel.Location = new Point(441, 538);
             cmbGradeLevel.Name = "cmbGradeLevel";
             cmbGradeLevel.Size = new Size(332, 32);
             cmbGradeLevel.TabIndex = 84;
-            // 
-            // txtGWA
-            // 
-            txtGWA.AccessibleRole = AccessibleRole.IpAddress;
-            txtGWA.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtGWA.Location = new Point(854, 683);
-            txtGWA.Name = "txtGWA";
-            txtGWA.Size = new Size(352, 29);
-            txtGWA.TabIndex = 83;
-            // 
-            // label18
-            // 
-            label18.AccessibleRole = AccessibleRole.IpAddress;
-            label18.AutoSize = true;
-            label18.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label18.Location = new Point(791, 685);
-            label18.Name = "label18";
-            label18.Size = new Size(55, 24);
-            label18.TabIndex = 82;
-            label18.Text = "GWA:\r\n";
-            // 
-            // txtLastGrade
-            // 
-            txtLastGrade.AccessibleRole = AccessibleRole.IpAddress;
-            txtLastGrade.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtLastGrade.Location = new Point(449, 686);
-            txtLastGrade.Name = "txtLastGrade";
-            txtLastGrade.Size = new Size(324, 29);
-            txtLastGrade.TabIndex = 81;
-            // 
-            // txtLastSchool
-            // 
-            txtLastSchool.AccessibleRole = AccessibleRole.IpAddress;
-            txtLastSchool.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtLastSchool.Location = new Point(441, 641);
-            txtLastSchool.Name = "txtLastSchool";
-            txtLastSchool.Size = new Size(765, 29);
-            txtLastSchool.TabIndex = 80;
-            // 
-            // txtRelationship
-            // 
-            txtRelationship.AccessibleRole = AccessibleRole.IpAddress;
-            txtRelationship.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtRelationship.Location = new Point(916, 584);
-            txtRelationship.Name = "txtRelationship";
-            txtRelationship.Size = new Size(290, 29);
-            txtRelationship.TabIndex = 79;
-            // 
-            // txtMotherContact
-            // 
-            txtMotherContact.AccessibleRole = AccessibleRole.IpAddress;
-            txtMotherContact.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtMotherContact.Location = new Point(877, 530);
-            txtMotherContact.Name = "txtMotherContact";
-            txtMotherContact.Size = new Size(329, 29);
-            txtMotherContact.TabIndex = 78;
-            // 
-            // txtFatherContactNo
-            // 
-            txtFatherContactNo.AccessibleRole = AccessibleRole.IpAddress;
-            txtFatherContactNo.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtFatherContactNo.Location = new Point(877, 480);
-            txtFatherContactNo.Name = "txtFatherContactNo";
-            txtFatherContactNo.Size = new Size(329, 29);
-            txtFatherContactNo.TabIndex = 77;
             // 
             // txtEmail
             // 
@@ -299,61 +233,10 @@
             // 
             txtGuardian.AccessibleRole = AccessibleRole.IpAddress;
             txtGuardian.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtGuardian.Location = new Point(340, 584);
+            txtGuardian.Location = new Point(340, 485);
             txtGuardian.Name = "txtGuardian";
             txtGuardian.Size = new Size(433, 29);
             txtGuardian.TabIndex = 75;
-            // 
-            // txtMotherName
-            // 
-            txtMotherName.AccessibleRole = AccessibleRole.IpAddress;
-            txtMotherName.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtMotherName.Location = new Point(392, 532);
-            txtMotherName.Name = "txtMotherName";
-            txtMotherName.Size = new Size(381, 29);
-            txtMotherName.TabIndex = 74;
-            // 
-            // txtFatherName
-            // 
-            txtFatherName.AccessibleRole = AccessibleRole.IpAddress;
-            txtFatherName.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtFatherName.Location = new Point(379, 482);
-            txtFatherName.Name = "txtFatherName";
-            txtFatherName.Size = new Size(394, 29);
-            txtFatherName.TabIndex = 73;
-            // 
-            // label17
-            // 
-            label17.AccessibleRole = AccessibleRole.IpAddress;
-            label17.AutoSize = true;
-            label17.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label17.Location = new Point(791, 586);
-            label17.Name = "label17";
-            label17.Size = new Size(124, 24);
-            label17.TabIndex = 72;
-            label17.Text = "Relationship:";
-            // 
-            // label16
-            // 
-            label16.AccessibleRole = AccessibleRole.IpAddress;
-            label16.AutoSize = true;
-            label16.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label16.Location = new Point(791, 532);
-            label16.Name = "label16";
-            label16.Size = new Size(80, 24);
-            label16.TabIndex = 71;
-            label16.Text = "Contact:";
-            // 
-            // label15
-            // 
-            label15.AccessibleRole = AccessibleRole.IpAddress;
-            label15.AutoSize = true;
-            label15.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label15.Location = new Point(791, 482);
-            label15.Name = "label15";
-            label15.Size = new Size(80, 24);
-            label15.TabIndex = 70;
-            label15.Text = "Contact:";
             // 
             // label14
             // 
@@ -435,21 +318,21 @@
             txtAddress.Size = new Size(875, 29);
             txtAddress.TabIndex = 62;
             // 
-            // txtFullname
+            // txtFirstname
             // 
-            txtFullname.AccessibleRole = AccessibleRole.IpAddress;
-            txtFullname.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtFullname.Location = new Point(356, 259);
-            txtFullname.Name = "txtFullname";
-            txtFullname.Size = new Size(196, 29);
-            txtFullname.TabIndex = 53;
+            txtFirstname.AccessibleRole = AccessibleRole.IpAddress;
+            txtFirstname.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            txtFirstname.Location = new Point(356, 259);
+            txtFirstname.Name = "txtFirstname";
+            txtFirstname.Size = new Size(196, 29);
+            txtFirstname.TabIndex = 53;
             // 
             // label11
             // 
             label11.AccessibleRole = AccessibleRole.IpAddress;
             label11.AutoSize = true;
             label11.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label11.Location = new Point(310, 781);
+            label11.Location = new Point(310, 588);
             label11.Name = "label11";
             label11.Size = new Size(121, 24);
             label11.TabIndex = 61;
@@ -460,66 +343,22 @@
             label10.AccessibleRole = AccessibleRole.IpAddress;
             label10.AutoSize = true;
             label10.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label10.Location = new Point(242, 731);
+            label10.Location = new Point(242, 538);
             label10.Name = "label10";
             label10.Size = new Size(194, 24);
             label10.TabIndex = 60;
             label10.Text = "Grade Level to Enroll:";
-            // 
-            // label9
-            // 
-            label9.AccessibleRole = AccessibleRole.IpAddress;
-            label9.AutoSize = true;
-            label9.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label9.Location = new Point(242, 685);
-            label9.Name = "label9";
-            label9.Size = new Size(202, 24);
-            label9.TabIndex = 59;
-            label9.Text = "Last Grade Completed:";
-            // 
-            // label8
-            // 
-            label8.AccessibleRole = AccessibleRole.IpAddress;
-            label8.AutoSize = true;
-            label8.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label8.Location = new Point(242, 640);
-            label8.Name = "label8";
-            label8.Size = new Size(193, 24);
-            label8.TabIndex = 58;
-            label8.Text = "Last School Attended:";
             // 
             // label7
             // 
             label7.AccessibleRole = AccessibleRole.IpAddress;
             label7.AutoSize = true;
             label7.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label7.Location = new Point(242, 586);
+            label7.Location = new Point(242, 487);
             label7.Name = "label7";
             label7.Size = new Size(95, 24);
             label7.TabIndex = 57;
             label7.Text = "Guardian:";
-            // 
-            // label6
-            // 
-            label6.AccessibleRole = AccessibleRole.IpAddress;
-            label6.AutoSize = true;
-            label6.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label6.Location = new Point(242, 532);
-            label6.Name = "label6";
-            label6.Size = new Size(144, 24);
-            label6.TabIndex = 56;
-            label6.Text = "Mother's Name:";
-            // 
-            // label5
-            // 
-            label5.AccessibleRole = AccessibleRole.IpAddress;
-            label5.AutoSize = true;
-            label5.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label5.Location = new Point(242, 482);
-            label5.Name = "label5";
-            label5.Size = new Size(137, 24);
-            label5.TabIndex = 55;
-            label5.Text = "Father's Name:";
             // 
             // label4
             // 
@@ -589,15 +428,10 @@
             btnSearchStudInfo.TabIndex = 97;
             btnSearchStudInfo.Text = "Search";
             btnSearchStudInfo.UseVisualStyleBackColor = true;
-            btnSearchStudInfo.Click += BtnSearchStudInfo_Click;
             // 
             // printDialog1
             // 
             printDialog1.UseEXDialog = true;
-            // 
-            // printDocument1
-            // 
-            printDocument1.PrintPage += PrintDocument1_PrintPage;
             // 
             // panel2
             // 
@@ -668,7 +502,6 @@
             pictureBox1.Size = new Size(66, 69);
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click_1;
             // 
             // pictureBox3
             // 
@@ -679,7 +512,6 @@
             pictureBox3.Size = new Size(66, 69);
             pictureBox3.TabIndex = 4;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
             // 
             // pictureBox4
             // 
@@ -690,30 +522,55 @@
             pictureBox4.Size = new Size(66, 69);
             pictureBox4.TabIndex = 5;
             pictureBox4.TabStop = false;
-            pictureBox4.Click += BtnDeleteStudInfo_Click;
             // 
-            // btnPrint
+            // clbModeOfPayment_AdminStudentRegistrationAdd
             // 
-            btnPrint.AccessibleRole = AccessibleRole.IpAddress;
-            btnPrint.Anchor = AnchorStyles.Left;
-            btnPrint.FlatAppearance.BorderColor = Color.Firebrick;
-            btnPrint.FlatStyle = FlatStyle.System;
-            btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
-            btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPrint.Location = new Point(791, 851);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(178, 56);
-            btnPrint.TabIndex = 90;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = true;
-            btnPrint.Click += btnPrint_Click;
+            clbModeOfPayment_AdminStudentRegistrationAdd.FormattingEnabled = true;
+            clbModeOfPayment_AdminStudentRegistrationAdd.Items.AddRange(new object[] { "Low Down Payment", "Low Monthly Payment", "Cash" });
+            clbModeOfPayment_AdminStudentRegistrationAdd.Location = new Point(940, 638);
+            clbModeOfPayment_AdminStudentRegistrationAdd.Name = "clbModeOfPayment_AdminStudentRegistrationAdd";
+            clbModeOfPayment_AdminStudentRegistrationAdd.Size = new Size(179, 70);
+            clbModeOfPayment_AdminStudentRegistrationAdd.TabIndex = 283;
             // 
-            // UserControlStudentInformation
+            // clbRequirements_AdminStudentRegistrationAdd
+            // 
+            clbRequirements_AdminStudentRegistrationAdd.FormattingEnabled = true;
+            clbRequirements_AdminStudentRegistrationAdd.Items.AddRange(new object[] { "Good Moral", "Form 137", "Birth Certificate" });
+            clbRequirements_AdminStudentRegistrationAdd.Location = new Point(441, 638);
+            clbRequirements_AdminStudentRegistrationAdd.Name = "clbRequirements_AdminStudentRegistrationAdd";
+            clbRequirements_AdminStudentRegistrationAdd.Size = new Size(159, 70);
+            clbRequirements_AdminStudentRegistrationAdd.TabIndex = 281;
+            // 
+            // label8
+            // 
+            label8.AccessibleRole = AccessibleRole.IpAddress;
+            label8.AutoSize = true;
+            label8.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            label8.Location = new Point(297, 638);
+            label8.Name = "label8";
+            label8.Size = new Size(133, 24);
+            label8.TabIndex = 284;
+            label8.Text = "Requirements:";
+            // 
+            // label9
+            // 
+            label9.AccessibleRole = AccessibleRole.IpAddress;
+            label9.AutoSize = true;
+            label9.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            label9.Location = new Point(771, 638);
+            label9.Name = "label9";
+            label9.Size = new Size(163, 24);
+            label9.TabIndex = 285;
+            label9.Text = "Mode of Payment:";
+            // 
+            // UserControlRegistration
             // 
             AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
+            Controls.Add(label9);
+            Controls.Add(label8);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(textBox1);
             Controls.Add(panel2);
@@ -731,20 +588,8 @@
             Controls.Add(cmbSection);
             Controls.Add(label19);
             Controls.Add(cmbGradeLevel);
-            Controls.Add(txtGWA);
-            Controls.Add(label18);
-            Controls.Add(txtLastGrade);
-            Controls.Add(txtLastSchool);
-            Controls.Add(txtRelationship);
-            Controls.Add(txtMotherContact);
-            Controls.Add(txtFatherContactNo);
             Controls.Add(txtEmail);
             Controls.Add(txtGuardian);
-            Controls.Add(txtMotherName);
-            Controls.Add(txtFatherName);
-            Controls.Add(label17);
-            Controls.Add(label16);
-            Controls.Add(label15);
             Controls.Add(label14);
             Controls.Add(dateTimePicker1);
             Controls.Add(cmbGender);
@@ -753,21 +598,19 @@
             Controls.Add(label12);
             Controls.Add(txtContactNo);
             Controls.Add(txtAddress);
-            Controls.Add(txtFullname);
+            Controls.Add(txtFirstname);
             Controls.Add(label11);
             Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "UserControlStudentInformation";
+            Controls.Add(clbModeOfPayment_AdminStudentRegistrationAdd);
+            Controls.Add(clbRequirements_AdminStudentRegistrationAdd);
+            Name = "UserControlRegistration";
             Size = new Size(1470, 973);
-            Load += UserControlStudentInfo_Load;
+            Load += UserControlRegistration_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -785,6 +628,7 @@
         private Label label21;
         private TextBox txtLastName;
         private Label label20;
+        private Button btnPrint;
         public Button btnSave;
         private CheckBox cbOld;
         private CheckBox cbTransferee;
@@ -792,20 +636,8 @@
         private ComboBox cmbSection;
         private Label label19;
         private ComboBox cmbGradeLevel;
-        private TextBox txtGWA;
-        private Label label18;
-        private TextBox txtLastGrade;
-        private TextBox txtLastSchool;
-        private TextBox txtRelationship;
-        private TextBox txtMotherContact;
-        private TextBox txtFatherContactNo;
         private TextBox txtEmail;
         private TextBox txtGuardian;
-        private TextBox txtMotherName;
-        private TextBox txtFatherName;
-        private Label label17;
-        private Label label16;
-        private Label label15;
         private Label label14;
         private DateTimePicker dateTimePicker1;
         private ComboBox cmbGender;
@@ -814,14 +646,10 @@
         private Label label12;
         private TextBox txtContactNo;
         private TextBox txtAddress;
-        private TextBox txtFullname;
+        private TextBox txtFirstname;
         private Label label11;
         private Label label10;
-        private Label label9;
-        private Label label8;
         private Label label7;
-        private Label label6;
-        private Label label5;
         private Label label4;
         private Label label3;
         private Label label2;
@@ -839,6 +667,12 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
-        private Button btnPrint;
+        private CheckedListBox clbModeOfPayment_AdminStudentRegistrationAdd;
+        //private Label label24;
+        private CheckedListBox clbRequirements_AdminStudentRegistrationAdd;
+        private Label label8;
+        private Label label9;
+        //private Label label25;
     }
 }
+

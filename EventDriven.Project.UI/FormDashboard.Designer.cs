@@ -114,6 +114,7 @@
             btnAdminDashboardLogout.TabIndex = 12;
             btnAdminDashboardLogout.Text = "Log Out";
             btnAdminDashboardLogout.UseVisualStyleBackColor = true;
+            btnAdminDashboardLogout.Click += btnAdminDashboardLogout_Click_1;
             // 
             // flowLayoutPanel1
             // 
@@ -177,6 +178,7 @@
             btnStudentReg.Text = "Student Registration";
             btnStudentReg.UseVisualStyleBackColor = true;
             btnStudentReg.Visible = false;
+            btnStudentReg.Click += btnStudentReg_Click_2;
             // 
             // btnPayments
             // 
