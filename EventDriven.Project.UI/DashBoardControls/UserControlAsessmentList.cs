@@ -13,23 +13,23 @@ using EventDriven.Project.Model;
 
 namespace EventDriven.Project.UI.DashBoardControls
 {
-    public partial class UserControlStudentInfoList : UserControl
+    public partial class UserControlAsessmentList : UserControl
     {
         private readonly StudentController studentController;
-        private UserControlStudentInformation studentInformationControl;
+        private UserControlAssessment studentAssessmentControl;
         private string role;
         private UserModel authenticationKey;
         private MainForm main;
-        public UserControlStudentInfoList(string role, MainForm main, UserModel authenticationKey)
+        public UserControlAsessmentList(string role, MainForm main, UserModel authenticationKey)
         {
+            InitializeComponent();
             this.role = role;
             this.main = main;
             this.authenticationKey = authenticationKey;
-            InitializeComponent();
             studentController = new StudentController();
             LoadStudents();
-            
         }
+
         private async void LoadStudents()
         {
             try
@@ -52,28 +52,24 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
+
         private void refresh(object sender, EventArgs e)
         {
             LoadStudents();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            studentInformationControl.selectAdd();
-            studentInformationControl.ClearForm();
-            tabControl1.SelectedIndex = 1;
-        }
-        
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    studentAssessmentControl.ClearForm();
+        //    tabControl1.SelectedIndex = 1;
+        //}
 
         private void edit(int studentId)
         {
-            studentInformationControl.selectEdit();
-            studentInformationControl.selectedStudentId = studentId;
+            studentAssessmentControl.selectedStudentId = studentId;
             tabControl1.SelectedIndex = 1;
-            studentInformationControl.txtSearchStudentIn.Text = studentId.ToString();
-            studentInformationControl.search();
+            studentAssessmentControl.txtSearchStudentIn.Text = studentId.ToString();
         }
 
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -87,11 +83,11 @@ namespace EventDriven.Project.UI.DashBoardControls
                 int studentId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Column1"].Value);
                 edit(studentId);
                 //MessageBox.Show($"Edit student with ID: {studentId}");
-                // TODO: open Student Registration tab and load details
+                // TODO: open Student Assessment tab and load details
             }
             else if (columnName == "ColDelete")
             {
-                if(role != "Admin")
+                if (role != "Admin")
                 {
                     MessageBox.Show("Only Admin can delete student records.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -103,26 +99,26 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (confirm == DialogResult.Yes)
                 {
-                    await studentController.DeleteAsync(studentId,  authenticationKey);
+                    await studentController.DeleteAsync(studentId, authenticationKey);
                     LoadStudents(); // refresh grid
                 }
             }
         }
 
-        private void UserControlStudentInfoList_Load(object sender, EventArgs e)
+        private void UserControlAsessmentList_Load(object sender, EventArgs e)
         {
-            UserControlStudentInformation info = new UserControlStudentInformation(role, main, authenticationKey);
-            studentInformationControl = info;
+            //UserControlAssessment info = new UserControlAssessment(role, main, authenticationKey);
+            //studentAssessmentControl = info;
             panel1.Controls.Clear();
-            studentInformationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
-            panel1.Controls.Add(studentInformationControl);
-            info.btnSave.Click += refresh;
+            studentAssessmentControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
+            panel1.Controls.Add(studentAssessmentControl);
+            //info.btnSave.Click += refresh;
         }
+
         private void btnSearchStuIn_Click(object sender, EventArgs e)
         {
             SearchStudent(txtSearch.Text.Trim());
         }
-
 
         private void SearchStudent(string searchValue)
         {
@@ -160,5 +156,19 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void UserControlAsessmentList_Load_1(object sender, EventArgs e)
+        {
+            //UserControlAssessment info = new UserControlAssessment(role, main, authenticationKey);
+            //studentAssessmentControl = info;
+            //panel2.Controls.Clear();
+            //studentAssessmentControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
+            //panel2.Controls.Add(studentAssessmentControl);
+            //info.btnSave.Click += refresh;
+        }
     }
 }

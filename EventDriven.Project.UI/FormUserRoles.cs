@@ -19,6 +19,7 @@ namespace EventDriven.Project.UI
             InitializeComponent();
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            userControlExit1.mainForm = main;
         }
 
         private void Adminbtn_Click(object sender, EventArgs e)
@@ -50,6 +51,10 @@ namespace EventDriven.Project.UI
         {
             main.OpenChildForm(new FormLogin("Registrar", main));
         }
-    }
-}
 
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            
+        }
+    }
+    }

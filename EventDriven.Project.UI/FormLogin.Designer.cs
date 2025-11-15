@@ -44,6 +44,7 @@ namespace EventDriven.Project.UI
             label1 = new Label();
             pictureBox2 = new PictureBox();
             label4 = new Label();
+            userControlExit1 = new DashBoardControls.UserControlExit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -63,7 +64,6 @@ namespace EventDriven.Project.UI
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             panel1.BackColor = Color.BurlyWood;
             panel1.Controls.Add(showBtn);
             panel1.Controls.Add(btnLogin);
@@ -184,6 +184,7 @@ namespace EventDriven.Project.UI
             // panel2
             // 
             panel2.BackColor = Color.BurlyWood;
+            panel2.Controls.Add(userControlExit1);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(label4);
@@ -206,7 +207,6 @@ namespace EventDriven.Project.UI
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox2.Image = Properties.Resources.logo;
             pictureBox2.Location = new Point(0, -14);
             pictureBox2.Name = "pictureBox2";
@@ -226,6 +226,14 @@ namespace EventDriven.Project.UI
             label4.TabIndex = 0;
             label4.Text = "ROSEWOOD ";
             // 
+            // userControlExit1
+            // 
+            userControlExit1.Location = new Point(1838, 24);
+            userControlExit1.Name = "userControlExit1";
+            userControlExit1.Size = new Size(70, 67);
+            userControlExit1.TabIndex = 7;
+            userControlExit1.Load += userControlExit1_Load;
+            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -238,7 +246,6 @@ namespace EventDriven.Project.UI
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormAdminLogIn";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -268,5 +275,6 @@ namespace EventDriven.Project.UI
         private Label label4;
         private PictureBox pictureBox2;
         private Panel panel3;
+        private DashBoardControls.UserControlExit userControlExit1;
     }
 }

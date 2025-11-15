@@ -19,8 +19,6 @@ namespace EventDriven.Project.UI
         private int currentPrintIndex = 0;
         private UserModel authenticationKey;
 
-
-
         public UserControlStudentInformation(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
@@ -169,7 +167,7 @@ namespace EventDriven.Project.UI
         //    foreach (Control ctrl in flowLayoutPanel1.Controls)
         //    {
         //        if (ctrl is Button btn)
-        //        {
+        //        {load
         //            btn.BackColor = flowLayoutPanel1.BackColor;
         //            btn.ForeColor = Color.FromArgb(64, 64, 64);
         //            btn.FlatStyle = FlatStyle.Flat;
@@ -281,14 +279,14 @@ namespace EventDriven.Project.UI
             cmbGender.Items.AddRange(genders);
 
             // Grade Levels
-            
+
 
             // Suffixes
             string[] suffixes = { "", "Jr.", "II", "III", "IV", "V" };
             cmbSuffix.Items.AddRange(suffixes);
 
             // Sections
-            
+
 
         }
 
@@ -328,6 +326,7 @@ namespace EventDriven.Project.UI
         }
         public void selectEdit()
         {
+            action = "Edit";
 
 
         }
@@ -340,17 +339,26 @@ namespace EventDriven.Project.UI
         {
             try
             {
-                studentsToPrint = await studentController.GetAllAsync(authenticationKey); // Get all students
-                if (studentsToPrint.Count == 0)
+                if (selectedStudentId <= 0)
                 {
-                    MessageBox.Show("No students to print.");
+                    MessageBox.Show("Please search and select a student first.");
                     return;
                 }
 
+                var student = await studentController.GetByIdAsync(selectedStudentId, authenticationKey);
+                if (student == null)
+                {
+                    MessageBox.Show("Student not found.");
+                    return;
+                }
+
+                studentsToPrint = new List<StudentModel> { student }; // Print only the selected student
                 currentPrintIndex = 0; // Reset page index
+                currentPage = 1; // Reset page number
 
                 PrintPreviewDialog preview = new PrintPreviewDialog();
                 PrintDocument printDoc = new PrintDocument();
+                printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169); // Set to A4 size (210mm x 297mm)
                 printDoc.PrintPage += PrintDocument1_PrintPage;
                 preview.Document = printDoc;
                 preview.ShowDialog();
@@ -361,41 +369,214 @@ namespace EventDriven.Project.UI
             }
         }
 
+
+        private int currentPage = 1;  // Add this variable at the class level to track the page number.
+
         private void PrintDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
+            if (studentsToPrint.Count == 0) return;
+
+            StudentModel student = studentsToPrint[0]; // Printing only the selected student
+
             int yPos = e.MarginBounds.Top;
-            Font headerFont = new Font("Arial", 10, FontStyle.Bold);
-            Font itemFont = new Font("Arial", 10);
+            int leftMargin = e.MarginBounds.Left;
+            int rightMargin = e.MarginBounds.Right;
+            int bottomMargin = e.MarginBounds.Bottom;
+            int pageWidth = rightMargin - leftMargin;
 
-            // Header
-            string header = "ID | Firstname | Lastname | Grade | Section | Gender | GWA";
-            e.Graphics.DrawString(header, headerFont, Brushes.Black, e.MarginBounds.Left, yPos);
-            yPos += headerFont.Height + 5;
+            // Fonts
+            Font headerFont = new Font("Segoe UI", 18, FontStyle.Bold);
+            Font subHeaderFont = new Font("Segoe UI", 14, FontStyle.Bold); // Slightly larger for sections
+            Font bodyFont = new Font("Segoe UI", 10);
+            Font footerFont = new Font("Segoe UI", 8);
 
-            // Print students
-            while (currentPrintIndex < studentsToPrint.Count)
+            // Brushes
+            Brush headerBrush = Brushes.DarkRed; // School name in darker red
+            Brush subHeaderBrush = Brushes.Black;
+            Brush bodyBrush = Brushes.Black;
+
+            // Pen for borders
+            Pen borderPen = new Pen(Color.Black, 1);
+
+            // Draw outer border for the entire report card
+            Rectangle outerBorder = new Rectangle(leftMargin - 10, yPos - 10, pageWidth + 20, bottomMargin - yPos + 20);
+            e.Graphics.DrawRectangle(borderPen, outerBorder);
+
+            // Header Section with border
+            int headerHeight = 100;
+            Rectangle headerBox = new Rectangle(leftMargin, yPos, pageWidth, headerHeight + 10);
+            e.Graphics.DrawRectangle(borderPen, headerBox);
+
+            int innerY = yPos + 10;
+
+            // Draw Logo (centered in header)
+            try
             {
-                StudentModel s = studentsToPrint[currentPrintIndex];
-
-                string line = $"{s.Id,-3} | {s.FirstName,-10} | {s.LastName,-10} | {s.GradeLevel,-6} | {s.Section,-12} | {s.Gender,-6} | {s.GWA?.ToString("0.00") ?? "-"}";
-                e.Graphics.DrawString(line, itemFont, Brushes.Black, e.MarginBounds.Left, yPos);
-                yPos += itemFont.Height + 5;
-
-                // Check if we need a new page
-                if (yPos + itemFont.Height > e.MarginBounds.Bottom)
+                var logo = Properties.Resources.logo; // Ensure logo.png is in Resources
+                if (logo != null)
                 {
-                    currentPrintIndex++; // next student on next page
-                    e.HasMorePages = true;
-                    return;
+                    int logoWidth = 120;
+                    int logoHeight = 50;
+                    int logoX = leftMargin + (pageWidth - logoWidth) / 2;
+                    e.Graphics.DrawImage(logo, logoX, innerY, logoWidth, logoHeight);
+                    innerY += logoHeight + 10;
                 }
-
-                currentPrintIndex++;
             }
+            catch { }
 
-            // Finished printing
+            // Draw School Name (centered, darker red)
+            string schoolName = "ROSEWOOD ACADEMY INC.";
+            SizeF schoolSize = e.Graphics.MeasureString(schoolName, headerFont);
+            e.Graphics.DrawString(schoolName, headerFont, headerBrush, (leftMargin + rightMargin - schoolSize.Width) / 2, innerY);
+            innerY += (int)schoolSize.Height + 5;
+
+            // Report Title (centered)
+            string reportTitle = "Student Information";
+            SizeF titleSize = e.Graphics.MeasureString(reportTitle, subHeaderFont);
+            e.Graphics.DrawString(reportTitle, subHeaderFont, subHeaderBrush, (leftMargin + rightMargin - titleSize.Width) / 2, innerY);
+
+            yPos += headerHeight + 50;
+
+            // Student Info Section
+            e.Graphics.DrawString("Student Information", subHeaderFont, subHeaderBrush, leftMargin, yPos);
+            yPos += (int)e.Graphics.MeasureString("Student Information", subHeaderFont).Height + 10;
+
+            string[] studentInfoLines = {
+        $"Student ID: {student.Id}",
+        $"Name: {student.FirstName} {student.MiddleName} {student.LastName} {student.Suffix}",
+        $"Status: {student.Status}",
+        $"Birth Date: {student.BirthDate:yyyy-MM-dd} | Gender: {student.Gender}"
+    };
+            int studentInfoHeight = CalculateSectionHeight(e.Graphics, studentInfoLines, bodyFont, 8);
+            Rectangle infoBox = new Rectangle(leftMargin, yPos, pageWidth, studentInfoHeight + 20);
+            e.Graphics.DrawRectangle(borderPen, infoBox);
+
+            innerY = yPos + 10;
+            foreach (string line in studentInfoLines)
+            {
+                e.Graphics.DrawString(line, bodyFont, bodyBrush, leftMargin + 10, innerY);
+                innerY += (int)e.Graphics.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += studentInfoHeight + 30;
+
+            // Academic Info Section
+            e.Graphics.DrawString("Academic Information", subHeaderFont, subHeaderBrush, leftMargin, yPos);
+            yPos += (int)e.Graphics.MeasureString("Academic Information", subHeaderFont).Height + 10;
+
+            string[] academicLines = {
+        $"Grade Level: {student.GradeLevel} | Section: {student.Section}",
+        $"Last School: {student.LastSchool}",
+        $"Last Grade: {student.LastGrade} | GWA: {student.GWA?.ToString("0.00") ?? "N/A"}"
+    };
+            int academicHeight = CalculateSectionHeight(e.Graphics, academicLines, bodyFont, 8);
+            Rectangle academicBox = new Rectangle(leftMargin, yPos, pageWidth, academicHeight + 20);
+            e.Graphics.DrawRectangle(borderPen, academicBox);
+
+            innerY = yPos + 10;
+            foreach (string line in academicLines)
+            {
+                e.Graphics.DrawString(line, bodyFont, bodyBrush, leftMargin + 10, innerY);
+                innerY += (int)e.Graphics.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += academicHeight + 30;
+
+            // Contact Info Section
+            e.Graphics.DrawString("Contact Information", subHeaderFont, subHeaderBrush, leftMargin, yPos);
+            yPos += (int)e.Graphics.MeasureString("Contact Information", subHeaderFont).Height + 10;
+
+            string[] contactLines = {
+        $"Email: {student.Email}",
+        $"Address: {student.Address}",
+        $"Contact: {student.Contact}"
+    };
+            int contactHeight = CalculateSectionHeight(e.Graphics, contactLines, bodyFont, 8);
+            Rectangle contactBox = new Rectangle(leftMargin, yPos, pageWidth, contactHeight + 20);
+            e.Graphics.DrawRectangle(borderPen, contactBox);
+
+            innerY = yPos + 10;
+            foreach (string line in contactLines)
+            {
+                e.Graphics.DrawString(line, bodyFont, bodyBrush, leftMargin + 10, innerY);
+                innerY += (int)e.Graphics.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += contactHeight + 30;
+
+            // Parents & Guardian Section
+            e.Graphics.DrawString("Parents and Guardian", subHeaderFont, subHeaderBrush, leftMargin, yPos);
+            yPos += (int)e.Graphics.MeasureString("Parents and Guardian", subHeaderFont).Height + 10;
+
+            string[] guardianLines = {
+        $"Father: {student.FatherName} | Contact: {student.FatherContact}",
+        $"Mother: {student.MotherName} | Contact: {student.MotherContact}",
+        $"Guardian: {student.GuardianName} | Relationship: {student.GuardianRelationship}"
+    };
+            int guardianHeight = CalculateSectionHeight(e.Graphics, guardianLines, bodyFont, 8);
+            Rectangle guardianBox = new Rectangle(leftMargin, yPos, pageWidth, guardianHeight + 20);
+            e.Graphics.DrawRectangle(borderPen, guardianBox);
+
+            innerY = yPos + 10;
+            foreach (string line in guardianLines)
+            {
+                e.Graphics.DrawString(line, bodyFont, bodyBrush, leftMargin + 10, innerY);
+                innerY += (int)e.Graphics.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += guardianHeight + 40; // Extra space before footer
+
+            // Signature Section
+            int sigLineLength = 200;
+            int sigSpacing = 40;
+            // Student Signature (left)
+            e.Graphics.DrawString("Student:", bodyFont, bodyBrush, leftMargin, yPos - 10);
+            yPos += (int)e.Graphics.MeasureString("Student:", bodyFont).Height + 5;
+            e.Graphics.DrawLine(Pens.Black, leftMargin, yPos, leftMargin + sigLineLength, yPos);
+            yPos += 5;
+            e.Graphics.DrawString($"{student.FirstName} {student.LastName}", bodyFont, bodyBrush, leftMargin, yPos);
+            yPos += (int)e.Graphics.MeasureString($"{student.FirstName} {student.LastName}", bodyFont).Height + sigSpacing;
+            // Parent/Guardian Signature (center)
+            int parentX = leftMargin + (pageWidth - sigLineLength) / 2;
+            yPos -= (int)e.Graphics.MeasureString("Parent/Guardian:", bodyFont).Height + 5 + sigSpacing; // Align with student
+            e.Graphics.DrawString("Parent/Guardian:", bodyFont, bodyBrush, parentX, yPos - 10);
+            yPos += (int)e.Graphics.MeasureString("Parent/Guardian:", bodyFont).Height + 5;
+            e.Graphics.DrawLine(Pens.Black, parentX, yPos, parentX + sigLineLength, yPos);
+            yPos += 5;
+            e.Graphics.DrawString($"{student.GuardianName}", bodyFont, bodyBrush, parentX, yPos);
+            yPos += (int)e.Graphics.MeasureString($"{student.GuardianName}", bodyFont).Height + sigSpacing;
+            // Principal Signature (right)
+            int principalX = rightMargin - sigLineLength;
+            yPos -= (int)e.Graphics.MeasureString("Principal:", bodyFont).Height + 5 + sigSpacing; // Align with others
+            e.Graphics.DrawString("Principal:", bodyFont, bodyBrush, principalX, yPos - 10);
+            yPos += (int)e.Graphics.MeasureString("Principal:", bodyFont).Height + 5;
+            e.Graphics.DrawLine(Pens.Black, principalX, yPos, principalX + sigLineLength, yPos);
+            yPos += 5;
+            e.Graphics.DrawString("Hanz Llenard Sacdalan", bodyFont, bodyBrush, principalX, yPos);
+            yPos += (int)e.Graphics.MeasureString("Hanz Llenard Sacdalan", bodyFont).Height + 20;
+
+            // Footer with extra bottom margin
+            string dateLine = $"Report Generated on: {DateTime.Now:yyyy-MM-dd}";
+            SizeF dateSize = e.Graphics.MeasureString(dateLine, footerFont);
+            e.Graphics.DrawString(dateLine, footerFont, bodyBrush, leftMargin, bottomMargin - dateSize.Height - 30); // Increased bottom margin
+
+            string pageNumber = $"Page {currentPage}";
+            SizeF pageSize = e.Graphics.MeasureString(pageNumber, footerFont);
+            e.Graphics.DrawString(pageNumber, footerFont, bodyBrush, rightMargin - pageSize.Width, bottomMargin - pageSize.Height - 30);
+
+            currentPage++;
             e.HasMorePages = false;
-            currentPrintIndex = 0;
         }
+
+        // Helper method
+        private int CalculateSectionHeight(Graphics g, string[] lines, Font font, int lineSpacing)
+        {
+            int totalHeight = 0;
+            foreach (string line in lines)
+            {
+                totalHeight += (int)g.MeasureString(line, font).Height + lineSpacing;
+            }
+            return totalHeight;
+        }
+
+
+
 
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
@@ -410,9 +591,14 @@ namespace EventDriven.Project.UI
             action = "Edit";
         }
 
-       
+
 
         private void pictureBox4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -29,6 +29,7 @@ namespace EventDriven.Project.UI
             InitializeComponent();
             this.Text = role + " Dashboard";
             visibleRole(role);
+            userControlExit1.mainForm = main;
         }
         private void ShowControl(UserControl control)
         {
@@ -169,6 +170,18 @@ namespace EventDriven.Project.UI
             highlightButton(sender as Button);
             //ShowControl(new UserControlStudentRegistration(role, main));
             ShowControl(new UserControlRegistrationList(role, main, authenticationKey));
+        }
+
+        private void btnAssessment_Click_1(object sender, EventArgs e)
+        {
+            highlightButton(sender as Button);
+            ShowControl(new UserControlAssessmentList2(role, main, authenticationKey));
+        }
+
+        private void btnReports_Click_1(object sender, EventArgs e)
+        {
+            highlightButton(sender as Button);
+            ShowControl(new UserControlReports(role, main, authenticationKey));
         }
     }
 }

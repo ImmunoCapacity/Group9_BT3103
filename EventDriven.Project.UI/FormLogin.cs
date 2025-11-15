@@ -23,9 +23,10 @@ namespace EventDriven.Project.UI
             lblLogin.Text = Role + " Login";
             TBPassword.UseSystemPasswordChar = true;
             userController = new UserController();
+            userControlExit1.mainForm = main;
 
             resetTimer = new System.Windows.Forms.Timer();
-            resetTimer.Interval = 180000;
+            resetTimer.Interval = 10000;
             resetTimer.Tick += ResetAttempts;
             resetTimer.Stop();
 
@@ -112,6 +113,18 @@ namespace EventDriven.Project.UI
         private void lblLogin_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?",
+                "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            Application.Exit();
+        }
+
+        private void userControlExit1_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
