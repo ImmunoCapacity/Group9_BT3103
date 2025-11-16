@@ -38,6 +38,7 @@
             pictureBox5 = new PictureBox();
             pictureBox4 = new PictureBox();
             panel2 = new Panel();
+            userControlExit1 = new DashBoardControls.UserControlExit();
             label3 = new Label();
             pictureBox2 = new PictureBox();
             label2 = new Label();
@@ -52,7 +53,6 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox1.Image = Properties.Resources.logo;
             pictureBox1.Location = new Point(450, 45);
             pictureBox1.Name = "pictureBox1";
@@ -62,7 +62,6 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             label1.AutoSize = true;
             label1.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(64, 64, 64);
@@ -74,7 +73,7 @@
             // 
             // Adminbtn
             // 
-            Adminbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
+            Adminbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Adminbtn.Cursor = Cursors.Hand;
             Adminbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Adminbtn.FlatAppearance.BorderSize = 3;
@@ -91,7 +90,7 @@
             // 
             // Cashierbtn
             // 
-            Cashierbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
+            Cashierbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Cashierbtn.Cursor = Cursors.Hand;
             Cashierbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Cashierbtn.FlatAppearance.BorderSize = 3;
@@ -108,7 +107,7 @@
             // 
             // Regstrarbtn
             // 
-            Regstrarbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left ;
+            Regstrarbtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Regstrarbtn.Cursor = Cursors.Hand;
             Regstrarbtn.FlatAppearance.BorderColor = Color.Firebrick;
             Regstrarbtn.FlatAppearance.BorderSize = 3;
@@ -126,7 +125,6 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             panel1.BackColor = Color.SeaShell;
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(pictureBox5);
@@ -143,7 +141,6 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox3.Image = Properties.Resources.user;
             pictureBox3.Location = new Point(48, 368);
             pictureBox3.Name = "pictureBox3";
@@ -155,7 +152,6 @@
             // 
             // pictureBox5
             // 
-            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox5.Image = Properties.Resources.registered;
             pictureBox5.Location = new Point(966, 368);
             pictureBox5.Name = "pictureBox5";
@@ -166,7 +162,6 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox4.Image = Properties.Resources.cash_machine;
             pictureBox4.Location = new Point(533, 368);
             pictureBox4.Name = "pictureBox4";
@@ -178,6 +173,7 @@
             // panel2
             // 
             panel2.BackColor = Color.SeaShell;
+            panel2.Controls.Add(userControlExit1);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(label2);
@@ -185,6 +181,13 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1919, 112);
             panel2.TabIndex = 6;
+            // 
+            // userControlExit1
+            // 
+            userControlExit1.Location = new Point(1838, 22);
+            userControlExit1.Name = "userControlExit1";
+            userControlExit1.Size = new Size(69, 67);
+            userControlExit1.TabIndex = 8;
             // 
             // label3
             // 
@@ -199,7 +202,6 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left ;
             pictureBox2.Image = Properties.Resources.logo;
             pictureBox2.Location = new Point(3, -14);
             pictureBox2.Name = "pictureBox2";
@@ -224,12 +226,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
             ClientSize = new Size(1920, 1080);
+            ControlBox = false;
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormUserRoles";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormUserRoles";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -257,5 +259,6 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private PictureBox pictureBox3;
+        private DashBoardControls.UserControlExit userControlExit1;
     }
 }

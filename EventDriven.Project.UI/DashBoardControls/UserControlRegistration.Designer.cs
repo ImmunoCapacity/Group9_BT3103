@@ -58,13 +58,9 @@
             label2 = new Label();
             label1 = new Label();
             txtSearchStudentIn = new TextBox();
-            btnSearchStudInfo = new Button();
+            btnSearch = new Button();
             printDialog1 = new PrintDialog();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
-            panel2 = new Panel();
-            label22 = new Label();
-            pictureBox2 = new PictureBox();
-            label23 = new Label();
             textBox1 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
@@ -74,8 +70,6 @@
             label9 = new Label();
             checkedListBox1 = new CheckedListBox();
             checkedListBox2 = new CheckedListBox();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -86,7 +80,7 @@
             // 
             txtMiddleName.AccessibleRole = AccessibleRole.IpAddress;
             txtMiddleName.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtMiddleName.Location = new Point(1023, 259);
+            txtMiddleName.Location = new Point(1023, 213);
             txtMiddleName.Name = "txtMiddleName";
             txtMiddleName.Size = new Size(183, 29);
             txtMiddleName.TabIndex = 94;
@@ -96,7 +90,7 @@
             label21.AccessibleRole = AccessibleRole.IpAddress;
             label21.AutoSize = true;
             label21.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label21.Location = new Point(888, 261);
+            label21.Location = new Point(888, 215);
             label21.Name = "label21";
             label21.Size = new Size(128, 24);
             label21.TabIndex = 93;
@@ -106,7 +100,7 @@
             // 
             txtLastName.AccessibleRole = AccessibleRole.IpAddress;
             txtLastName.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtLastName.Location = new Point(681, 259);
+            txtLastName.Location = new Point(681, 213);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(192, 29);
             txtLastName.TabIndex = 92;
@@ -116,7 +110,7 @@
             label20.AccessibleRole = AccessibleRole.IpAddress;
             label20.AutoSize = true;
             label20.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label20.Location = new Point(572, 261);
+            label20.Location = new Point(572, 215);
             label20.Name = "label20";
             label20.Size = new Size(105, 24);
             label20.TabIndex = 91;
@@ -136,6 +130,7 @@
             btnPrint.TabIndex = 90;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = true;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnSave
             // 
@@ -158,7 +153,7 @@
             cbOld.AccessibleRole = AccessibleRole.IpAddress;
             cbOld.AutoSize = true;
             cbOld.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbOld.Location = new Point(709, 588);
+            cbOld.Location = new Point(709, 542);
             cbOld.Name = "cbOld";
             cbOld.Size = new Size(61, 28);
             cbOld.TabIndex = 89;
@@ -170,7 +165,7 @@
             cbTransferee.AccessibleRole = AccessibleRole.IpAddress;
             cbTransferee.AutoSize = true;
             cbTransferee.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbTransferee.Location = new Point(548, 588);
+            cbTransferee.Location = new Point(548, 542);
             cbTransferee.Name = "cbTransferee";
             cbTransferee.Size = new Size(122, 28);
             cbTransferee.TabIndex = 88;
@@ -182,7 +177,7 @@
             cbNew.AccessibleRole = AccessibleRole.IpAddress;
             cbNew.AutoSize = true;
             cbNew.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            cbNew.Location = new Point(441, 588);
+            cbNew.Location = new Point(441, 542);
             cbNew.Name = "cbNew";
             cbNew.Size = new Size(69, 28);
             cbNew.TabIndex = 87;
@@ -195,7 +190,7 @@
             cmbSection.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbSection.FormattingEnabled = true;
             cmbSection.Items.AddRange(new object[] { "7-A", "7-B", "7-C", "8-A", "8-B", "8-C", "9-A", "9-B", "9-C", "10-A", "10-B", "10-C" });
-            cmbSection.Location = new Point(877, 534);
+            cmbSection.Location = new Point(877, 488);
             cmbSection.Name = "cmbSection";
             cmbSection.Size = new Size(329, 32);
             cmbSection.TabIndex = 86;
@@ -205,7 +200,7 @@
             label19.AccessibleRole = AccessibleRole.IpAddress;
             label19.AutoSize = true;
             label19.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label19.Location = new Point(794, 537);
+            label19.Location = new Point(794, 491);
             label19.Name = "label19";
             label19.Size = new Size(77, 24);
             label19.TabIndex = 85;
@@ -217,7 +212,7 @@
             cmbGradeLevel.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbGradeLevel.FormattingEnabled = true;
             cmbGradeLevel.Items.AddRange(new object[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
-            cmbGradeLevel.Location = new Point(441, 538);
+            cmbGradeLevel.Location = new Point(441, 492);
             cmbGradeLevel.Name = "cmbGradeLevel";
             cmbGradeLevel.Size = new Size(332, 32);
             cmbGradeLevel.TabIndex = 84;
@@ -226,7 +221,7 @@
             // 
             txtEmail.AccessibleRole = AccessibleRole.IpAddress;
             txtEmail.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtEmail.Location = new Point(857, 426);
+            txtEmail.Location = new Point(857, 380);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(349, 29);
             txtEmail.TabIndex = 76;
@@ -235,7 +230,7 @@
             // 
             txtGuardian.AccessibleRole = AccessibleRole.IpAddress;
             txtGuardian.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtGuardian.Location = new Point(340, 485);
+            txtGuardian.Location = new Point(340, 439);
             txtGuardian.Name = "txtGuardian";
             txtGuardian.Size = new Size(433, 29);
             txtGuardian.TabIndex = 75;
@@ -245,7 +240,7 @@
             label14.AccessibleRole = AccessibleRole.IpAddress;
             label14.AutoSize = true;
             label14.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label14.Location = new Point(791, 428);
+            label14.Location = new Point(791, 382);
             label14.Name = "label14";
             label14.Size = new Size(65, 24);
             label14.TabIndex = 69;
@@ -255,7 +250,7 @@
             // 
             dateTimePicker1.AccessibleRole = AccessibleRole.IpAddress;
             dateTimePicker1.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            dateTimePicker1.Location = new Point(370, 313);
+            dateTimePicker1.Location = new Point(370, 267);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(403, 29);
             dateTimePicker1.TabIndex = 68;
@@ -265,7 +260,7 @@
             cmbGender.AccessibleRole = AccessibleRole.IpAddress;
             cmbGender.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbGender.FormattingEnabled = true;
-            cmbGender.Location = new Point(879, 312);
+            cmbGender.Location = new Point(879, 266);
             cmbGender.Name = "cmbGender";
             cmbGender.Size = new Size(108, 32);
             cmbGender.TabIndex = 67;
@@ -275,7 +270,7 @@
             cmbSuffix.AccessibleRole = AccessibleRole.IpAddress;
             cmbSuffix.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             cmbSuffix.FormattingEnabled = true;
-            cmbSuffix.Location = new Point(1110, 311);
+            cmbSuffix.Location = new Point(1110, 265);
             cmbSuffix.Name = "cmbSuffix";
             cmbSuffix.Size = new Size(96, 32);
             cmbSuffix.TabIndex = 66;
@@ -285,7 +280,7 @@
             label13.AccessibleRole = AccessibleRole.IpAddress;
             label13.AutoSize = true;
             label13.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label13.Location = new Point(794, 315);
+            label13.Location = new Point(794, 269);
             label13.Name = "label13";
             label13.Size = new Size(76, 24);
             label13.TabIndex = 65;
@@ -296,7 +291,7 @@
             label12.AccessibleRole = AccessibleRole.IpAddress;
             label12.AutoSize = true;
             label12.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label12.Location = new Point(1019, 314);
+            label12.Location = new Point(1019, 268);
             label12.Name = "label12";
             label12.Size = new Size(67, 24);
             label12.TabIndex = 64;
@@ -306,7 +301,7 @@
             // 
             txtContactNo.AccessibleRole = AccessibleRole.IpAddress;
             txtContactNo.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtContactNo.Location = new Point(367, 428);
+            txtContactNo.Location = new Point(367, 382);
             txtContactNo.Name = "txtContactNo";
             txtContactNo.Size = new Size(406, 29);
             txtContactNo.TabIndex = 63;
@@ -315,7 +310,7 @@
             // 
             txtAddress.AccessibleRole = AccessibleRole.IpAddress;
             txtAddress.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtAddress.Location = new Point(331, 373);
+            txtAddress.Location = new Point(331, 327);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(875, 29);
             txtAddress.TabIndex = 62;
@@ -324,7 +319,7 @@
             // 
             txtFirstname.AccessibleRole = AccessibleRole.IpAddress;
             txtFirstname.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtFirstname.Location = new Point(356, 259);
+            txtFirstname.Location = new Point(356, 213);
             txtFirstname.Name = "txtFirstname";
             txtFirstname.Size = new Size(196, 29);
             txtFirstname.TabIndex = 53;
@@ -334,7 +329,7 @@
             label11.AccessibleRole = AccessibleRole.IpAddress;
             label11.AutoSize = true;
             label11.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label11.Location = new Point(310, 588);
+            label11.Location = new Point(310, 542);
             label11.Name = "label11";
             label11.Size = new Size(121, 24);
             label11.TabIndex = 61;
@@ -345,7 +340,7 @@
             label10.AccessibleRole = AccessibleRole.IpAddress;
             label10.AutoSize = true;
             label10.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label10.Location = new Point(242, 538);
+            label10.Location = new Point(242, 492);
             label10.Name = "label10";
             label10.Size = new Size(194, 24);
             label10.TabIndex = 60;
@@ -356,7 +351,7 @@
             label7.AccessibleRole = AccessibleRole.IpAddress;
             label7.AutoSize = true;
             label7.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label7.Location = new Point(242, 487);
+            label7.Location = new Point(242, 441);
             label7.Name = "label7";
             label7.Size = new Size(95, 24);
             label7.TabIndex = 57;
@@ -367,7 +362,7 @@
             label4.AccessibleRole = AccessibleRole.IpAddress;
             label4.AutoSize = true;
             label4.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label4.Location = new Point(242, 427);
+            label4.Location = new Point(242, 381);
             label4.Name = "label4";
             label4.Size = new Size(118, 24);
             label4.TabIndex = 54;
@@ -378,7 +373,7 @@
             label3.AccessibleRole = AccessibleRole.IpAddress;
             label3.AutoSize = true;
             label3.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label3.Location = new Point(242, 372);
+            label3.Location = new Point(242, 326);
             label3.Name = "label3";
             label3.Size = new Size(84, 24);
             label3.TabIndex = 51;
@@ -389,7 +384,7 @@
             label2.AccessibleRole = AccessibleRole.IpAddress;
             label2.AutoSize = true;
             label2.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label2.Location = new Point(242, 315);
+            label2.Location = new Point(242, 269);
             label2.Name = "label2";
             label2.Size = new Size(125, 24);
             label2.TabIndex = 50;
@@ -400,7 +395,7 @@
             label1.AccessibleRole = AccessibleRole.IpAddress;
             label1.AutoSize = true;
             label1.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label1.Location = new Point(242, 258);
+            label1.Location = new Point(242, 212);
             label1.Name = "label1";
             label1.Size = new Size(109, 24);
             label1.TabIndex = 49;
@@ -410,74 +405,31 @@
             // 
             txtSearchStudentIn.AccessibleRole = AccessibleRole.IpAddress;
             txtSearchStudentIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            txtSearchStudentIn.Location = new Point(602, 184);
+            txtSearchStudentIn.Location = new Point(602, 138);
             txtSearchStudentIn.Margin = new Padding(3, 3, 10, 3);
             txtSearchStudentIn.Name = "txtSearchStudentIn";
             txtSearchStudentIn.Size = new Size(483, 29);
             txtSearchStudentIn.TabIndex = 96;
             // 
-            // btnSearchStudInfo
+            // btnSearch
             // 
-            btnSearchStudInfo.AccessibleRole = AccessibleRole.IpAddress;
-            btnSearchStudInfo.FlatAppearance.BorderColor = Color.Firebrick;
-            btnSearchStudInfo.FlatStyle = FlatStyle.System;
-            btnSearchStudInfo.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            btnSearchStudInfo.ForeColor = Color.FromArgb(64, 64, 64);
-            btnSearchStudInfo.Location = new Point(1098, 176);
-            btnSearchStudInfo.Margin = new Padding(3, 3, 10, 3);
-            btnSearchStudInfo.Name = "btnSearchStudInfo";
-            btnSearchStudInfo.Size = new Size(108, 47);
-            btnSearchStudInfo.TabIndex = 97;
-            btnSearchStudInfo.Text = "Search";
-            btnSearchStudInfo.UseVisualStyleBackColor = true;
-            btnSearchStudInfo.Click += btnSearch_Click;
+            btnSearch.AccessibleRole = AccessibleRole.IpAddress;
+            btnSearch.FlatAppearance.BorderColor = Color.Firebrick;
+            btnSearch.FlatStyle = FlatStyle.System;
+            btnSearch.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            btnSearch.ForeColor = Color.FromArgb(64, 64, 64);
+            btnSearch.Location = new Point(1098, 130);
+            btnSearch.Margin = new Padding(3, 3, 10, 3);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(108, 47);
+            btnSearch.TabIndex = 97;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // printDialog1
             // 
             printDialog1.UseEXDialog = true;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.BurlyWood;
-            panel2.Controls.Add(label22);
-            panel2.Controls.Add(pictureBox2);
-            panel2.Controls.Add(label23);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1470, 112);
-            panel2.TabIndex = 98;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label22.ForeColor = Color.FromArgb(64, 64, 64);
-            label22.Location = new Point(340, 30);
-            label22.Name = "label22";
-            label22.Size = new Size(275, 49);
-            label22.TabIndex = 6;
-            label22.Text = "ACADEMY INC.";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.logo;
-            pictureBox2.Location = new Point(0, -3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(103, 126);
-            pictureBox2.TabIndex = 5;
-            pictureBox2.TabStop = false;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Sitka Text", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label23.ForeColor = Color.Firebrick;
-            label23.Location = new Point(119, 30);
-            label23.Name = "label23";
-            label23.Size = new Size(234, 49);
-            label23.TabIndex = 0;
-            label23.Text = "ROSEWOOD ";
             // 
             // textBox1
             // 
@@ -491,7 +443,7 @@
             flowLayoutPanel1.Controls.Add(pictureBox1);
             flowLayoutPanel1.Controls.Add(pictureBox3);
             flowLayoutPanel1.Controls.Add(pictureBox4);
-            flowLayoutPanel1.Location = new Point(242, 158);
+            flowLayoutPanel1.Location = new Point(242, 112);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(359, 83);
             flowLayoutPanel1.TabIndex = 101;
@@ -533,7 +485,7 @@
             label8.AccessibleRole = AccessibleRole.IpAddress;
             label8.AutoSize = true;
             label8.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label8.Location = new Point(297, 638);
+            label8.Location = new Point(297, 592);
             label8.Name = "label8";
             label8.Size = new Size(133, 24);
             label8.TabIndex = 284;
@@ -544,7 +496,7 @@
             label9.AccessibleRole = AccessibleRole.IpAddress;
             label9.AutoSize = true;
             label9.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
-            label9.Location = new Point(771, 638);
+            label9.Location = new Point(771, 592);
             label9.Name = "label9";
             label9.Size = new Size(163, 24);
             label9.TabIndex = 285;
@@ -555,7 +507,7 @@
             checkedListBox1.CheckOnClick = true;
             checkedListBox1.FormattingEnabled = true;
             checkedListBox1.Items.AddRange(new object[] { "Good Moral", "Form 137", "Birth Certificate" });
-            checkedListBox1.Location = new Point(436, 638);
+            checkedListBox1.Location = new Point(436, 592);
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(159, 70);
             checkedListBox1.TabIndex = 286;
@@ -565,7 +517,7 @@
             checkedListBox2.CheckOnClick = true;
             checkedListBox2.FormattingEnabled = true;
             checkedListBox2.Items.AddRange(new object[] { "Partial", "Full" });
-            checkedListBox2.Location = new Point(940, 638);
+            checkedListBox2.Location = new Point(940, 592);
             checkedListBox2.Name = "checkedListBox2";
             checkedListBox2.Size = new Size(179, 70);
             checkedListBox2.TabIndex = 287;
@@ -582,9 +534,8 @@
             Controls.Add(label8);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(textBox1);
-            Controls.Add(panel2);
             Controls.Add(txtSearchStudentIn);
-            Controls.Add(btnSearchStudInfo);
+            Controls.Add(btnSearch);
             Controls.Add(txtMiddleName);
             Controls.Add(label21);
             Controls.Add(txtLastName);
@@ -617,9 +568,6 @@
             Controls.Add(label1);
             Name = "UserControlRegistration";
             Size = new Size(1470, 973);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -661,13 +609,9 @@
         private Label label2;
         private Label label1;
         public TextBox txtSearchStudentIn;
-        private Button btnSearchStudInfo;
+        private Button btnSearch;
         private PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private Panel panel2;
-        private Label label22;
-        private PictureBox pictureBox2;
-        private Label label23;
         private TextBox textBox1;
         private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox pictureBox1;

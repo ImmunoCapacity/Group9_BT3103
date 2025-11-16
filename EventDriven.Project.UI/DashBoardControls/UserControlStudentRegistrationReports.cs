@@ -14,20 +14,20 @@ using EventDriven.Project.Model;
 
 namespace EventDriven.Project.UI.DashBoardControls
 {
-    public partial class UserControlReports : UserControl
+    public partial class UserControlStudentRegistrationReports : UserControl
     {
         private readonly StudentController studentController;
-        private UserControlStudentInformation studentInformationControl;
+        private UserControlRegistration studentRegistrationControl;
         private string role;
         private UserModel authenticationKey;
         private MainForm main;
         private List<StudentModel> allStudents = new List<StudentModel>(); // To hold all students for printing
         private List<StudentModel> studentsToPrint = new List<StudentModel>();
         private int currentPrintIndex = 0;
-        private int currentPage = 1; // Added missing variable
-        private int selectedStudentId = 0; // Added missing variable for selected student
+        private int currentPage = 1;
 
-        public UserControlReports(string role, MainForm main, UserModel authenticationKey)
+        // Updated constructor to include parameters for functionality, as per the source code
+        public UserControlStudentRegistrationReports(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
             this.main = main;
@@ -36,6 +36,13 @@ namespace EventDriven.Project.UI.DashBoardControls
             studentController = new StudentController();
             LoadStudents();
         }
+
+        // If keeping parameterless constructor, uncomment and adjust:
+        // public UserControlStudentRegistrationReports()
+        // {
+        //     InitializeComponent();
+        //     // Note: Without parameters, role, main, authenticationKey are not set, so functionality may be limited
+        // }
 
         private async void LoadStudents()
         {
@@ -67,21 +74,19 @@ namespace EventDriven.Project.UI.DashBoardControls
             LoadStudents();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            studentInformationControl.selectAdd();
-            studentInformationControl.ClearForm();
-            tabControl1.SelectedIndex = 1;
-        }
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    studentRegistrationControl.ClearForm();
+        //    tabControl1.SelectedIndex = 1;
+        //}
 
-        private void edit(int studentId)
-        {
-            studentInformationControl.selectEdit();
-            studentInformationControl.selectedStudentId = studentId;
-            tabControl1.SelectedIndex = 1;
-            studentInformationControl.txtSearchStudentIn.Text = studentId.ToString();
-            studentInformationControl.search();
-        }
+        //private void edit(int studentId)
+        //{
+        //    studentRegistrationControl.selectedStudentId = studentId;
+        //    tabControl1.SelectedIndex = 1;
+        //    studentRegistrationControl.txtSearchStudentIn.Text = studentId.ToString();
+        //    studentRegistrationControl.search();
+        //}
 
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -92,7 +97,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             if (columnName == "ColEdit")
             {
                 int studentId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Column1"].Value);
-                edit(studentId);
+                //edit(studentId);
                 // MessageBox.Show($"Edit student with ID: {studentId}");
                 // TODO: open Student Registration tab and load details
             }
@@ -116,15 +121,20 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        private void UserControlReports_Load(object sender, EventArgs e)
+        private void UserControlStudentRegistrationReports_Load(object sender, EventArgs e)
         {
-            UserControlStudentInformation info = new UserControlStudentInformation(role, main, authenticationKey);
-            studentInformationControl = info;
+            UserControlRegistration info = new UserControlRegistration(role, main, authenticationKey);
+            studentRegistrationControl = info;
             panel1.Controls.Clear();
-            studentInformationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
-            panel1.Controls.Add(studentInformationControl);
+            studentRegistrationControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
+            panel1.Controls.Add(studentRegistrationControl);
             info.btnSave.Click += refresh;
         }
+
+        //private void btnSearchStuIn_Click(object sender, EventArgs e)
+        //{
+        //    SearchStudent(txtSearch.Text.Trim());
+        //}
 
         private void SearchStudent(string searchValue)
         {
@@ -166,7 +176,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
-                // Modified to print all students as per user request ("print all of the student information in a list")
                 if (allStudents.Count == 0)
                 {
                     MessageBox.Show("No students to print.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -180,7 +189,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 PrintPreviewDialog preview = new PrintPreviewDialog();
                 PrintDocument printDoc = new PrintDocument();
                 printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169); // Set to A4 size (210mm x 297mm)
-                printDoc.PrintPage += printDocument1_PrintPage; // Fixed case mismatch: was PrintDocument1_PrintPage, now matches method name
+                printDoc.PrintPage += printDocument1_PrintPage;
                 preview.Document = printDoc;
                 preview.ShowDialog();
             }
@@ -249,15 +258,11 @@ namespace EventDriven.Project.UI.DashBoardControls
             innerY += (int)schoolSize.Height + 5;
 
             // Report Title (centered)
-            string reportTitle = "Student Information List";
+            string reportTitle = "Student Registration List";
             SizeF titleSize = e.Graphics.MeasureString(reportTitle, subHeaderFont);
-            e.Graphics.DrawString(reportTitle, subHeaderFont, subHeaderBrush, (leftMargin + rightMargin - titleSize.Width) / 2, innerY);
+            e.Graphics.DrawString(reportTitle, subHeaderFont, subHeaderBrush,(leftMargin + rightMargin - titleSize.Width) / 2, innerY);
 
-            yPos += headerHeight + 40;
-
-            // Table Header
-            e.Graphics.DrawString("Student Information List", subHeaderFont, subHeaderBrush, leftMargin, yPos);
-            yPos += (int)e.Graphics.MeasureString("Student Information List", subHeaderFont).Height + 10;
+            yPos += headerHeight + 75;
 
             // Define column widths
             int col1Width = 80; // ID
@@ -342,24 +347,6 @@ namespace EventDriven.Project.UI.DashBoardControls
 
             currentPage++; // Increment for next page
             e.HasMorePages = false;
-        }
-
-        private void UserControlReports_Load_1(object sender, EventArgs e)
-        {
-            UserControlStudentRegistrationReports reports = new UserControlStudentRegistrationReports(role, main, authenticationKey);
-            reports.Dock = DockStyle.Fill;   // Makes the UserControl scale to fill the panel
-            panel2.Controls.Clear();         // Clear any existing controls in panel1
-            panel2.Controls.Add(reports);    // Add the reports control to panel1
-
-            UserControlAssessmentReports reports2 = new UserControlAssessmentReports(role, main, authenticationKey);
-            reports2.Dock = DockStyle.Fill;
-            panel3.Controls.Add(reports2);
-            panel3.Controls.Add(reports2);
-
-            UserControlPaymentReports reports3 = new UserControlPaymentReports(role, main, authenticationKey);
-            reports3.Dock = DockStyle.Fill;
-            panel4.Controls.Add(reports3);
-            panel4.Controls.Add(reports3);
         }
     }
 }

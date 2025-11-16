@@ -1,10 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="DashBoardControls\UserControlAsessment.cs">
+    <Compile Update="DashBoardControls\UserControlAsessmentList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlAssessment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlAssessmentList2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlAssessmentReports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlExit.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlPaymentHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlPaymentReports.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlRegistration.cs">
@@ -20,6 +35,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlStudentInfoList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlStudentRegistrationReports.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlTemplate.cs">

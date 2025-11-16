@@ -14,9 +14,10 @@ namespace EventDriven.Project.Logic.Repository
         public async Task<PaymentModel> InsertAsync(PaymentModel payment)
         {
             var query = @"INSERT INTO tblPayments
-                          (StudentId, AmountPaid, DatePaid, PaymentType)
-                          VALUES (@StudentId, @AmountPaid, @DatePaid, @PaymentType);
-                          SELECT CAST(SCOPE_IDENTITY() AS INT);";
+              (StudentId, AmountPaid, Change, DatePaid, PaymentType)
+              VALUES (@StudentId, @AmountPaid, @Change, @DatePaid, @PaymentType);
+              SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
@@ -177,10 +178,11 @@ namespace EventDriven.Project.Logic.Repository
         {
             command.Parameters.AddWithValue("@StudentId", payment.StudentId);
             command.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
+            command.Parameters.AddWithValue("@Change", payment.Change);                // NEW
             command.Parameters.AddWithValue("@DatePaid", payment.DatePaid ?? DateTime.Now);
             command.Parameters.AddWithValue("@PaymentType", payment.PaymentType ?? (object)DBNull.Value);
-            command.Parameters.AddWithValue("@RemainingBalance", payment.RemainingBalance ?? (object)DBNull.Value);
         }
+
 
         // Helper method to read payment from SqlDataReader
         private PaymentModel ReadPayment(SqlDataReader reader)
@@ -190,9 +192,11 @@ namespace EventDriven.Project.Logic.Repository
                 Id = reader.GetInt32(0),
                 StudentId = reader.GetInt32(1),
                 AmountPaid = reader.IsDBNull(2) ? 0 : reader.GetDecimal(2),
-                DatePaid = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
-                PaymentType = reader.IsDBNull(4) ? null : reader.GetString(4)
+                Change = reader.IsDBNull(3) ? 0 : reader.GetDecimal(3),          // NEW
+                DatePaid = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
+                PaymentType = reader.IsDBNull(5) ? null : reader.GetString(5)
             };
         }
+
     }
 }

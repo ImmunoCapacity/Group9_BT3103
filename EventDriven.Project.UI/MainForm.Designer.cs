@@ -36,10 +36,10 @@ namespace EventDriven.Project.UI
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1263, 779);
+            ControlBox = false;
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
             WindowState = FormWindowState.Maximized;
             Load += MainForm_Load;
             ResumeLayout(false);

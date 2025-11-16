@@ -42,7 +42,7 @@ VALUES
 -- 4
 ('Sophia', 'Cruz', 'Garcia', 'Active', '2012-03-30', 'Grade 7', 'Filipino',
  'Mario Garcia', '09175559999', 'Teresa Cruz', '09182223333', 'Balayan, Batangas',
- 'Isabel Torres', 'Cousin', '09445556666', 'Calaca, Batangas', '', '7-A', 'Female', 'sophia.garcia@email.com', 'Balayan Elementary', 'Grade 6', 'Balayan, Batangas', '09175559999', 91.2),
+ 'Isabel Torres', 'Cousin', '09445556666', 'Calaca, Batangas', '', '7-A', 'Female', 'sophia.garcia@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas', '09175559999', 91.2),
 
 -- 5
 ('Miguel', 'Andres', 'Torres', 'Active', '2011-06-18', 'Grade 8', 'Filipino',
@@ -62,7 +62,7 @@ VALUES
 -- 8
 ('Isabella', 'Maria', 'Fernandez', 'Active', '2012-08-22', 'Grade 7', 'Filipino',
  'Vicente Fernandez', '09173337777', 'Patricia Maria', '09189990000', 'Calaca, Batangas',
- 'Cecilia Reyes', 'Aunt', '09228889999', 'Balayan, Batangas', '', '7-B', 'Female', 'isabella.fernandez@email.com', 'Calaca Elementary', 'Grade 6', 'Calaca, Batangas', '09173337777', 93.4),
+ 'Cecilia Reyes', 'Aunt', '09228889999', 'Balayan, Batangas', '', '7-B', 'Female', 'isabella.fernandez@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas', '09173337777', 93.4),
 
 -- 9
 ('Gabriel', 'Jose', 'Mendoza', 'Active', '2011-04-14', 'Grade 8', 'Filipino',
@@ -77,7 +77,7 @@ VALUES
 -- 11
 ('Patrick', 'Reyes', 'Morales', 'Active', '2012-01-25', 'Grade 7', 'Filipino',
  'Hector Morales', '09178883333', 'Veronica Reyes', '09183334444', 'Batangas City',
- 'Ricardo Garcia', 'Uncle', '09176662222', 'Lipa, Batangas', '', '7-C', 'Male', 'patrick.morales@email.com', 'Batangas Elementary', 'Grade 6', 'Batangas City', '09178883333', 91.7),
+ 'Ricardo Garcia', 'Uncle', '09176662222', 'Lipa, Batangas', '', '7-C', 'Male', 'patrick.morales@email.com', 'Batangas Elementary', 'Grade 7', 'Batangas City', '09178883333', 91.7),
 
 -- 12
 ('Angela', 'Marie', 'Gutierrez', 'Active', '2009-11-11', 'Grade 10', 'Filipino',
@@ -107,7 +107,7 @@ VALUES
 -- 17
 ('Andrew', 'James', 'Pascual', 'Active', '2012-02-18', 'Grade 7', 'Filipino',
  'Mario Pascual', '09175559999', 'Jocelyn James', '09183336666', 'Calaca, Batangas',
- 'Leonardo Cruz', 'Uncle', '09173331111', 'Balayan, Batangas', '', '7-B', 'Male', 'andrew.pascual@email.com', 'Calaca Elementary', 'Grade 6', 'Calaca, Batangas', '09175559999', 89.1),
+ 'Leonardo Cruz', 'Uncle', '09173331111', 'Balayan, Batangas', '', '7-B', 'Male', 'andrew.pascual@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas', '09175559999', 89.1),
 
 -- 18
 ('Katrina', 'Joy', 'Marquez', 'Active', '2010-12-07', 'Grade 9', 'Filipino',
@@ -129,6 +129,241 @@ VALUES
 ('Grade 7', 45000.00),
 ('Grade 8', 47000.00),
 ('Grade 9', 50000.00),
-('Grade 10', 52000.00),
-('Grade 11', 55000.00),
-('Grade 12', 57000.00);
+('Grade 10', 52000.00);
+
+-- Insert Sections
+INSERT INTO [dbo].[tblSections] ([SectionName]) 
+VALUES 
+('7-A'), 
+('7-B'), 
+('7-C'),
+('8-A'), 
+('8-B'), 
+('8-C'),
+('9-A'), 
+('9-B'), 
+('9-C'),
+('10-A'), 
+('10-B'), 
+('10-C');
+
+-- Insert Teachers (Example)
+-- Adding more teachers
+-- Adding 12 Teachers with additional roles (e.g., Advisors, Subject Teachers, etc.)
+INSERT INTO [dbo].[tblTeachers] (TeacherID,[TeacherName]) VALUES
+(1, 'Zarah Austria'),
+(2, 'Hanz Llenard Sacdalan'),
+(3, 'Michael Tagle'),
+(4, 'Jean Andre Vergel De Dios'),
+(5,'Janine De Guzman'),    -- Teacher 5
+(6,'Joshua Reyes'),        -- Teacher 6
+(7,'Ronaldo Lopez'),       -- Teacher 7
+(8,'Cynthia Magno'),       -- Teacher 8
+(9,'Marianne Ramos'),      -- Teacher 9
+(10,'Gabrielle Santos'),    -- Teacher 10
+(11,'Liza Fernandez'),      -- Teacher 11
+(12,'Clara Reyes');         -- Teacher 12
+
+-- Insert Subjects
+INSERT INTO [dbo].[tblSubjects] ([SubjectID],[SubjectName], [Category])
+VALUES
+(1, 'Science', NULL),
+(2, 'Filipino', NULL),
+(3, 'Mathematics', NULL),
+(4, 'Edukasyon sa Pagpapakatao (EsP)', NULL),
+(5, 'Music', 'MAPEH'),
+(6, 'Arts', 'MAPEH'),
+(7, 'Physical Education', 'MAPEH'),
+(8, 'Health', 'MAPEH'),
+(9, 'Araling Panlipunan (AP)', NULL),
+(10, 'English', NULL),
+(11, 'Technology and Livelihood Education (TLE)', NULL);
+
+INSERT INTO [dbo].[tblSchedules] ([SectionID], [TeacherID], [SubjectID], [StartTime], [EndTime], [Day], [GradeLevel])
+VALUES
+(1, 1, 1, '08:00:00', '09:00:00', 'Monday', 'Grade 7'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Monday', 'Grade 7'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Monday', 'Grade 7'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Monday', 'Grade 7'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Monday', 'Grade 7'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Monday', 'Grade 7'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Monday', 'Grade 7'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Monday', 'Grade 7'),
+
+(5, 9, 1, '08:00:00', '09:00:00', 'Tuesday', 'Grade 7'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Tuesday', 'Grade 7'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Tuesday', 'Grade 7'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Tuesday', 'Grade 7'),
+
+(7, 1, 3, '08:00:00', '09:00:00', 'Wednesday', 'Grade 7'),
+(7, 2, 3, '09:00:00', '10:00:00', 'Wednesday', 'Grade 7'),
+(8, 3, 4, '08:00:00', '09:00:00', 'Wednesday', 'Grade 7'),
+(8, 4, 4, '09:00:00', '10:00:00', 'Wednesday', 'Grade 7'),
+(9, 5, 5, '08:00:00', '09:00:00', 'Wednesday', 'Grade 7'),
+(9, 6, 5, '09:00:00', '10:00:00', 'Wednesday', 'Grade 7'),
+
+(10, 7, 6, '08:00:00', '09:00:00', 'Thursday', 'Grade 7'),
+(10, 8, 6, '09:00:00', '10:00:00', 'Thursday', 'Grade 7'),
+(11, 9, 7, '08:00:00', '09:00:00', 'Thursday', 'Grade 7'),
+(11, 10, 7, '09:00:00', '10:00:00', 'Thursday', 'Grade 7'),
+(12, 11, 8, '08:00:00', '09:00:00', 'Thursday', 'Grade 7'),
+(12, 12, 8, '09:00:00', '10:00:00', 'Thursday', 'Grade 7'),
+
+(1, 1, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 7'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 7'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Friday', 'Grade 7'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Friday', 'Grade 7'),
+(5, 9, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 7'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 7'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 7');
+
+
+INSERT INTO [dbo].[tblSchedules] ([SectionID], [TeacherID], [SubjectID], [StartTime], [EndTime], [Day], [GradeLevel])
+VALUES
+-- Monday
+(1, 1, 1, '08:00:00', '09:00:00', 'Monday', 'Grade 8'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Monday', 'Grade 8'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Monday', 'Grade 8'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Monday', 'Grade 8'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Monday', 'Grade 8'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Monday', 'Grade 8'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Monday', 'Grade 8'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Monday', 'Grade 8'),
+
+-- Tuesday
+(5, 9, 1, '08:00:00', '09:00:00', 'Tuesday', 'Grade 8'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Tuesday', 'Grade 8'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Tuesday', 'Grade 8'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Tuesday', 'Grade 8'),
+
+-- Wednesday
+(7, 1, 3, '08:00:00', '09:00:00', 'Wednesday', 'Grade 8'),
+(7, 2, 3, '09:00:00', '10:00:00', 'Wednesday', 'Grade 8'),
+(8, 3, 4, '08:00:00', '09:00:00', 'Wednesday', 'Grade 8'),
+(8, 4, 4, '09:00:00', '10:00:00', 'Wednesday', 'Grade 8'),
+(9, 5, 5, '08:00:00', '09:00:00', 'Wednesday', 'Grade 8'),
+(9, 6, 5, '09:00:00', '10:00:00', 'Wednesday', 'Grade 8'),
+
+-- Thursday
+(10, 7, 6, '08:00:00', '09:00:00', 'Thursday', 'Grade 8'),
+(10, 8, 6, '09:00:00', '10:00:00', 'Thursday', 'Grade 8'),
+(11, 9, 7, '08:00:00', '09:00:00', 'Thursday', 'Grade 8'),
+(11, 10, 7, '09:00:00', '10:00:00', 'Thursday', 'Grade 8'),
+(12, 11, 8, '08:00:00', '09:00:00', 'Thursday', 'Grade 8'),
+(12, 12, 8, '09:00:00', '10:00:00', 'Thursday', 'Grade 8'),
+
+-- Friday
+(1, 1, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 8'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 8'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Friday', 'Grade 8'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Friday', 'Grade 8'),
+(5, 9, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 8'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 8'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 8');
+
+INSERT INTO [dbo].[tblSchedules] ([SectionID], [TeacherID], [SubjectID], [StartTime], [EndTime], [Day], [GradeLevel])
+VALUES
+-- Monday
+(1, 1, 1, '08:00:00', '09:00:00', 'Monday', 'Grade 9'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Monday', 'Grade 9'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Monday', 'Grade 9'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Monday', 'Grade 9'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Monday', 'Grade 9'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Monday', 'Grade 9'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Monday', 'Grade 9'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Monday', 'Grade 9'),
+
+-- Tuesday
+(5, 9, 1, '08:00:00', '09:00:00', 'Tuesday', 'Grade 9'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Tuesday', 'Grade 9'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Tuesday', 'Grade 9'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Tuesday', 'Grade 9'),
+
+-- Wednesday
+(7, 1, 3, '08:00:00', '09:00:00', 'Wednesday', 'Grade 9'),
+(7, 2, 3, '09:00:00', '10:00:00', 'Wednesday', 'Grade 9'),
+(8, 3, 4, '08:00:00', '09:00:00', 'Wednesday', 'Grade 9'),
+(8, 4, 4, '09:00:00', '10:00:00', 'Wednesday', 'Grade 9'),
+(9, 5, 5, '08:00:00', '09:00:00', 'Wednesday', 'Grade 9'),
+(9, 6, 5, '09:00:00', '10:00:00', 'Wednesday', 'Grade 9'),
+
+-- Thursday
+(10, 7, 6, '08:00:00', '09:00:00', 'Thursday', 'Grade 9'),
+(10, 8, 6, '09:00:00', '10:00:00', 'Thursday', 'Grade 9'),
+(11, 9, 7, '08:00:00', '09:00:00', 'Thursday', 'Grade 9'),
+(11, 10, 7, '09:00:00', '10:00:00', 'Thursday', 'Grade 9'),
+(12, 11, 8, '08:00:00', '09:00:00', 'Thursday', 'Grade 9'),
+(12, 12, 8, '09:00:00', '10:00:00', 'Thursday', 'Grade 9'),
+
+-- Friday
+(1, 1, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 9'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 9'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Friday', 'Grade 9'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Friday', 'Grade 9'),
+(5, 9, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 9'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 9'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 9');
+
+
+INSERT INTO [dbo].[tblSchedules] ([SectionID], [TeacherID], [SubjectID], [StartTime], [EndTime], [Day], [GradeLevel])
+VALUES
+-- Monday
+(1, 1, 1, '08:00:00', '09:00:00', 'Monday', 'Grade 10'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Monday', 'Grade 10'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Monday', 'Grade 10'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Monday', 'Grade 10'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Monday', 'Grade 10'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Monday', 'Grade 10'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Monday', 'Grade 10'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Monday', 'Grade 10'),
+
+-- Tuesday
+(5, 9, 1, '08:00:00', '09:00:00', 'Tuesday', 'Grade 10'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Tuesday', 'Grade 10'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Tuesday', 'Grade 10'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Tuesday', 'Grade 10'),
+
+-- Wednesday
+(7, 1, 3, '08:00:00', '09:00:00', 'Wednesday', 'Grade 10'),
+(7, 2, 3, '09:00:00', '10:00:00', 'Wednesday', 'Grade 10'),
+(8, 3, 4, '08:00:00', '09:00:00', 'Wednesday', 'Grade 10'),
+(8, 4, 4, '09:00:00', '10:00:00', 'Wednesday', 'Grade 10'),
+(9, 5, 5, '08:00:00', '09:00:00', 'Wednesday', 'Grade 10'),
+(9, 6, 5, '09:00:00', '10:00:00', 'Wednesday', 'Grade 10'),
+
+-- Thursday
+(10, 7, 6, '08:00:00', '09:00:00', 'Thursday', 'Grade 10'),
+(10, 8, 6, '09:00:00', '10:00:00', 'Thursday', 'Grade 10'),
+(11, 9, 7, '08:00:00', '09:00:00', 'Thursday', 'Grade 10'),
+(11, 10, 7, '09:00:00', '10:00:00', 'Thursday', 'Grade 10'),
+(12, 11, 8, '08:00:00', '09:00:00', 'Thursday', 'Grade 10'),
+(12, 12, 8, '09:00:00', '10:00:00', 'Thursday', 'Grade 10'),
+
+-- Friday
+(1, 1, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(1, 2, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
+(2, 3, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(2, 4, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
+(3, 5, 3, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(3, 6, 3, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
+(4, 7, 4, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(4, 8, 4, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
+(5, 9, 1, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(5, 10, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
+(6, 11, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
+(6, 12, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 10');

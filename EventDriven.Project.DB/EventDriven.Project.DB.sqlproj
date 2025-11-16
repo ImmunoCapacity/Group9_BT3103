@@ -77,8 +77,17 @@
     <Build Include="tblFeeStructure.sql" />
     <Build Include="dbo\Views\vwStudentPaymentBalance.sql" />
     <Build Include="dbo\Views\vwStudentPaymentHistory.sql" />
+    <Build Include="dbo\Tables\tblSection.sql" />
+    <Build Include="dbo\Tables\Academic Information Table\tblSections.sql" />
+    <Build Include="dbo\Tables\Academic Information Table\Subjects.sql" />
+    <Build Include="dbo\Tables\Academic Information Table\tblSchedules.sql" />
+    <Build Include="dbo\Views\vwScheduleDetails.sql" />
+    <Build Include="dbo\Views\vwAssessment.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="EventDriven.Project.DB.refactorlog" />
   </ItemGroup>
 </Project>

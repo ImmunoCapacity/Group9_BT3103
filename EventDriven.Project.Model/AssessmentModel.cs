@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace EventDriven.Project.Model
 {
-    public class PaymentModel
+    public class AssessmentModel
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public decimal AmountPaid { get; set; }
-        public decimal Change { get; set; }          // NEW
-        public DateTime? DatePaid { get; set; }
-        public string PaymentType { get; set; }
+        public string Section { get; set; }
+        public string Requirements { get; set; }
+        public string PaymentMethod { get; set; }
     }
 }

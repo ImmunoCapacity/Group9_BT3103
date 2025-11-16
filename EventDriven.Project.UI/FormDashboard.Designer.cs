@@ -36,12 +36,13 @@
             btnAdminDashboardLogout = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnStudentInfo = new Button();
-            btnHistory = new Button();
             btnStudentReg = new Button();
             btnPayments = new Button();
             btnAssessment = new Button();
+            btnHistory = new Button();
             btnReports = new Button();
             panel1 = new Panel();
+            userControlExit1 = new DashBoardControls.UserControlExit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
@@ -50,7 +51,8 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.SeaShell;
+            panel2.BackColor = Color.BurlyWood;
+            panel2.Controls.Add(userControlExit1);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(pictureBox2);
@@ -119,10 +121,10 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(btnStudentInfo);
-            flowLayoutPanel1.Controls.Add(btnHistory);
             flowLayoutPanel1.Controls.Add(btnStudentReg);
             flowLayoutPanel1.Controls.Add(btnPayments);
             flowLayoutPanel1.Controls.Add(btnAssessment);
+            flowLayoutPanel1.Controls.Add(btnHistory);
             flowLayoutPanel1.Controls.Add(btnReports);
             flowLayoutPanel1.Location = new Point(23, 88);
             flowLayoutPanel1.Margin = new Padding(101, 100, 101, 100);
@@ -146,23 +148,6 @@
             btnStudentInfo.Visible = false;
             btnStudentInfo.Click += btnStudentInfo_Click;
             // 
-            // btnHistory
-            // 
-            btnHistory.Cursor = Cursors.Hand;
-            btnHistory.FlatAppearance.BorderColor = Color.Firebrick;
-            btnHistory.FlatStyle = FlatStyle.System;
-            btnHistory.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnHistory.ForeColor = Color.FromArgb(64, 64, 64);
-            btnHistory.Location = new Point(3, 88);
-            btnHistory.Margin = new Padding(3, 29, 3, 3);
-            btnHistory.Name = "btnHistory";
-            btnHistory.Size = new Size(386, 53);
-            btnHistory.TabIndex = 8;
-            btnHistory.Text = "Payment History";
-            btnHistory.UseVisualStyleBackColor = true;
-            btnHistory.Visible = false;
-            btnHistory.Click += btnHistory_Click_1;
-            // 
             // btnStudentReg
             // 
             btnStudentReg.Cursor = Cursors.Hand;
@@ -170,7 +155,7 @@
             btnStudentReg.FlatStyle = FlatStyle.System;
             btnStudentReg.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStudentReg.ForeColor = Color.FromArgb(64, 64, 64);
-            btnStudentReg.Location = new Point(3, 173);
+            btnStudentReg.Location = new Point(3, 88);
             btnStudentReg.Margin = new Padding(3, 29, 3, 3);
             btnStudentReg.Name = "btnStudentReg";
             btnStudentReg.Size = new Size(386, 53);
@@ -187,7 +172,7 @@
             btnPayments.FlatStyle = FlatStyle.System;
             btnPayments.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPayments.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPayments.Location = new Point(3, 258);
+            btnPayments.Location = new Point(3, 173);
             btnPayments.Margin = new Padding(3, 29, 3, 3);
             btnPayments.Name = "btnPayments";
             btnPayments.Size = new Size(386, 53);
@@ -204,7 +189,7 @@
             btnAssessment.FlatStyle = FlatStyle.System;
             btnAssessment.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAssessment.ForeColor = Color.FromArgb(64, 64, 64);
-            btnAssessment.Location = new Point(3, 343);
+            btnAssessment.Location = new Point(3, 258);
             btnAssessment.Margin = new Padding(3, 29, 3, 3);
             btnAssessment.Name = "btnAssessment";
             btnAssessment.Size = new Size(386, 53);
@@ -212,6 +197,24 @@
             btnAssessment.Text = "Assessment";
             btnAssessment.UseVisualStyleBackColor = true;
             btnAssessment.Visible = false;
+            btnAssessment.Click += btnAssessment_Click_1;
+            // 
+            // btnHistory
+            // 
+            btnHistory.Cursor = Cursors.Hand;
+            btnHistory.FlatAppearance.BorderColor = Color.Firebrick;
+            btnHistory.FlatStyle = FlatStyle.System;
+            btnHistory.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHistory.ForeColor = Color.FromArgb(64, 64, 64);
+            btnHistory.Location = new Point(3, 343);
+            btnHistory.Margin = new Padding(3, 29, 3, 3);
+            btnHistory.Name = "btnHistory";
+            btnHistory.Size = new Size(386, 53);
+            btnHistory.TabIndex = 8;
+            btnHistory.Text = "Payment History";
+            btnHistory.UseVisualStyleBackColor = true;
+            btnHistory.Visible = false;
+            btnHistory.Click += btnHistory_Click_1;
             // 
             // btnReports
             // 
@@ -228,13 +231,22 @@
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Visible = false;
+            btnReports.Click += btnReports_Click_1;
             // 
             // panel1
             // 
+            panel1.BackColor = Color.SeaShell;
             panel1.Location = new Point(450, 107);
             panel1.Name = "panel1";
             panel1.Size = new Size(1470, 943);
             panel1.TabIndex = 9;
+            // 
+            // userControlExit1
+            // 
+            userControlExit1.Location = new Point(1836, 0);
+            userControlExit1.Name = "userControlExit1";
+            userControlExit1.Size = new Size(66, 64);
+            userControlExit1.TabIndex = 7;
             // 
             // FormDashboard
             // 
@@ -242,13 +254,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
             ClientSize = new Size(1902, 1033);
+            ControlBox = false;
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(panel3);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormDashboard";
-            Text = "FormAdminDashboard";
             Load += FormDashboard_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -273,5 +285,6 @@
         private Button btnAssessment;
         private Button btnReports;
         private Panel panel1;
+        private DashBoardControls.UserControlExit userControlExit1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace EventDriven.Project.UI.DashBoardControls
 {
-    partial class UserControlRegistrationList
+    partial class UserControlAsessmentList
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,13 +32,9 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentInfoList));
-            printDialog1 = new PrintDialog();
-            printDocument1 = new System.Drawing.Printing.PrintDocument();
-            tabPage2 = new TabPage();
-            panel1 = new Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlAsessmentList));
+            tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            panel2 = new Panel();
             dataGridView1 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -47,64 +43,43 @@
             Column5 = new DataGridViewTextBoxColumn();
             ColEdit = new DataGridViewImageColumn();
             ColDelete = new DataGridViewImageColumn();
-            panel4 = new Panel();
+            panel1 = new Panel();
+            button1 = new Button();
+            textBox1 = new TextBox();
+            btnAddStuIn = new Button();
+            tabPage2 = new TabPage();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
-            tabControl1 = new TabControl();
-            tabPage2.SuspendLayout();
-            tabPage1.SuspendLayout();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel4.SuspendLayout();
+            panel2 = new Panel();
             tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
-            // printDialog1
+            // tabControl1
             // 
-            printDialog1.UseEXDialog = true;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(panel1);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1462, 1002);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Student Registration";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.SeaShell;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1456, 996);
-            panel1.TabIndex = 0;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1470, 973);
+            tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(panel2);
+            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Controls.Add(panel1);
             tabPage1.Location = new Point(4, 29);
-            tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 4, 3, 4);
-            tabPage1.Size = new Size(1462, 1002);
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1462, 940);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Student List";
+            tabPage1.Text = "Assessment List";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = SystemColors.Control;
-            panel2.Controls.Add(dataGridView1);
-            panel2.Controls.Add(panel4);
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(3, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1456, 994);
-            panel2.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -141,7 +116,7 @@
             dataGridView1.Dock = DockStyle.Left;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SeaShell;
-            dataGridView1.Location = new Point(0, 51);
+            dataGridView1.Location = new Point(3, 54);
             dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -155,9 +130,9 @@
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1456, 943);
-            dataGridView1.TabIndex = 3;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.Size = new Size(1456, 883);
+            dataGridView1.TabIndex = 8;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // Column1
             // 
@@ -207,8 +182,8 @@
             // 
             ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColEdit.HeaderText = "";
-            ColEdit.MinimumWidth = 6;
             ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
+            ColEdit.MinimumWidth = 6;
             ColEdit.Name = "ColEdit";
             ColEdit.ReadOnly = true;
             ColEdit.Width = 6;
@@ -217,23 +192,71 @@
             // 
             ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColDelete.HeaderText = "";
-            ColDelete.MinimumWidth = 6;
             ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
+            ColDelete.MinimumWidth = 6;
             ColDelete.Name = "ColDelete";
             ColDelete.ReadOnly = true;
             ColDelete.Width = 6;
             // 
-            // panel4
+            // panel1
             // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(btnSearchStuIn);
-            panel4.Controls.Add(txtSearch);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Margin = new Padding(3, 4, 3, 4);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1456, 51);
-            panel4.TabIndex = 2;
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(button1);
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(btnAddStuIn);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(3, 3);
+            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1456, 51);
+            panel1.TabIndex = 7;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.White;
+            button1.FlatStyle = FlatStyle.System;
+            button1.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.SteelBlue;
+            button1.Location = new Point(1332, 3);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(120, 45);
+            button1.TabIndex = 147;
+            button1.Text = "Search";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(872, 12);
+            textBox1.Margin = new Padding(3, 3, 10, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(447, 27);
+            textBox1.TabIndex = 146;
+            // 
+            // btnAddStuIn
+            // 
+            btnAddStuIn.BackColor = Color.White;
+            btnAddStuIn.FlatStyle = FlatStyle.System;
+            btnAddStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddStuIn.ForeColor = Color.SteelBlue;
+            btnAddStuIn.Location = new Point(2, 3);
+            btnAddStuIn.Margin = new Padding(3, 4, 3, 4);
+            btnAddStuIn.Name = "btnAddStuIn";
+            btnAddStuIn.Size = new Size(113, 44);
+            btnAddStuIn.TabIndex = 0;
+            btnAddStuIn.Text = "Add";
+            btnAddStuIn.UseVisualStyleBackColor = false;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(panel2);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1462, 940);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Assessment Information";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnSearchStuIn
             // 
@@ -248,7 +271,6 @@
             btnSearchStuIn.TabIndex = 147;
             btnSearchStuIn.Text = "Search";
             btnSearchStuIn.UseVisualStyleBackColor = false;
-            btnSearchStuIn.Click += btnSearchStuIn_Click;
             // 
             // txtSearch
             // 
@@ -258,50 +280,44 @@
             txtSearch.Size = new Size(447, 27);
             txtSearch.TabIndex = 146;
             // 
-            // tabControl1
+            // panel2
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.ItemSize = new Size(60, 25);
-            tabControl1.Location = new Point(0, 0);
-            tabControl1.Margin = new Padding(3, 4, 3, 4);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1470, 1035);
-            tabControl1.TabIndex = 2;
+            panel2.BackColor = Color.SeaShell;
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1456, 934);
+            panel2.TabIndex = 0;
             // 
-            // UserControlRegistrationList
+            // UserControlAsessmentList
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControl1);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlRegistrationList";
-            Size = new Size(1470, 1035);
-            Load += UserControlStudentInfoList_Load;
-            tabPage2.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            Name = "UserControlAsessmentList";
+            Size = new Size(1470, 973);
+            Load += UserControlAsessmentList_Load_1;
             tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private PrintDialog printDialog1;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private TabPage tabPage2;
+
+        private TabControl tabControl1;
         private TabPage tabPage1;
-        private Panel panel2;
-        private DataGridView dataGridView1;
-        private Panel panel4;
+        private TabPage tabPage2;
         private Button btnSearchStuIn;
         private TextBox txtSearch;
-        private TabControl tabControl1;
         private Panel panel1;
+        private Button button1;
+        private TextBox textBox1;
+        private Button btnAddStuIn;
+        private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
@@ -309,5 +325,6 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewImageColumn ColEdit;
         private DataGridViewImageColumn ColDelete;
+        private Panel panel2;
     }
 }

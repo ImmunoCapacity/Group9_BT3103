@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +23,22 @@ namespace EventDriven.Project.UI.DashBoardControls
         private string role;
         private UserModel authenticationKey;
         private MainForm main;
+        private PaymentModel selectedPayment; // Set this before printing
+        private int currentPage = 1;
+        
+
+        // Fields to hold data for printing
+        private StudentPaymentInfo currentStudentPayment;
+        private decimal currentPaymentReceived;
+        private decimal currentChange;
+        private decimal currentBalance;
+        private DateTime currentDate;
+
+        // Added missing fields for list printing
+        private List<StudentPaymentInfo> allPayments = new List<StudentPaymentInfo>(); // To hold all payments for printing
+        private List<StudentPaymentInfo> paymentsToPrint = new List<StudentPaymentInfo>();
+        private int currentPrintIndex = 0;
+
         public UserControlStudentPayment(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
@@ -31,12 +48,17 @@ namespace EventDriven.Project.UI.DashBoardControls
             paymentController = new PaymentController();
             LoadStudents();
         }
+        //private string getTuitionFee()
+        //{
+        //    return dataGridView1.SelectedCells
+        //}
         private async void LoadStudents()
         {
             try
             {
                 dataGridView1.Rows.Clear();
                 List<StudentPaymentInfo> payments = await paymentController.GetAllStudentPayment(authenticationKey);
+                allPayments = payments; // Store for printing
 
                 foreach (var payment in payments)
                 {
@@ -54,70 +76,96 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+        private PaymentModel currentPayment;
+
         private async void btnPay_Click(object sender, EventArgs e)
         {
             try
             {
-                // 1️⃣ Get selected student row
+                // 1️⃣ Ensure a student is selected
                 if (dataGridView1.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select a student first.");
+                    MessageBox.Show("Please select a student first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                decimal change = 0;
-                int studentId = Convert.ToInt32(lbId.Text);
 
-                // 2️⃣ Get payment info from UI
+                // 2️⃣ Validate and get Student ID
+                if (!int.TryParse(lbId.Text, out int studentId))
+                {
+                    MessageBox.Show("Invalid student ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 3️⃣ Validate payment input
                 if (!decimal.TryParse(txtPaymentReceived.Text, out decimal paymentAmount))
                 {
-                    MessageBox.Show("Invalid payment amount.");
+                    MessageBox.Show("Please enter a valid numeric payment amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                // 🚫 Prevent zero or negative payments
+                if (paymentAmount <= 0)
+                {
+                    MessageBox.Show("Invalid Payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 4️⃣ Validate balance
                 if (!decimal.TryParse(lbBalance.Text, out decimal currentBalance))
                 {
-                    MessageBox.Show("Invalid payment amount.");
+                    MessageBox.Show("Invalid balance amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                decimal change = 0;
 
+                // ⚖️ Handle overpayment
                 if (paymentAmount > currentBalance)
                 {
                     change = paymentAmount - currentBalance;
                     paymentAmount = currentBalance; // record only up to the remaining balance
                 }
+                //string tuition
 
+                // 5️⃣ Determine payment type
                 string paymentType = rbFullPayment.Checked ? "Full" : "Partial";
 
-                // 3️⃣ Create payment model
-                PaymentModel payment = new PaymentModel
+                // 6️⃣ Build model
+                 currentPayment = new PaymentModel
                 {
                     StudentId = studentId,
                     AmountPaid = paymentAmount,
                     DatePaid = DateTime.Now,
+                    Change = change,
                     PaymentType = paymentType
+
                 };
 
-                // 4️⃣ Add payment via controller
-                var addedPayment = await paymentController.AddAsync(payment, authenticationKey);
+                // 7️⃣ Send to controller
+                var addedPayment = await paymentController.AddAsync(currentPayment, authenticationKey);
 
-                MessageBox.Show($"Payment of {paymentAmount:C} added successfully!");
+                // ✅ Success message
+                string msg = $"Payment of {paymentAmount:C} added successfully!";
+                if (change > 0)
+                    msg += $"\nChange to return: {change:C}";
 
-                // 5️⃣ Refresh UI: grid & labels
-                LoadStudents(); // your method to reload DataGridView
+                MessageBox.Show(msg, "Payment Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 8️⃣ Refresh data grid & UI
+                LoadStudents(); // reload student list
                 UpdatePayment(change, paymentAmount, currentBalance);
 
-                // Clear payment input
-                txtPaymentReceived.Text = "0.00";
-
+                //// 9️⃣ Reset input
+                //txtPaymentReceived.Text = "0.00";
                 rbFullPayment.Checked = rbFullPayment.Checked;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing payment: {ex.Message}");
+                MessageBox.Show($"Error processing payment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void UpdatePayment(decimal change, decimal paymentAmount, decimal currentBalance)
         {
             currentBalance = currentBalance - paymentAmount;
@@ -125,10 +173,9 @@ namespace EventDriven.Project.UI.DashBoardControls
             lbBalance.Text = currentBalance.ToString("F2");
             lbChange.Text = change.ToString("F2");
 
-            // Reset the payment textbox
-            txtPaymentReceived.Text = "0.00";
+            //// Reset the payment textbox
+            //txtPaymentReceived.Text = "0.00";
         }
-
 
         private void btnSearchStuIn_Click(object sender, EventArgs e)
         {
@@ -170,9 +217,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                 row.Visible = match;
             }
         }
-
-
-
+        string tuitionFee;
+        string grade;
+        string name;
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Make sure user clicked a valid row (not header or empty space)
@@ -181,6 +228,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // Example: assuming these are the column names or indexes
+                grade = row.Cells["Column3"].Value?.ToString() ?? "";
+                tuitionFee = row.Cells["Column4"].Value?.ToString() ?? "";
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
                 lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "0.00";
@@ -208,5 +257,185 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private async void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select a student first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int selectedIndex = dataGridView1.CurrentRow.Index;
+                currentStudentPayment = allPayments[selectedIndex];
+
+                PrintPreviewDialog preview = new PrintPreviewDialog();
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.DefaultPageSettings.Landscape = false; // Portrait for single student
+                printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169); // A4 portrait
+                printDoc.PrintPage += printDocument1_PrintPage;
+                preview.Document = printDoc;
+                preview.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            if (currentPayment == null)
+            {
+                return;
+            }
+            Graphics g = e.Graphics;
+            int leftMargin = e.MarginBounds.Left;
+            int topMargin = e.MarginBounds.Top;
+            int rightMargin = e.MarginBounds.Right;
+            int bottomMargin = e.MarginBounds.Bottom;
+            int pageWidth = rightMargin - leftMargin;
+
+            // Fonts
+            Font headerFont = new Font("Segoe UI", 18, FontStyle.Bold);
+            Font subHeaderFont = new Font("Segoe UI", 14, FontStyle.Bold);
+            Font bodyFont = new Font("Segoe UI", 11);
+            Font footerFont = new Font("Segoe UI", 9, FontStyle.Italic);
+            Brush blackBrush = Brushes.Black;
+            Brush darkRedBrush = Brushes.DarkRed; // For school name
+            Pen borderPen = new Pen(Color.Black, 1);
+
+            int yPos = topMargin;
+
+            // Draw outer border for the entire form
+            Rectangle outerBorder = new Rectangle(leftMargin - 10, yPos - 10, pageWidth + 20, bottomMargin - yPos + 20);
+            g.DrawRectangle(borderPen, outerBorder);
+
+            // Header Section
+            int headerHeight = 100;
+            Rectangle headerBox = new Rectangle(leftMargin, yPos + 5, pageWidth, headerHeight + 10);
+            g.DrawRectangle(borderPen, headerBox);
+
+            int innerY = yPos + 10;
+
+            // Draw logo (centered in header)
+            try
+            {
+                Image logo = Properties.Resources.logo; // Ensure logo.png is in Resources
+                if (logo != null)
+                {
+                    int logoWidth = 120;
+                    int logoHeight = 50;
+                    int logoX = leftMargin + (pageWidth - logoWidth) / 2;
+                    g.DrawImage(logo, logoX, innerY, logoWidth, logoHeight);
+                    innerY += logoHeight + 10;
+                }
+            }
+            catch { }
+
+            // School name (centered, darker red)
+            string schoolName = "ROSEWOOD ACADEMY INC.";
+            SizeF schoolSize = g.MeasureString(schoolName, headerFont);
+            g.DrawString(schoolName, headerFont, darkRedBrush, leftMargin + (pageWidth - schoolSize.Width) / 2, innerY);
+            innerY += (int)schoolSize.Height + 5;
+            innerY += 15;
+
+            // Form Title (centered)
+            string title = "Payment Receipt";
+            SizeF titleSize = g.MeasureString(title, subHeaderFont);
+            g.DrawString(title, subHeaderFont, blackBrush, leftMargin + (pageWidth - titleSize.Width) / 2, innerY);
+
+            yPos += headerHeight + 20;
+            yPos += 50;
+
+            // Student Information Section
+            g.DrawString("Student Information", subHeaderFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Student Information", subHeaderFont).Height + 10;
+
+            string[] studentInfo = {
+                $"Student ID: {currentPayment.StudentId}",
+                $"Name: {name}",
+                $"Grade Level: {grade}",
+                $"Tuition Fee: {tuitionFee:C}",
+                $"Total Paid: {currentPayment.AmountPaid:C}",
+                $"Remaining Balance: {lbBalance.Text:C}"
+            };
+
+            int studentHeight = CalculateSectionHeight(g, studentInfo, bodyFont, 8);
+            Rectangle studentBox = new Rectangle(leftMargin, yPos, pageWidth, studentHeight + 20);
+            g.DrawRectangle(borderPen, studentBox);
+
+            innerY = yPos + 10;
+            foreach (string line in studentInfo)
+            {
+                g.DrawString(line, bodyFont, blackBrush, leftMargin + 10, innerY);
+                innerY += (int)g.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += studentHeight + 30;
+
+            // Additional Information Section (optional, can be customized or removed)
+            g.DrawString("Additional Information", subHeaderFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Additional Information", subHeaderFont).Height + 10;
+
+            string[] additionalInfo = {
+                "Payment Status: Paid", // Placeholder or customize based on data
+                "Date: " + DateTime.Now.ToString("yyyy-MM-dd") // Or use specific date if available
+            };
+
+            int additionalHeight = CalculateSectionHeight(g, additionalInfo, bodyFont, 8);
+            Rectangle additionalBox = new Rectangle(leftMargin, yPos, pageWidth, additionalHeight + 20);
+            g.DrawRectangle(borderPen, additionalBox);
+
+            innerY = yPos + 10;
+            foreach (string line in additionalInfo)
+            {
+                g.DrawString(line, bodyFont, blackBrush, leftMargin + 10, innerY);
+                innerY += (int)g.MeasureString(line, bodyFont).Height + 8;
+            }
+            yPos += additionalHeight + 40;
+
+            // Signature Section
+            int sigLineLength = 300;
+            int sigSpacing = 50;
+
+            yPos += 30;
+
+            // Registrar Signature (left)
+            g.DrawString("Registrar:", bodyFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Registrar:", bodyFont).Height + 30;
+            g.DrawLine(Pens.Black, leftMargin, yPos, leftMargin + sigLineLength, yPos);
+            yPos += 5;
+            g.DrawString("Zarah Austria", bodyFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Zarah Austria", bodyFont).Height + sigSpacing + 20; // Added extra space below Registrar
+
+            // Principal Signature (right)
+            int principalX = rightMargin - sigLineLength;
+            yPos -= (int)g.MeasureString("Principal:", bodyFont).Height + sigSpacing + 20; // Align with registrar, accounting for extra space
+            g.DrawString("Principal:", bodyFont, blackBrush, principalX, yPos - 30);
+            yPos += (int)g.MeasureString("Principal:", bodyFont).Height + 5;
+            g.DrawLine(Pens.Black, principalX, yPos, principalX + sigLineLength, yPos);
+            yPos += 5;
+            g.DrawString("Hanz Llenard Kim Sacdalan", bodyFont, blackBrush, principalX, yPos);
+            yPos += (int)g.MeasureString("Hanz Llenard Kim Sacdalan", bodyFont).Height + 20; // Added extra space below Principal
+
+            // Footer with extra bottom margin
+            string datePrinted = $"Printed on: {DateTime.Now:yyyy-MM-dd HH:mm}";
+            SizeF footerSize = g.MeasureString(datePrinted, footerFont);
+            g.DrawString(datePrinted, footerFont, blackBrush, leftMargin + (pageWidth - footerSize.Width) / 2, bottomMargin - footerSize.Height - 30); // Increased bottom margin
+
+            e.HasMorePages = false;
+        }
+
+        // Helper method to calculate section height
+        private int CalculateSectionHeight(Graphics g, string[] lines, Font font, int lineSpacing)
+        {
+            int totalHeight = 0;
+            foreach (string line in lines)
+            {
+                totalHeight += (int)g.MeasureString(line, font).Height + lineSpacing;
+            }
+            return totalHeight;
+        }
     }
 }
