@@ -10,6 +10,8 @@ namespace EventDriven.Project.Model
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
+        public string Name { get; set; }
+        public string Grade {  get; set; }  
         public decimal AmountPaid { get; set; }
         public decimal Change { get; set; }          // NEW
         public DateTime? DatePaid { get; set; }

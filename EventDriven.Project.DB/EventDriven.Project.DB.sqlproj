@@ -62,6 +62,7 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Tables\Academic Information Table" />
     <Folder Include="dbo\Views" />
+    <Folder Include="dbo\exec" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
@@ -83,11 +84,20 @@
     <Build Include="dbo\Tables\Academic Information Table\tblSchedules.sql" />
     <Build Include="dbo\Views\vwScheduleDetails.sql" />
     <Build Include="dbo\Views\vwAssessment.sql" />
+    <Build Include="dbo\exec\CreatePaymentScheduleForStudent.sql" />
+    <Build Include="dbo\Tables\tblPaymentSchedule.sql" />
+    <Build Include="dbo\exec\trg_InsertStudentSchedules.sql" />
+    <Build Include="dbo\exec\CreatePhilippineMiddleSchoolSchedule.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="EventDriven.Project.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
 </Project>

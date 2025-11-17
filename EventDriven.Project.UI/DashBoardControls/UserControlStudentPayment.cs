@@ -25,7 +25,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         private MainForm main;
         private PaymentModel selectedPayment; // Set this before printing
         private int currentPage = 1;
-        
+
 
         // Fields to hold data for printing
         private StudentPaymentInfo currentStudentPayment;
@@ -57,25 +57,55 @@ namespace EventDriven.Project.UI.DashBoardControls
             try
             {
                 dataGridView1.Rows.Clear();
+                dataGridView2.Rows.Clear();
                 List<StudentPaymentInfo> payments = await paymentController.GetAllStudentPayment(authenticationKey);
                 allPayments = payments; // Store for printing
 
                 foreach (var payment in payments)
                 {
-                    dataGridView1.Rows.Add(
-                        payment.StudentId,
-                        payment.StudentName,
-                        payment.GradeLevel,
-                        payment.TuitionFee,
-                        payment.TotalPaid,
-                        payment.RemainingBalance
-                    );
+                    if (payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
+                    {
+                        dataGridView1.Rows.Add(
+                            payment.StudentId,
+                            payment.StudentName,
+                            payment.GradeLevel,
+                            payment.TuitionFee,
+                            payment.TotalPaid,
+                            payment.RemainingBalance,
+                            payment.PaymentMethod
+                        );
+                        dataGridView2.Rows.Add(
+                            payment.StudentId,
+                            payment.StudentName,
+                            payment.GradeLevel,
+                            payment.TuitionFee,
+                            payment.NextAmountDue,
+                            payment.TotalPaid,
+                            payment.RemainingBalance,
+                            payment.NextDueDate,
+                            payment.NextScheduleDescription,
+                            payment.PaymentMethod
+
+                        );
+                    }
                 }
+
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            dataGridView1.Columns["Column1"].ValueType = typeof(int);
+            dataGridView2.Columns["dataGridViewTextBoxColumn1"].ValueType = typeof(int);
+
+
+            // Sort dataGridView1 by ID ascending
+            dataGridView1.Sort(dataGridView1.Columns["Column1"], System.ComponentModel.ListSortDirection.Ascending);
+
+            // Sort dataGridView2 by ID ascending
+            dataGridView2.Sort(dataGridView2.Columns["dataGridViewTextBoxColumn1"], System.ComponentModel.ListSortDirection.Ascending);
         }
         private PaymentModel currentPayment;
 
@@ -132,23 +162,24 @@ namespace EventDriven.Project.UI.DashBoardControls
                 string paymentType = rbFullPayment.Checked ? "Full" : "Partial";
 
                 // 6️⃣ Build model
-                 currentPayment = new PaymentModel
+                currentPayment = new PaymentModel
                 {
                     StudentId = studentId,
                     AmountPaid = paymentAmount,
                     DatePaid = DateTime.Now,
                     Change = change,
-                    PaymentType = paymentType
-
+                    PaymentType = paymentType,
+                    Grade = grade,
+                    Name = name
                 };
 
                 // 7️⃣ Send to controller
                 var addedPayment = await paymentController.AddAsync(currentPayment, authenticationKey);
 
                 // ✅ Success message
-                string msg = $"Payment of {paymentAmount:C} added successfully!";
+                string msg = $"Payment of {paymentAmount} added successfully!";
                 if (change > 0)
-                    msg += $"\nChange to return: {change:C}";
+                    msg += $"\nChange to return: {change}";
 
                 MessageBox.Show(msg, "Payment Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -189,12 +220,22 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Show all rows if search is empty
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                     row.Visible = true;
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                    row.Visible = true;
                 return;
             }
 
-            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$"); // only digits
+            // only digits
+            match(dataGridView1, searchValue);
+            match(dataGridView2, searchValue);
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+
+        }
+
+        private void match(DataGridView rows, string searchValue)
+        {
+            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$");
+            foreach (DataGridViewRow row in rows.Rows)
             {
                 if (row.IsNewRow) continue;
 
@@ -228,19 +269,56 @@ namespace EventDriven.Project.UI.DashBoardControls
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // Example: assuming these are the column names or indexes
+                name = row.Cells["Column2"].Value?.ToString() ?? "";
                 grade = row.Cells["Column3"].Value?.ToString() ?? "";
                 tuitionFee = row.Cells["Column4"].Value?.ToString() ?? "";
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
                 lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "0.00";
                 lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
-                if (rbFullPayment.Checked)
+                if (row.Cells["Column12"].Value.ToString().Equals("Full"))
                 {
+                    rbFullPayment.Checked = true;
                     txtPaymentReceived.Text = lbBalance.Text;
+                    
                 }
                 else
                 {
+                    rbPartialPayment.Checked = true;
                     txtPaymentReceived.Text = "0.00";
+                    
+                }
+            }
+        }
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+            // Make sure user clicked a valid row (not header or empty space)
+            if (row.Cells["Column10"].Value?.ToString().Length>0)
+            {
+
+                
+
+                // Example: assuming these are the column names or indexes
+
+                grade = row.Cells["dataGridViewTextBoxColumn3"].Value?.ToString() ?? "";
+                tuitionFee = row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
+                name = lbName.Text = row.Cells["dataGridViewTextBoxColumn2"].Value?.ToString() ?? "" ?? "";
+                lbBalance.Text = row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "0.00";
+                lbChange.Text = "0.00";
+                lbId.Text = row.Cells["dataGridViewTextBoxColumn1"].Value?.ToString() ?? "0";
+                if (row.Cells["Column10"].Value.ToString().Equals("Full"))
+                {
+                    rbFullPayment.Checked = true;
+                    txtPaymentReceived.Text = lbBalance.Text;
+                    
+                }
+                else
+                {
+                    rbPartialPayment.Checked = true;
+                    txtPaymentReceived.Text = row.Cells["Column11"].Value?.ToString() ?? ""; ;
+                   
                 }
             }
         }
@@ -355,11 +433,11 @@ namespace EventDriven.Project.UI.DashBoardControls
 
             string[] studentInfo = {
                 $"Student ID: {currentPayment.StudentId}",
-                $"Name: {name}",
-                $"Grade Level: {grade}",
-                $"Tuition Fee: {tuitionFee:C}",
-                $"Total Paid: {currentPayment.AmountPaid:C}",
-                $"Remaining Balance: {lbBalance.Text:C}"
+                $"Name: {currentPayment.Name}",
+                $"Grade Level: {currentPayment.Grade}",
+                $"Tuition Fee: {tuitionFee}",
+                $"Total Paid: {currentPayment.AmountPaid}",
+                $"Remaining Balance: {lbBalance.Text}"
             };
 
             int studentHeight = CalculateSectionHeight(g, studentInfo, bodyFont, 8);
@@ -436,6 +514,16 @@ namespace EventDriven.Project.UI.DashBoardControls
                 totalHeight += (int)g.MeasureString(line, font).Height + lineSpacing;
             }
             return totalHeight;
+        }
+
+        private void lbChange_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

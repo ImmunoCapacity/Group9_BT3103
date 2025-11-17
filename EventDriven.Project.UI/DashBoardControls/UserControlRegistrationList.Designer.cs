@@ -32,7 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentInfoList));
             printDialog1 = new PrintDialog();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             tabPage2 = new TabPage();
@@ -109,6 +108,9 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.SeaShell;
             dataGridViewCellStyle1.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Black;
@@ -208,7 +210,6 @@
             ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColEdit.HeaderText = "";
             ColEdit.MinimumWidth = 6;
-            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
             ColEdit.Name = "ColEdit";
             ColEdit.ReadOnly = true;
             ColEdit.Width = 6;
@@ -218,7 +219,6 @@
             ColDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColDelete.HeaderText = "";
             ColDelete.MinimumWidth = 6;
-            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
             ColDelete.Name = "ColDelete";
             ColDelete.ReadOnly = true;
             ColDelete.Width = 6;

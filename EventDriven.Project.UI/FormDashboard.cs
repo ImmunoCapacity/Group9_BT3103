@@ -23,6 +23,9 @@ namespace EventDriven.Project.UI
             this.role = role;
             this.authenticationKey = authenticationKey;
 
+            this.FormBorderStyle = FormBorderStyle.None;
+            main.FormBorderStyle = FormBorderStyle.None;
+
             MaximizeBox = false;
             MinimizeBox = false;
 
@@ -70,6 +73,7 @@ namespace EventDriven.Project.UI
             }
             else if (role.Equals("Cashier"))
             {
+                btnStudentInfo.Visible = false;
                 btnStudentReg.Visible = false;
                 btnAssessment.Visible = false;
             }
@@ -183,5 +187,7 @@ namespace EventDriven.Project.UI
             highlightButton(sender as Button);
             ShowControl(new UserControlReports(role, main, authenticationKey));
         }
+
+        
     }
 }

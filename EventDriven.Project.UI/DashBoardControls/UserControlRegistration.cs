@@ -43,9 +43,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                     //btnDeleteStudInfo.Visible = false;
                     pictureBox3.Visible = false;
                 }
-            }
+                checkedListBox2.SelectionMode = SelectionMode.One;
+                checkedListBox2.CheckOnClick = true;
+                checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
 
-            private StudentModel GetStudentFromForm()
+        }
+
+        private StudentModel GetStudentFromForm()
             {
                 string studentType = "";
                 if (cbNew.Checked) studentType = "New";
@@ -234,7 +238,26 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 return (requirements, paymentMethod);
             }
 
-            public async void search()
+        private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // Get a reference to the CheckedListBox
+            CheckedListBox list = (CheckedListBox)sender;
+
+            // If the checked item is not the one being clicked, uncheck it
+            if (e.NewValue == CheckState.Checked)
+            {
+                foreach (int index in list.CheckedIndices)
+                {
+                    if (index != e.Index)
+                    {
+                        list.SetItemChecked(index, false);
+                    }
+                }
+            }
+        }
+
+
+        public async void search()
             {
                 try
                 {

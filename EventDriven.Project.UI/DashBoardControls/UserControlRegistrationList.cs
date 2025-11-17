@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
 using EventDriven.Project.Model;
+using EventDriven.Project.UI.Properties;
 
 namespace EventDriven.Project.UI.DashBoardControls
 {
@@ -27,8 +29,12 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.authenticationKey = authenticationKey;
             InitializeComponent();
 
+
             studentController = new StudentController();
             LoadStudents();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlStudentInfoList));
+            ColDelete.Image = (Image)resources.GetObject("ColDelete.Image");
+            ColEdit.Image = (Image)resources.GetObject("ColEdit.Image");
 
         }
         private async void LoadStudents()
