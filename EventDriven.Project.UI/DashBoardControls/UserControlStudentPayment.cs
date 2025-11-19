@@ -278,7 +278,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column12"].Value.ToString().Equals("Full"))
                 {
-                    rbFullPayment.Checked = true;
+                    rbFullPayment.Checked = true;   
                     txtPaymentReceived.Text = lbBalance.Text;
                     
                 }

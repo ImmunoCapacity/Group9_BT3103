@@ -63,16 +63,12 @@
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             textBox1 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            pictureBox1 = new PictureBox();
-            pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             label8 = new Label();
             label9 = new Label();
             checkedListBox1 = new CheckedListBox();
             checkedListBox2 = new CheckedListBox();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
@@ -440,40 +436,16 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(pictureBox1);
-            flowLayoutPanel1.Controls.Add(pictureBox3);
             flowLayoutPanel1.Controls.Add(pictureBox4);
             flowLayoutPanel1.Location = new Point(242, 112);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(359, 83);
             flowLayoutPanel1.TabIndex = 101;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.add_friend;
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Margin = new Padding(3, 3, 50, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(66, 69);
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click_1;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.edit;
-            pictureBox3.Location = new Point(122, 3);
-            pictureBox3.Margin = new Padding(3, 3, 50, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(66, 69);
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
-            // 
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.bin;
-            pictureBox4.Location = new Point(241, 3);
+            pictureBox4.Location = new Point(3, 3);
             pictureBox4.Margin = new Padding(3, 3, 50, 3);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(66, 69);
@@ -569,8 +541,6 @@
             Name = "UserControlRegistration";
             Size = new Size(1470, 973);
             flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -614,8 +584,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private TextBox textBox1;
         private FlowLayoutPanel flowLayoutPanel1;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Label label8;
         private Label label9;

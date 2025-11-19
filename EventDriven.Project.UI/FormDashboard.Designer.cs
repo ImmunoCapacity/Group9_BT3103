@@ -108,7 +108,7 @@
             panel3.Controls.Add(flowLayoutPanel1);
             panel3.Location = new Point(0, 107);
             panel3.Name = "panel3";
-            panel3.Size = new Size(450, 955);
+            panel3.Size = new Size(450, 1009);
             panel3.TabIndex = 8;
             // 
             // btnAdminDashboardLogout
@@ -246,7 +246,7 @@
             panel1.BackColor = Color.SeaShell;
             panel1.Location = new Point(450, 107);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1470, 955);
+            panel1.Size = new Size(1470, 984);
             panel1.TabIndex = 9;
             // 
             // FormDashboard
