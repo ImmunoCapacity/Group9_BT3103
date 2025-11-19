@@ -14,8 +14,14 @@ VALUES
     ('Admin',    HASHBYTES('SHA2_256', 'admin123'), 'Admin'),
     ('Registrar', HASHBYTES('SHA2_256', 'registrar123'), 'Registrar'),
     ('Cashier',  HASHBYTES('SHA2_256', 'cashier123'), 'Cashier');
-
-
+begin
+INSERT INTO tblFeeStructure (GradeLevel, TuitionFee)
+VALUES 
+('Grade 7', 45000.00),
+('Grade 8', 47000.00),
+('Grade 9', 50000.00),
+('Grade 10', 52000.00);
+end
 
 
 INSERT INTO [dbo].[tblStudents]
@@ -124,12 +130,7 @@ VALUES
  'Vicente Aquino', '09173332222', 'Adela Mae', '09182229999', 'Balayan, Batangas',
  'Josefina Garcia', 'Aunt', '09176664444', 'Calaca, Batangas', '', '8-A', 'Female', 'samantha.aquino@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas', '09173332222', 90.6);
 
- INSERT INTO tblFeeStructure (GradeLevel, TuitionFee)
-VALUES 
-('Grade 7', 45000.00),
-('Grade 8', 47000.00),
-('Grade 9', 50000.00),
-('Grade 10', 52000.00);
+
 
 -- Insert Sections
 INSERT INTO [dbo].[tblSections] ([SectionName]) 
@@ -367,3 +368,25 @@ VALUES
 (5, 10, 1, '09:00:00', '10:00:00', 'Friday', 'Grade 10'),
 (6, 11, 2, '08:00:00', '09:00:00', 'Friday', 'Grade 10'),
 (6, 12, 2, '09:00:00', '10:00:00', 'Friday', 'Grade 10');
+
+
+-- Execute the Philippine Middle School Schedule Stored Procedure
+-- For ALL STUDENTS in tblStudents
+
+DECLARE @StudentId INT;
+
+DECLARE cur CURSOR FOR
+    SELECT Id FROM tblStudents;
+
+OPEN cur;
+
+FETCH NEXT FROM cur INTO @StudentId;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    EXEC CreatePhilippineMiddleSchoolSchedule @StudentId = @StudentId;
+
+    FETCH NEXT FROM cur INTO @StudentId;
+END;
+
+CLOSE cur;
+DEALLOCATE cur;

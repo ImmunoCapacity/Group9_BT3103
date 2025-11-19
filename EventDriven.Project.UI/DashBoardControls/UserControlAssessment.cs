@@ -35,6 +35,8 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.main = main;
 
             GetStudent(id);
+
+
         }
 
         private void label2_Click(object sender, EventArgs e)

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
+            userControlExit1 = new DashBoardControls.UserControlExit();
             label3 = new Label();
             label2 = new Label();
             pictureBox2 = new PictureBox();
@@ -42,7 +43,6 @@
             btnHistory = new Button();
             btnReports = new Button();
             panel1 = new Panel();
-            userControlExit1 = new DashBoardControls.UserControlExit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
@@ -60,6 +60,14 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1920, 107);
             panel2.TabIndex = 7;
+            // 
+            // userControlExit1
+            // 
+            userControlExit1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            userControlExit1.Location = new Point(1836, 0);
+            userControlExit1.Name = "userControlExit1";
+            userControlExit1.Size = new Size(66, 64);
+            userControlExit1.TabIndex = 8;
             // 
             // label3
             // 
@@ -100,7 +108,7 @@
             panel3.Controls.Add(flowLayoutPanel1);
             panel3.Location = new Point(0, 107);
             panel3.Name = "panel3";
-            panel3.Size = new Size(450, 926);
+            panel3.Size = new Size(450, 1009);
             panel3.TabIndex = 8;
             // 
             // btnAdminDashboardLogout
@@ -113,7 +121,7 @@
             btnAdminDashboardLogout.Location = new Point(26, 764);
             btnAdminDashboardLogout.Name = "btnAdminDashboardLogout";
             btnAdminDashboardLogout.Size = new Size(388, 53);
-            btnAdminDashboardLogout.TabIndex = 12;
+            btnAdminDashboardLogout.TabIndex = 7;
             btnAdminDashboardLogout.Text = "Log Out";
             btnAdminDashboardLogout.UseVisualStyleBackColor = true;
             btnAdminDashboardLogout.Click += btnAdminDashboardLogout_Click_1;
@@ -130,7 +138,7 @@
             flowLayoutPanel1.Margin = new Padding(101, 100, 101, 100);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(391, 484);
-            flowLayoutPanel1.TabIndex = 11;
+            flowLayoutPanel1.TabIndex = 1;
             // 
             // btnStudentInfo
             // 
@@ -142,7 +150,7 @@
             btnStudentInfo.Location = new Point(3, 3);
             btnStudentInfo.Name = "btnStudentInfo";
             btnStudentInfo.Size = new Size(386, 53);
-            btnStudentInfo.TabIndex = 8;
+            btnStudentInfo.TabIndex = 1;
             btnStudentInfo.Text = "Student Information";
             btnStudentInfo.UseVisualStyleBackColor = true;
             btnStudentInfo.Visible = false;
@@ -159,7 +167,7 @@
             btnStudentReg.Margin = new Padding(3, 29, 3, 3);
             btnStudentReg.Name = "btnStudentReg";
             btnStudentReg.Size = new Size(386, 53);
-            btnStudentReg.TabIndex = 9;
+            btnStudentReg.TabIndex = 2;
             btnStudentReg.Text = "Student Registration";
             btnStudentReg.UseVisualStyleBackColor = true;
             btnStudentReg.Visible = false;
@@ -176,7 +184,7 @@
             btnPayments.Margin = new Padding(3, 29, 3, 3);
             btnPayments.Name = "btnPayments";
             btnPayments.Size = new Size(386, 53);
-            btnPayments.TabIndex = 11;
+            btnPayments.TabIndex = 3;
             btnPayments.Text = "Payment";
             btnPayments.UseVisualStyleBackColor = true;
             btnPayments.Visible = false;
@@ -193,7 +201,7 @@
             btnAssessment.Margin = new Padding(3, 29, 3, 3);
             btnAssessment.Name = "btnAssessment";
             btnAssessment.Size = new Size(386, 53);
-            btnAssessment.TabIndex = 10;
+            btnAssessment.TabIndex = 4;
             btnAssessment.Text = "Assessment";
             btnAssessment.UseVisualStyleBackColor = true;
             btnAssessment.Visible = false;
@@ -210,7 +218,7 @@
             btnHistory.Margin = new Padding(3, 29, 3, 3);
             btnHistory.Name = "btnHistory";
             btnHistory.Size = new Size(386, 53);
-            btnHistory.TabIndex = 8;
+            btnHistory.TabIndex = 5;
             btnHistory.Text = "Payment History";
             btnHistory.UseVisualStyleBackColor = true;
             btnHistory.Visible = false;
@@ -227,7 +235,7 @@
             btnReports.Margin = new Padding(3, 29, 3, 3);
             btnReports.Name = "btnReports";
             btnReports.Size = new Size(386, 53);
-            btnReports.TabIndex = 13;
+            btnReports.TabIndex = 6;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Visible = false;
@@ -238,29 +246,27 @@
             panel1.BackColor = Color.SeaShell;
             panel1.Location = new Point(450, 107);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1470, 943);
+            panel1.Size = new Size(1470, 984);
             panel1.TabIndex = 9;
-            // 
-            // userControlExit1
-            // 
-            userControlExit1.Location = new Point(1836, 0);
-            userControlExit1.Name = "userControlExit1";
-            userControlExit1.Size = new Size(66, 64);
-            userControlExit1.TabIndex = 7;
             // 
             // FormDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.BurlyWood;
-            ClientSize = new Size(1902, 1033);
+            CausesValidation = false;
+            ClientSize = new Size(1902, 1062);
             ControlBox = false;
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(panel3);
             MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "FormDashboard";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
             Load += FormDashboard_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

@@ -13,49 +13,140 @@ namespace EventDriven.Project.Logic.Repository
         // INSERT payment
         public async Task<PaymentModel> InsertAsync(PaymentModel payment)
         {
-            var query = @"INSERT INTO tblPayments
-              (StudentId, AmountPaid, Change, DatePaid, PaymentType)
-              VALUES (@StudentId, @AmountPaid, @Change, @DatePaid, @PaymentType);
-              SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            var queryPayment = @"
+        INSERT INTO tblPayments
+        (StudentId, AmountPaid, Change, DatePaid, PaymentType)
+        VALUES (@StudentId, @AmountPaid, @Change, @DatePaid, @PaymentType);
+        SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
+            var queryGetNextSchedule = @"
+        SELECT TOP 1 Id
+        FROM tblPaymentSchedule
+        WHERE StudentId = @StudentId AND IsPaid = 0
+        ORDER BY DueDate ASC;";
+
+            var queryUpdateSchedule = @"
+        UPDATE tblPaymentSchedule
+        SET IsPaid = 1
+        WHERE Id = @ScheduleId;
+    ";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                await connection.OpenAsync();
+
+                SqlTransaction transaction = connection.BeginTransaction();
+
+                try
                 {
-                    AddParameters(command, payment);
-                    int insertedId = (int)command.ExecuteScalar();
-                    payment.Id = insertedId;
+                    int paymentId;
+
+                    // 1️⃣ Insert payment
+                    using (SqlCommand cmd = new SqlCommand(queryPayment, connection, transaction))
+                    {
+                        AddParameters(cmd, payment);
+                        paymentId = (int)await cmd.ExecuteScalarAsync();
+                    }
+
+                    payment.Id = paymentId;
+
+                    // 2️⃣ Get the next unpaid schedule
+                    int? scheduleId = null;
+
+                    using (SqlCommand cmd = new SqlCommand(queryGetNextSchedule, connection, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null && result != DBNull.Value)
+                            scheduleId = Convert.ToInt32(result);
+                    }
+
+                    // 3️⃣ If schedule exists, update it
+                    if (scheduleId.HasValue)
+                    {
+                        using (SqlCommand cmd = new SqlCommand(queryUpdateSchedule, connection, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@ScheduleId", scheduleId.Value);
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+                    }
+
+                    // 4️⃣ Commit everything
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
                 }
             }
 
             return payment;
         }
+
         public async Task<List<StudentPaymentInfo>> GetAllStudentPayments()
         {
             var payments = new List<StudentPaymentInfo>();
 
             using (SqlConnection conn = new SqlConnection(connect.connectionString))
             {
-                string query = "SELECT * FROM vwStudentPaymentBalance ORDER BY StudentName";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                conn.Open();
+                string query = @"SELECT 
+                            StudentId,
+                            StudentName,
+                            GradeLevel,
+                            TuitionFee,
+                            TotalPaid,
+                            RemainingBalance,
+                            LastPaymentDate,
+                            LastPaymentType,
+                            PaymentMethod,
+                            NextDueDate,
+                            NextAmountDue,
+                            NextScheduleDescription
+                         FROM vwStudentPaymentBalance
+                         ORDER BY StudentName";
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                await conn.OpenAsync();
+
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         payments.Add(new StudentPaymentInfo
                         {
-                            StudentId = Convert.ToInt32(reader["StudentId"]),
+                            StudentId = reader.GetInt32(reader.GetOrdinal("StudentId")),
                             StudentName = reader["StudentName"].ToString(),
                             GradeLevel = reader["GradeLevel"].ToString(),
-                            TuitionFee = Convert.ToDecimal(reader["TuitionFee"]),
-                            TotalPaid = Convert.ToDecimal(reader["TotalPaid"]),
-                            RemainingBalance = Convert.ToDecimal(reader["RemainingBalance"]),
-                            LastPaymentDate = reader["LastPaymentDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["LastPaymentDate"]),
-                            LastPaymentType = reader["LastPaymentType"] == DBNull.Value ? "" : reader["LastPaymentType"].ToString()
+
+                            TuitionFee = reader.GetDecimal(reader.GetOrdinal("TuitionFee")),
+                            TotalPaid = reader.GetDecimal(reader.GetOrdinal("TotalPaid")),
+                            RemainingBalance = reader.GetDecimal(reader.GetOrdinal("RemainingBalance")),
+
+                            LastPaymentDate = reader["LastPaymentDate"] == DBNull.Value
+                                                ? null
+                                                : (DateTime?)reader.GetDateTime(reader.GetOrdinal("LastPaymentDate")),
+
+                            LastPaymentType = reader["LastPaymentType"] == DBNull.Value
+                                                ? null
+                                                : reader["LastPaymentType"].ToString(),
+
+                            PaymentMethod = reader["PaymentMethod"] == DBNull.Value
+                                                ? null
+                                                : reader["PaymentMethod"].ToString(),
+
+                            NextDueDate = reader["NextDueDate"] == DBNull.Value
+                                                ? null
+                                                : (DateTime?)reader.GetDateTime(reader.GetOrdinal("NextDueDate")),
+
+                            NextAmountDue = reader["NextAmountDue"] == DBNull.Value
+                                                ? null
+                                                : (decimal?)reader.GetDecimal(reader.GetOrdinal("NextAmountDue")),
+
+                            NextScheduleDescription = reader["NextScheduleDescription"] == DBNull.Value
+                                                ? null
+                                                : reader["NextScheduleDescription"].ToString()
                         });
                     }
                 }
@@ -63,6 +154,7 @@ namespace EventDriven.Project.Logic.Repository
 
             return payments;
         }
+
         public async Task<List<PaymentHistoryModel>> GetAllPayments()
         {
             var payments = new List<PaymentHistoryModel>();
