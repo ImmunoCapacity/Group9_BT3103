@@ -41,7 +41,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 if (role != "Admin")
                 {
                     //btnDeleteStudInfo.Visible = false;
-                    pictureBox3.Visible = false;
+                    //pictureBox3.Visible = false;
                 }
                 checkedListBox2.SelectionMode = SelectionMode.One;
                 checkedListBox2.CheckOnClick = true;
@@ -384,13 +384,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
             private void pictureBox1_Click_1(object sender, EventArgs e)
             {
-                highlightPicture(pictureBox1);
+                //highlightPicture(pictureBox1);
                 action = "Add";
             }
 
             private void pictureBox3_Click(object sender, EventArgs e)
             {
-                highlightPicture(pictureBox3);
+                //highlightPicture(pictureBox3);
                 action = "Edit";
             }
             private void highlightPicture(PictureBox selected)
