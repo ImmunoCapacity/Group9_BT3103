@@ -19,6 +19,8 @@ namespace EventDriven.Project.UI.DashBoardControls
         MainForm main;
         UserModel authenticationKey;
         AssessmentController2 assessmentController2;
+        private AcademicYearController academicYearController;
+        private List<AcademicYearModel> academicYearModels;
 
 
         public UserControlAssessmentList2(string role, MainForm main, UserModel authenticationKey)
@@ -30,6 +32,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             assessmentController2 = new AssessmentController2();
             LoadStudents();
             action();
+            loadyear();
 
         }
 
@@ -37,7 +40,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             List<StudentAssessment> allAssessments =
                 await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
-
+            
             // Group by student to remove duplicates caused by multiple schedules/payments
             var datasource = allAssessments
                 .GroupBy(s => s.StudentId)
@@ -48,7 +51,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                     Grade = g.First().GradeLevel,
                     Section = g.First().StudentSection,
                     GWA = g.First().GWA,
-                    Status = g.First().Status
+                    Status = g.First().Status,
+                    year = g.First().year
+                    
                 })
                 .ToList();
 
@@ -61,6 +66,8 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView1.Columns["Section"].HeaderText = "Section";
             dataGridView1.Columns["GWA"].HeaderText = "GWA";
             dataGridView1.Columns["Status"].HeaderText = "Status";
+            dataGridView1.Columns["Year"].HeaderText = "Year";
+            //dataGridView1.Columns["Year"].Visible = false;
 
             // Auto-size columns to fit content
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -73,6 +80,27 @@ namespace EventDriven.Project.UI.DashBoardControls
 
             // Optional: prevent user from resizing
             dataGridView1.AllowUserToResizeColumns = false;
+            // Populate ComboBox with distinct years
+
+            var lastYear = datasource
+            .Select(s => s.year)
+            .Distinct()
+            .OrderBy(y => y)
+            .LastOrDefault();
+
+
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(
+                datasource
+                    .Select(s => s.year)
+                    .Distinct()
+                    .OrderBy(y => y)
+                    .Cast<object>()
+                    .ToArray()
+            );
+            comboBox1.SelectedItem = lastYear;
+
+
         }
 
 
@@ -100,6 +128,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 .ToList();
 
             dataGridView1.DataSource = filtered;
+            loadyear();
         }
 
 
@@ -138,6 +167,22 @@ namespace EventDriven.Project.UI.DashBoardControls
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadyear();
+        }
+        private async void loadyear()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                bool match = false;
+                match = row.Cells["Year"].Value.ToString().Contains(comboBox1.Text);
+                row.Visible = match;
+            }
         }
     }
 }

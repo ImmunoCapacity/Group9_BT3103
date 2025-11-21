@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
 using EventDriven.Project.UI.DashBoardControls;
 
@@ -76,6 +77,11 @@ namespace EventDriven.Project.UI
                 btnStudentInfo.Visible = false;
                 btnStudentReg.Visible = false;
                 btnAssessment.Visible = false;
+            }
+            else if (role.Equals("Admin"))
+            {
+                btnNewAcademicYear.Visible = true;
+                btnNewAcademicYear.Enabled = true;
             }
         }
         private void highlightButton(Button selected)
@@ -188,6 +194,34 @@ namespace EventDriven.Project.UI
             ShowControl(new UserControlReports(role, main, authenticationKey));
         }
 
-        
+        private async void btnNewAcademicYear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AcademicYearModel model = new AcademicYearModel
+                {
+                    YearName = $"{DateTime.Now.Year}-{DateTime.Now.Year + 1}",
+                    StartDate = new DateTime(DateTime.Now.Year, 6, 1),   // example
+                    EndDate = new DateTime(DateTime.Now.Year + 1, 3, 31), // example
+                    IsActive = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                AcademicYearController controller = new AcademicYearController();
+
+                AcademicYearModel result = await controller.AddAsync(model, authenticationKey);
+
+                MessageBox.Show("Academic year created successfully!",
+                                "Success",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

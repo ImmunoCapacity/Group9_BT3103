@@ -117,7 +117,9 @@ namespace EventDriven.Project.Logic.Repository
 
                 SubjectID = r["SubjectID"] as int?,
                 SubjectName = r["SubjectName"] as string,
-                Category = r["Category"] as string
+                Category = r["Category"] as string,
+                yearId = r["YearId"] as int?,
+                year = r["YearName"] as string
             };
         }
     }

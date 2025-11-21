@@ -43,6 +43,7 @@
             btnHistory = new Button();
             btnReports = new Button();
             panel1 = new Panel();
+            btnNewAcademicYear = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
@@ -106,6 +107,7 @@
             panel3.BackColor = Color.SeaShell;
             panel3.Controls.Add(btnAdminDashboardLogout);
             panel3.Controls.Add(flowLayoutPanel1);
+            panel3.Controls.Add(btnNewAcademicYear);
             panel3.Location = new Point(0, 107);
             panel3.Name = "panel3";
             panel3.Size = new Size(450, 1009);
@@ -137,7 +139,7 @@
             flowLayoutPanel1.Location = new Point(23, 88);
             flowLayoutPanel1.Margin = new Padding(101, 100, 101, 100);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(391, 484);
+            flowLayoutPanel1.Size = new Size(391, 595);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // btnStudentInfo
@@ -249,6 +251,24 @@
             panel1.Size = new Size(1470, 984);
             panel1.TabIndex = 9;
             // 
+            // btnNewAcademicYear
+            // 
+            btnNewAcademicYear.Cursor = Cursors.Hand;
+            btnNewAcademicYear.Enabled = false;
+            btnNewAcademicYear.FlatAppearance.BorderColor = Color.Firebrick;
+            btnNewAcademicYear.FlatStyle = FlatStyle.System;
+            btnNewAcademicYear.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNewAcademicYear.ForeColor = Color.FromArgb(64, 64, 64);
+            btnNewAcademicYear.Location = new Point(28, 13);
+            btnNewAcademicYear.Margin = new Padding(3, 29, 3, 3);
+            btnNewAcademicYear.Name = "btnNewAcademicYear";
+            btnNewAcademicYear.Size = new Size(201, 40);
+            btnNewAcademicYear.TabIndex = 7;
+            btnNewAcademicYear.Text = "New Academic Year";
+            btnNewAcademicYear.UseVisualStyleBackColor = true;
+            btnNewAcademicYear.Visible = false;
+            btnNewAcademicYear.Click += btnNewAcademicYear_Click;
+            // 
             // FormDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -292,5 +312,6 @@
         private Button btnReports;
         private Panel panel1;
         private DashBoardControls.UserControlExit userControlExit1;
+        private Button btnNewAcademicYear;
     }
 }

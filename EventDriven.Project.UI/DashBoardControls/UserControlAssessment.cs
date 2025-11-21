@@ -81,6 +81,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbGrade.Text = s.GradeLevel;
                 lbSection.Text = s.StudentSection;
                 cbStatus.Text = s.Status;
+                lbYear.Text = s.year;
 
                 // ------- Fill Subjects Grid -------
                 var subjectRows = assessmentList

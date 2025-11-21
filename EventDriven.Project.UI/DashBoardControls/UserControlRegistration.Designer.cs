@@ -68,6 +68,8 @@
             label9 = new Label();
             checkedListBox1 = new CheckedListBox();
             checkedListBox2 = new CheckedListBox();
+            cbYear = new ComboBox();
+            label5 = new Label();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
@@ -494,12 +496,36 @@
             checkedListBox2.Size = new Size(179, 70);
             checkedListBox2.TabIndex = 287;
             // 
+            // cbYear
+            // 
+            cbYear.AccessibleRole = AccessibleRole.IpAddress;
+            cbYear.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbYear.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            cbYear.FormattingEnabled = true;
+            cbYear.Location = new Point(877, 538);
+            cbYear.Name = "cbYear";
+            cbYear.Size = new Size(329, 32);
+            cbYear.TabIndex = 289;
+            // 
+            // label5
+            // 
+            label5.AccessibleRole = AccessibleRole.IpAddress;
+            label5.AutoSize = true;
+            label5.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            label5.Location = new Point(817, 541);
+            label5.Name = "label5";
+            label5.Size = new Size(53, 24);
+            label5.TabIndex = 288;
+            label5.Text = "Year:\r\n";
+            // 
             // UserControlRegistration
             // 
             AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
+            Controls.Add(cbYear);
+            Controls.Add(label5);
             Controls.Add(checkedListBox2);
             Controls.Add(checkedListBox1);
             Controls.Add(label9);
@@ -589,6 +615,8 @@
         private Label label9;
         private CheckedListBox checkedListBox1;
         private CheckedListBox checkedListBox2;
+        private ComboBox cbYear;
+        private Label label5;
         //private Label label25;
     }
 }

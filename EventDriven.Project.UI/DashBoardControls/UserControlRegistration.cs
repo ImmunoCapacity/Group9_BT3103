@@ -30,6 +30,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             private List<StudentModel> studentsToPrint = new List<StudentModel>();
             private int currentPrintIndex = 0;
             private StudentModel student;
+            private readonly AcademicYearController academicYearController;
+            private List<AcademicYearModel> academicYearModels;
+        
 
             public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
             {
@@ -37,19 +40,34 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 studentController = new StudentController();
                 registrationController = new RegistrationController();
                 this.authenticationKey = authenticationKey;
+                
                 this.main = main;
                 if (role != "Admin")
                 {
                     //btnDeleteStudInfo.Visible = false;
                     //pictureBox3.Visible = false;
                 }
+                academicYearController = new AcademicYearController();
+                LoadYear();
                 checkedListBox2.SelectionMode = SelectionMode.One;
                 checkedListBox2.CheckOnClick = true;
+
                 checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
+                
 
         }
-
-        private StudentModel GetStudentFromForm()
+        
+        private async void LoadYear()
+        {
+            academicYearModels = await academicYearController.GetAllAsync(authenticationKey);
+            foreach(var model in academicYearModels)
+            {
+                cbYear.Items.Add(model.YearName);
+                cbYear.SelectedItem = model.YearName;
+            }
+            
+        }
+        private async Task<StudentModel> GetStudentFromForm()
             {
                 string studentType = "";
                 if (cbNew.Checked) studentType = "New";
@@ -69,6 +87,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             student.Section = cmbSection.Text;
             student.Gender = cmbGender.Text;
             student.Status = studentType;
+            student.AcademicYearId = await academicYearController.getYearId(cbYear.Text, academicYearModels, authenticationKey);
                     
                 
 
@@ -113,7 +132,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                                 return;
                             }
 
-                            var student = GetStudentFromForm();
+                            var student = await GetStudentFromForm();
                             student.Id = selectedStudentId;
 
                             var result = await studentController.UpdateAsync(student, authenticationKey);
@@ -141,6 +160,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
                             // Call your controller (if you have one):
                             var result = await registrationController.UpsertAsync(registration, authenticationKey);
+                            
                             if (result != null) { MessageBox.Show($"Requirements: {requirements}\nPayment Method: {paymentMethod}"); }
                         }
                         catch (Exception ex)
@@ -294,9 +314,18 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                     cbNew.Checked = student.Status == "New";
                     cbOld.Checked = student.Status == "Old";
                     cbTransferee.Checked = student.Status == "Transferee";
+                    foreach(var year in academicYearModels)
+                {
+                    if(year.Id == student.AcademicYearId)
+                    {
+                        cbYear.SelectedItem = year.YearName;
+                    }
+                }
+                    
 
-                    // --- NEW: Also get registration data ---
-                    var registration = await registrationController.GetByIdAsync(student.Id, authenticationKey);
+
+                // --- NEW: Also get registration data ---
+                var registration = await registrationController.GetByIdAsync(student.Id, authenticationKey);
                     //MessageBox.Show("Requirements" + registration.Requirements + " Payment" + registration.PaymentMethod);
                     if (registration != null)
                     {

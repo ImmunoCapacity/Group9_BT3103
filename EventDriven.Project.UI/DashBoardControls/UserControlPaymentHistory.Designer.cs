@@ -21,6 +21,7 @@
         }
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -50,6 +51,7 @@
             lbBalance = new Label();
             label8 = new Label();
             Column6 = new DataGridViewTextBoxColumn();
+            academicYearModelBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).BeginInit();
             splitContainerPayment.Panel1.SuspendLayout();
             splitContainerPayment.Panel2.SuspendLayout();
@@ -58,6 +60,7 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)academicYearModelBindingSource).BeginInit();
             SuspendLayout();
             // 
             // splitContainerPayment
@@ -219,7 +222,7 @@
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearchStuIn.ForeColor = Color.SteelBlue;
-            btnSearchStuIn.Location = new Point(626, 16);
+            btnSearchStuIn.Location = new Point(705, 16);
             btnSearchStuIn.Margin = new Padding(3, 4, 3, 4);
             btnSearchStuIn.Name = "btnSearchStuIn";
             btnSearchStuIn.Size = new Size(120, 45);
@@ -230,7 +233,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(114, 26);
+            txtSearch.Location = new Point(193, 26);
             txtSearch.Margin = new Padding(3, 3, 10, 3);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(499, 27);
@@ -374,6 +377,10 @@
             Column6.ReadOnly = true;
             Column6.Width = 125;
             // 
+            // academicYearModelBindingSource
+            // 
+            academicYearModelBindingSource.DataSource = typeof(Model.AcademicYearModel);
+            // 
             // UserControlPaymentHistory
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -392,6 +399,7 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)academicYearModelBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -422,5 +430,6 @@
         private DataGridViewTextBoxColumn studentID;
         private Panel panel2;
         private Label label4;
+        private BindingSource academicYearModelBindingSource;
     }
 }

@@ -41,16 +41,18 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
             ColEdit = new DataGridViewImageColumn();
             ColDelete = new DataGridViewImageColumn();
             panel1 = new Panel();
+            comboBox1 = new ComboBox();
             button1 = new Button();
             textBox1 = new TextBox();
             btnAddStuIn = new Button();
             tabPage2 = new TabPage();
+            panel2 = new Panel();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
-            panel2 = new Panel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -104,7 +106,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColEdit, ColDelete });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, ColEdit, ColDelete });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.SeaShell;
             dataGridViewCellStyle3.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -178,6 +180,15 @@
             Column5.ReadOnly = true;
             Column5.Width = 128;
             // 
+            // Column6
+            // 
+            Column6.HeaderText = "Year";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            Column6.Visible = false;
+            Column6.Width = 125;
+            // 
             // ColEdit
             // 
             ColEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -201,6 +212,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(btnAddStuIn);
@@ -210,6 +222,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1456, 51);
             panel1.TabIndex = 7;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(685, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(171, 28);
+            comboBox1.TabIndex = 150;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // button1
             // 
@@ -258,6 +280,15 @@
             tabPage2.Text = "Assessment Information";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.SeaShell;
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1456, 934);
+            panel2.TabIndex = 0;
+            // 
             // btnSearchStuIn
             // 
             btnSearchStuIn.BackColor = Color.White;
@@ -279,15 +310,6 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(447, 27);
             txtSearch.TabIndex = 146;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.SeaShell;
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(3, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1456, 934);
-            panel2.TabIndex = 0;
             // 
             // UserControlAsessmentList
             // 
@@ -318,13 +340,15 @@
         private TextBox textBox1;
         private Button btnAddStuIn;
         private DataGridView dataGridView1;
+        private Panel panel2;
+        private ComboBox comboBox1;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
         private DataGridViewImageColumn ColEdit;
         private DataGridViewImageColumn ColDelete;
-        private Panel panel2;
     }
 }

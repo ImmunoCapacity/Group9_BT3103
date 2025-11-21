@@ -61,6 +61,8 @@
             dataGridViewSubject = new DataGridView();
             dataGridViewSchedule = new DataGridView();
             dataGridViewPayment = new DataGridView();
+            lbYear = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSchedule).BeginInit();
@@ -414,11 +416,33 @@
             dataGridViewPayment.Size = new Size(438, 459);
             dataGridViewPayment.TabIndex = 123;
             // 
+            // lbYear
+            // 
+            lbYear.AutoSize = true;
+            lbYear.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            lbYear.Location = new Point(219, 257);
+            lbYear.Name = "lbYear";
+            lbYear.Size = new Size(119, 29);
+            lbYear.TabIndex = 125;
+            lbYear.Text = "2000-2001";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            label3.Location = new Point(119, 257);
+            label3.Name = "label3";
+            label3.Size = new Size(65, 29);
+            label3.TabIndex = 124;
+            label3.Text = "Year:";
+            // 
             // UserControlAssessment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(lbYear);
+            Controls.Add(label3);
             Controls.Add(dataGridViewPayment);
             Controls.Add(dataGridViewSchedule);
             Controls.Add(dataGridViewSubject);
@@ -471,5 +495,7 @@
         private DataGridView dataGridViewSubject;
         private DataGridView dataGridViewSchedule;
         private DataGridView dataGridViewPayment;
+        private Label lbYear;
+        private Label label3;
     }
 }
