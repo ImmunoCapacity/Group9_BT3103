@@ -152,7 +152,7 @@
             btnPrint.FlatStyle = FlatStyle.System;
             btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
             btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPrint.Location = new Point(-212, 853);
+            btnPrint.Location = new Point(-220, 885);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(236, 57);
             btnPrint.TabIndex = 111;
@@ -164,11 +164,12 @@
             // 
             btnSave.AccessibleRole = AccessibleRole.IpAddress;
             btnSave.Anchor = AnchorStyles.Left;
+            btnSave.Enabled = false;
             btnSave.FlatAppearance.BorderColor = Color.Firebrick;
             btnSave.FlatStyle = FlatStyle.System;
             btnSave.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
             btnSave.ForeColor = Color.FromArgb(64, 64, 64);
-            btnSave.Location = new Point(-212, 916);
+            btnSave.Location = new Point(576, 885);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(236, 57);
             btnSave.TabIndex = 110;
@@ -219,11 +220,12 @@
             // cbStatus
             // 
             cbStatus.FormattingEnabled = true;
-            cbStatus.Items.AddRange(new object[] { "Enrolled", "Pending", "Dropout" });
+            cbStatus.Items.AddRange(new object[] { "New", "Old", "Transferee", "Graduated", "Inactive", "Dropout" });
             cbStatus.Location = new Point(830, 199);
             cbStatus.Name = "cbStatus";
             cbStatus.Size = new Size(183, 28);
             cbStatus.TabIndex = 116;
+            cbStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
             // 
             // lbGrade
             // 

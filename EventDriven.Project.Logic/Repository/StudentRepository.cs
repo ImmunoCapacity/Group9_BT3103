@@ -71,25 +71,55 @@ namespace EventDriven.Project.Businesslogic.Repository
         }
 
         // DELETE student
+        //public async Task<StudentModel> DeleteAsync(int id)
+        //{
+        //    var studentToDelete = GetByIdAsync(id);
+        //    var query = "DELETE FROM tblStudents WHERE Id=@Id";
+
+        //    using (SqlConnection connection = new SqlConnection(connect.connectionString))
+        //    {
+        //        connection.Open();
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@Id", id);
+        //            int rowsAffected = command.ExecuteNonQuery();
+        //            if (rowsAffected == 0)
+        //                throw new Exception("Delete failed. No student found with the given ID.");
+        //        }
+        //    }
+
+        //    return await studentToDelete;
+        //}
+
+
         public async Task<StudentModel> DeleteAsync(int id)
         {
-            var studentToDelete = GetByIdAsync(id);
-            var query = "DELETE FROM tblStudents WHERE Id=@Id";
+            // Get the student first
+            var studentToUpdate = await GetByIdAsync(id);
+            if (studentToUpdate == null)
+                throw new Exception("No student found with the given ID.");
+
+            // Update Status to Inactive
+            var query = "UPDATE tblStudents SET Status = 'Inactive' WHERE Id = @Id";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
-                connection.Open();
+                await connection.OpenAsync();
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    int rowsAffected = command.ExecuteNonQuery();
+                    int rowsAffected = await command.ExecuteNonQueryAsync();
                     if (rowsAffected == 0)
-                        throw new Exception("Delete failed. No student found with the given ID.");
+                        throw new Exception("Update failed. No student found with the given ID.");
                 }
             }
 
-            return await studentToDelete;
+            // Reflect the status change in the returned model
+            studentToUpdate.Status = "Inactive";
+            return studentToUpdate;
         }
+
+
 
         // GET all students
         public async Task<List<StudentModel>> GetAllAsync()

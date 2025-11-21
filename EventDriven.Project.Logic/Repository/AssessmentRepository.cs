@@ -10,6 +10,29 @@ namespace EventDriven.Project.Logic.Repository
 {
     public class AssessmentRepository
     {
+
+        public async Task UpdateStudentStatusAsync(int studentId, string newStatus)
+        {
+            var query = @"UPDATE tblStudents
+                  SET Status = @Status
+                  WHERE Id = @StudentId";
+
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Status", newStatus);
+                    command.Parameters.AddWithValue("@StudentId", studentId);
+
+                    int rowsAffected = await command.ExecuteNonQueryAsync();
+
+                    if (rowsAffected == 0)
+                        throw new Exception("Update failed. No student found with the given ID.");
+                }
+            }
+        }
+
         public async Task<List<StudentAssessment>> GetAssessmentAsync(int studentId)
         {
             var query = @"SELECT * FROM vwStudentAssessment WHERE StudentId = @StudentId";

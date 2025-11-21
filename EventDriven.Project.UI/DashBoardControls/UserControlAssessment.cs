@@ -158,12 +158,19 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            assessmentController.UpdateStudentStatusAsync(int.Parse(lbId.Text), cbStatus.Text, authenticationKey);
 
+            btnSave.Enabled = false;
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbStatus_SelectedValueChanged(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
         }
     }
 }
