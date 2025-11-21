@@ -31,6 +31,8 @@
         public string? GuardianAddress { get; set; }
         public decimal? GWA { get; set; }
 
+        public int AcademicYearId { get; set; }
+
 
     }
 }

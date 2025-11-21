@@ -88,6 +88,8 @@
     <Build Include="dbo\Tables\tblPaymentSchedule.sql" />
     <Build Include="dbo\exec\trg_InsertStudentSchedules.sql" />
     <Build Include="dbo\exec\CreatePhilippineMiddleSchoolSchedule.sql" />
+    <Build Include="tblAcademicYear.sql" />
+    <Build Include="dbo\Tables\Academic Information Table\tblEnrollment.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment1.sql" />

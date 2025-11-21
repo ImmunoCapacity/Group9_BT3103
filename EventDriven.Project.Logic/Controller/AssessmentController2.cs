@@ -29,6 +29,24 @@ namespace EventDriven.Project.Logic.Controller
 
             return matching != null;
         }
+        public async void UpdateStudentStatusAsync(int studentId, string status, UserModel authenticationKey)
+        {
+            if (!Authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            if (studentId <= 0)
+                throw new Exception("Missing parameter: student ID");
+
+            try
+            {
+                await assessmentRepository.UpdateStudentStatusAsync(studentId, status);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving assessment: {ex.Message}");
+            }
+        }
+
 
 
         // GET assessment for student

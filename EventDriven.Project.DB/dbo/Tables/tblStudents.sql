@@ -30,5 +30,8 @@
     [GuardianAddress] NVARCHAR(255) NULL,
 
     [CreatedAt] DATETIME DEFAULT GETDATE(), 
-    [GWA] DECIMAL(4, 2) NULL
+    [GWA] DECIMAL(4, 2) NULL, 
+    [AcademicYearId] INT NULL,
+    Constraint FK_Students_AcademicYear FOREIGN KEY (AcademicYearId) REFERENCES tblAcademicYear(Id)
+    
 )

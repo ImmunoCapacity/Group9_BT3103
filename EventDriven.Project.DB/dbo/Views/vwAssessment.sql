@@ -40,7 +40,11 @@ SELECT
     -- Subject
     sub.SubjectID,
     sub.SubjectName,
-    sub.Category
+    sub.Category,
+
+    --Academic Year
+    ac.Id as YearId,
+    ac.YearName as YearName
 
 FROM tblStudents s
 
@@ -62,4 +66,6 @@ LEFT JOIN tblTeachers t
     ON sch.TeacherID = t.TeacherID
 
 LEFT JOIN tblSubjects sub
-    ON sch.SubjectID = sub.SubjectID;
+    ON sch.SubjectID = sub.SubjectID
+LEFT JOIN tblAcademicYear ac ON s.AcademicYearId = ac.Id;
+    ;

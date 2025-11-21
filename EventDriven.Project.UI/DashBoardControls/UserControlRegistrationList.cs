@@ -46,6 +46,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 foreach (var student in students)
                 {
+                    if(student.Status != "Inactive") 
                     dataGridView1.Rows.Add(
                         student.Id,
                         $"{student.FirstName} {student.MiddleName} {student.LastName}",

@@ -61,6 +61,8 @@
             dataGridViewSubject = new DataGridView();
             dataGridViewSchedule = new DataGridView();
             dataGridViewPayment = new DataGridView();
+            lbYear = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSchedule).BeginInit();
@@ -152,7 +154,7 @@
             btnPrint.FlatStyle = FlatStyle.System;
             btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
             btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPrint.Location = new Point(-212, 853);
+            btnPrint.Location = new Point(-220, 885);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(236, 57);
             btnPrint.TabIndex = 111;
@@ -164,11 +166,12 @@
             // 
             btnSave.AccessibleRole = AccessibleRole.IpAddress;
             btnSave.Anchor = AnchorStyles.Left;
+            btnSave.Enabled = false;
             btnSave.FlatAppearance.BorderColor = Color.Firebrick;
             btnSave.FlatStyle = FlatStyle.System;
             btnSave.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
             btnSave.ForeColor = Color.FromArgb(64, 64, 64);
-            btnSave.Location = new Point(-212, 916);
+            btnSave.Location = new Point(576, 885);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(236, 57);
             btnSave.TabIndex = 110;
@@ -219,11 +222,12 @@
             // cbStatus
             // 
             cbStatus.FormattingEnabled = true;
-            cbStatus.Items.AddRange(new object[] { "Enrolled", "Pending", "Dropout" });
+            cbStatus.Items.AddRange(new object[] { "New", "Old", "Transferee", "Graduated", "Inactive", "Dropout" });
             cbStatus.Location = new Point(830, 199);
             cbStatus.Name = "cbStatus";
             cbStatus.Size = new Size(183, 28);
             cbStatus.TabIndex = 116;
+            cbStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
             // 
             // lbGrade
             // 
@@ -412,11 +416,33 @@
             dataGridViewPayment.Size = new Size(438, 459);
             dataGridViewPayment.TabIndex = 123;
             // 
+            // lbYear
+            // 
+            lbYear.AutoSize = true;
+            lbYear.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            lbYear.Location = new Point(219, 257);
+            lbYear.Name = "lbYear";
+            lbYear.Size = new Size(119, 29);
+            lbYear.TabIndex = 125;
+            lbYear.Text = "2000-2001";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            label3.Location = new Point(119, 257);
+            label3.Name = "label3";
+            label3.Size = new Size(65, 29);
+            label3.TabIndex = 124;
+            label3.Text = "Year:";
+            // 
             // UserControlAssessment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(lbYear);
+            Controls.Add(label3);
             Controls.Add(dataGridViewPayment);
             Controls.Add(dataGridViewSchedule);
             Controls.Add(dataGridViewSubject);
@@ -469,5 +495,7 @@
         private DataGridView dataGridViewSubject;
         private DataGridView dataGridViewSchedule;
         private DataGridView dataGridViewPayment;
+        private Label lbYear;
+        private Label label3;
     }
 }

@@ -20,12 +20,13 @@ namespace EventDriven.Project.UI.DashBoardControls
         private string role;
         private UserModel authenticationKey;
         private MainForm main;
+        private AcademicYearModel AcademicYearModel;
         public UserControlPaymentHistory(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
             this.main = main;
             this.authenticationKey = authenticationKey;
-            InitializeComponent();
+            InitializeComponent(); 
             paymentController = new PaymentController();
             LoadPaymentHistory();
             dataGridView1.SortCompare += dataGridView1_SortCompare;
@@ -49,6 +50,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
+
                 dataGridView1.Rows.Clear();
 
                 // Get all payments

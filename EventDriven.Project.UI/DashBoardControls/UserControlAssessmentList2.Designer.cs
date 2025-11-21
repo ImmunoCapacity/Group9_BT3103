@@ -37,10 +37,12 @@
             panel2 = new Panel();
             dataGridView1 = new DataGridView();
             panel4 = new Panel();
+            comboBox1 = new ComboBox();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
             tabPage2 = new TabPage();
             panel1 = new Panel();
+            Column1 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel2.SuspendLayout();
@@ -111,6 +113,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1 });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.SeaShell;
             dataGridViewCellStyle3.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -144,6 +147,7 @@
             // panel4
             // 
             panel4.BackColor = Color.White;
+            panel4.Controls.Add(comboBox1);
             panel4.Controls.Add(btnSearchStuIn);
             panel4.Controls.Add(txtSearch);
             panel4.Dock = DockStyle.Top;
@@ -152,6 +156,16 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(1456, 51);
             panel4.TabIndex = 2;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(685, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(171, 29);
+            comboBox1.TabIndex = 151;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // btnSearchStuIn
             // 
@@ -197,6 +211,15 @@
             panel1.Size = new Size(1456, 996);
             panel1.TabIndex = 0;
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Column1";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Visible = false;
+            Column1.Width = 125;
+            // 
             // UserControlAssessmentList2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -226,5 +249,7 @@
         private TextBox txtSearch;
         private TabPage tabPage2;
         private Panel panel1;
+        private ComboBox comboBox1;
+        private DataGridViewTextBoxColumn Column1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
 
 namespace EventDriven.Project.UI.DashBoardControls
@@ -20,6 +22,8 @@ namespace EventDriven.Project.UI.DashBoardControls
         private string role;
         private UserModel authenticationKey;
         private MainForm main;
+        private AcademicYearController academicYearController;
+        private List<AcademicYearModel> academicYearModels;
         public UserControlAsessmentList(string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
@@ -27,25 +31,37 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.main = main;
             this.authenticationKey = authenticationKey;
             studentController = new StudentController();
+            academicYearController = new AcademicYearController();
             LoadStudents();
+            loadyear();
         }
 
         private async void LoadStudents()
         {
             try
             {
+
+
                 dataGridView1.Rows.Clear();
                 List<StudentModel> students = await studentController.GetAllAsync(authenticationKey);
+                academicYearModels = await academicYearController.GetAllAsync(authenticationKey);
 
                 foreach (var student in students)
                 {
+
                     dataGridView1.Rows.Add(
                         student.Id,
                         $"{student.FirstName} {student.MiddleName} {student.LastName}",
+
                         student.Contact,
                         student.GradeLevel,
-                        student.BirthDate.ToString("yyyy-MM-dd")
+                        student.BirthDate.ToString("yyyy-MM-dd"),
+                        student.AcademicYearId
                     );
+                }
+                foreach (var year in academicYearModels)
+                {
+                    comboBox1.Items.Add(year.YearName);
                 }
             }
             catch (Exception ex)
@@ -53,6 +69,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void refresh(object sender, EventArgs e)
         {
@@ -169,6 +187,23 @@ namespace EventDriven.Project.UI.DashBoardControls
             //studentAssessmentControl.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
             //panel2.Controls.Add(studentAssessmentControl);
             //info.btnSave.Click += refresh;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadyear();   
+        }
+        private async void loadyear()
+        {
+            int id = await academicYearController.getYearId(comboBox1.Text, academicYearModels, authenticationKey);
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                bool match = false;
+                match = row.Cells["Column1"].Value.ToString().Contains(id.ToString());
+                row.Visible = match;
+            }
         }
     }
 }

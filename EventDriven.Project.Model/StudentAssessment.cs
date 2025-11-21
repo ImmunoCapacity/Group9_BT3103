@@ -40,5 +40,8 @@ namespace EventDriven.Project.Model
         public int? SubjectID { get; set; }
         public string SubjectName { get; set; }
         public string Category { get; set; }
+
+        public int? yearId { get; set; }
+        public string year { get; set; }
     }
 }

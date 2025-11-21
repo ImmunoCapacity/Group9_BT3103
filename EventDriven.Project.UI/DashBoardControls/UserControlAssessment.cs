@@ -81,6 +81,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbGrade.Text = s.GradeLevel;
                 lbSection.Text = s.StudentSection;
                 cbStatus.Text = s.Status;
+                lbYear.Text = s.year;
 
                 // ------- Fill Subjects Grid -------
                 var subjectRows = assessmentList
@@ -158,12 +159,19 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            assessmentController.UpdateStudentStatusAsync(int.Parse(lbId.Text), cbStatus.Text, authenticationKey);
 
+            btnSave.Enabled = false;
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbStatus_SelectedValueChanged(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
         }
     }
 }
