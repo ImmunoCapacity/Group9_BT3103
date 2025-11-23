@@ -38,6 +38,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private async void LoadStudents()
         {
+            loadyear();
             List<StudentAssessment> allAssessments =
                 await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
             
@@ -171,17 +172,25 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             loadyear();
         }
         private async void loadyear()
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            try
             {
-                if (row.IsNewRow) continue;
+                if(comboBox1.Text == null) { return; }
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.IsNewRow) continue;
 
-                bool match = false;
-                match = row.Cells["Year"].Value.ToString().Contains(comboBox1.Text);
-                row.Visible = match;
+                    bool match = false;
+                    match = row.Cells["Year"].Value.ToString().Contains(comboBox1.Text);
+                    row.Visible = match;
+                }
+            }
+            catch (Exception ex)
+            {
             }
         }
     }

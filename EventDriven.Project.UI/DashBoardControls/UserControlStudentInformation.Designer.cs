@@ -83,6 +83,8 @@
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             btnPrint = new Button();
+            label22 = new Label();
+            lbStuInSec = new Label();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -192,9 +194,9 @@
             cmbSection.Items.AddRange(new object[] { "7-A", "7-B", "7-C", "8-A", "8-B", "8-C", "9-A", "9-B", "9-C", "10-A", "10-B", "10-C" });
             cmbSection.Location = new Point(877, 660);
             cmbSection.Name = "cmbSection";
-            cmbSection.Size = new Size(329, 32);
+            cmbSection.Size = new Size(163, 32);
             cmbSection.TabIndex = 86;
-            cmbSection.SelectedIndexChanged += cmbSection_SelectedIndexChanged;
+            cmbSection.SelectedValueChanged += cmbSection_SelectedValueChanged;
             // 
             // label19
             // 
@@ -273,6 +275,7 @@
             txtMotherContact.Name = "txtMotherContact";
             txtMotherContact.Size = new Size(329, 29);
             txtMotherContact.TabIndex = 78;
+            txtMotherContact.KeyPress += OnlyNumbers_KeyPress;
             // 
             // txtFatherContactNo
             // 
@@ -282,6 +285,7 @@
             txtFatherContactNo.Name = "txtFatherContactNo";
             txtFatherContactNo.Size = new Size(329, 29);
             txtFatherContactNo.TabIndex = 77;
+            txtFatherContactNo.KeyPress += OnlyNumbers_KeyPress;
             // 
             // txtEmail
             // 
@@ -422,6 +426,7 @@
             txtContactNo.Name = "txtContactNo";
             txtContactNo.Size = new Size(406, 29);
             txtContactNo.TabIndex = 63;
+            txtContactNo.KeyPress += OnlyNumbers_KeyPress;
             // 
             // txtAddress
             // 
@@ -662,12 +667,36 @@
             btnPrint.UseVisualStyleBackColor = true;
             btnPrint.Click += btnPrint_Click;
             // 
+            // label22
+            // 
+            label22.AccessibleRole = AccessibleRole.IpAddress;
+            label22.AutoSize = true;
+            label22.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            label22.Location = new Point(1046, 661);
+            label22.Name = "label22";
+            label22.Size = new Size(119, 24);
+            label22.TabIndex = 102;
+            label22.Text = "No Students:";
+            // 
+            // lbStuInSec
+            // 
+            lbStuInSec.AccessibleRole = AccessibleRole.IpAddress;
+            lbStuInSec.AutoSize = true;
+            lbStuInSec.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            lbStuInSec.Location = new Point(1163, 660);
+            lbStuInSec.Name = "lbStuInSec";
+            lbStuInSec.Size = new Size(43, 24);
+            lbStuInSec.TabIndex = 103;
+            lbStuInSec.Text = "000";
+            // 
             // UserControlStudentInformation
             // 
             AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
+            Controls.Add(lbStuInSec);
+            Controls.Add(label22);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(textBox1);
             Controls.Add(txtSearchStudentIn);
@@ -786,5 +815,7 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Button btnPrint;
+        private Label label22;
+        private Label lbStuInSec;
     }
 }

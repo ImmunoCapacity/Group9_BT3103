@@ -50,7 +50,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                           GuardianName=@GuardianName, GuardianRelationship=@GuardianRelationship,
                           GuardianContact=@GuardianContact, GuardianAddress=@GuardianAddress,
                           Suffix=@Suffix, Section=@Section, Gender=@Gender, Email=@Email,
-                          LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, GWA=@GWA
+                          LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, GWA=@GWA, AcademicYearId=@AcademicYearId
                           WHERE Id=@Id";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
@@ -222,8 +222,34 @@ namespace EventDriven.Project.Businesslogic.Repository
             command.Parameters.AddWithValue("@Address", student.Address ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@Contact", student.Contact ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@GWA", student.GWA ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@AcademicYearId", student.AcademicYearId);
 
         }
+
+        public async Task<int> GetStudentCountBySectionAndYearAsync(string sectionName, string yearName)
+        {
+            var query = @"
+        SELECT COUNT(*)
+        FROM tblStudents s
+        JOIN tblAcademicYear ay ON s.AcademicYearId = ay.Id
+        WHERE s.Section = @SectionName
+          AND ay.YearName = @YearName";
+
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@SectionName", sectionName);
+                    command.Parameters.AddWithValue("@YearName", yearName);
+
+                    object result = await command.ExecuteScalarAsync();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+            }
+        }
+
 
         // Helper method to read student from SqlDataReader
         private StudentModel ReadStudent(SqlDataReader reader)

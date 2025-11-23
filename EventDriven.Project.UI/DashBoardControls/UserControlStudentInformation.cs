@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using EventDriven.Project.Businesslogic.Controller;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
  
 
@@ -18,6 +20,8 @@ namespace EventDriven.Project.UI
         private List<StudentModel> studentsToPrint = new List<StudentModel>();
         private int currentPrintIndex = 0;
         private UserModel authenticationKey;
+        private AcademicYearController academicYearController;
+        private AcademicYearModel academicYearModel;
 
         public UserControlStudentInformation(string role, MainForm main, UserModel authenticationKey)
         {
@@ -26,6 +30,8 @@ namespace EventDriven.Project.UI
             highlightPicture(pictureBox1);
             studentController = new StudentController();
             this.authenticationKey = authenticationKey;
+            academicYearController = new AcademicYearController();
+           
 
             this.main = main;
             if (role != "Admin")
@@ -33,10 +39,126 @@ namespace EventDriven.Project.UI
                 //btnDeleteStudInfo.Visible = false;
                 pictureBox3.Visible = false;
             }
+            getStudentsInSection();
         }
+        
+        int studentsInSection = 0;
+
+        private async void getStudentsInSection()
+        {
+            try
+            {
+                academicYearModel = await academicYearController.GetActiveYearAsync(authenticationKey);
+                string sectionName = cmbSection.Text;
+                
+
+                if (string.IsNullOrWhiteSpace(sectionName))
+                {
+                    lbStuInSec.Text = "0";
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(academicYearModel.YearName))
+                {
+                    lbStuInSec.Text = "0";
+                    return;
+                }
+
+                // Call the controller
+                studentsInSection = await studentController
+                    .GetStudentCountBySectionAndYearAsync(sectionName, academicYearModel.YearName, authenticationKey);
+
+                // Update UI
+                lbStuInSec.Text = studentsInSection.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool ValidateStudentForm()
+        {
+            bool isValid = true;
+
+            void MarkInvalid(Control ctrl)
+            {
+                ctrl.BackColor = Color.MistyRose;
+                isValid = false;
+            }
+
+            void MarkValid(Control ctrl)
+            {
+                ctrl.BackColor = Color.White;
+            }
+
+            // Required text fields
+            if (string.IsNullOrWhiteSpace(txtFullname.Text)) MarkInvalid(txtFullname); else MarkValid(txtFullname);
+            if (string.IsNullOrWhiteSpace(txtLastName.Text)) MarkInvalid(txtLastName); else MarkValid(txtLastName);
+            if (string.IsNullOrWhiteSpace(cmbGender.Text)) MarkInvalid(cmbGender); else MarkValid(cmbGender);
+            if (string.IsNullOrWhiteSpace(cmbGradeLevel.Text)) MarkInvalid(cmbGradeLevel); else MarkValid(cmbGradeLevel);
+            if (string.IsNullOrWhiteSpace(cmbSection.Text)) MarkInvalid(cmbSection); else MarkValid(cmbSection);
+
+            // Newly added required fields
+            if (string.IsNullOrWhiteSpace(txtAddress.Text)) MarkInvalid(txtAddress); else MarkValid(txtAddress);
+            if (string.IsNullOrWhiteSpace(txtRelationship.Text)) MarkInvalid(txtRelationship); else MarkValid(txtRelationship);
+            if (string.IsNullOrWhiteSpace(txtLastGrade.Text)) MarkInvalid(txtLastGrade); else MarkValid(txtLastGrade);
+
+            // GWA required + numeric check
+            if (string.IsNullOrWhiteSpace(txtGWA.Text) ||
+                !decimal.TryParse(txtGWA.Text, out _))
+            {
+                MarkInvalid(txtGWA);
+            }
+            else
+            {
+                MarkValid(txtGWA);
+            }
+
+            // Parent or guardian must have at least 1 name
+            if (string.IsNullOrWhiteSpace(txtFatherName.Text) &&
+                string.IsNullOrWhiteSpace(txtMotherName.Text) &&
+                string.IsNullOrWhiteSpace(txtGuardian.Text))
+            {
+                MarkInvalid(txtFatherName);
+                MarkInvalid(txtMotherName);
+                MarkInvalid(txtGuardian);
+            }
+            else
+            {
+                MarkValid(txtFatherName);
+                MarkValid(txtMotherName);
+                MarkValid(txtGuardian);
+            }
+
+            // Numeric-only fields
+            if (!long.TryParse(txtContactNo.Text, out _)) MarkInvalid(txtContactNo); else MarkValid(txtContactNo);
+            if (!long.TryParse(txtFatherContactNo.Text, out _)) MarkInvalid(txtFatherContactNo); else MarkValid(txtFatherContactNo);
+            if (!long.TryParse(txtMotherContact.Text, out _)) MarkInvalid(txtMotherContact); else MarkValid(txtMotherContact);
+
+            // ✔ At least one (New, Old, Transferee) must be checked
+            if (!cbNew.Checked && !cbTransferee.Checked && !cbOld.Checked)
+            {
+                // highlight label or all three checkboxes
+                cbNew.BackColor = Color.MistyRose;
+                cbTransferee.BackColor = Color.MistyRose;
+                cbOld.BackColor = Color.MistyRose;
+                isValid = false;
+            }
+            else
+            {
+                cbNew.BackColor = Color.Transparent;
+                cbTransferee.BackColor = Color.Transparent;
+                cbOld.BackColor = Color.Transparent;
+            }
+
+            return isValid;
+        }
+
 
         private StudentModel GetStudentFromForm()
         {
+
             return new StudentModel
             {
                 FirstName = txtFullname.Text,
@@ -160,6 +282,7 @@ namespace EventDriven.Project.UI
             {
                 MessageBox.Show(ex.Message);
             }
+            getStudentsInSection();
         }
 
         //private void highlightButton(Button selected)
@@ -292,6 +415,47 @@ namespace EventDriven.Project.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Save();
+        }
+        public async void Save()
+        {
+            if (!ValidateStudentForm())
+            {
+                MessageBox.Show("Please correct the highlighted fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Get count of students in selected grade + section
+            int countInSection = int.Parse(lbStuInSec.Text);
+
+            bool isSectionFull = countInSection >= 30;
+
+            // If full, apply role-based logic
+            if (isSectionFull)
+            {
+                if (authenticationKey.Role != "Admin")
+                {
+                    MessageBox.Show("This section already reached the limit of 30 students.\n\n" +
+                                    "Only admins can add students beyond the limit.",
+                                    "Section Full", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    var overrideResult = MessageBox.Show(
+                        $"This section already has {countInSection} students.\n\n" +
+                        "Do you want to add this student anyway?",
+                        "Override Section Limit",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (overrideResult == DialogResult.No)
+                    {
+                        return; // Cancel the entire save
+                    }
+                }
+            }
             switch (action)
             {
                 case "Add":
@@ -300,6 +464,7 @@ namespace EventDriven.Project.UI
                         var student = GetStudentFromForm();
                         var result = studentController.AddAsync(student, authenticationKey);
                         MessageBox.Show(result != null ? "Student added successfully!" : "Failed to add student.");
+                        this.ClearForm();
                     }
                     catch (Exception ex)
                     {
@@ -324,10 +489,11 @@ namespace EventDriven.Project.UI
                     break;
             }
         }
+
         public void selectEdit()
         {
             action = "Edit";
-
+            highlightPicture(pictureBox3);
 
         }
         public void selectAdd()
@@ -602,5 +768,17 @@ namespace EventDriven.Project.UI
         {
 
         }
+
+        private void cmbSection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            getStudentsInSection();
+        }
+
+        private void OnlyNumbers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true; // Block input
+        }
+
     }
 }

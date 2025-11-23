@@ -88,6 +88,29 @@ namespace EventDriven.Project.Businesslogic.Controller
             }
         }
 
+        // GET: student count by section and academic year (using YearName)
+        public async Task<int> GetStudentCountBySectionAndYearAsync(string sectionName, string yearName, UserModel authenticationKey)
+        {
+            if (!authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            if (string.IsNullOrWhiteSpace(sectionName))
+                throw new Exception("Missing parameter: sectionName");
+
+            if (string.IsNullOrWhiteSpace(yearName))
+                throw new Exception("Missing parameter: yearName");
+
+            try
+            {
+                return await studentRepository.GetStudentCountBySectionAndYearAsync(sectionName, yearName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving student count: {ex.Message}");
+            }
+        }
+
+
         // GET student by Id
         public async Task<StudentModel> GetByIdAsync(int id, UserModel authenticationKey)
         {

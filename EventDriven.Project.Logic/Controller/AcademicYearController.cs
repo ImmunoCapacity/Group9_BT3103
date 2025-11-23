@@ -92,6 +92,22 @@ namespace EventDriven.Project.Logic.Controller
             }
         }
 
+        public async Task<AcademicYearModel> GetActiveYearAsync(UserModel authenticationKey)
+        {
+            if (!authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            try
+            {
+                return await academicYearRepository.GetActiveYearAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving active academic year: {ex.Message}");
+            }
+        }
+
+
         // GET Academic Year by Id
         public async Task<AcademicYearModel> GetByIdAsync(int id, UserModel authenticationKey)
         {
