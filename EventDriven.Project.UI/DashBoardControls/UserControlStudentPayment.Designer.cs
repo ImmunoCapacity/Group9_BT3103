@@ -612,7 +612,7 @@
             txtPaymentReceived.Name = "txtPaymentReceived";
             txtPaymentReceived.Size = new Size(243, 23);
             txtPaymentReceived.TabIndex = 154;
-            txtPaymentReceived.Text = "₱0.00";
+            txtPaymentReceived.Text = "0.00";
             txtPaymentReceived.TextChanged += txtPaymentReceived_TextChanged;
             // 
             // btnPay

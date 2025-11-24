@@ -26,7 +26,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         private PaymentModel selectedPayment; // Set this before printing
         private int currentPage = 1;
 
-
         // Fields to hold data for printing
         private StudentPaymentInfo currentStudentPayment;
         private decimal currentPaymentReceived;
@@ -48,6 +47,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             paymentController = new PaymentController();
             LoadStudents();
         }
+
         //private string getTuitionFee()
         //{
         //    return dataGridView1.SelectedCells
@@ -120,7 +120,6 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView2.Columns["dataGridViewTextBoxColumn6"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
         }
 
-
         private PaymentModel currentPayment;
 
         private async void btnPay_Click(object sender, EventArgs e)
@@ -141,8 +140,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                     return;
                 }
 
-                // 3️⃣ Validate payment input
-                if (!decimal.TryParse(txtPaymentReceived.Text, out decimal paymentAmount))
+                // 3️⃣ Validate payment input (strip ₱ sign before parsing)
+                string paymentInput = txtPaymentReceived.Text.Replace("₱", "").Trim();
+                if (!decimal.TryParse(paymentInput, out decimal paymentAmount))
                 {
                     MessageBox.Show("Please enter a valid numeric payment amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -155,8 +155,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                     return;
                 }
 
-                // 4️⃣ Validate balance
-                if (!decimal.TryParse(lbBalance.Text, out decimal currentBalance))
+                // 4️⃣ Validate balance (strip ₱ sign before parsing)
+                string balanceInput = lbBalance.Text.Replace("₱", "").Trim();
+                if (!decimal.TryParse(balanceInput, out decimal currentBalance))
                 {
                     MessageBox.Show("Invalid balance amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -191,9 +192,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                 var addedPayment = await paymentController.AddAsync(currentPayment, authenticationKey);
 
                 // ✅ Success message
-                string msg = $"Payment of {paymentAmount} added successfully!";
+                string msg = $"Payment of ₱{paymentAmount:N2} added successfully!";
                 if (change > 0)
-                    msg += $"\nChange to return: {change}";
+                    msg += $"\nChange to return: ₱{change:N2}";
 
                 MessageBox.Show(msg, "Payment Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -215,8 +216,8 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             currentBalance = currentBalance - paymentAmount;
             // Update the UI labels
-            lbBalance.Text = currentBalance.ToString("F2");
-            lbChange.Text = change.ToString("F2");
+            lbBalance.Text = $"₱{currentBalance:N2}";
+            lbChange.Text = $"₱{change:N2}";
 
             //// Reset the payment textbox
             //txtPaymentReceived.Text = "0.00";
@@ -242,8 +243,6 @@ namespace EventDriven.Project.UI.DashBoardControls
             // only digits
             match(dataGridView1, searchValue);
             match(dataGridView2, searchValue);
-
-
         }
 
         private void match(DataGridView rows, string searchValue)
@@ -287,8 +286,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                 grade = row.Cells["Column3"].Value?.ToString() ?? "";
                 tuitionFee = row.Cells["Column4"].Value?.ToString() ?? "";
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
-                lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "0.00";
-                lbChange.Text = "0.00";
+                lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "₱0.00";
+                lbChange.Text = "₱0.00";
                 lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column12"].Value.ToString().Equals("Full"))
                 {
@@ -299,7 +298,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 else
                 {
                     rbPartialPayment.Checked = true;
-                    txtPaymentReceived.Text = "0.00";
+                    txtPaymentReceived.Text = "₱0.00";
 
                 }
             }
@@ -311,16 +310,13 @@ namespace EventDriven.Project.UI.DashBoardControls
             // Make sure user clicked a valid row (not header or empty space)
             if (row.Cells["Column10"].Value?.ToString().Length > 0)
             {
-
-
-
                 // Example: assuming these are the column names or indexes
 
                 grade = row.Cells["dataGridViewTextBoxColumn3"].Value?.ToString() ?? "";
                 tuitionFee = row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
                 name = lbName.Text = row.Cells["dataGridViewTextBoxColumn2"].Value?.ToString() ?? "" ?? "";
-                lbBalance.Text = row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "0.00";
-                lbChange.Text = "0.00";
+                lbBalance.Text = row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "₱0.00";
+                lbChange.Text = "₱0.00";
                 lbId.Text = row.Cells["dataGridViewTextBoxColumn1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column10"].Value.ToString().Equals("Full"))
                 {
@@ -345,7 +341,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
             else
             {
-                txtPaymentReceived.Text = "0.00";
+                txtPaymentReceived.Text = "₱0.00";
             }
         }
 
@@ -450,7 +446,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 $"Name: {currentPayment.Name}",
                 $"Grade Level: {currentPayment.Grade}",
                 $"Tuition Fee: {tuitionFee}",
-                $"Total Paid: {currentPayment.AmountPaid}",
+                $"Total Paid: ₱{currentPayment.AmountPaid:N2}",
                 $"Remaining Balance: {lbBalance.Text}"
             };
 
