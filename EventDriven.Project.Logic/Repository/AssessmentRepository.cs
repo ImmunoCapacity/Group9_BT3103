@@ -61,7 +61,8 @@ namespace EventDriven.Project.Logic.Repository
         }
         public async Task<List<StudentAssessment>> GetAllAssessmentsAsync()
         {
-            var query = @"SELECT * FROM vwStudentAssessment";
+            var query = @"SELECT * FROM vwStudentAssessment WHERE YearName IS NOT NULL
+";
 
             var list = new List<StudentAssessment>();
 

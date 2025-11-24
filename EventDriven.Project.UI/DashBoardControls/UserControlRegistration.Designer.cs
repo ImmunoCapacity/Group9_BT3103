@@ -70,6 +70,8 @@
             checkedListBox2 = new CheckedListBox();
             cbYear = new ComboBox();
             label5 = new Label();
+            lbStuInSec = new Label();
+            label22 = new Label();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
@@ -190,8 +192,9 @@
             cmbSection.Items.AddRange(new object[] { "7-A", "7-B", "7-C", "8-A", "8-B", "8-C", "9-A", "9-B", "9-C", "10-A", "10-B", "10-C" });
             cmbSection.Location = new Point(877, 488);
             cmbSection.Name = "cmbSection";
-            cmbSection.Size = new Size(329, 32);
+            cmbSection.Size = new Size(163, 32);
             cmbSection.TabIndex = 86;
+            cmbSection.SelectedValueChanged += cmbSection_SelectedValueChanged;
             // 
             // label19
             // 
@@ -303,6 +306,7 @@
             txtContactNo.Name = "txtContactNo";
             txtContactNo.Size = new Size(406, 29);
             txtContactNo.TabIndex = 63;
+            txtContactNo.KeyPress += OnlyNumbers_KeyPress;
             // 
             // txtAddress
             // 
@@ -453,6 +457,7 @@
             pictureBox4.Size = new Size(66, 69);
             pictureBox4.TabIndex = 5;
             pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
             // 
             // label8
             // 
@@ -518,12 +523,36 @@
             label5.TabIndex = 288;
             label5.Text = "Year:\r\n";
             // 
+            // lbStuInSec
+            // 
+            lbStuInSec.AccessibleRole = AccessibleRole.IpAddress;
+            lbStuInSec.AutoSize = true;
+            lbStuInSec.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            lbStuInSec.Location = new Point(1163, 491);
+            lbStuInSec.Name = "lbStuInSec";
+            lbStuInSec.Size = new Size(43, 24);
+            lbStuInSec.TabIndex = 291;
+            lbStuInSec.Text = "000";
+            // 
+            // label22
+            // 
+            label22.AccessibleRole = AccessibleRole.IpAddress;
+            label22.AutoSize = true;
+            label22.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
+            label22.Location = new Point(1046, 492);
+            label22.Name = "label22";
+            label22.Size = new Size(119, 24);
+            label22.TabIndex = 290;
+            label22.Text = "No Students:";
+            // 
             // UserControlRegistration
             // 
             AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
+            Controls.Add(lbStuInSec);
+            Controls.Add(label22);
             Controls.Add(cbYear);
             Controls.Add(label5);
             Controls.Add(checkedListBox2);
@@ -617,6 +646,8 @@
         private CheckedListBox checkedListBox2;
         private ComboBox cbYear;
         private Label label5;
+        private Label lbStuInSec;
+        private Label label22;
         //private Label label25;
     }
 }

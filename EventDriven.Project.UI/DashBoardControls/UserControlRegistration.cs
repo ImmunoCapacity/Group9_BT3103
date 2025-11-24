@@ -18,61 +18,63 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
     namespace EventDriven.Project.UI.DashBoardControls
     {
-        public partial class UserControlRegistration : UserControl
+    public partial class UserControlRegistration : UserControl
+    {
+        private readonly StudentController studentController;
+        private readonly RegistrationController registrationController;
+        private readonly UserModel authenticationKey;
+        private readonly MainForm main;
+        public int selectedStudentId = 0;
+        private string status = "";
+        private string action = "Edit";
+        private List<StudentModel> studentsToPrint = new List<StudentModel>();
+        private int currentPrintIndex = 0;
+        private StudentModel student;
+        private readonly AcademicYearController academicYearController;
+        private List<AcademicYearModel> academicYearModels;
+        private AcademicYearModel academicYearModel;
+
+
+        public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
         {
-            private readonly StudentController studentController;
-            private readonly RegistrationController registrationController;
-            private readonly UserModel authenticationKey;
-            private readonly MainForm main;
-            public int selectedStudentId = 0;
-            private string status = "";
-            private string action = "Edit";
-            private List<StudentModel> studentsToPrint = new List<StudentModel>();
-            private int currentPrintIndex = 0;
-            private StudentModel student;
-            private readonly AcademicYearController academicYearController;
-            private List<AcademicYearModel> academicYearModels;
-        
+            InitializeComponent();
+            studentController = new StudentController();
+            registrationController = new RegistrationController();
+            this.authenticationKey = authenticationKey;
 
-            public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
+            this.main = main;
+            if (role != "Admin")
             {
-                InitializeComponent();
-                studentController = new StudentController();
-                registrationController = new RegistrationController();
-                this.authenticationKey = authenticationKey;
-                
-                this.main = main;
-                if (role != "Admin")
-                {
-                    //btnDeleteStudInfo.Visible = false;
-                    //pictureBox3.Visible = false;
-                }
-                academicYearController = new AcademicYearController();
-                LoadYear();
-                checkedListBox2.SelectionMode = SelectionMode.One;
-                checkedListBox2.CheckOnClick = true;
+                //btnDeleteStudInfo.Visible = false;
+                //pictureBox3.Visible = false;
+            }
+            academicYearController = new AcademicYearController();
+            LoadYear();
+            checkedListBox2.SelectionMode = SelectionMode.One;
+            checkedListBox2.CheckOnClick = true;
 
-                checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
-                
+            checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
+            getStudentsInSection();
+
 
         }
-        
+
         private async void LoadYear()
         {
             academicYearModels = await academicYearController.GetAllAsync(authenticationKey);
-            foreach(var model in academicYearModels)
+            foreach (var model in academicYearModels)
             {
                 cbYear.Items.Add(model.YearName);
                 cbYear.SelectedItem = model.YearName;
             }
-            
+
         }
         private async Task<StudentModel> GetStudentFromForm()
-            {
-                string studentType = "";
-                if (cbNew.Checked) studentType = "New";
-                else if (cbOld.Checked) studentType = "Old";
-                else if (cbTransferee.Checked) studentType = "Transferee";
+        {
+            string studentType = "";
+            if (cbNew.Checked) studentType = "New";
+            else if (cbOld.Checked) studentType = "Old";
+            else if (cbTransferee.Checked) studentType = "Transferee";
 
             student.FirstName = txtFirstname.Text.Trim();
             student.MiddleName = txtMiddleName.Text.Trim();
@@ -88,175 +90,303 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             student.Gender = cmbGender.Text;
             student.Status = studentType;
             student.AcademicYearId = await academicYearController.getYearId(cbYear.Text, academicYearModels, authenticationKey);
-                    
-                
+
+
 
             return student;
-                
-            }
 
-            public void ClearForm()
+        }
+
+        public void ClearForm()
+        {
+            txtFirstname.Clear();
+            txtMiddleName.Clear();
+            txtLastName.Clear();
+            cmbSuffix.SelectedIndex = -1;
+            cmbGradeLevel.SelectedIndex = -1;
+            cmbSection.SelectedIndex = -1;
+            cmbGender.SelectedIndex = -1;
+            txtAddress.Clear();
+            txtContactNo.Clear();
+            txtEmail.Clear();
+            txtGuardian.Clear();
+
+            cbNew.Checked = false;
+            cbOld.Checked = false;
+            cbTransferee.Checked = false;
+
+            selectedStudentId = 0;
+            status = "";
+        }
+        int studentsInSection = 0;
+        private async void getStudentsInSection()
+        {
+            try
             {
-                txtFirstname.Clear();
-                txtMiddleName.Clear();
-                txtLastName.Clear();
-                cmbSuffix.SelectedIndex = -1;
-                cmbGradeLevel.SelectedIndex = -1;
-                cmbSection.SelectedIndex = -1;
-                cmbGender.SelectedIndex = -1;
-                txtAddress.Clear();
-                txtContactNo.Clear();
-                txtEmail.Clear();
-                txtGuardian.Clear();
+                academicYearModel = await academicYearController.GetActiveYearAsync(authenticationKey);
+                string sectionName = cmbSection.Text;
 
-                cbNew.Checked = false;
-                cbOld.Checked = false;
-                cbTransferee.Checked = false;
 
-                selectedStudentId = 0;
-                status = "";
-            }
-
-            private async void btnSave_Click(object sender, EventArgs e)
-            {
-                switch (action)
+                if (string.IsNullOrWhiteSpace(sectionName))
                 {
+                    lbStuInSec.Text = "0";
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(academicYearModel.YearName))
+                {
+                    lbStuInSec.Text = "0";
+                    return;
+                }
+
+                // Call the controller
+                studentsInSection = await studentController
+                    .GetStudentCountBySectionAndYearAsync(sectionName, academicYearModel.YearName, authenticationKey);
+
+                // Update UI
+                lbStuInSec.Text = studentsInSection.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private bool ValidateStudentForm()
+        {
+            bool isValid = true;
+
+            void MarkInvalid(Control ctrl)
+            {
+                ctrl.BackColor = Color.MistyRose;
+                isValid = false;
+            }
+
+            void MarkValid(Control ctrl)
+            {
+                ctrl.BackColor = Color.White;
+            }
+
+            // Required text fields
+            if (string.IsNullOrWhiteSpace(txtFirstname.Text)) MarkInvalid(txtFirstname); else MarkValid(txtFirstname);
+            if (string.IsNullOrWhiteSpace(txtLastName.Text)) MarkInvalid(txtLastName); else MarkValid(txtLastName);
+            if (string.IsNullOrWhiteSpace(cmbGender.Text)) MarkInvalid(cmbGender); else MarkValid(cmbGender);
+            if (string.IsNullOrWhiteSpace(cmbGradeLevel.Text)) MarkInvalid(cmbGradeLevel); else MarkValid(cmbGradeLevel);
+            if (string.IsNullOrWhiteSpace(cmbSection.Text)) MarkInvalid(cmbSection); else MarkValid(cmbSection);
+
+            // Newly added required fields
+            if (string.IsNullOrWhiteSpace(txtAddress.Text)) MarkInvalid(txtAddress); else MarkValid(txtAddress);
 
 
-                    case "Edit":
-                        try
-                        {
-                            if (selectedStudentId <= 0)
-                            {
-                                MessageBox.Show("Please search and select a student first.");
-                                return;
-                            }
+            // Parent or guardian must have at least 1 name
+            if (
+                string.IsNullOrWhiteSpace(txtGuardian.Text))
+            {
+                MarkInvalid(txtGuardian);
+            }
+            else
+            {
+                MarkValid(txtGuardian);
+            }
 
-                            var student = await GetStudentFromForm();
-                            student.Id = selectedStudentId;
+            // Numeric-only fields
+            if (!long.TryParse(txtContactNo.Text, out _)) MarkInvalid(txtContactNo); else MarkValid(txtContactNo);
 
-                            var result = await studentController.UpdateAsync(student, authenticationKey);
-                            //MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error updating student: {ex.Message}");
-                        }
-                        try
-                        {
-                            // Example usage
-                            var (requirements, paymentMethod) = GetCheckedOptions();
+            // ✔ At least one (New, Old, Transferee) must be checked
+            if (!cbNew.Checked && !cbTransferee.Checked && !cbOld.Checked)
+            {
+                // highlight label or all three checkboxes
+                cbNew.BackColor = Color.MistyRose;
+                cbTransferee.BackColor = Color.MistyRose;
+                cbOld.BackColor = Color.MistyRose;
+                isValid = false;
+            }
+            else
+            {
+                cbNew.BackColor = Color.Transparent;
+                cbTransferee.BackColor = Color.Transparent;
+                cbOld.BackColor = Color.Transparent;
+            }
 
+            return isValid;
+        }
 
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            int countInSection = int.Parse(lbStuInSec.Text);
 
-                            // You can now include these values in your RegistrationModel:
-                            var registration = new RegistrationModel
-                            {
-                                StudentId = selectedStudentId,
-                                Section = cmbSection.Text,
-                                Requirements = requirements,
-                                PaymentMethod = paymentMethod
-                            };
+            bool isSectionFull = countInSection >= 30;
 
-                            // Call your controller (if you have one):
-                            var result = await registrationController.UpsertAsync(registration, authenticationKey);
-                            
-                            if (result != null) { MessageBox.Show($"Requirements: {requirements}\nPayment Method: {paymentMethod}"); }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error saving registration: {ex.Message}");
-                        }
-                        break;
+            // If full, apply role-based logic
+            if (isSectionFull)
+            {
+                if (authenticationKey.Role != "Admin")
+                {
+                    MessageBox.Show("This section already reached the limit of 30 students.\n\n" +
+                                    "Only admins can add students beyond the limit.",
+                                    "Section Full", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    var overrideResult = MessageBox.Show(
+                        $"This section already has {countInSection} students.\n\n" +
+                        "Do you want to add this student anyway?",
+                        "Override Section Limit",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (overrideResult == DialogResult.No)
+                    {
+                        return; // Cancel the entire save
+                    }
                 }
             }
-
-            public async void Delete()
+            if (!ValidateStudentForm())
             {
-                try
-                {
-                    if (selectedStudentId <= 0)
+                MessageBox.Show("Please correct the highlighted fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            switch (action)
+            {
+
+
+                case "Edit":
+                    try
                     {
-                        MessageBox.Show("Please search and select a student first.");
-                        return;
+                        if (selectedStudentId <= 0)
+                        {
+                            MessageBox.Show("Please search and select a student first.");
+                            return;
+                        }
+
+                        var student = await GetStudentFromForm();
+                        student.Id = selectedStudentId;
+
+                        var result = await studentController.UpdateAsync(student, authenticationKey);
+                        //MessageBox.Show(result != null ? "Student updated successfully!" : "Failed to update student.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error updating student: {ex.Message}");
+                    }
+                    try
+                    {
+                        // Example usage
+                        var (requirements, paymentMethod) = GetCheckedOptions();
+
+
+
+                        // You can now include these values in your RegistrationModel:
+                        var registration = new RegistrationModel
+                        {
+                            StudentId = selectedStudentId,
+                            Section = cmbSection.Text,
+                            Requirements = requirements,
+                            PaymentMethod = paymentMethod
+                        };
+
+                        // Call your controller (if you have one):
+                        var result = await registrationController.UpsertAsync(registration, authenticationKey);
+
+                        if (result != null) { MessageBox.Show($"Requirements: {requirements}\nPayment Method: {paymentMethod}"); }
                     }
 
-                    if (MessageBox.Show("Are you sure you want to delete this student?",
-                        "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    catch (Exception ex)
                     {
-                        var result = await studentController.DeleteAsync(selectedStudentId, authenticationKey);
-                        if (result != null)
-                        {
-                            MessageBox.Show("Student deleted successfully!");
-                            ClearForm();
-                        }
-                        else MessageBox.Show("Failed to delete student.");
+                        MessageBox.Show($"Error saving registration: {ex.Message}");
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error deleting student: {ex.Message}");
-                }
+                    break;
             }
+            getStudentsInSection();
+        }
 
-            private void SetCheckedOptions(string requirements, string paymentMethod)
+        public async void Delete()
+        {
+            try
             {
-                // Split the comma-separated strings into lists (handle "None" gracefully)
-                var requirementItems = requirements != null && requirements != "None"
-                    ? requirements.Split(',').Select(r => r.Trim()).ToList()
-                    : new List<string>();
-
-                var paymentItems = paymentMethod != null && paymentMethod != "None"
-                    ? paymentMethod.Split(',').Select(p => p.Trim()).ToList()
-                    : new List<string>();
-
-                // Clear all current checks
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                    checkedListBox1.SetItemChecked(i, false);
-                for (int i = 0; i < checkedListBox2.Items.Count; i++)
-                    checkedListBox2.SetItemChecked(i, false);
-
-                // Re-check items that match the stored values
-                foreach (var req in requirementItems)
+                if (selectedStudentId <= 0)
                 {
-                    int index = checkedListBox1.Items.IndexOf(req);
-                    if (index >= 0)
-                        checkedListBox1.SetItemChecked(index, true);
+                    MessageBox.Show("Please search and select a student first.");
+                    return;
                 }
 
-                foreach (var pay in paymentItems)
+                if (MessageBox.Show("Are you sure you want to delete this student?",
+                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int index = checkedListBox2.Items.IndexOf(pay);
-                    if (index >= 0)
-                        checkedListBox2.SetItemChecked(index, true);
+                    var result = await studentController.DeleteAsync(selectedStudentId, authenticationKey);
+                    if (result != null)
+                    {
+                        MessageBox.Show("Student deleted successfully!");
+                        ClearForm();
+                    }
+                    else MessageBox.Show("Failed to delete student.");
                 }
             }
-
-            /// <summary>
-            /// Gets the selected requirements and payment method from the checked list boxes.
-            /// </summary>
-            private (string Requirements, string PaymentMethod) GetCheckedOptions()
+            catch (Exception ex)
             {
-                // Collect all checked items from the requirements list
-                List<string> selectedRequirements = new List<string>();
-                foreach (var item in checkedListBox1.CheckedItems)
-                {
-                    selectedRequirements.Add(item.ToString());
-                }
-
-                // Collect all checked items from the payment method list
-                List<string> selectedPaymentMethods = new List<string>();
-                foreach (var item in checkedListBox2.CheckedItems)
-                {
-                    selectedPaymentMethods.Add(item.ToString());
-                }
-
-                // Convert to comma-separated strings for saving or displaying
-                string requirements = selectedRequirements.Count > 0 ? string.Join(", ", selectedRequirements) : "None";
-                string paymentMethod = selectedPaymentMethods.Count > 0 ? string.Join(", ", selectedPaymentMethods) : "None";
-
-                return (requirements, paymentMethod);
+                MessageBox.Show($"Error deleting student: {ex.Message}");
             }
+        }
+
+        private void SetCheckedOptions(string requirements, string paymentMethod)
+        {
+            // Split the comma-separated strings into lists (handle "None" gracefully)
+            var requirementItems = requirements != null && requirements != "None"
+                ? requirements.Split(',').Select(r => r.Trim()).ToList()
+                : new List<string>();
+
+            var paymentItems = paymentMethod != null && paymentMethod != "None"
+                ? paymentMethod.Split(',').Select(p => p.Trim()).ToList()
+                : new List<string>();
+
+            // Clear all current checks
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+                checkedListBox2.SetItemChecked(i, false);
+
+            // Re-check items that match the stored values
+            foreach (var req in requirementItems)
+            {
+                int index = checkedListBox1.Items.IndexOf(req);
+                if (index >= 0)
+                    checkedListBox1.SetItemChecked(index, true);
+            }
+
+            foreach (var pay in paymentItems)
+            {
+                int index = checkedListBox2.Items.IndexOf(pay);
+                if (index >= 0)
+                    checkedListBox2.SetItemChecked(index, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the selected requirements and payment method from the checked list boxes.
+        /// </summary>
+        private (string Requirements, string PaymentMethod) GetCheckedOptions()
+        {
+            // Collect all checked items from the requirements list
+            List<string> selectedRequirements = new List<string>();
+            foreach (var item in checkedListBox1.CheckedItems)
+            {
+                selectedRequirements.Add(item.ToString());
+            }
+
+            // Collect all checked items from the payment method list
+            List<string> selectedPaymentMethods = new List<string>();
+            foreach (var item in checkedListBox2.CheckedItems)
+            {
+                selectedPaymentMethods.Add(item.ToString());
+            }
+
+            // Convert to comma-separated strings for saving or displaying
+            string requirements = selectedRequirements.Count > 0 ? string.Join(", ", selectedRequirements) : "None";
+            string paymentMethod = selectedPaymentMethods.Count > 0 ? string.Join(", ", selectedPaymentMethods) : "None";
+
+            return (requirements, paymentMethod);
+        }
 
         private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -278,164 +408,165 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
         public async void search()
+        {
+            try
             {
-                try
+                if (!int.TryParse(txtSearchStudentIn.Text, out int id))
                 {
-                    if (!int.TryParse(txtSearchStudentIn.Text, out int id))
-                    {
-                        MessageBox.Show("Invalid ID. Please enter a numeric value.");
-                        return;
-                    }
+                    MessageBox.Show("Invalid ID. Please enter a numeric value.");
+                    return;
+                }
 
-                    // Get student
-                    student = await studentController.GetByIdAsync(id, authenticationKey);
-                    if (student == null)
-                    {
-                        MessageBox.Show("Student not found.");
-                        return;
-                    }
-
-                    selectedStudentId = student.Id;
-
-                    // Fill student fields
-                    txtFirstname.Text = student.FirstName;
-                    txtMiddleName.Text = student.MiddleName;
-                    txtLastName.Text = student.LastName;
-                    cmbSuffix.Text = student.Suffix;
-                    dateTimePicker1.Value = student.BirthDate;
-                    cmbGradeLevel.Text = student.GradeLevel;
-                    cmbSection.Text = student.Section;
-                    cmbGender.Text = student.Gender;
-                    txtAddress.Text = student.Address;
-                    txtContactNo.Text = student.Contact;
-                    txtEmail.Text = student.Email;
-                    txtGuardian.Text = student.GuardianName;
-
-                    cbNew.Checked = student.Status == "New";
-                    cbOld.Checked = student.Status == "Old";
-                    cbTransferee.Checked = student.Status == "Transferee";
-                    foreach(var year in academicYearModels)
+                // Get student
+                student = await studentController.GetByIdAsync(id, authenticationKey);
+                if (student == null)
                 {
-                    if(year.Id == student.AcademicYearId)
+                    MessageBox.Show("Student not found.");
+                    return;
+                }
+
+                selectedStudentId = student.Id;
+
+                // Fill student fields
+                txtFirstname.Text = student.FirstName;
+                txtMiddleName.Text = student.MiddleName;
+                txtLastName.Text = student.LastName;
+                cmbSuffix.Text = student.Suffix;
+                dateTimePicker1.Value = student.BirthDate;
+                cmbGradeLevel.Text = student.GradeLevel;
+                cmbSection.Text = student.Section;
+                cmbGender.Text = student.Gender;
+                txtAddress.Text = student.Address;
+                txtContactNo.Text = student.Contact;
+                txtEmail.Text = student.Email;
+                txtGuardian.Text = student.GuardianName;
+
+                cbNew.Checked = student.Status == "New";
+                cbOld.Checked = student.Status == "Old";
+                cbTransferee.Checked = student.Status == "Transferee";
+                foreach (var year in academicYearModels)
+                {
+                    if (year.Id == student.AcademicYearId)
                     {
                         cbYear.SelectedItem = year.YearName;
                     }
                 }
-                    
+
 
 
                 // --- NEW: Also get registration data ---
                 var registration = await registrationController.GetByIdAsync(student.Id, authenticationKey);
-                    //MessageBox.Show("Requirements" + registration.Requirements + " Payment" + registration.PaymentMethod);
-                    if (registration != null)
-                    {
-                        // Fill registration section dropdown (if not already)
-                        cmbSection.Text = registration.Section;
-
-                        // Use your earlier helper to restore checked items
-                        SetCheckedOptions(registration.Requirements, registration.PaymentMethod);
-
-                    }
-                    else
-                    {
-                        // Clear if no registration record found
-                        for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                            checkedListBox1.SetItemChecked(i, false);
-                        for (int i = 0; i < checkedListBox2.Items.Count; i++)
-                            checkedListBox2.SetItemChecked(i, false);
-                    }
-                }
-                catch (Exception ex)
+                //MessageBox.Show("Requirements" + registration.Requirements + " Payment" + registration.PaymentMethod);
+                if (registration != null)
                 {
-                    MessageBox.Show($"Error searching student: {ex.Message}");
+                    // Fill registration section dropdown (if not already)
+                    cmbSection.Text = registration.Section;
+
+                    // Use your earlier helper to restore checked items
+                    SetCheckedOptions(registration.Requirements, registration.PaymentMethod);
+
                 }
-            }
-
-
-            private async void btnSearch_Click(object sender, EventArgs e)
-            {
-                search();
-            }
-
-            #region Checkbox logic
-            private void cbNew_CheckedChanged(object sender, EventArgs e)
-            {
-                if (cbNew.Checked)
+                else
                 {
-                    cbOld.Checked = false;
-                    cbTransferee.Checked = false;
-                    status = "New";
+                    // Clear if no registration record found
+                    for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                        checkedListBox1.SetItemChecked(i, false);
+                    for (int i = 0; i < checkedListBox2.Items.Count; i++)
+                        checkedListBox2.SetItemChecked(i, false);
                 }
             }
-
-            private void cbOld_CheckedChanged(object sender, EventArgs e)
+            catch (Exception ex)
             {
-                if (cbOld.Checked)
+                MessageBox.Show($"Error searching student: {ex.Message}");
+            }
+            getStudentsInSection();
+        }
+
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            search();
+        }
+
+        #region Checkbox logic
+        private void cbNew_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbNew.Checked)
+            {
+                cbOld.Checked = false;
+                cbTransferee.Checked = false;
+                status = "New";
+            }
+        }
+
+        private void cbOld_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbOld.Checked)
+            {
+                cbNew.Checked = false;
+                cbTransferee.Checked = false;
+                status = "Old";
+            }
+        }
+
+        private void cbTransferee_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTransferee.Checked)
+            {
+                cbNew.Checked = false;
+                cbOld.Checked = false;
+                status = "Transferee";
+            }
+        }
+        #endregion
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            action = "Add";
+            ClearForm();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            action = "Edit";
+        }
+
+        public void selectEdit()
+        {
+
+
+        }
+        public void selectAdd()
+        {
+            //highlightButton(btnAddStudInfo);
+            action = "Add";
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            //highlightPicture(pictureBox1);
+            action = "Add";
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            //highlightPicture(pictureBox3);
+            action = "Edit";
+        }
+        private void highlightPicture(PictureBox selected)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                if (control is PictureBox pb)
                 {
-                    cbNew.Checked = false;
-                    cbTransferee.Checked = false;
-                    status = "Old";
+                    pb.BackColor = flowLayoutPanel1.BackColor;
                 }
             }
-
-            private void cbTransferee_CheckedChanged(object sender, EventArgs e)
+            if (selected != null)
             {
-                if (cbTransferee.Checked)
-                {
-                    cbNew.Checked = false;
-                    cbOld.Checked = false;
-                    status = "Transferee";
-                }
+                selected.BackColor = Color.Gray;
             }
-            #endregion
-
-            private void btnAdd_Click(object sender, EventArgs e)
-            {
-                action = "Add";
-                ClearForm();
-            }
-
-            private void btnEdit_Click(object sender, EventArgs e)
-            {
-                action = "Edit";
-            }
-
-            public void selectEdit()
-            {
-
-
-            }
-            public void selectAdd()
-            {
-                //highlightButton(btnAddStudInfo);
-                action = "Add";
-            }
-
-            private void pictureBox1_Click_1(object sender, EventArgs e)
-            {
-                //highlightPicture(pictureBox1);
-                action = "Add";
-            }
-
-            private void pictureBox3_Click(object sender, EventArgs e)
-            {
-                //highlightPicture(pictureBox3);
-                action = "Edit";
-            }
-            private void highlightPicture(PictureBox selected)
-            {
-                foreach (Control control in flowLayoutPanel1.Controls)
-                {
-                    if (control is PictureBox pb)
-                    {
-                        pb.BackColor = flowLayoutPanel1.BackColor;
-                    }
-                }
-                if (selected != null)
-                {
-                    selected.BackColor = Color.Gray;
-                }
-            }
+        }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -619,7 +750,38 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             return totalHeight;
         }
 
+        private void cmbSection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            getStudentsInSection();
+        }
 
+        private async void pictureBox4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedStudentId <= 0) { MessageBox.Show("Please search and select a student first."); return; }
 
+                if (MessageBox.Show("Are you sure you want to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var result = await studentController.DeleteAsync(selectedStudentId, authenticationKey);
+                    if (result != null)
+                    {
+                        MessageBox.Show("Student deleted successfully!");
+                        ClearForm();
+                    }
+                    else
+                        MessageBox.Show("Failed to delete student.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void OnlyNumbers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true; // Block input
+        }
     }
 }
