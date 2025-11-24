@@ -1,23 +1,23 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
 using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
-    using EventDriven.Project.Businesslogic.Controller;
-    using EventDriven.Project.Logic.Controller;
-    using EventDriven.Project.Model;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using EventDriven.Project.Businesslogic.Controller;
+using EventDriven.Project.Logic.Controller;
+using EventDriven.Project.Model;
 using static System.Collections.Specialized.BitVector32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-    namespace EventDriven.Project.UI.DashBoardControls
-    {
+namespace EventDriven.Project.UI.DashBoardControls
+{
     public partial class UserControlRegistration : UserControl
     {
         private readonly StudentController studentController;
@@ -33,7 +33,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
         private readonly AcademicYearController academicYearController;
         private List<AcademicYearModel> academicYearModels;
         private AcademicYearModel academicYearModel;
-
 
         public UserControlRegistration(string role, MainForm main, UserModel authenticationKey)
         {
@@ -56,7 +55,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             checkedListBox2.ItemCheck += checkedListBox2_ItemCheck;
             getStudentsInSection();
 
-
+            // Initialize checkedListBox1 with all possible requirements
+            checkedListBox1.Items.AddRange(new string[] { "Good Moral", "Form 137", "Form 138", "Birth Certificate", "Honorable Dismissal" });
         }
 
         private async void LoadYear()
@@ -67,8 +67,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 cbYear.Items.Add(model.YearName);
                 cbYear.SelectedItem = model.YearName;
             }
-
         }
+
         private async Task<StudentModel> GetStudentFromForm()
         {
             string studentType = "";
@@ -91,10 +91,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             student.Status = studentType;
             student.AcademicYearId = await academicYearController.getYearId(cbYear.Text, academicYearModels, authenticationKey);
 
-
-
             return student;
-
         }
 
         public void ClearForm()
@@ -117,7 +114,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
             selectedStudentId = 0;
             status = "";
+
+            // Clear requirements checks
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
+            }
         }
+
         int studentsInSection = 0;
         private async void getStudentsInSection()
         {
@@ -125,7 +129,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             {
                 academicYearModel = await academicYearController.GetActiveYearAsync(authenticationKey);
                 string sectionName = cmbSection.Text;
-
 
                 if (string.IsNullOrWhiteSpace(sectionName))
                 {
@@ -151,6 +154,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 MessageBox.Show(ex.Message);
             }
         }
+
         private bool ValidateStudentForm()
         {
             bool isValid = true;
@@ -176,10 +180,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             // Newly added required fields
             if (string.IsNullOrWhiteSpace(txtAddress.Text)) MarkInvalid(txtAddress); else MarkValid(txtAddress);
 
-
             // Parent or guardian must have at least 1 name
-            if (
-                string.IsNullOrWhiteSpace(txtGuardian.Text))
+            if (string.IsNullOrWhiteSpace(txtGuardian.Text))
             {
                 MarkInvalid(txtGuardian);
             }
@@ -249,8 +251,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             }
             switch (action)
             {
-
-
                 case "Edit":
                     try
                     {
@@ -275,8 +275,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                         // Example usage
                         var (requirements, paymentMethod) = GetCheckedOptions();
 
-
-
                         // You can now include these values in your RegistrationModel:
                         var registration = new RegistrationModel
                         {
@@ -291,7 +289,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
                         if (result != null) { MessageBox.Show($"Requirements: {requirements}\nPayment Method: {paymentMethod}"); }
                     }
-
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error saving registration: {ex.Message}");
@@ -406,7 +403,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             }
         }
 
-
         public async void search()
         {
             try
@@ -452,7 +448,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                     }
                 }
 
-
+                // Load requirements based on status
+                LoadRequirementsForStatus(student.Status);
 
                 // --- NEW: Also get registration data ---
                 var registration = await registrationController.GetByIdAsync(student.Id, authenticationKey);
@@ -464,7 +461,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
                     // Use your earlier helper to restore checked items
                     SetCheckedOptions(registration.Requirements, registration.PaymentMethod);
-
                 }
                 else
                 {
@@ -482,7 +478,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             getStudentsInSection();
         }
 
-
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             search();
@@ -496,6 +491,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 cbOld.Checked = false;
                 cbTransferee.Checked = false;
                 status = "New";
+                LoadRequirementsForStatus("New");
             }
         }
 
@@ -506,6 +502,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 cbNew.Checked = false;
                 cbTransferee.Checked = false;
                 status = "Old";
+                LoadRequirementsForStatus("Old");
             }
         }
 
@@ -516,9 +513,41 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 cbNew.Checked = false;
                 cbOld.Checked = false;
                 status = "Transferee";
+                LoadRequirementsForStatus("Transferee");
             }
         }
         #endregion
+
+        private void LoadRequirementsForStatus(string studentStatus)
+        {
+            // Define requirements per status (updated as per your request)
+            Dictionary<string, List<string>> requirementsByStatus = new Dictionary<string, List<string>>
+        {
+            { "New", new List<string> { "Good Moral", "Form 137", "Birth Certificate" } },
+            { "Old", new List<string> { "Form 138" } },
+            { "Transferee", new List<string> { "Good Moral", "Form 137", "Form 138", "Birth Certificate", "Honorable Dismissal" } }
+        };
+
+            // Clear the checkedListBox1 and repopulate with only the required items for the status
+            checkedListBox1.Items.Clear();
+
+            if (requirementsByStatus.ContainsKey(studentStatus))
+            {
+                checkedListBox1.Items.AddRange(requirementsByStatus[studentStatus].ToArray());
+
+                // Optionally, check all required items by default (or leave unchecked)
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, true);  // Check all by default, or false if you prefer
+                }
+            }
+            else
+            {
+                // If no status or invalid, show all items (fallback)
+                checkedListBox1.Items.AddRange(new string[] { "Good Moral", "Form 137", "Form 138", "Birth Certificate", "Honorable Dismissal" });
+            }
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -533,9 +562,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
         public void selectEdit()
         {
-
-
         }
+
         public void selectAdd()
         {
             //highlightButton(btnAddStudInfo);
@@ -553,6 +581,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
             //highlightPicture(pictureBox3);
             action = "Edit";
         }
+
         private void highlightPicture(PictureBox selected)
         {
             foreach (Control control in flowLayoutPanel1.Controls)
@@ -567,6 +596,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
                 selected.BackColor = Color.Gray;
             }
         }
+
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -782,6 +812,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true; // Block input
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
