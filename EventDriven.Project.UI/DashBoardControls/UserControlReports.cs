@@ -33,6 +33,9 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.main = main;
             this.authenticationKey = authenticationKey;
             InitializeComponent();
+
+            RemoveTabsForRole();
+
             studentController = new StudentController();
             LoadStudents();
         }
@@ -361,5 +364,25 @@ namespace EventDriven.Project.UI.DashBoardControls
             panel4.Controls.Add(reports3);
             panel4.Controls.Add(reports3);
         }
+
+        private void RemoveTabsForRole()
+        {
+            if (tabControl1 == null) return;
+
+            if (role == "Cashier")
+            {
+                // Remove tabs for Cashier
+                tabControl1.TabPages.Remove(tabPage1);
+                tabControl1.TabPages.Remove(tabPage2);
+                tabControl1.TabPages.Remove(tabPage3);
+            }
+            else if (role == "Registrar")
+            {
+                // Remove tabs for Registrar
+                tabControl1.TabPages.Remove(tabPage4);
+            }
+        }
+
+
     }
 }
