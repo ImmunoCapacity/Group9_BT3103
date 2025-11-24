@@ -26,13 +26,10 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.role = role;
             this.main = main;
             this.authenticationKey = authenticationKey;
-            InitializeComponent(); 
+            InitializeComponent();
             paymentController = new PaymentController();
             LoadPaymentHistory();
             dataGridView1.SortCompare += dataGridView1_SortCompare;
-
-           
-
         }
         private void dataGridView1_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
@@ -50,7 +47,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
-
                 dataGridView1.Rows.Clear();
 
                 // Get all payments
@@ -64,8 +60,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                         payment.StudentName,
                         payment.DatePaid.ToString("MM/dd/yyyy"),
                         payment.PaymentType,
-                        payment.AmountPaid.ToString("C2"),
-                        payment.RemainingBalance.ToString("C2"),
+                        string.Format("₱{0:N2}", payment.AmountPaid),  // Updated: Add ₱ sign with formatting
+                        string.Format("₱{0:N2}", payment.RemainingBalance),  // Updated: Add ₱ sign with formatting
                         payment.StudentId
                     );
                 }
@@ -77,7 +73,6 @@ namespace EventDriven.Project.UI.DashBoardControls
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void btnSearchStuIn_Click(object sender, EventArgs e)
         {
@@ -129,19 +124,21 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 // Example: assuming these are the column names or indexes
                 lbName.Text = row.Cells["StudentName"].Value?.ToString() ?? "";
-                lbBalance.Text = row.Cells["RemainingBalance"].Value?.ToString() ?? "0.00";;
+
+                // Updated: Strip ₱ and commas before parsing to avoid FormatException
+                string balanceStr = row.Cells["RemainingBalance"].Value?.ToString() ?? "₱0.00";
+                balanceStr = balanceStr.Replace("₱", "").Replace(",", "");
+                decimal balance = decimal.Parse(balanceStr);
+                lbBalance.Text = $"₱{balance:N2}";  // Reformat with ₱ sign
+
                 lbId.Text = row.Cells["studentID"].Value?.ToString() ?? "0";
                 getTotal();
-                
-
             }
         }
         private async void getTotal()
         {
             decimal totalPaid = await paymentController.GetTotalPaidByStudentIdAsync(int.Parse(lbId.Text), authenticationKey);
-            lbTotal.Text = totalPaid.ToString("C2");
+            lbTotal.Text = string.Format("₱{0:N2}", totalPaid);  // Updated: Add ₱ sign with formatting
         }
-
     }
-
 }
