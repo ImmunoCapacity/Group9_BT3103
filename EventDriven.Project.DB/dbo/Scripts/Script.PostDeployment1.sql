@@ -34,6 +34,7 @@ VALUES
     ('Admin',    HASHBYTES('SHA2_256', 'admin123'), 'Admin'),
     ('Registrar', HASHBYTES('SHA2_256', 'registrar123'), 'Registrar'),
     ('Cashier',  HASHBYTES('SHA2_256', 'cashier123'), 'Cashier');
+
 begin
 INSERT INTO tblFeeStructure (GradeLevel, BaseTuition, LabFee, LibraryFee, SportsFee)
 VALUES 
@@ -217,8 +218,219 @@ VALUES
  'Calaca, Batangas', '', '8-A', 'Female',
  'samantha.aquino@email.com',
  'Balayan Elementary', 'Grade 7', 'Balayan, Batangas',
- '09173332222', 90.6, @AcademicYearId);
+ '09173332222', 90.6, @AcademicYearId),
+
+-- 21
+('Luis', 'Antonio', 'Hernandez', 'Old', '2010-04-10', 'Grade 9', 'Filipino',
+ 'Manuel Hernandez', '09171112233', 'Rosa Antonio', '09182233445', 'Balayan, Batangas',
+ 'Tito Reyes', 'Uncle', '09173344556', 'Lemery, Batangas', '', '9-C', 'Male',
+ 'luis.hernandez@email.com', 'Balayan Elementary', 'Grade 8', 'Balayan, Batangas',
+ '09171112233', 87.4, @AcademicYearId),
+
+-- 22
+('Maria', 'Elena', 'Santos', 'New', '2012-05-05', 'Grade 7', 'Filipino',
+ 'Pedro Santos', '09174455667', 'Ana Elena', '09185566778', 'Calaca, Batangas',
+ 'Lola Cruz', 'Grandmother', '09176677889', 'Balayan, Batangas', '', '7-A', 'Female',
+ 'maria.santos@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas',
+ '09174455667', 92.1, @AcademicYearId),
+
+-- 23
+('Carlos', 'Miguel', 'Lopez', 'Transferee', '2009-10-20', 'Grade 10', 'Filipino',
+ 'Juan Lopez', '09177788990', 'Sofia Miguel', '09188899001', 'Taal, Batangas',
+ 'Tito Garcia', 'Uncle', '09179900112', 'Batangas City', '', '10-B', 'Male',
+ 'carlos.lopez@email.com', 'Taal High', 'Grade 9', 'Taal, Batangas',
+ '09177788990', 89.3, @AcademicYearId),
+
+-- 24
+('Elena', 'Rose', 'Cruz', 'Old', '2011-01-15', 'Grade 8', 'Filipino',
+ 'Antonio Cruz', '09172233445', 'Maria Rose', '09183344556', 'Balayan, Batangas',
+ 'Tita Reyes', 'Aunt', '09174455667', 'San Juan, Batangas', '', '8-B', 'Female',
+ 'elena.cruz@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas',
+ '09172233445', 91.0, @AcademicYearId),
+
+-- 25
+('Ricardo', 'Jose', 'Garcia', 'New', '2012-07-12', 'Grade 7', 'Filipino',
+ 'Luis Garcia', '09175566778', 'Carmen Jose', '09186677889', 'Lemery, Batangas',
+ 'Lolo Torres', 'Grandfather', '09177788990', 'Lipa, Batangas', '', '7-C', 'Male',
+ 'ricardo.garcia@email.com', 'Lemery Elementary', 'Grade 7', 'Lemery, Batangas',
+ '09175566778', 88.7, @AcademicYearId),
+
+-- 26
+('Patricia', 'Ann', 'Torres', 'Transferee', '2010-11-08', 'Grade 9', 'Filipino',
+ 'Miguel Torres', '09178899001', 'Elena Ann', '09189900112', 'San Luis, Batangas',
+ 'Tita Lopez', 'Aunt', '09171112233', 'Balayan, Batangas', '', '9-A', 'Female',
+ 'patricia.torres@email.com', 'San Luis Elementary', 'Grade 8', 'San Luis, Batangas',
+ '09178899001', 93.2, @AcademicYearId),
+
+-- 27
+('Fernando', 'Luis', 'Ramos', 'Old', '2009-06-25', 'Grade 10', 'Filipino',
+ 'Oscar Ramos', '09173344556', 'Isabel Luis', '09184455667', 'Balayan, Batangas',
+ 'Tito Mendoza', 'Uncle', '09175566778', 'Tanauan, Batangas', '', '10-C', 'Male',
+ 'fernando.ramos@email.com', 'Balayan High', 'Grade 9', 'Balayan, Batangas',
+ '09173344556', 90.5, @AcademicYearId),
+
+-- 28
+('Cristina', 'Marie', 'Villanueva', 'New', '2011-09-18', 'Grade 8', 'Filipino',
+ 'Rogelio Villanueva', '09176677889', 'Angela Marie', '09187788990', 'Calaca, Batangas',
+ 'Lola Garcia', 'Grandmother', '09178899001', 'Balayan, Batangas', '', '8-A', 'Female',
+ 'cristina.villanueva@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas',
+ '09176677889', 89.8, @AcademicYearId),
+
+-- 29
+('Roberto', 'Paul', 'Fernandez', 'Transferee', '2010-03-22', 'Grade 9', 'Filipino',
+ 'Vicente Fernandez', '09179900112', 'Patricia Paul', '09181112233', 'Nasugbu, Batangas',
+ 'Tito Cruz', 'Uncle', '09172233445', 'Batangas City', '', '9-B', 'Male',
+ 'roberto.fernandez@email.com', 'Nasugbu High', 'Grade 8', 'Nasugbu, Batangas',
+ '09179900112', 86.9, @AcademicYearId),
+-- 30 
+('Victoria', 'Grace', 'Mendoza', 'Old', '2012-04-30', 'Grade 7', 'Filipino',
+ 'Salvador Mendoza', '09171122334', 'Dolores Grace', '09182233445', 'Balayan, Batangas',
+ 'Tita Ramos', 'Aunt', '09173344556', 'Calaca, Batangas', '', '7-B', 'Female',
+ 'victoria.mendoza@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas',
+ '09171122334', 88.2, @AcademicYearId),
+
+-- 31
+('Eduardo', 'Carlos', 'Castillo', 'New', '2011-11-14', 'Grade 8', 'Filipino',
+ 'Julio Castillo', '09172233456', 'Marta Carlos', '09183344567', 'San Luis, Batangas',
+ 'Lolo Lopez', 'Grandfather', '09174455678', 'Balayan, Batangas', '', '8-C', 'Male',
+ 'eduardo.castillo@email.com', 'San Luis Elementary', 'Grade 7', 'San Luis, Batangas',
+ '09172233456', 91.3, @AcademicYearId),
+
+-- 32
+('Francesca', 'Joy', 'Morales', 'Transferee', '2010-07-19', 'Grade 9', 'Filipino',
+ 'Hector Morales', '09175566789', 'Veronica Joy', '09186677890', 'Batangas City',
+ 'Tito Garcia', 'Uncle', '09177788901', 'Lipa, Batangas', '', '9-A', 'Female',
+ 'francesca.morales@email.com', 'Batangas Elementary', 'Grade 8', 'Batangas City',
+ '09175566789', 94.5, @AcademicYearId),
+
+-- 33
+('Rafael', 'Luis', 'Gutierrez', 'Old', '2009-12-03', 'Grade 10', 'Filipino',
+ 'Francisco Gutierrez', '09178899012', 'Clarissa Luis', '09189900123', 'Balayan, Batangas',
+ 'Tita Torres', 'Aunt', '09171112234', 'Tanauan, Batangas', '', '10-A', 'Male',
+ 'rafael.gutierrez@email.com', 'Balayan High', 'Grade 9', 'Balayan, Batangas',
+ '09178899012', 89.7, @AcademicYearId),
+
+-- 34
+('Diana', 'Marie', 'Santiago', 'New', '2012-06-27', 'Grade 7', 'Filipino',
+ 'Pedro Santiago', '09173344567', 'Evelyn Marie', '09184455678', 'Calaca, Batangas',
+ 'Lola Cruz', 'Grandmother', '09175566789', 'Balayan, Batangas', '', '7-C', 'Female',
+ 'diana.santiago@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas',
+ '09173344567', 92.8, @AcademicYearId),
+
+-- 35
+('Antonio', 'Paul', 'Navarro', 'Transferee', '2011-05-09', 'Grade 8', 'Filipino',
+ 'Benito Navarro', '09176677890', 'Sandra Paul', '09187788901', 'Balayan, Batangas',
+ 'Tito Mendoza', 'Uncle', '09178899012', 'San Jose, Batangas', '', '8-B', 'Male',
+ 'antonio.navarro@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas',
+ '09176677890', 87.6, @AcademicYearId),
+
+-- 36
+('Monica', 'Grace', 'Domingo', 'Old', '2010-08-16', 'Grade 9', 'Filipino',
+ 'Dominic Domingo', '09179900123', 'Rosario Grace', '09181112234', 'Balayan, Batangas',
+ 'Lolo Ramos', 'Grandfather', '09172233456', 'Magnito Street, Batangas', '', '9-B', 'Female',
+ 'monica.domingo@email.com', 'Balayan Elementary', 'Grade 8', 'Balayan, Batangas',
+ '09179900123', 90.9, @AcademicYearId),
+
+-- 37
+('Leonardo', 'James', 'Valdez', 'New', '2012-03-11', 'Grade 7', 'Filipino',
+ 'Cesar Valdez', '09171122345', 'Helena James', '09182233456', 'Lemery, Batangas',
+ 'Tita Garcia', 'Aunt', '09173344567', 'Balayan, Batangas', '', '7-A', 'Male',
+ 'leonardo.valdez@email.com', 'Lemery Elementary', 'Grade 7', 'Lemery, Batangas',
+ '09171122345', 89.4, @AcademicYearId),
+
+-- 38
+('Bianca', 'Rose', 'Pascual', 'Transferee', '2010-01-28', 'Grade 9', 'Filipino',
+ 'Mario Pascual', '09174455678', 'Jocelyn Rose', '09185566789', 'Calaca, Batangas',
+ 'Tito Cruz', 'Uncle', '09176677890', 'Balayan, Batangas', '', '9-C', 'Female',
+ 'bianca.pascual@email.com', 'Calaca Elementary', 'Grade 8', 'Calaca, Batangas',
+ '09174455678', 93.7, @AcademicYearId),
+
+-- 39
+('Diego', 'Allan', 'Marquez', 'Old', '2009-09-05', 'Grade 10', 'Filipino',
+ 'Jorge Marquez', '09177788901', 'Lucia Allan', '09188899012', 'Balayan, Batangas',
+ 'Lola Torres', 'Grandmother', '09179900123', 'San Juan, Batangas', '', '10-B', 'Male',
+ 'diego.marquez@email.com', 'Balayan High', 'Grade 9', 'Balayan, Batangas',
+ '09177788901', 91.1, @AcademicYearId),
+
+-- 40
+('Camila', 'Mae', 'Roxas', 'New', '2011-10-22', 'Grade 8', 'Filipino',
+ 'Roberto Roxas', '09172233456', 'Miriam Mae', '09183344567', 'Taal, Batangas',
+ 'Tito Garcia', 'Uncle', '09174455678', 'Batangas City', '', '8-A', 'Female',
+ 'camila.roxas@email.com', 'Taal Elementary', 'Grade 7', 'Taal, Batangas',
+ '09172233456', 88.3, @AcademicYearId),
+
+-- 41
+('Felipe', 'Jose', 'Hernandez', 'Transferee', '2010-04-17', 'Grade 9', 'Filipino',
+ 'Manuel Hernandez', '09175566789', 'Rosa Jose', '09186677890', 'Balayan, Batangas',
+ 'Lolo Reyes', 'Grandfather', '09177788901', 'Lemery, Batangas', '', '9-A', 'Male',
+ 'felipe.hernandez@email.com', 'Balayan Elementary', 'Grade 8', 'Balayan, Batangas',
+ '09175566789', 92.4, @AcademicYearId),
+
+-- 42
+('Gabriela', 'Elena', 'Santos', 'Old', '2012-02-09', 'Grade 7', 'Filipino',
+ 'Pedro Santos', '09178899012', 'Ana Elena', '09189900123', 'Calaca, Batangas',
+ 'Tita Cruz', 'Aunt', '09171112234', 'Balayan, Batangas', '', '7-B', 'Female',
+ 'gabriela.santos@email.com', 'Calaca Elementary', 'Grade 7', 'Calaca, Batangas',
+ '09178899012', 90.2, @AcademicYearId),
+
+-- 43
+('Hugo', 'Miguel', 'Lopez', 'New', '2011-12-01', 'Grade 8', 'Filipino',
+ 'Juan Lopez', '09173344567', 'Sofia Miguel', '09184455678', 'Taal, Batangas',
+ 'Tito Garcia', 'Uncle', '09175566789', 'Batangas City', '', '8-C', 'Male',
+ 'hugo.lopez@email.com', 'Taal Elementary', 'Grade 7', 'Taal, Batangas',
+ '09173344567', 87.8, @AcademicYearId),
+
+-- 44
+('Isabel', 'Rose', 'Cruz', 'Transferee', '2009-11-30', 'Grade 10', 'Filipino',
+ 'Antonio Cruz', '09176677890', 'Maria Rose', '09187788901', 'Balayan, Batangas',
+ 'Lola Reyes', 'Grandmother', '09178899012', 'San Juan, Batangas', '', '10-C', 'Female',
+ 'isabel.cruz@email.com', 'Balayan High', 'Grade 9', 'Balayan, Batangas',
+ '09176677890', 94.0, @AcademicYearId),
+
+-- 45
+('Javier', 'Jose', 'Garcia', 'Old', '2010-06-14', 'Grade 9', 'Filipino',
+ 'Luis Garcia', '09179900123', 'Carmen Jose', '09181112234', 'Lemery, Batangas',
+ 'Tito Torres', 'Uncle', '09172233456', 'Lipa, Batangas', '', '9-B', 'Male',
+ 'javier.garcia@email.com', 'Lemery Elementary', 'Grade 8', 'Lemery, Batangas',
+ '09179900123', 89.5, @AcademicYearId),
+
+-- 46
+('Karla', 'Ann', 'Torres', 'New', '2012-08-03', 'Grade 7', 'Filipino',
+ 'Miguel Torres', '09171122345', 'Elena Ann', '09182233456', 'San Luis, Batangas',
+ 'Lolo Lopez', 'Grandfather', '09173344567', 'Balayan, Batangas', '', '7-C', 'Female',
+ 'karla.torres@email.com', 'San Luis Elementary', 'Grade 7', 'San Luis, Batangas',
+ '09171122345', 91.6, @AcademicYearId),
+
+-- 47
+('Luis', 'Luis', 'Ramos', 'Transferee', '2011-03-26', 'Grade 8', 'Filipino',
+ 'Oscar Ramos', '09174455678', 'Isabel Luis', '09185566789', 'Balayan, Batangas',
+ 'Tita Mendoza', 'Aunt', '09176677890', 'Tanauan, Batangas', '', '8-B', 'Male',
+ 'luis.ramos@email.com', 'Balayan Elementary', 'Grade 7', 'Balayan, Batangas',
+ '09174455678', 88.1, @AcademicYearId),
+
+-- 48
+('Natalia', 'Marie', 'Villanueva', 'Old', '2010-05-12', 'Grade 9', 'Filipino',
+ 'Rogelio Villanueva', '09177788901', 'Angela Marie', '09188899012', 'Calaca, Batangas',
+ 'Tito Cruz', 'Uncle', '09179900123', 'Balayan, Batangas', '', '9-C', 'Female',
+ 'natalia.villanueva@email.com', 'Calaca Elementary', 'Grade 8', 'Calaca, Batangas',
+ '09177788901', 93.3, @AcademicYearId),
+
+-- 49
+('Oscar', 'Paul', 'Fernandez', 'New', '2012-01-07', 'Grade 7', 'Filipino',
+ 'Vicente Fernandez', '09172233456', 'Patricia Paul', '09183344567', 'Nasugbu, Batangas',
+ 'Lola Garcia', 'Grandmother', '09174455678', 'Batangas City', '', '7-A', 'Male',
+ 'oscar.fernandez@email.com', 'Nasugbu Elementary', 'Grade 7', 'Nasugbu, Batangas',
+ '09172233456', 90.7, @AcademicYearId),
+
+-- 50
+('Paula', 'Grace', 'Mendoza', 'Transferee', '2009-07-29', 'Grade 10', 'Filipino',
+ 'Salvador Mendoza', '09175566789', 'Dolores Grace', '09186677890', 'Balayan, Batangas',
+ 'Tito Ramos', 'Uncle', '09177788901', 'Calaca, Batangas', '', '10-A', 'Female',
+ 'paula.mendoza@email.com', 'Balayan High', 'Grade 9', 'Balayan, Batangas',
+ '09175566789', 92.9, @AcademicYearId);
 ;
+
+-- Insert Student Registrations
 INSERT INTO [dbo].[tblStudentRegistration] (StudentId, Section, Requirements, PaymentMethod)
 VALUES
 (1, '9-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
@@ -240,7 +452,37 @@ VALUES
 (17, '7-B', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
 (18, '9-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
 (19, '10-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
-(20, '8-A', 'Good Moral, Form 137, Birth Certificate', 'Partial');
+(20, '8-A', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(21, '9-C', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(22, '7-A', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(23, '10-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(24, '8-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(25, '9-A', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(26, '7-C', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(27, '10-C', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(28, '8-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(29, '9-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(30, '7-B', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(31, '10-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(32, '8-C', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(33, '9-C', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(34, '7-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(35, '10-B', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(36, '8-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(37, '9-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(38, '7-C', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(39, '10-C', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(40, '8-A', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(41, '9-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(42, '7-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(43, '10-A', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(44, '8-C', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(45, '9-C', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(46, '7-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(47, '10-B', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(48, '8-B', 'Good Moral, Form 137, Birth Certificate', 'Partial'),
+(49, '9-A', 'Good Moral, Form 137, Birth Certificate', 'Full'),
+(50, '7-C', 'Good Moral, Form 137, Birth Certificate', 'Partial');
 
 
  end
