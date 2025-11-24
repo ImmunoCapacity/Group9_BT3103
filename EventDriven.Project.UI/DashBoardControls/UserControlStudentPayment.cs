@@ -58,13 +58,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 dataGridView1.Rows.Clear();
                 dataGridView2.Rows.Clear();
+
                 List<StudentPaymentInfo> payments = await paymentController.GetAllStudentPayment(authenticationKey);
-                allPayments = payments; // Store for printing
+                allPayments = payments;
 
                 foreach (var payment in payments)
                 {
                     if (payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
                     {
+                        // ==== DataGridView1 (Summary List) ====
                         dataGridView1.Rows.Add(
                             payment.StudentId,
                             payment.StudentName,
@@ -74,6 +76,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                             payment.RemainingBalance,
                             payment.PaymentMethod
                         );
+
+                        // ==== DataGridView2 (Next Payment Breakdown) ====
                         dataGridView2.Rows.Add(
                             payment.StudentId,
                             payment.StudentName,
@@ -85,28 +89,38 @@ namespace EventDriven.Project.UI.DashBoardControls
                             payment.NextDueDate,
                             payment.NextScheduleDescription,
                             payment.PaymentMethod
-
                         );
                     }
                 }
-
-
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             dataGridView1.Columns["Column1"].ValueType = typeof(int);
             dataGridView2.Columns["dataGridViewTextBoxColumn1"].ValueType = typeof(int);
 
+            // Sort both tables by ID
+            dataGridView1.Sort(dataGridView1.Columns["Column1"], ListSortDirection.Ascending);
+            dataGridView2.Sort(dataGridView2.Columns["dataGridViewTextBoxColumn1"], ListSortDirection.Ascending);
 
-            // Sort dataGridView1 by ID ascending
-            dataGridView1.Sort(dataGridView1.Columns["Column1"], System.ComponentModel.ListSortDirection.Ascending);
+            // ============================================
+            // ✅ Add Peso Formatting to Both Grids
+            // ============================================
+            // DataGridView1
+            dataGridView1.Columns["Column4"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition Fee
+            dataGridView1.Columns["Column5"].DefaultCellStyle.Format = "₱#,0.00"; // Total Paid
+            dataGridView1.Columns["Column7"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
 
-            // Sort dataGridView2 by ID ascending
-            dataGridView2.Sort(dataGridView2.Columns["dataGridViewTextBoxColumn1"], System.ComponentModel.ListSortDirection.Ascending);
+            // DataGridView2
+            dataGridView2.Columns["dataGridViewTextBoxColumn4"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition Fee
+            dataGridView2.Columns["dataGridViewTextBoxColumn5"].DefaultCellStyle.Format = "₱#,0.00"; // Total Paid
+            dataGridView2.Columns["dataGridViewTextBoxColumn6"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
         }
+
+
         private PaymentModel currentPayment;
 
         private async void btnPay_Click(object sender, EventArgs e)
@@ -278,27 +292,27 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column12"].Value.ToString().Equals("Full"))
                 {
-                    rbFullPayment.Checked = true;   
+                    rbFullPayment.Checked = true;
                     txtPaymentReceived.Text = lbBalance.Text;
-                    
+
                 }
                 else
                 {
                     rbPartialPayment.Checked = true;
                     txtPaymentReceived.Text = "0.00";
-                    
+
                 }
             }
         }
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex < 0) { return; }
+            if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
             // Make sure user clicked a valid row (not header or empty space)
-            if (row.Cells["Column10"].Value?.ToString().Length>0)
+            if (row.Cells["Column10"].Value?.ToString().Length > 0)
             {
 
-                
+
 
                 // Example: assuming these are the column names or indexes
 
@@ -312,13 +326,13 @@ namespace EventDriven.Project.UI.DashBoardControls
                 {
                     rbFullPayment.Checked = true;
                     txtPaymentReceived.Text = lbBalance.Text;
-                    
+
                 }
                 else
                 {
                     rbPartialPayment.Checked = true;
                     txtPaymentReceived.Text = row.Cells["Column11"].Value?.ToString() ?? ""; ;
-                   
+
                 }
             }
         }
@@ -525,5 +539,25 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
 
         }
+
+        private void txtPaymentReceived_TextChanged(object sender, EventArgs e)
+        {
+            // Remove existing peso sign if user types it manually
+            string input = txtPaymentReceived.Text.Replace("₱", "").Trim();
+
+            // Only allow numbers and dot
+            if (decimal.TryParse(input, out decimal value))
+            {
+                // Format with peso sign
+                txtPaymentReceived.Text = "₱" + value.ToString("N2");
+                txtPaymentReceived.SelectionStart = txtPaymentReceived.Text.Length; // Keep cursor at end
+            }
+            else if (string.IsNullOrEmpty(input))
+            {
+                txtPaymentReceived.Text = "₱0.00";
+                txtPaymentReceived.SelectionStart = txtPaymentReceived.Text.Length;
+            }
+        }
+
     }
 }
