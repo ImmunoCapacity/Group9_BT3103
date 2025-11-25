@@ -38,6 +38,11 @@ namespace EventDriven.Project.UI.DashBoardControls
         private List<StudentPaymentInfo> paymentsToPrint = new List<StudentPaymentInfo>();
         private int currentPrintIndex = 0;
 
+        private string Peso(decimal value)
+        {
+            return $"₱{value:N2}";
+        }
+
         public UserControlStudentPayment(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
@@ -118,6 +123,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView2.Columns["dataGridViewTextBoxColumn4"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition Fee
             dataGridView2.Columns["dataGridViewTextBoxColumn5"].DefaultCellStyle.Format = "₱#,0.00"; // Total Paid
             dataGridView2.Columns["dataGridViewTextBoxColumn6"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
+            dataGridView2.Columns["Column11"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition
         }
 
         private PaymentModel currentPayment;
@@ -216,8 +222,8 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             currentBalance = currentBalance - paymentAmount;
             // Update the UI labels
-            lbBalance.Text = $"₱{currentBalance:N2}";
-            lbChange.Text = $"₱{change:N2}";
+            lbBalance.Text = Peso(currentBalance);
+            lbChange.Text = Peso(change);
 
             //// Reset the payment textbox
             //txtPaymentReceived.Text = "0.00";
@@ -256,9 +262,16 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (isNumber)
                 {
-                    // search by ID (exact match)
-                    match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
-                    row.Visible = match;
+                    try
+                    {
+                        // search by ID (exact match)
+                        match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
+                        row.Visible = match;
+                    } catch (Exception e)
+                    {
+                        match = row.Cells["dataGridViewTextBoxColumn1"].Value.ToString().Contains(searchValue);
+                        row.Visible = match;
+                    }
                 }
                 else
                 {
@@ -284,15 +297,15 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Example: assuming these are the column names or indexes
                 name = row.Cells["Column2"].Value?.ToString() ?? "";
                 grade = row.Cells["Column3"].Value?.ToString() ?? "";
-                tuitionFee = row.Cells["Column4"].Value?.ToString() ?? "";
+                tuitionFee = "₱"+row.Cells["Column4"].Value?.ToString() ?? "0.00";
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
-                lbBalance.Text = row.Cells["Column7"].Value?.ToString() ?? "₱0.00";
+                lbBalance.Text = "₱" + row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "₱0.00";
                 lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column12"].Value.ToString().Equals("Full"))
                 {
                     rbFullPayment.Checked = true;
-                    txtPaymentReceived.Text = lbBalance.Text;
+                    txtPaymentReceived.Text = "₱" + lbBalance.Text;
 
                 }
                 else
@@ -313,9 +326,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Example: assuming these are the column names or indexes
 
                 grade = row.Cells["dataGridViewTextBoxColumn3"].Value?.ToString() ?? "";
-                tuitionFee = row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
+                tuitionFee = "₱"+row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
                 name = lbName.Text = row.Cells["dataGridViewTextBoxColumn2"].Value?.ToString() ?? "" ?? "";
-                lbBalance.Text = row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "₱0.00";
+                lbBalance.Text = "₱" + row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "₱0.00";
                 lbId.Text = row.Cells["dataGridViewTextBoxColumn1"].Value?.ToString() ?? "0";
                 if (row.Cells["Column10"].Value.ToString().Equals("Full"))
@@ -445,9 +458,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                 $"Student ID: {currentPayment.StudentId}",
                 $"Name: {currentPayment.Name}",
                 $"Grade Level: {currentPayment.Grade}",
-                $"Tuition Fee: {tuitionFee}",
+                $"Tuition Fee: ₱{tuitionFee}",
                 $"Total Paid: ₱{currentPayment.AmountPaid:N2}",
-                $"Remaining Balance: {lbBalance.Text}"
+                $"Remaining Balance: ₱{lbBalance.Text}"
             };
 
             int studentHeight = CalculateSectionHeight(g, studentInfo, bodyFont, 8);

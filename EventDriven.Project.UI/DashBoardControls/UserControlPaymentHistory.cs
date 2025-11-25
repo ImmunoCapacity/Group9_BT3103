@@ -21,6 +21,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         private UserModel authenticationKey;
         private MainForm main;
         private AcademicYearModel AcademicYearModel;
+        private FeeStructure feeStructure;
         public UserControlPaymentHistory(string role, MainForm main, UserModel authenticationKey)
         {
             this.role = role;
@@ -62,7 +63,9 @@ namespace EventDriven.Project.UI.DashBoardControls
                         payment.PaymentType,
                         string.Format("₱{0:N2}", payment.AmountPaid),  // Updated: Add ₱ sign with formatting
                         string.Format("₱{0:N2}", payment.RemainingBalance),  // Updated: Add ₱ sign with formatting
-                        payment.StudentId
+                        payment.StudentId,
+                        payment.GradeLevel
+
                     );
                 }
                 dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
@@ -133,6 +136,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 lbId.Text = row.Cells["studentID"].Value?.ToString() ?? "0";
                 getTotal();
+                getBreakDown(row.Cells["Grade"].Value?.ToString()??"");
             }
         }
         private async void getTotal()
@@ -140,5 +144,17 @@ namespace EventDriven.Project.UI.DashBoardControls
             decimal totalPaid = await paymentController.GetTotalPaidByStudentIdAsync(int.Parse(lbId.Text), authenticationKey);
             lbTotal.Text = string.Format("₱{0:N2}", totalPaid);  // Updated: Add ₱ sign with formatting
         }
+        private async void getBreakDown(string grade)
+        {
+            feeStructure = await paymentController.GetFeeStructureByGradeAsync(grade, authenticationKey);
+
+            lbBreakDown.Text =
+                $"Base Tuition: ₱{feeStructure.BaseTuition:N2}\n" +
+                $"Lab Fee: ₱{feeStructure.LabFee:N2}\n" +
+                $"Library Fee: ₱{feeStructure.LibraryFee:N2}\n" +
+                $"Sports Fee: ₱{feeStructure.SportsFee:N2}\n" +
+                $"Total Tuition: ₱{feeStructure.TuitionFee}";
+        }
+
     }
 }
