@@ -31,7 +31,8 @@ namespace EventDriven.Project.UI
             studentController = new StudentController();
             this.authenticationKey = authenticationKey;
             academicYearController = new AcademicYearController();
-           
+            txtSearchStudentIn.KeyDown += txtSearchStudentIn_KeyDown;
+
 
             this.main = main;
             if (role != "Admin")
@@ -41,7 +42,7 @@ namespace EventDriven.Project.UI
             }
             getStudentsInSection();
         }
-        
+
         int studentsInSection = 0;
 
         private async void getStudentsInSection()
@@ -50,7 +51,7 @@ namespace EventDriven.Project.UI
             {
                 academicYearModel = await academicYearController.GetActiveYearAsync(authenticationKey);
                 string sectionName = cmbSection.Text;
-                
+
 
                 if (string.IsNullOrWhiteSpace(sectionName))
                 {
@@ -780,5 +781,15 @@ namespace EventDriven.Project.UI
                 e.Handled = true; // Block input
         }
 
+        private void txtSearchStudentIn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed
+                search();
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

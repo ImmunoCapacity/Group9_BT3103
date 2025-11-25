@@ -40,6 +40,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             studentController = new StudentController();
             registrationController = new RegistrationController();
             this.authenticationKey = authenticationKey;
+            txtSearchStudentIn.KeyDown += txtSearchStudentIn_KeyDown;
 
             this.main = main;
             if (role != "Admin")
@@ -57,6 +58,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
             // Initialize checkedListBox1 with all possible requirements
             checkedListBox1.Items.AddRange(new string[] { "Good Moral", "Form 137", "Form 138", "Birth Certificate", "Honorable Dismissal" });
+            AutoAdjustCheckedListBox();
         }
 
         private async void LoadYear()
@@ -120,6 +122,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
+            AutoAdjustCheckedListBox();
         }
 
         int studentsInSection = 0;
@@ -357,6 +360,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 if (index >= 0)
                     checkedListBox2.SetItemChecked(index, true);
             }
+            AutoAdjustCheckedListBox();
         }
 
         /// <summary>
@@ -469,6 +473,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                         checkedListBox1.SetItemChecked(i, false);
                     for (int i = 0; i < checkedListBox2.Items.Count; i++)
                         checkedListBox2.SetItemChecked(i, false);
+                    AutoAdjustCheckedListBox();
                 }
             }
             catch (Exception ex)
@@ -520,6 +525,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void LoadRequirementsForStatus(string studentStatus)
         {
+            AutoAdjustCheckedListBox();
             // Define requirements per status (updated as per your request)
             Dictionary<string, List<string>> requirementsByStatus = new Dictionary<string, List<string>>
         {
@@ -546,6 +552,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // If no status or invalid, show all items (fallback)
                 checkedListBox1.Items.AddRange(new string[] { "Good Moral", "Form 137", "Form 138", "Birth Certificate", "Honorable Dismissal" });
             }
+            AutoAdjustCheckedListBox();
         }
 
 
@@ -813,10 +820,57 @@ namespace EventDriven.Project.UI.DashBoardControls
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true; // Block input
         }
+        private void AdjustCheckedListBoxHeight()
+        {
+            int itemHeight = checkedListBox1.ItemHeight;
+            int itemCount = checkedListBox1.Items.Count;
+
+            // Add space for borders
+            checkedListBox1.Height = itemHeight * itemCount + 6;
+        }
+        private void AdjustCheckedListBoxWidth()
+        {
+            int maxWidth = 0;
+
+            using (Graphics g = checkedListBox1.CreateGraphics())
+            {
+                foreach (var item in checkedListBox1.Items)
+                {
+                    int width = (int)g.MeasureString(item.ToString(), checkedListBox1.Font).Width;
+                    if (width > maxWidth)
+                        maxWidth = width;
+                }
+            }
+
+            // Add spacing for the checkbox and scrollbar
+            checkedListBox1.Width = maxWidth + 30;
+        }
+        private void AutoAdjustCheckedListBox()
+        {
+            AdjustCheckedListBoxHeight();
+            AdjustCheckedListBoxWidth();
+        }
+
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            AutoAdjustCheckedListBox();
+        }
 
+        private void txtSearchStudentIn_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearchStudentIn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed
+                search();
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

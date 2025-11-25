@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="printDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="printDocument1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>161, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ColDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cQAAEnEB89x6jgAAAV1JREFUWEftljFuAjEURLfLHXIierbgEOE0FDSAhLhKQkiK5BxJm1QJfPK/NY7M
-        ZmZZKS73SU8U9niM16BtRkYYNpncWNsezm17rqFNp5++3h2W7yfK2SI19E28oEbju31i4VqiRsNCNUWN
-        hoVqihoNC9UUNRoWCm2xeLbT6Z2NldpyeeibhxoNC4VpUcfMvtl4aJvNPuYkyHiIGg0LZb38K9b2z+Of
-        sdXqMRU7tt0+dMezqNGwUGk6gSgpNnFRvtvdl/O7okbDQl3LTdh6/Xvs18pD1GhYiJk3kRlSHqJGw0LM
-        i29O7oQSNRoW6lre9uJxyF9HKWo0LFTKLlyxiasngRoNC2X7bvvQTaBGw0Jh/MOlZic9AjZnwONAjYaF
-        Qv8nfOsrz+ZNsLEQNRoWqilqNCxUU9RoWKimqNH4K9kHC9YSNRp/cZyzYC1R04+fwisL/1ebzW5RMTIC
-        muYHeoU1XO/UIZwAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="ColEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
@@ -153,4 +135,22 @@
         RU5ErkJggg==
 </value>
   </data>
+  <data name="ColDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        cQAAEnEB89x6jgAAAV1JREFUWEftljFuAjEURLfLHXIierbgEOE0FDSAhLhKQkiK5BxJm1QJfPK/NY7M
+        ZmZZKS73SU8U9niM16BtRkYYNpncWNsezm17rqFNp5++3h2W7yfK2SI19E28oEbju31i4VqiRsNCNUWN
+        hoVqihoNC9UUNRoWCm2xeLbT6Z2NldpyeeibhxoNC4VpUcfMvtl4aJvNPuYkyHiIGg0LZb38K9b2z+Of
+        sdXqMRU7tt0+dMezqNGwUGk6gSgpNnFRvtvdl/O7okbDQl3LTdh6/Xvs18pD1GhYiJk3kRlSHqJGw0LM
+        i29O7oQSNRoW6lre9uJxyF9HKWo0LFTKLlyxiasngRoNC2X7bvvQTaBGw0Jh/MOlZic9AjZnwONAjYaF
+        Qv8nfOsrz+ZNsLEQNRoWqilqNCxUU9RoWKimqNH4K9kHC9YSNRp/cZyzYC1R04+fwisL/1ebzW5RMTIC
+        muYHeoU1XO/UIZwAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="printDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="printDocument1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>161, 17</value>
+  </metadata>
 </root>

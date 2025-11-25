@@ -441,6 +441,7 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(499, 27);
             txtSearch.TabIndex = 147;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // panel2
             // 

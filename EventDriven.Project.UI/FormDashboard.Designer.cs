@@ -33,6 +33,7 @@
             label3 = new Label();
             label2 = new Label();
             pictureBox2 = new PictureBox();
+            lblAcademicYear = new Label();
             panel3 = new Panel();
             btnAdminDashboardLogout = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -42,8 +43,8 @@
             btnAssessment = new Button();
             btnHistory = new Button();
             btnReports = new Button();
-            panel1 = new Panel();
             btnNewAcademicYear = new Button();
+            panel1 = new Panel();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
@@ -65,7 +66,7 @@
             // userControlExit1
             // 
             userControlExit1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            userControlExit1.Location = new Point(1836, 0);
+            userControlExit1.Location = new Point(1823, 19);
             userControlExit1.Name = "userControlExit1";
             userControlExit1.Size = new Size(66, 64);
             userControlExit1.TabIndex = 8;
@@ -101,16 +102,28 @@
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
             // 
+            // lblAcademicYear
+            // 
+            lblAcademicYear.AutoSize = true;
+            lblAcademicYear.Font = new Font("Sitka Text", 18F, FontStyle.Bold);
+            lblAcademicYear.Location = new Point(126, 17);
+            lblAcademicYear.Name = "lblAcademicYear";
+            lblAcademicYear.Size = new Size(176, 43);
+            lblAcademicYear.TabIndex = 9;
+            lblAcademicYear.Text = "**** - ****";
+            lblAcademicYear.Click += lblAcademicYear_Click;
+            // 
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel3.BackColor = Color.SeaShell;
+            panel3.Controls.Add(lblAcademicYear);
             panel3.Controls.Add(btnAdminDashboardLogout);
             panel3.Controls.Add(flowLayoutPanel1);
             panel3.Controls.Add(btnNewAcademicYear);
             panel3.Location = new Point(0, 107);
             panel3.Name = "panel3";
-            panel3.Size = new Size(450, 1009);
+            panel3.Size = new Size(450, 960);
             panel3.TabIndex = 8;
             // 
             // btnAdminDashboardLogout
@@ -136,7 +149,7 @@
             flowLayoutPanel1.Controls.Add(btnAssessment);
             flowLayoutPanel1.Controls.Add(btnHistory);
             flowLayoutPanel1.Controls.Add(btnReports);
-            flowLayoutPanel1.Location = new Point(23, 88);
+            flowLayoutPanel1.Location = new Point(23, 170);
             flowLayoutPanel1.Margin = new Padding(101, 100, 101, 100);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(391, 595);
@@ -243,14 +256,6 @@
             btnReports.Visible = false;
             btnReports.Click += btnReports_Click_1;
             // 
-            // panel1
-            // 
-            panel1.BackColor = Color.SeaShell;
-            panel1.Location = new Point(450, 107);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1470, 984);
-            panel1.TabIndex = 9;
-            // 
             // btnNewAcademicYear
             // 
             btnNewAcademicYear.Cursor = Cursors.Hand;
@@ -259,15 +264,23 @@
             btnNewAcademicYear.FlatStyle = FlatStyle.System;
             btnNewAcademicYear.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNewAcademicYear.ForeColor = Color.FromArgb(64, 64, 64);
-            btnNewAcademicYear.Location = new Point(28, 13);
+            btnNewAcademicYear.Location = new Point(28, 89);
             btnNewAcademicYear.Margin = new Padding(3, 29, 3, 3);
             btnNewAcademicYear.Name = "btnNewAcademicYear";
-            btnNewAcademicYear.Size = new Size(201, 40);
+            btnNewAcademicYear.Size = new Size(386, 49);
             btnNewAcademicYear.TabIndex = 7;
             btnNewAcademicYear.Text = "New Academic Year";
             btnNewAcademicYear.UseVisualStyleBackColor = true;
             btnNewAcademicYear.Visible = false;
             btnNewAcademicYear.Click += btnNewAcademicYear_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.SeaShell;
+            panel1.Location = new Point(450, 107);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1470, 960);
+            panel1.TabIndex = 9;
             // 
             // FormDashboard
             // 
@@ -292,6 +305,7 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -313,5 +327,6 @@
         private Panel panel1;
         private DashBoardControls.UserControlExit userControlExit1;
         private Button btnNewAcademicYear;
+        private Label lblAcademicYear;
     }
 }
