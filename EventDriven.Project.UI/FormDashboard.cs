@@ -18,6 +18,7 @@ namespace EventDriven.Project.UI
         MainForm main;
         string role;
         public UserModel authenticationKey;
+        private AcademicYearController academicYearController = new AcademicYearController();
         public FormDashboard(string role, MainForm main, UserModel authenticationKey)
         {
             this.main = main;
@@ -108,10 +109,30 @@ namespace EventDriven.Project.UI
             }
         }
 
-        private void FormDashboard_Load(object sender, EventArgs e)
+        private async void FormDashboard_Load(object sender, EventArgs e)
         {
             highlightButton(sender as Button);
+
+            try
+            {
+                var activeYear = await academicYearController.GetActiveYearAsync(authenticationKey);
+
+                if (activeYear != null)
+                {
+                    lblAcademicYear.Text = $"S.Y. {activeYear.YearName}";
+                }
+                else
+                {
+                    lblAcademicYear.Text = "No Active Year";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblAcademicYear.Text = "Error";
+                MessageBox.Show(ex.Message);
+            }
         }
+
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
@@ -220,6 +241,28 @@ namespace EventDriven.Project.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void lblAcademicYear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var activeYear = await academicYearController.GetActiveYearAsync(authenticationKey);
+
+                if (activeYear != null)
+                {
+                    lblAcademicYear.Text = $"S.Y. {activeYear.YearName}";
+
+                }
+                else
+                {
+                    lblAcademicYear.Text = "No Active Year";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

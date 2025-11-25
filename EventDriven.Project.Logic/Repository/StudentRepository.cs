@@ -42,16 +42,12 @@ namespace EventDriven.Project.Businesslogic.Repository
         // UPDATE student
         public async Task<StudentModel> UpdateAsync(StudentModel student)
         {
-            var query = @"UPDATE tblStudents SET
-                          FirstName=@FirstName, MiddleName=@MiddleName, LastName=@LastName, Status=@Status,
-                          BirthDate=@BirthDate, GradeLevel=@GradeLevel, Nationality=@Nationality,
-                          FatherName=@FatherName, FatherContact=@FatherContact, MotherName=@MotherName,
-                          MotherContact=@MotherContact, ParentAddress=@ParentAddress,
-                          GuardianName=@GuardianName, GuardianRelationship=@GuardianRelationship,
-                          GuardianContact=@GuardianContact, GuardianAddress=@GuardianAddress,
-                          Suffix=@Suffix, Section=@Section, Gender=@Gender, Email=@Email,
-                          LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, GWA=@GWA, AcademicYearId=@AcademicYearId
-                          WHERE Id=@Id";
+            var query = @"UPDATE tblStudents SET FirstName=@FirstName, MiddleName=@MiddleName, LastName=@LastName, Status=@Status, 
+                        BirthDate=@BirthDate, GradeLevel=@GradeLevel, Nationality=@Nationality, FatherName=@FatherName, 
+                        FatherContact=@FatherContact, MotherName=@MotherName, MotherContact=@MotherContact, ParentAddress=@ParentAddress, 
+                        GuardianName=@GuardianName, GuardianRelationship=@GuardianRelationship, GuardianContact=@GuardianContact, GuardianAddress=@GuardianAddress, 
+                        Suffix=@Suffix, Section=@Section, Gender=@Gender, Email=@Email, LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, 
+                    GWA=@GWA, AcademicYearId=@AcademicYearId WHERE Id=@Id";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {

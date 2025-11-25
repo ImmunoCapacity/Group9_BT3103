@@ -79,20 +79,49 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void btnSearchStuIn_Click(object sender, EventArgs e)
         {
-            SearchStudent(txtSearch.Text);
-        }
+            // Get the search value from the TextBox
+            string searchValue = txtSearch.Text.Trim();
 
-        private void SearchStudent(string searchValue)
-        {
+            // If the search value is empty, show a message and return
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                // Show all rows if search is empty
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                    row.Visible = true;
+                MessageBox.Show("Please enter a student ID or name.");
                 return;
             }
 
-            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$"); // only digits
+            // Check if the input is a valid student ID (numeric)
+            if (int.TryParse(searchValue, out _))
+            {
+                // If it's a valid student ID, search by ID (true)
+                SearchStudent(searchValue, true);
+            }
+            else
+            {
+                // If it's not a valid ID, search by name (false)
+                SearchStudent(searchValue, false);
+            }
+        }
+
+
+        private void SearchStudent(string searchValue, bool searchById)
+        {
+            // Reset visibility before starting the search
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    row.Visible = true; // Show all rows initially
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(searchValue))
+            {
+                return; // Do nothing if the search value is empty
+            }
+
+            bool isNumber = int.TryParse(searchValue, out _); // Check if it's an ID (numeric)
+
+            string searchValueLower = searchValue.ToLower(); // For name search, make it case-insensitive
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -100,23 +129,25 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 bool match = false;
 
-                if (isNumber)
+                if (searchById || isNumber)
                 {
-                    // search by ID (exact match)
-                    match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
-                    row.Visible = match;
+                    // Search by ID (exact match)
+                    string studentId = row.Cells["PaymentId"].Value?.ToString(); 
+                    match = studentId != null && studentId.Equals(searchValue, StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
-                    // search by Name (partial match)
-                    match = row.Cells["Column2"].Value.ToString()
-                                .ToLower()
-                                .Contains(searchValue.ToLower());
+                    // Search by Name (partial match, case-insensitive)
+                    string studentName = row.Cells["StudentName"].Value?.ToString();
+                    match = studentName != null && studentName.ToLower().Contains(searchValueLower);
                 }
 
+                // Set row visibility based on match
                 row.Visible = match;
             }
         }
+
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -136,7 +167,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 lbId.Text = row.Cells["studentID"].Value?.ToString() ?? "0";
                 getTotal();
-                getBreakDown(row.Cells["Grade"].Value?.ToString()??"");
+                getBreakDown(row.Cells["Grade"].Value?.ToString() ?? "");
             }
         }
         private async void getTotal()
@@ -154,6 +185,37 @@ namespace EventDriven.Project.UI.DashBoardControls
                 $"Library Fee: ₱{feeStructure.LibraryFee:N2}\n" +
                 $"Sports Fee: ₱{feeStructure.SportsFee:N2}\n" +
                 $"Total Tuition: ₱{feeStructure.TuitionFee}";
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Get the search value and trim it to remove any extra spaces
+                string searchValue = txtSearch.Text.Trim();
+
+                // If the search value is empty, show a message and return
+                if (string.IsNullOrWhiteSpace(searchValue))
+                {
+                    MessageBox.Show("Please enter a student ID or name.");
+                    return;
+                }
+
+                // Check if the input is a valid student ID (numeric)
+                if (int.TryParse(searchValue, out int studentId))
+                {
+                    // If it's a valid student ID, trigger the search by ID
+                    SearchStudent(studentId.ToString(), true); // Assuming SearchStudent can handle ID search
+                }
+                else
+                {
+                    // If it's not a valid ID, trigger the search by name
+                    SearchStudent(searchValue, false); // Assuming SearchStudent handles name search
+                }
+
+                // Optional: Prevent the beep sound when pressing Enter
+                e.SuppressKeyPress = true;
+            }
         }
 
     }

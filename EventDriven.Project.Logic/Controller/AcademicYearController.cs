@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using EventDriven.Project.Logic.Repository;
 using EventDriven.Project.Model;
@@ -46,11 +47,25 @@ namespace EventDriven.Project.Logic.Controller
         // ADD Academic Year
         public async Task<AcademicYearModel> AddAsync(AcademicYearModel model, UserModel authenticationKey)
         {
-            if (!authenticate(authenticationKey)) throw new Exception("You are not Logged in");
-            if (model == null) throw new Exception("Missing parameter: academic year");
+            if (!authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            if (model == null)
+                throw new Exception("Missing parameter: academic year");
 
             try
             {
+                // Get all existing years
+                var existingYears = await academicYearRepository.GetAllAsync();
+
+                // Check for duplicate (case-insensitive)
+                var exists = existingYears.Any(y =>
+                    y.YearName.Equals(model.YearName, StringComparison.OrdinalIgnoreCase));
+
+                if (exists)
+                    throw new Exception($"Academic year '{model.YearName}' already exists.");
+
+                // Add if no duplicate
                 return await academicYearRepository.AddAsync(model);
             }
             catch (Exception ex)
@@ -58,6 +73,7 @@ namespace EventDriven.Project.Logic.Controller
                 throw new Exception($"Error adding academic year: {ex.Message}");
             }
         }
+
 
         // UPDATE Academic Year
         public async Task<AcademicYearModel> UpdateAsync(AcademicYearModel model, UserModel authenticationKey)

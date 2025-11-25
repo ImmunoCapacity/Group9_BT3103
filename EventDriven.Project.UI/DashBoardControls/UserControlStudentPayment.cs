@@ -262,28 +262,31 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (isNumber)
                 {
-                    try
+                    // Search by ID (exact match) - Check if column exists
+                    if (rows.Columns.Contains("Column1") && row.Cells["Column1"].Value != null)
                     {
-                        // search by ID (exact match)
                         match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
-                        row.Visible = match;
-                    } catch (Exception e)
+                    }
+                    else if (rows.Columns.Contains("dataGridViewTextBoxColumn1") && row.Cells["dataGridViewTextBoxColumn1"].Value != null)
                     {
                         match = row.Cells["dataGridViewTextBoxColumn1"].Value.ToString().Contains(searchValue);
-                        row.Visible = match;
                     }
                 }
                 else
                 {
-                    // search by Name (partial match)
-                    match = row.Cells["Column2"].Value.ToString()
-                                .ToLower()
-                                .Contains(searchValue.ToLower());
+                    // Search by Name (partial match) - Assume Column2 exists; add check if needed
+                    if (rows.Columns.Contains("Column2") && row.Cells["Column2"].Value != null)
+                    {
+                        match = row.Cells["Column2"].Value.ToString()
+                                    .ToLower()
+                                    .Contains(searchValue.ToLower());
+                    }
                 }
 
                 row.Visible = match;
             }
         }
+
         string tuitionFee;
         string grade;
         string name;
@@ -297,7 +300,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Example: assuming these are the column names or indexes
                 name = row.Cells["Column2"].Value?.ToString() ?? "";
                 grade = row.Cells["Column3"].Value?.ToString() ?? "";
-                tuitionFee = "₱"+row.Cells["Column4"].Value?.ToString() ?? "0.00";
+                tuitionFee = "₱" + row.Cells["Column4"].Value?.ToString() ?? "0.00";
                 lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
                 lbBalance.Text = "₱" + row.Cells["Column7"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "₱0.00";
@@ -326,7 +329,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Example: assuming these are the column names or indexes
 
                 grade = row.Cells["dataGridViewTextBoxColumn3"].Value?.ToString() ?? "";
-                tuitionFee = "₱"+row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
+                tuitionFee = "₱" + row.Cells["dataGridViewTextBoxColumn4"].Value?.ToString() ?? "";
                 name = lbName.Text = row.Cells["dataGridViewTextBoxColumn2"].Value?.ToString() ?? "" ?? "";
                 lbBalance.Text = "₱" + row.Cells["dataGridViewTextBoxColumn6"].Value?.ToString() ?? "0.00";
                 lbChange.Text = "₱0.00";
@@ -568,5 +571,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed (no validation needed, as SearchStudent handles empty input)
+                SearchStudent(txtSearch.Text);
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

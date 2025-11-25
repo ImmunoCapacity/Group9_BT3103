@@ -28,6 +28,14 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             splitContainerPayment = new SplitContainer();
             dataGridView1 = new DataGridView();
+            PaymentId = new DataGridViewTextBoxColumn();
+            StudentName = new DataGridViewTextBoxColumn();
+            DatePaid = new DataGridViewTextBoxColumn();
+            PaymentType = new DataGridViewTextBoxColumn();
+            AmountPaid = new DataGridViewTextBoxColumn();
+            RemainingBalance = new DataGridViewTextBoxColumn();
+            studentID = new DataGridViewTextBoxColumn();
+            Grade = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
@@ -47,14 +55,6 @@
             label8 = new Label();
             Column6 = new DataGridViewTextBoxColumn();
             academicYearModelBindingSource = new BindingSource(components);
-            PaymentId = new DataGridViewTextBoxColumn();
-            StudentName = new DataGridViewTextBoxColumn();
-            DatePaid = new DataGridViewTextBoxColumn();
-            PaymentType = new DataGridViewTextBoxColumn();
-            AmountPaid = new DataGridViewTextBoxColumn();
-            RemainingBalance = new DataGridViewTextBoxColumn();
-            studentID = new DataGridViewTextBoxColumn();
-            Grade = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).BeginInit();
             splitContainerPayment.Panel1.SuspendLayout();
             splitContainerPayment.Panel2.SuspendLayout();
@@ -146,6 +146,78 @@
             dataGridView1.TabIndex = 149;
             dataGridView1.CellClick += dataGridView1_CellContentClick;
             // 
+            // PaymentId
+            // 
+            PaymentId.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            PaymentId.HeaderText = "Id";
+            PaymentId.MinimumWidth = 6;
+            PaymentId.Name = "PaymentId";
+            PaymentId.ReadOnly = true;
+            PaymentId.Width = 52;
+            // 
+            // StudentName
+            // 
+            StudentName.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            StudentName.HeaderText = "Student Name";
+            StudentName.MinimumWidth = 6;
+            StudentName.Name = "StudentName";
+            StudentName.ReadOnly = true;
+            StudentName.Width = 280;
+            // 
+            // DatePaid
+            // 
+            DatePaid.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DatePaid.HeaderText = "Date Paid";
+            DatePaid.MinimumWidth = 6;
+            DatePaid.Name = "DatePaid";
+            DatePaid.ReadOnly = true;
+            DatePaid.Width = 105;
+            // 
+            // PaymentType
+            // 
+            PaymentType.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            PaymentType.HeaderText = "Type";
+            PaymentType.MinimumWidth = 6;
+            PaymentType.Name = "PaymentType";
+            PaymentType.ReadOnly = true;
+            PaymentType.Width = 71;
+            // 
+            // AmountPaid
+            // 
+            AmountPaid.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            AmountPaid.HeaderText = "Amount Paid";
+            AmountPaid.MinimumWidth = 6;
+            AmountPaid.Name = "AmountPaid";
+            AmountPaid.ReadOnly = true;
+            AmountPaid.Width = 127;
+            // 
+            // RemainingBalance
+            // 
+            RemainingBalance.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            RemainingBalance.HeaderText = "Remaining Balance";
+            RemainingBalance.MinimumWidth = 6;
+            RemainingBalance.Name = "RemainingBalance";
+            RemainingBalance.ReadOnly = true;
+            RemainingBalance.Width = 170;
+            // 
+            // studentID
+            // 
+            studentID.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            studentID.HeaderText = "StudentID";
+            studentID.MinimumWidth = 6;
+            studentID.Name = "studentID";
+            studentID.ReadOnly = true;
+            studentID.Visible = false;
+            studentID.Width = 125;
+            // 
+            // Grade
+            // 
+            Grade.HeaderText = "Grade";
+            Grade.MinimumWidth = 6;
+            Grade.Name = "Grade";
+            Grade.ReadOnly = true;
+            Grade.Width = 125;
+            // 
             // panel1
             // 
             panel1.Controls.Add(btnSearchStuIn);
@@ -178,6 +250,7 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(499, 27);
             txtSearch.TabIndex = 147;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // panel2
             // 
@@ -342,78 +415,6 @@
             // academicYearModelBindingSource
             // 
             academicYearModelBindingSource.DataSource = typeof(Model.AcademicYearModel);
-            // 
-            // PaymentId
-            // 
-            PaymentId.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            PaymentId.HeaderText = "Id";
-            PaymentId.MinimumWidth = 6;
-            PaymentId.Name = "PaymentId";
-            PaymentId.ReadOnly = true;
-            PaymentId.Width = 52;
-            // 
-            // StudentName
-            // 
-            StudentName.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            StudentName.HeaderText = "Student Name";
-            StudentName.MinimumWidth = 6;
-            StudentName.Name = "StudentName";
-            StudentName.ReadOnly = true;
-            StudentName.Width = 280;
-            // 
-            // DatePaid
-            // 
-            DatePaid.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            DatePaid.HeaderText = "Date Paid";
-            DatePaid.MinimumWidth = 6;
-            DatePaid.Name = "DatePaid";
-            DatePaid.ReadOnly = true;
-            DatePaid.Width = 105;
-            // 
-            // PaymentType
-            // 
-            PaymentType.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            PaymentType.HeaderText = "Type";
-            PaymentType.MinimumWidth = 6;
-            PaymentType.Name = "PaymentType";
-            PaymentType.ReadOnly = true;
-            PaymentType.Width = 71;
-            // 
-            // AmountPaid
-            // 
-            AmountPaid.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            AmountPaid.HeaderText = "Amount Paid";
-            AmountPaid.MinimumWidth = 6;
-            AmountPaid.Name = "AmountPaid";
-            AmountPaid.ReadOnly = true;
-            AmountPaid.Width = 127;
-            // 
-            // RemainingBalance
-            // 
-            RemainingBalance.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            RemainingBalance.HeaderText = "Remaining Balance";
-            RemainingBalance.MinimumWidth = 6;
-            RemainingBalance.Name = "RemainingBalance";
-            RemainingBalance.ReadOnly = true;
-            RemainingBalance.Width = 170;
-            // 
-            // studentID
-            // 
-            studentID.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            studentID.HeaderText = "StudentID";
-            studentID.MinimumWidth = 6;
-            studentID.Name = "studentID";
-            studentID.ReadOnly = true;
-            studentID.Visible = false;
-            studentID.Width = 109;
-            // 
-            // Grade
-            // 
-            Grade.HeaderText = "Grade";
-            Grade.MinimumWidth = 6;
-            Grade.Name = "Grade";
-            Grade.ReadOnly = true;
-            Grade.Width = 125;
             // 
             // UserControlPaymentHistory
             // 

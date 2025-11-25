@@ -78,6 +78,7 @@
             txtSearchStudentIn.Name = "txtSearchStudentIn";
             txtSearchStudentIn.Size = new Size(483, 29);
             txtSearchStudentIn.TabIndex = 102;
+            txtSearchStudentIn.KeyDown += txtSearchStudentIn_KeyDown;
             // 
             // btnSearch
             // 

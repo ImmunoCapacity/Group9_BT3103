@@ -25,12 +25,14 @@ namespace EventDriven.Project.UI.DashBoardControls
         private int currentPrintIndex = 0;
         private UserModel authenticationKey;
 
+
         public UserControlAssessment(int id, string role, MainForm main, UserModel authenticationKey)
         {
             InitializeComponent();
             studentController = new StudentController();
             assessmentController = new AssessmentController2();
             this.authenticationKey = authenticationKey;
+            txtSearchStudentIn.KeyDown += txtSearchStudentIn_KeyDown;
 
             this.main = main;
 
@@ -58,7 +60,11 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
 
             await GetStudent(studentId);
+            txtSearchStudentIn.Clear();  // Clear the TextBox after successful search
+            txtSearchStudentIn.Focus();  // Optional: Keep focus for immediate re-entry
         }
+
+
         public async Task GetStudent(int id)
         {
             try
@@ -173,5 +179,29 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             btnSave.Enabled = true;
         }
+
+        private async void txtSearchStudentIn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Validate and parse the input, then trigger search
+                if (string.IsNullOrWhiteSpace(txtSearchStudentIn.Text))
+                {
+                    MessageBox.Show("Please enter a student ID.");
+                    return;
+                }
+
+                if (!int.TryParse(txtSearchStudentIn.Text, out int studentId))
+                {
+                    MessageBox.Show("Invalid ID format.");
+                    return;
+                }
+
+                await GetStudent(studentId);
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
+        }
+
     }
 }
