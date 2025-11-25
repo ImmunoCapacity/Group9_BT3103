@@ -28,19 +28,14 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             splitContainerPayment = new SplitContainer();
             dataGridView1 = new DataGridView();
-            PaymentId = new DataGridViewTextBoxColumn();
-            StudentName = new DataGridViewTextBoxColumn();
-            DatePaid = new DataGridViewTextBoxColumn();
-            PaymentType = new DataGridViewTextBoxColumn();
-            AmountPaid = new DataGridViewTextBoxColumn();
-            RemainingBalance = new DataGridViewTextBoxColumn();
-            studentID = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
             panel2 = new Panel();
             label4 = new Label();
             panel3 = new Panel();
+            lbBreakDown = new Label();
+            label1 = new Label();
             lbId = new Label();
             lbTotal = new Label();
             label5 = new Label();
@@ -52,6 +47,14 @@
             label8 = new Label();
             Column6 = new DataGridViewTextBoxColumn();
             academicYearModelBindingSource = new BindingSource(components);
+            PaymentId = new DataGridViewTextBoxColumn();
+            StudentName = new DataGridViewTextBoxColumn();
+            DatePaid = new DataGridViewTextBoxColumn();
+            PaymentType = new DataGridViewTextBoxColumn();
+            AmountPaid = new DataGridViewTextBoxColumn();
+            RemainingBalance = new DataGridViewTextBoxColumn();
+            studentID = new DataGridViewTextBoxColumn();
+            Grade = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).BeginInit();
             splitContainerPayment.Panel1.SuspendLayout();
             splitContainerPayment.Panel2.SuspendLayout();
@@ -67,7 +70,6 @@
             // 
             splitContainerPayment.Dock = DockStyle.Fill;
             splitContainerPayment.Location = new Point(0, 0);
-            splitContainerPayment.Margin = new Padding(3, 2, 3, 2);
             splitContainerPayment.Name = "splitContainerPayment";
             // 
             // splitContainerPayment.Panel1
@@ -81,8 +83,9 @@
             splitContainerPayment.Panel2.BackColor = Color.BurlyWood;
             splitContainerPayment.Panel2.Controls.Add(panel2);
             splitContainerPayment.Panel2.Controls.Add(panel3);
-            splitContainerPayment.Size = new Size(1270, 741);
-            splitContainerPayment.SplitterDistance = 748;
+            splitContainerPayment.Size = new Size(1451, 988);
+            splitContainerPayment.SplitterDistance = 854;
+            splitContainerPayment.SplitterWidth = 5;
             splitContainerPayment.TabIndex = 0;
             // 
             // dataGridView1
@@ -111,7 +114,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { PaymentId, StudentName, DatePaid, PaymentType, AmountPaid, RemainingBalance, studentID });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { PaymentId, StudentName, DatePaid, PaymentType, AmountPaid, RemainingBalance, studentID, Grade });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.SeaShell;
             dataGridViewCellStyle3.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -123,7 +126,8 @@
             dataGridView1.Dock = DockStyle.Left;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SeaShell;
-            dataGridView1.Location = new Point(0, 58);
+            dataGridView1.Location = new Point(0, 77);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -138,9 +142,206 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(749, 683);
+            dataGridView1.Size = new Size(856, 911);
             dataGridView1.TabIndex = 149;
             dataGridView1.CellClick += dataGridView1_CellContentClick;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(btnSearchStuIn);
+            panel1.Controls.Add(txtSearch);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(854, 77);
+            panel1.TabIndex = 148;
+            // 
+            // btnSearchStuIn
+            // 
+            btnSearchStuIn.BackColor = Color.White;
+            btnSearchStuIn.FlatStyle = FlatStyle.System;
+            btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearchStuIn.ForeColor = Color.SteelBlue;
+            btnSearchStuIn.Location = new Point(705, 16);
+            btnSearchStuIn.Margin = new Padding(3, 4, 3, 4);
+            btnSearchStuIn.Name = "btnSearchStuIn";
+            btnSearchStuIn.Size = new Size(120, 45);
+            btnSearchStuIn.TabIndex = 148;
+            btnSearchStuIn.Text = "Search";
+            btnSearchStuIn.UseVisualStyleBackColor = false;
+            btnSearchStuIn.Click += btnSearchStuIn_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(193, 27);
+            txtSearch.Margin = new Padding(3, 3, 10, 3);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(499, 27);
+            txtSearch.TabIndex = 147;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.SeaShell;
+            panel2.Controls.Add(label4);
+            panel2.Location = new Point(27, 15);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(539, 51);
+            panel2.TabIndex = 166;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(126, 9);
+            label4.Name = "label4";
+            label4.Size = new Size(268, 33);
+            label4.TabIndex = 0;
+            label4.Text = "Payment Information:";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.SeaShell;
+            panel3.Controls.Add(lbBreakDown);
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(lbId);
+            panel3.Controls.Add(lbTotal);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(lbName);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(lbStatus);
+            panel3.Controls.Add(lbBalance);
+            panel3.Controls.Add(label8);
+            panel3.Location = new Point(47, 77);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(497, 867);
+            panel3.TabIndex = 162;
+            // 
+            // lbBreakDown
+            // 
+            lbBreakDown.BackColor = Color.SeaShell;
+            lbBreakDown.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbBreakDown.Location = new Point(37, 278);
+            lbBreakDown.Name = "lbBreakDown";
+            lbBreakDown.Size = new Size(431, 564);
+            lbBreakDown.TabIndex = 167;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.SeaShell;
+            label1.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(37, 230);
+            label1.Name = "label1";
+            label1.Size = new Size(139, 29);
+            label1.TabIndex = 166;
+            label1.Text = "Break down:";
+            // 
+            // lbId
+            // 
+            lbId.AutoSize = true;
+            lbId.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbId.Location = new Point(94, 61);
+            lbId.Name = "lbId";
+            lbId.Size = new Size(26, 29);
+            lbId.TabIndex = 164;
+            lbId.Text = "0";
+            // 
+            // lbTotal
+            // 
+            lbTotal.AutoSize = true;
+            lbTotal.BackColor = Color.SeaShell;
+            lbTotal.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbTotal.Location = new Point(162, 147);
+            lbTotal.Name = "lbTotal";
+            lbTotal.Size = new Size(72, 29);
+            lbTotal.TabIndex = 165;
+            lbTotal.Text = "₱0.00";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(47, 61);
+            label5.Name = "label5";
+            label5.Size = new Size(50, 29);
+            label5.TabIndex = 163;
+            label5.Text = "ID: ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.SeaShell;
+            label3.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(37, 147);
+            label3.Name = "label3";
+            label3.Size = new Size(120, 29);
+            label3.TabIndex = 164;
+            label3.Text = "Total Paid:";
+            // 
+            // lbName
+            // 
+            lbName.AutoSize = true;
+            lbName.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbName.Location = new Point(94, 20);
+            lbName.Name = "lbName";
+            lbName.Size = new Size(115, 29);
+            lbName.TabIndex = 150;
+            lbName.Text = "Full Name";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(13, 20);
+            label2.Name = "label2";
+            label2.Size = new Size(84, 29);
+            label2.TabIndex = 1;
+            label2.Text = "Name: ";
+            // 
+            // lbStatus
+            // 
+            lbStatus.AutoSize = true;
+            lbStatus.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbStatus.Location = new Point(209, 259);
+            lbStatus.Name = "lbStatus";
+            lbStatus.Size = new Size(0, 29);
+            lbStatus.TabIndex = 163;
+            // 
+            // lbBalance
+            // 
+            lbBalance.AutoSize = true;
+            lbBalance.BackColor = Color.SeaShell;
+            lbBalance.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbBalance.Location = new Point(253, 175);
+            lbBalance.Name = "lbBalance";
+            lbBalance.Size = new Size(72, 29);
+            lbBalance.TabIndex = 162;
+            lbBalance.Text = "₱0.00";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.SeaShell;
+            label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(37, 175);
+            label8.Name = "label8";
+            label8.Size = new Size(211, 29);
+            label8.TabIndex = 157;
+            label8.Text = "Remaining Balance:";
+            // 
+            // Column6
+            // 
+            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column6.HeaderText = "Date of Birth";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            Column6.Width = 125;
+            // 
+            // academicYearModelBindingSource
+            // 
+            academicYearModelBindingSource.DataSource = typeof(Model.AcademicYearModel);
             // 
             // PaymentId
             // 
@@ -149,7 +350,7 @@
             PaymentId.MinimumWidth = 6;
             PaymentId.Name = "PaymentId";
             PaymentId.ReadOnly = true;
-            PaymentId.Width = 42;
+            PaymentId.Width = 52;
             // 
             // StudentName
             // 
@@ -167,7 +368,7 @@
             DatePaid.MinimumWidth = 6;
             DatePaid.Name = "DatePaid";
             DatePaid.ReadOnly = true;
-            DatePaid.Width = 83;
+            DatePaid.Width = 105;
             // 
             // PaymentType
             // 
@@ -176,7 +377,7 @@
             PaymentType.MinimumWidth = 6;
             PaymentType.Name = "PaymentType";
             PaymentType.ReadOnly = true;
-            PaymentType.Width = 59;
+            PaymentType.Width = 71;
             // 
             // AmountPaid
             // 
@@ -185,7 +386,7 @@
             AmountPaid.MinimumWidth = 6;
             AmountPaid.Name = "AmountPaid";
             AmountPaid.ReadOnly = true;
-            AmountPaid.Width = 103;
+            AmountPaid.Width = 127;
             // 
             // RemainingBalance
             // 
@@ -194,7 +395,7 @@
             RemainingBalance.MinimumWidth = 6;
             RemainingBalance.Name = "RemainingBalance";
             RemainingBalance.ReadOnly = true;
-            RemainingBalance.Width = 137;
+            RemainingBalance.Width = 170;
             // 
             // studentID
             // 
@@ -204,191 +405,23 @@
             studentID.Name = "studentID";
             studentID.ReadOnly = true;
             studentID.Visible = false;
+            studentID.Width = 109;
             // 
-            // panel1
+            // Grade
             // 
-            panel1.Controls.Add(btnSearchStuIn);
-            panel1.Controls.Add(txtSearch);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 2, 3, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(748, 58);
-            panel1.TabIndex = 148;
-            // 
-            // btnSearchStuIn
-            // 
-            btnSearchStuIn.BackColor = Color.White;
-            btnSearchStuIn.FlatStyle = FlatStyle.System;
-            btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSearchStuIn.ForeColor = Color.SteelBlue;
-            btnSearchStuIn.Location = new Point(617, 12);
-            btnSearchStuIn.Name = "btnSearchStuIn";
-            btnSearchStuIn.Size = new Size(105, 34);
-            btnSearchStuIn.TabIndex = 148;
-            btnSearchStuIn.Text = "Search";
-            btnSearchStuIn.UseVisualStyleBackColor = false;
-            btnSearchStuIn.Click += btnSearchStuIn_Click;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(169, 20);
-            txtSearch.Margin = new Padding(3, 2, 9, 2);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(437, 23);
-            txtSearch.TabIndex = 147;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.SeaShell;
-            panel2.Controls.Add(label4);
-            panel2.Location = new Point(24, 11);
-            panel2.Margin = new Padding(3, 2, 3, 2);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(472, 38);
-            panel2.TabIndex = 166;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(110, 7);
-            label4.Name = "label4";
-            label4.Size = new Size(221, 28);
-            label4.TabIndex = 0;
-            label4.Text = "Payment Information:";
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.SeaShell;
-            panel3.Controls.Add(lbId);
-            panel3.Controls.Add(lbTotal);
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(label3);
-            panel3.Controls.Add(lbName);
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(lbStatus);
-            panel3.Controls.Add(lbBalance);
-            panel3.Controls.Add(label8);
-            panel3.Location = new Point(41, 58);
-            panel3.Margin = new Padding(3, 2, 3, 2);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(435, 650);
-            panel3.TabIndex = 162;
-            // 
-            // lbId
-            // 
-            lbId.AutoSize = true;
-            lbId.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbId.Location = new Point(82, 46);
-            lbId.Name = "lbId";
-            lbId.Size = new Size(20, 23);
-            lbId.TabIndex = 164;
-            lbId.Text = "0";
-            // 
-            // lbTotal
-            // 
-            lbTotal.AutoSize = true;
-            lbTotal.BackColor = Color.SeaShell;
-            lbTotal.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbTotal.Location = new Point(142, 110);
-            lbTotal.Name = "lbTotal";
-            lbTotal.Size = new Size(57, 23);
-            lbTotal.TabIndex = 165;
-            lbTotal.Text = "₱0.00";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(41, 46);
-            label5.Name = "label5";
-            label5.Size = new Size(40, 23);
-            label5.TabIndex = 163;
-            label5.Text = "ID: ";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.SeaShell;
-            label3.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(32, 110);
-            label3.Name = "label3";
-            label3.Size = new Size(97, 23);
-            label3.TabIndex = 164;
-            label3.Text = "Total Paid:";
-            // 
-            // lbName
-            // 
-            lbName.AutoSize = true;
-            lbName.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbName.Location = new Point(82, 15);
-            lbName.Name = "lbName";
-            lbName.Size = new Size(92, 23);
-            lbName.TabIndex = 150;
-            lbName.Text = "Full Name";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(11, 15);
-            label2.Name = "label2";
-            label2.Size = new Size(66, 23);
-            label2.TabIndex = 1;
-            label2.Text = "Name: ";
-            // 
-            // lbStatus
-            // 
-            lbStatus.AutoSize = true;
-            lbStatus.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbStatus.Location = new Point(183, 194);
-            lbStatus.Name = "lbStatus";
-            lbStatus.Size = new Size(0, 23);
-            lbStatus.TabIndex = 163;
-            // 
-            // lbBalance
-            // 
-            lbBalance.AutoSize = true;
-            lbBalance.BackColor = Color.SeaShell;
-            lbBalance.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbBalance.Location = new Point(221, 131);
-            lbBalance.Name = "lbBalance";
-            lbBalance.Size = new Size(57, 23);
-            lbBalance.TabIndex = 162;
-            lbBalance.Text = "₱0.00";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.SeaShell;
-            label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(32, 131);
-            label8.Name = "label8";
-            label8.Size = new Size(168, 23);
-            label8.TabIndex = 157;
-            label8.Text = "Remaining Balance:";
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column6.HeaderText = "Date of Birth";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.ReadOnly = true;
-            // 
-            // academicYearModelBindingSource
-            // 
-            academicYearModelBindingSource.DataSource = typeof(Model.AcademicYearModel);
+            Grade.HeaderText = "Grade";
+            Grade.MinimumWidth = 6;
+            Grade.Name = "Grade";
+            Grade.ReadOnly = true;
+            Grade.Width = 125;
             // 
             // UserControlPaymentHistory
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(splitContainerPayment);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "UserControlPaymentHistory";
-            Size = new Size(1270, 741);
+            Size = new Size(1451, 988);
             splitContainerPayment.Panel1.ResumeLayout(false);
             splitContainerPayment.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).EndInit();
@@ -422,6 +455,11 @@
         private Label lbStatus;
         private Label lbId;
         private Label label5;
+        private Panel panel2;
+        private Label label4;
+        private BindingSource academicYearModelBindingSource;
+        private Label lbBreakDown;
+        private Label label1;
         private DataGridViewTextBoxColumn PaymentId;
         private DataGridViewTextBoxColumn StudentName;
         private DataGridViewTextBoxColumn DatePaid;
@@ -429,8 +467,6 @@
         private DataGridViewTextBoxColumn AmountPaid;
         private DataGridViewTextBoxColumn RemainingBalance;
         private DataGridViewTextBoxColumn studentID;
-        private Panel panel2;
-        private Label label4;
-        private BindingSource academicYearModelBindingSource;
+        private DataGridViewTextBoxColumn Grade;
     }
 }

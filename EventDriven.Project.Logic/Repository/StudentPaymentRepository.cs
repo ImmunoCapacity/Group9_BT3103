@@ -264,6 +264,45 @@ namespace EventDriven.Project.Logic.Repository
             return totalPaid;
         }
 
+        public async Task<FeeStructure> GetFeeStructureAsync(string gradeLevel)
+        {
+            var query = @"
+        SELECT Id, GradeLevel, BaseTuition, LabFee, LibraryFee, SportsFee, TuitionFee
+        FROM tblFeeStructure
+        WHERE GradeLevel = @GradeLevel
+    ";
+
+            using (SqlConnection conn = new SqlConnection(connect.connectionString))
+            {
+                await conn.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@GradeLevel", gradeLevel);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return new FeeStructure
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                GradeLevel = reader["GradeLevel"].ToString(),
+                                BaseTuition = reader.GetDecimal(reader.GetOrdinal("BaseTuition")),
+                                LabFee = reader.GetDecimal(reader.GetOrdinal("LabFee")),
+                                LibraryFee = reader.GetDecimal(reader.GetOrdinal("LibraryFee")),
+                                SportsFee = reader.GetDecimal(reader.GetOrdinal("SportsFee")),
+                                TuitionFee = reader.GetDecimal(reader.GetOrdinal("TuitionFee"))
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null; // No matching grade level
+        }
+
+
 
         // Helper method to add parameters
         private void AddParameters(SqlCommand command, PaymentModel payment)

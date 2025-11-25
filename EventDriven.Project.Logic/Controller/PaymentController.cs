@@ -68,6 +68,8 @@ namespace EventDriven.Project.Logic.Controller
             }
         }
 
+
+
         // 📜 Get all payment history (for reports)
         public async Task<List<PaymentHistoryModel>> GetAllPayments(UserModel authenticationKey)
         {
@@ -97,6 +99,28 @@ namespace EventDriven.Project.Logic.Controller
             catch (Exception ex)
             {
                 throw new Exception($"Error retrieving payments: {ex.Message}");
+            }
+        }
+        public async Task<FeeStructure> GetFeeStructureByGradeAsync(string gradeLevel, UserModel authenticationKey)
+        {
+            if (!Authenticate(authenticationKey))
+                throw new Exception("You are not logged in.");
+
+            if (string.IsNullOrWhiteSpace(gradeLevel))
+                throw new Exception("Grade level cannot be empty.");
+
+            try
+            {
+                var result = await paymentRepository.GetFeeStructureAsync(gradeLevel);
+
+                if (result == null)
+                    throw new Exception("No fee structure found for this grade.");
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving fee structure: {ex.Message}");
             }
         }
 
