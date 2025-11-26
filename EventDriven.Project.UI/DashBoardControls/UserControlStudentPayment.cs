@@ -50,8 +50,11 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.authenticationKey = authenticationKey;
             InitializeComponent();
             paymentController = new PaymentController();
+            cmbPaymentStatus.Text = "Unpaid";
             LoadStudents();
+
         }
+
 
         //private string getTuitionFee()
         //{
@@ -69,32 +72,14 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 foreach (var payment in payments)
                 {
-                    if (payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
+                    if (cmbPaymentStatus.Text.Equals("Unpaid") && payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
                     {
                         // ==== DataGridView1 (Summary List) ====
-                        dataGridView1.Rows.Add(
-                            payment.StudentId,
-                            payment.StudentName,
-                            payment.GradeLevel,
-                            payment.TuitionFee,
-                            payment.TotalPaid,
-                            payment.RemainingBalance,
-                            payment.PaymentMethod
-                        );
-
-                        // ==== DataGridView2 (Next Payment Breakdown) ====
-                        dataGridView2.Rows.Add(
-                            payment.StudentId,
-                            payment.StudentName,
-                            payment.GradeLevel,
-                            payment.TuitionFee,
-                            payment.NextAmountDue,
-                            payment.TotalPaid,
-                            payment.RemainingBalance,
-                            payment.NextDueDate,
-                            payment.NextScheduleDescription,
-                            payment.PaymentMethod
-                        );
+                        addPaymentToDataGrid(payment);
+                    }
+                    else if (cmbPaymentStatus.Text.Equals("Paid") && payment.TuitionFee <= payment.TotalPaid && payment.PaymentMethod != null)
+                    {
+                        addPaymentToDataGrid(payment);
                     }
                 }
 
@@ -124,6 +109,33 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView2.Columns["dataGridViewTextBoxColumn5"].DefaultCellStyle.Format = "₱#,0.00"; // Total Paid
             dataGridView2.Columns["dataGridViewTextBoxColumn6"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
             dataGridView2.Columns["Column11"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition
+        }
+
+        private void addPaymentToDataGrid(StudentPaymentInfo payment)
+        {
+            dataGridView1.Rows.Add(
+                            payment.StudentId,
+                            payment.StudentName,
+                            payment.GradeLevel,
+                            payment.TuitionFee,
+                            payment.TotalPaid,
+                            payment.RemainingBalance,
+                            payment.PaymentMethod
+                        );
+
+            // ==== DataGridView2 (Next Payment Breakdown) ====
+            dataGridView2.Rows.Add(
+                payment.StudentId,
+                payment.StudentName,
+                payment.GradeLevel,
+                payment.TuitionFee,
+                payment.NextAmountDue,
+                payment.TotalPaid,
+                payment.RemainingBalance,
+                payment.NextDueDate,
+                payment.NextScheduleDescription,
+                payment.PaymentMethod
+            );
         }
 
         private PaymentModel currentPayment;
@@ -580,6 +592,11 @@ namespace EventDriven.Project.UI.DashBoardControls
                 // Optional: Prevent the beep sound on Enter
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void cmbPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadStudents();
         }
     }
 }
