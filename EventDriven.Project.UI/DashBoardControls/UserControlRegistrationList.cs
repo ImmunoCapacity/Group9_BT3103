@@ -46,14 +46,14 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 foreach (var student in students)
                 {
-                    if(student.Status != "Inactive") 
-                    dataGridView1.Rows.Add(
-                        student.Id,
-                        $"{student.FirstName} {student.MiddleName} {student.LastName}",
-                        student.Contact,
-                        student.GradeLevel,
-                        student.BirthDate.ToString("yyyy-MM-dd")
-                    );
+                    if (student.Status != "Inactive")
+                        dataGridView1.Rows.Add(
+                            student.Id,
+                            $"{student.FirstName} {student.MiddleName} {student.LastName}",
+                            student.Contact,
+                            student.GradeLevel,
+                            student.BirthDate.ToString("yyyy-MM-dd")
+                        );
                 }
             }
             catch (Exception ex)
@@ -165,6 +165,15 @@ namespace EventDriven.Project.UI.DashBoardControls
                 }
 
                 row.Visible = match;
+            }
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Remove beep sound
+                SearchStudent(txtSearch.Text.Trim());
             }
         }
 

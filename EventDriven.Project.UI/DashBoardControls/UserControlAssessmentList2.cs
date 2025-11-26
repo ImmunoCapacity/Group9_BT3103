@@ -41,7 +41,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             loadyear();
             List<StudentAssessment> allAssessments =
                 await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
-            
+
             // Group by student to remove duplicates caused by multiple schedules/payments
             var datasource = allAssessments
                 .GroupBy(s => s.StudentId)
@@ -54,7 +54,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                     GWA = g.First().GWA,
                     Status = g.First().Status,
                     year = g.First().year
-                    
+
                 })
                 .ToList();
 
@@ -172,14 +172,14 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             loadyear();
         }
         private async void loadyear()
         {
             try
             {
-                if(comboBox1.Text == null) { return; }
+                if (comboBox1.Text == null) { return; }
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.IsNewRow) continue;
@@ -193,5 +193,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
             }
         }
+
+        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnSearchStuIn_Click(sender, e);
+            }
+        }
+
     }
 }

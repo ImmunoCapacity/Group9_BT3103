@@ -36,13 +36,13 @@
             tabPage1 = new TabPage();
             panel2 = new Panel();
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
             panel4 = new Panel();
             comboBox1 = new ComboBox();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
             tabPage2 = new TabPage();
             panel1 = new Panel();
-            Column1 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel2.SuspendLayout();
@@ -144,6 +144,15 @@
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.CellDoubleClick += dataGridView1_DoubleClick;
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Column1";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Visible = false;
+            Column1.Width = 125;
+            // 
             // panel4
             // 
             panel4.BackColor = Color.White;
@@ -189,6 +198,7 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(447, 26);
             txtSearch.TabIndex = 146;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // tabPage2
             // 
@@ -210,15 +220,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1456, 996);
             panel1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Column1";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            Column1.Visible = false;
-            Column1.Width = 125;
             // 
             // UserControlAssessmentList2
             // 
