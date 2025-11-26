@@ -28,7 +28,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             InitializeComponent();
             studentController = new StudentController();
             LoadStudents();
-            
+
         }
         private async void LoadStudents()
         {
@@ -53,7 +53,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         private void refresh(object sender, EventArgs e)
         {
@@ -66,7 +66,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             studentInformationControl.ClearForm();
             tabControl1.SelectedIndex = 1;
         }
-        
+
 
         private void edit(int studentId)
         {
@@ -92,7 +92,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
             else if (columnName == "ColDelete")
             {
-                if(role != "Admin")
+                if (role != "Admin")
                 {
                     MessageBox.Show("Only Admin can delete student records.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -104,7 +104,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (confirm == DialogResult.Yes)
                 {
-                    await studentController.DeleteAsync(studentId,  authenticationKey);
+                    await studentController.DeleteAsync(studentId, authenticationKey);
                     LoadStudents(); // refresh grid
                 }
             }
@@ -124,18 +124,25 @@ namespace EventDriven.Project.UI.DashBoardControls
             SearchStudent(txtSearch.Text.Trim());
         }
 
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SearchStudent(txtSearch.Text.Trim());
+            }
+        }
 
         private void SearchStudent(string searchValue)
         {
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                // Show all rows if search is empty
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                     row.Visible = true;
                 return;
             }
 
-            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$"); // only digits
+            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$");
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -145,19 +152,16 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (isNumber)
                 {
-                    // search by ID (exact match)
                     match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
                     row.Visible = match;
                 }
                 else
                 {
-                    // search by Name (partial match)
                     match = row.Cells["Column2"].Value.ToString()
-                                .ToLower()
-                                .Contains(searchValue.ToLower());
+                                  .ToLower()
+                                  .Contains(searchValue.ToLower());
+                    row.Visible = match;
                 }
-
-                row.Visible = match;
             }
         }
 

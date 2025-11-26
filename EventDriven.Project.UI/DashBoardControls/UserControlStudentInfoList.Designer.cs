@@ -269,6 +269,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(447, 27);
             txtSearch.TabIndex = 146;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // btnAddStuIn
             // 

@@ -9,6 +9,8 @@ SELECT
     s.Section AS StudentSection,
     s.GWA,
     s.Status,
+    s.AssessmentStatus,
+    s.EnrollmentStatus,
 
     -- Registration
     r.Id AS RegistrationId,

@@ -29,7 +29,7 @@ namespace EventDriven.Project.Logic.Controller
 
             return matching != null;
         }
-        public async void UpdateStudentStatusAsync(int studentId, string status, UserModel authenticationKey)
+        public async void UpdateStudentStatusAsync(int studentId, string requirement, string enrollment, UserModel authenticationKey)
         {
             if (!Authenticate(authenticationKey))
                 throw new Exception("You are not Logged in");
@@ -39,7 +39,7 @@ namespace EventDriven.Project.Logic.Controller
 
             try
             {
-                await assessmentRepository.UpdateStudentStatusAsync(studentId, status);
+                await assessmentRepository.UpdateStudentStatusAsync(studentId, requirement, enrollment);
             }
             catch (Exception ex)
             {
@@ -79,6 +79,23 @@ namespace EventDriven.Project.Logic.Controller
             catch (Exception ex)
             {
                 throw new Exception($"Error retrieving all assessments: {ex.Message}");
+            }
+        }
+
+        public async Task<List<StudentAssessment>> GetAllEnrolledAsync(UserModel authenticationKey)
+        {
+            if (!Authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            try
+            {
+                // Call the repository method
+                var repo = new AssessmentRepository();
+                return await repo.GetAllEnrolledAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving enrolled students: {ex.Message}");
             }
         }
     }

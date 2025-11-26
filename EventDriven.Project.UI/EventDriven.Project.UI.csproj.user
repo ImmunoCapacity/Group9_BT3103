@@ -16,6 +16,9 @@
     <Compile Update="DashBoardControls\UserControlExit.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="DashBoardControls\UserControlHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="DashBoardControls\UserControlPaymentHistory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -29,6 +32,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlReports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DashBoardControls\UserControlStudentEnrollment.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="DashBoardControls\UserControlStudentPayment.cs">

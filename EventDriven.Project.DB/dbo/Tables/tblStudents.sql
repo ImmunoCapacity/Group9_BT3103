@@ -6,7 +6,9 @@
     [MiddleName] NVARCHAR(50) NULL,
     [LastName] NVARCHAR(50) NOT NULL,
     [Suffix] NVARCHAR(20) NULL,
-    [Status] NVARCHAR(20) NOT NULL,            
+    [Status] NVARCHAR(20) NOT NULL, 
+    [AssessmentStatus] NVARCHAR(20) NULL Default 'Pending',
+    [EnrollmentStatus] NVARCHAR(20) NULL Default 'Not Enrolled',
     [BirthDate] DATE NOT NULL,
     [GradeLevel] NVARCHAR(20) NOT NULL,
     [Section] NVARCHAR(20) NULL,
@@ -32,6 +34,7 @@
     [CreatedAt] DATETIME DEFAULT GETDATE(), 
     [GWA] DECIMAL(4, 2) NULL, 
     [AcademicYearId] INT NULL,
+    
     Constraint FK_Students_AcademicYear FOREIGN KEY (AcademicYearId) REFERENCES tblAcademicYear(Id)
     
 )

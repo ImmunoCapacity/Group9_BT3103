@@ -86,7 +86,8 @@ namespace EventDriven.Project.UI.DashBoardControls
                 lbId.Text = s.StudentId.ToString();
                 lbGrade.Text = s.GradeLevel;
                 lbSection.Text = s.StudentSection;
-                cbStatus.Text = s.Status;
+                cbRequirementStatus.Text = s.AssessmentStatus;
+                cmbEnrollmentStatus.Text = s.EnrollmentStatus;
                 lbYear.Text = s.year;
 
                 // ------- Fill Subjects Grid -------
@@ -165,7 +166,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            assessmentController.UpdateStudentStatusAsync(int.Parse(lbId.Text), cbStatus.Text, authenticationKey);
+            assessmentController.UpdateStudentStatusAsync(int.Parse(lbId.Text), cbRequirementStatus.Text, cmbEnrollmentStatus.Text, authenticationKey);
 
             btnSave.Enabled = false;
         }
@@ -179,6 +180,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             btnSave.Enabled = true;
         }
+
 
         private async void txtSearchStudentIn_KeyDown(object sender, KeyEventArgs e)
         {
@@ -203,5 +205,9 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void cbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -53,7 +53,7 @@
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
-            cbStatus = new ComboBox();
+            cbRequirementStatus = new ComboBox();
             lbGrade = new Label();
             label10 = new Label();
             lbSection = new Label();
@@ -63,6 +63,8 @@
             dataGridViewPayment = new DataGridView();
             lbYear = new Label();
             label3 = new Label();
+            cmbEnrollmentStatus = new ComboBox();
+            label2 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSchedule).BeginInit();
@@ -214,21 +216,24 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
-            label8.Location = new Point(884, 141);
+            label8.Location = new Point(490, 138);
             label8.Name = "label8";
-            label8.Size = new Size(75, 29);
+            label8.Size = new Size(218, 29);
             label8.TabIndex = 115;
-            label8.Text = "Status";
+            label8.Text = "Requirement Status:";
             // 
-            // cbStatus
+            // cbRequirementStatus
             // 
-            cbStatus.FormattingEnabled = true;
-            cbStatus.Items.AddRange(new object[] { "New", "Old", "Transferee", "Graduated", "Inactive", "Dropout" });
-            cbStatus.Location = new Point(830, 199);
-            cbStatus.Name = "cbStatus";
-            cbStatus.Size = new Size(183, 28);
-            cbStatus.TabIndex = 116;
-            cbStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
+            cbRequirementStatus.Cursor = Cursors.Hand;
+            cbRequirementStatus.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbRequirementStatus.FormattingEnabled = true;
+            cbRequirementStatus.Items.AddRange(new object[] { "Incomplete", "Pending", "Complete" });
+            cbRequirementStatus.Location = new Point(720, 138);
+            cbRequirementStatus.Name = "cbRequirementStatus";
+            cbRequirementStatus.Size = new Size(183, 36);
+            cbRequirementStatus.TabIndex = 116;
+            cbRequirementStatus.SelectedIndexChanged += cbStatus_SelectedIndexChanged;
+            cbRequirementStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
             // 
             // lbGrade
             // 
@@ -437,11 +442,36 @@
             label3.TabIndex = 124;
             label3.Text = "Year:";
             // 
+            // cmbEnrollmentStatus
+            // 
+            cmbEnrollmentStatus.Cursor = Cursors.Hand;
+            cmbEnrollmentStatus.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbEnrollmentStatus.FormattingEnabled = true;
+            cmbEnrollmentStatus.Items.AddRange(new object[] { "Enrolled", "Not Enrolled", "Dropped Out", "Withdrawn", "Graduated", "Inactive" });
+            cmbEnrollmentStatus.Location = new Point(720, 192);
+            cmbEnrollmentStatus.Name = "cmbEnrollmentStatus";
+            cmbEnrollmentStatus.Size = new Size(183, 36);
+            cmbEnrollmentStatus.TabIndex = 126;
+            cmbEnrollmentStatus.SelectedIndexChanged += cbStatus_SelectedIndexChanged;
+            cmbEnrollmentStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            label2.Location = new Point(506, 195);
+            label2.Name = "label2";
+            label2.Size = new Size(202, 29);
+            label2.TabIndex = 127;
+            label2.Text = "Enrollment Status:";
+            // 
             // UserControlAssessment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(label2);
+            Controls.Add(cmbEnrollmentStatus);
             Controls.Add(lbYear);
             Controls.Add(label3);
             Controls.Add(dataGridViewPayment);
@@ -451,7 +481,7 @@
             Controls.Add(label12);
             Controls.Add(lbGrade);
             Controls.Add(label10);
-            Controls.Add(cbStatus);
+            Controls.Add(cbRequirementStatus);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -488,7 +518,7 @@
         private Label label6;
         private Label label7;
         private Label label8;
-        private ComboBox cbStatus;
+        private ComboBox cbRequirementStatus;
         private Label lbGrade;
         private Label label10;
         private Label lbSection;
@@ -498,5 +528,7 @@
         private DataGridView dataGridViewPayment;
         private Label lbYear;
         private Label label3;
+        private ComboBox cmbEnrollmentStatus;
+        private Label label2;
     }
 }

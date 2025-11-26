@@ -17,6 +17,10 @@ namespace EventDriven.Project.Model
         public decimal? GWA { get; set; }
         public string Status { get; set; }
 
+        public string AssessmentStatus {  get; set; }
+
+        public string EnrollmentStatus { get; set; }
+
         public int? RegistrationId { get; set; }
         public string RegistrationSection { get; set; }
         public string Requirements { get; set; }
