@@ -32,10 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             splitContainerPayment = new SplitContainer();
             dataGridView2 = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -48,19 +44,12 @@
             Column8 = new DataGridViewTextBoxColumn();
             Column9 = new DataGridViewTextBoxColumn();
             Column10 = new DataGridViewTextBoxColumn();
-            label9 = new Label();
             label5 = new Label();
-            dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column12 = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
+            cmbIfPay = new ComboBox();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
+            btnSOA = new Button();
             panel2 = new Panel();
             label1 = new Label();
             lbId = new Label();
@@ -68,6 +57,7 @@
             lbName = new Label();
             label2 = new Label();
             panel3 = new Panel();
+            label10 = new Label();
             lbBalance = new Label();
             lbChange = new Label();
             rbPartialPayment = new RadioButton();
@@ -87,7 +77,6 @@
             splitContainerPayment.Panel2.SuspendLayout();
             splitContainerPayment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -103,14 +92,13 @@
             // 
             splitContainerPayment.Panel1.BackColor = Color.BurlyWood;
             splitContainerPayment.Panel1.Controls.Add(dataGridView2);
-            splitContainerPayment.Panel1.Controls.Add(label9);
             splitContainerPayment.Panel1.Controls.Add(label5);
-            splitContainerPayment.Panel1.Controls.Add(dataGridView1);
             splitContainerPayment.Panel1.Controls.Add(panel1);
             // 
             // splitContainerPayment.Panel2
             // 
             splitContainerPayment.Panel2.BackColor = Color.BurlyWood;
+            splitContainerPayment.Panel2.Controls.Add(btnSOA);
             splitContainerPayment.Panel2.Controls.Add(panel2);
             splitContainerPayment.Panel2.Controls.Add(lbId);
             splitContainerPayment.Panel2.Controls.Add(label3);
@@ -175,7 +163,7 @@
             dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.Size = new Size(856, 420);
+            dataGridView2.Size = new Size(856, 841);
             dataGridView2.TabIndex = 150;
             dataGridView2.CellClick += dataGridView2_CellContentClick;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
@@ -268,16 +256,6 @@
             Column10.ReadOnly = true;
             Column10.Width = 125;
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(407, 531);
-            label9.Name = "label9";
-            label9.Size = new Size(52, 29);
-            label9.TabIndex = 167;
-            label9.Text = "Full";
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -288,129 +266,9 @@
             label5.TabIndex = 166;
             label5.Text = "Incoming";
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = Color.SeaShell;
-            dataGridViewCellStyle5.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridView1.BackgroundColor = Color.SeaShell;
-            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SunkenVertical;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.SeaShell;
-            dataGridViewCellStyle6.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column7, Column12 });
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.SeaShell;
-            dataGridViewCellStyle7.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.SeaShell;
-            dataGridView1.Location = new Point(3, 564);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.SeaShell;
-            dataGridViewCellStyle8.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.BurlyWood;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(856, 420);
-            dataGridView1.TabIndex = 149;
-            dataGridView1.CellClick += dataGridView1_CellContentClick;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "ID";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            Column1.Width = 54;
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Column2.HeaderText = "Name";
-            Column2.MinimumWidth = 200;
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
-            Column2.Width = 272;
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column3.HeaderText = "Grade Level";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            Column3.Width = 122;
-            // 
-            // Column4
-            // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column4.HeaderText = "TuitionFee";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
-            Column4.Width = 113;
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column5.HeaderText = "TotalPaid";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.ReadOnly = true;
-            Column5.Width = 103;
-            // 
-            // Column7
-            // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column7.HeaderText = "Remaining Balance";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.ReadOnly = true;
-            Column7.Width = 170;
-            // 
-            // Column12
-            // 
-            Column12.HeaderText = "Payment Method";
-            Column12.MinimumWidth = 6;
-            Column12.Name = "Column12";
-            Column12.ReadOnly = true;
-            Column12.Visible = false;
-            Column12.Width = 125;
-            // 
             // panel1
             // 
+            panel1.Controls.Add(cmbIfPay);
             panel1.Controls.Add(btnSearchStuIn);
             panel1.Controls.Add(txtSearch);
             panel1.Dock = DockStyle.Top;
@@ -419,13 +277,24 @@
             panel1.Size = new Size(854, 77);
             panel1.TabIndex = 148;
             // 
+            // cmbIfPay
+            // 
+            cmbIfPay.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbIfPay.FormattingEnabled = true;
+            cmbIfPay.Items.AddRange(new object[] { "Unpaid", "Paid" });
+            cmbIfPay.Location = new Point(24, 30);
+            cmbIfPay.Name = "cmbIfPay";
+            cmbIfPay.Size = new Size(171, 28);
+            cmbIfPay.TabIndex = 152;
+            cmbIfPay.SelectedIndexChanged += cmbIfPay_SelectedIndexChanged;
+            // 
             // btnSearchStuIn
             // 
             btnSearchStuIn.BackColor = Color.White;
             btnSearchStuIn.FlatStyle = FlatStyle.System;
             btnSearchStuIn.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearchStuIn.ForeColor = Color.SteelBlue;
-            btnSearchStuIn.Location = new Point(624, 16);
+            btnSearchStuIn.Location = new Point(713, 19);
             btnSearchStuIn.Margin = new Padding(3, 4, 3, 4);
             btnSearchStuIn.Name = "btnSearchStuIn";
             btnSearchStuIn.Size = new Size(120, 45);
@@ -436,12 +305,27 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(112, 27);
+            txtSearch.Location = new Point(201, 30);
             txtSearch.Margin = new Padding(3, 3, 10, 3);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(499, 27);
             txtSearch.TabIndex = 147;
             txtSearch.KeyDown += txtSearch_KeyDown;
+            // 
+            // btnSOA
+            // 
+            btnSOA.BackColor = Color.White;
+            btnSOA.FlatStyle = FlatStyle.System;
+            btnSOA.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSOA.ForeColor = Color.SteelBlue;
+            btnSOA.Location = new Point(134, 895);
+            btnSOA.Margin = new Padding(3, 4, 3, 4);
+            btnSOA.Name = "btnSOA";
+            btnSOA.Size = new Size(328, 45);
+            btnSOA.TabIndex = 164;
+            btnSOA.Text = "Print Statement of Account";
+            btnSOA.UseVisualStyleBackColor = false;
+            btnSOA.Click += btnSOA_Click;
             // 
             // panel2
             // 
@@ -488,9 +372,9 @@
             lbName.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbName.Location = new Point(134, 89);
             lbName.Name = "lbName";
-            lbName.Size = new Size(115, 29);
+            lbName.Size = new Size(133, 29);
             lbName.TabIndex = 150;
-            lbName.Text = "Full Name";
+            lbName.Text = "---------------";
             // 
             // label2
             // 
@@ -505,6 +389,7 @@
             // panel3
             // 
             panel3.BackColor = Color.SeaShell;
+            panel3.Controls.Add(label10);
             panel3.Controls.Add(lbBalance);
             panel3.Controls.Add(lbChange);
             panel3.Controls.Add(rbPartialPayment);
@@ -518,8 +403,18 @@
             panel3.Controls.Add(label7);
             panel3.Location = new Point(47, 192);
             panel3.Name = "panel3";
-            panel3.Size = new Size(497, 747);
+            panel3.Size = new Size(497, 660);
             panel3.TabIndex = 162;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(37, 114);
+            label10.Name = "label10";
+            label10.Size = new Size(19, 20);
+            label10.TabIndex = 163;
+            label10.Text = "₱";
             // 
             // lbBalance
             // 
@@ -561,12 +456,12 @@
             btnPrint.FlatStyle = FlatStyle.System;
             btnPrint.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPrint.ForeColor = Color.SteelBlue;
-            btnPrint.Location = new Point(147, 631);
+            btnPrint.Location = new Point(147, 555);
             btnPrint.Margin = new Padding(3, 4, 3, 4);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(218, 45);
             btnPrint.TabIndex = 161;
-            btnPrint.Text = "Print";
+            btnPrint.Text = "Print Receipt";
             btnPrint.UseVisualStyleBackColor = false;
             btnPrint.Click += btnPrint_Click;
             // 
@@ -612,7 +507,7 @@
             txtPaymentReceived.Name = "txtPaymentReceived";
             txtPaymentReceived.Size = new Size(277, 27);
             txtPaymentReceived.TabIndex = 154;
-            txtPaymentReceived.Text = "₱0.00";
+            txtPaymentReceived.Text = "0.00";
             txtPaymentReceived.TextChanged += txtPaymentReceived_TextChanged;
             // 
             // btnPay
@@ -621,7 +516,7 @@
             btnPay.FlatStyle = FlatStyle.System;
             btnPay.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPay.ForeColor = Color.SteelBlue;
-            btnPay.Location = new Point(147, 555);
+            btnPay.Location = new Point(147, 502);
             btnPay.Margin = new Padding(3, 4, 3, 4);
             btnPay.Name = "btnPay";
             btnPay.Size = new Size(216, 45);
@@ -683,7 +578,6 @@
             ((System.ComponentModel.ISupportInitialize)splitContainerPayment).EndInit();
             splitContainerPayment.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -719,20 +613,11 @@
         private Panel panel2;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PrintDialog printDialog1;
-        private DataGridView dataGridView1;
         private Panel panel1;
         private Button btnSearchStuIn;
         private TextBox txtSearch;
-        private Label label9;
         private Label label5;
         private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -743,5 +628,8 @@
         private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewTextBoxColumn Column10;
+        private Label label10;
+        private Button btnSOA;
+        private ComboBox cmbIfPay;
     }
 }

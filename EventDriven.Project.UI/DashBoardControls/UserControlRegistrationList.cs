@@ -46,14 +46,14 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 foreach (var student in students)
                 {
-                    if(student.Status != "Inactive") 
-                    dataGridView1.Rows.Add(
-                        student.Id,
-                        $"{student.FirstName} {student.MiddleName} {student.LastName}",
-                        student.Contact,
-                        student.GradeLevel,
-                        student.BirthDate.ToString("yyyy-MM-dd")
-                    );
+                    if (student.Status != "Inactive")
+                        dataGridView1.Rows.Add(
+                            student.Id,
+                            $"{student.FirstName} {student.MiddleName} {student.LastName}",
+                            student.Contact,
+                            student.GradeLevel,
+                            student.BirthDate.ToString("yyyy-MM-dd")
+                        );
                 }
             }
             catch (Exception ex)
@@ -168,5 +168,20 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed
+                SearchStudent(txtSearch.Text.Trim());  // Fixed: Pass the trimmed text as parameter
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing.Printing;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using EventDriven.Project.Businesslogic.Controller;
+using EventDriven.Project.Logic.Controller;
 using EventDriven.Project.Model;
 
 namespace EventDriven.Project.UI.DashBoardControls
@@ -37,8 +29,87 @@ namespace EventDriven.Project.UI.DashBoardControls
             RemoveTabsForRole();
 
             studentController = new StudentController();
+
+
             LoadStudents();
         }
+        UserControlStudentRegistrationReports reports;
+        UserControlAssessmentReports reports2;
+        UserControlPaymentReports reports3;
+
+        private async Task LoadComboBoxData()
+        {
+
+
+            AssessmentController2 assessmentController2 = new AssessmentController2();
+            var list = await assessmentController2.GetSectionGradeYear(authenticationKey);
+
+            cmbSection.Items.Clear();
+            cmbGrade.Items.Clear();
+            cmbYearLevel.Items.Clear();
+
+            // Track added items to avoid duplicates
+            var addedSections = new HashSet<string>();
+            var addedGrades = new HashSet<string>();
+            var addedYears = new HashSet<string>();
+
+            foreach (var item in list)
+            {
+                if (!string.IsNullOrEmpty(item.StudentSection) && !addedSections.Contains(item.StudentSection))
+                {
+                    cmbSection.Items.Add(item.StudentSection);
+                    addedSections.Add(item.StudentSection);
+                }
+
+                if (!string.IsNullOrEmpty(item.GradeLevel) && !addedGrades.Contains(item.GradeLevel))
+                {
+                    cmbGrade.Items.Add(item.GradeLevel);
+                    addedGrades.Add(item.GradeLevel);
+                }
+
+                if (!string.IsNullOrEmpty(item.year) && !addedYears.Contains(item.year))
+                {
+                    cmbYearLevel.Items.Add(item.year);
+                    addedYears.Add(item.year);
+                }
+
+
+            }
+
+        }
+
+
+        private void SortBy(DataGridView view)
+        {
+            string section = cmbSection.Text?.Trim();  // Trim to handle extra spaces
+            string grade = cmbGrade.Text?.Trim();
+            string year = cmbYearLevel.Text?.Trim();
+            foreach (DataGridViewRow row in view.Rows)
+            {
+                if (row.IsNewRow) continue;  // Skip the "new row" placeholder
+                bool isVisible = true;
+                // Check section filter
+                if (!string.IsNullOrEmpty(section) &&
+                    row.Cells["Section"].Value?.ToString() != section)
+                {
+                    isVisible = false;
+                }
+                // Check grade filter
+                if (!string.IsNullOrEmpty(grade) &&
+                    row.Cells["Grade"].Value?.ToString() != grade)
+                {
+                    isVisible = false;
+                }
+                // Check year filter
+                if (!string.IsNullOrEmpty(year) &&
+                    row.Cells["YearLevel"].Value?.ToString() != year)
+                {
+                    isVisible = false;
+                }
+                row.Visible = isVisible;
+            }
+        }
+
 
         private async void LoadStudents()
         {
@@ -347,22 +418,24 @@ namespace EventDriven.Project.UI.DashBoardControls
             e.HasMorePages = false;
         }
 
-        private void UserControlReports_Load_1(object sender, EventArgs e)
+
+        private async void UserControlReports_Load_1(object sender, EventArgs e)
         {
-            UserControlStudentRegistrationReports reports = new UserControlStudentRegistrationReports(role, main, authenticationKey);
+            reports = new UserControlStudentRegistrationReports(role, main, authenticationKey);
             reports.Dock = DockStyle.Fill;   // Makes the UserControl scale to fill the panel
             panel2.Controls.Clear();         // Clear any existing controls in panel1
             panel2.Controls.Add(reports);    // Add the reports control to panel1
 
-            UserControlAssessmentReports reports2 = new UserControlAssessmentReports(role, main, authenticationKey);
+            reports2 = new UserControlAssessmentReports(role, main, authenticationKey);
             reports2.Dock = DockStyle.Fill;
             panel3.Controls.Add(reports2);
             panel3.Controls.Add(reports2);
 
-            UserControlPaymentReports reports3 = new UserControlPaymentReports(role, main, authenticationKey);
+            reports3 = new UserControlPaymentReports(role, main, authenticationKey);
             reports3.Dock = DockStyle.Fill;
             panel4.Controls.Add(reports3);
             panel4.Controls.Add(reports3);
+            await LoadComboBoxData();
         }
 
         private void RemoveTabsForRole()
@@ -383,6 +456,31 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //// Update the label with the selected section
+            //string selectedSection = cmbSection.Text?.Trim();
+            //lblSelectedSection.Text = string.IsNullOrEmpty(selectedSection) ? "Section: None" : $"Section: {selectedSection}";
+            //SortBy(dataGridView1);
+        }
+        private void cmbGrade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //// Update the label with the selected grade
+            //string selectedGrade = cmbGrade.Text?.Trim();
+            //lblSelectedGrade.Text = string.IsNullOrEmpty(selectedGrade) ? "Grade: None" : $"Grade: {selectedGrade}";
+            //SortBy(dataGridView1);
+        }
+        private void cmbYearLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //// Update the label with the selected year
+            //string selectedYear = cmbYearLevel.Text?.Trim();
+            //lblSelectedYear.Text = string.IsNullOrEmpty(selectedYear) ? "Year: None" : $"Year: {selectedYear}";
+            //SortBy(dataGridView1);
+        }
 
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -37,13 +37,6 @@
             tabPage1 = new TabPage();
             panel1 = new Panel();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            ColEdit = new DataGridViewImageColumn();
-            ColDelete = new DataGridViewImageColumn();
             tabPage2 = new TabPage();
             panel2 = new Panel();
             tabPage3 = new TabPage();
@@ -54,6 +47,17 @@
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             btnPrint = new Button();
             panel5 = new Panel();
+            lblSortby = new Label();
+            cmbYearLevel = new ComboBox();
+            cmbGrade = new ComboBox();
+            cmbSection = new ComboBox();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            ColEdit = new DataGridViewImageColumn();
+            ColDelete = new DataGridViewImageColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -79,6 +83,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btnPrint);
             tabPage1.Controls.Add(panel1);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
@@ -147,6 +152,139 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1460, 889);
             dataGridView1.TabIndex = 5;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(panel2);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1462, 855);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Student Registration";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1456, 863);
+            panel2.TabIndex = 1;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(panel3);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1462, 855);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Student Assessment";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(3, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1456, 863);
+            panel3.TabIndex = 1;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(panel4);
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(1462, 855);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Payment";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(1462, 863);
+            panel4.TabIndex = 1;
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // btnPrint
+            // 
+            btnPrint.AccessibleRole = AccessibleRole.IpAddress;
+            btnPrint.Anchor = AnchorStyles.Left;
+            btnPrint.FlatAppearance.BorderColor = Color.Firebrick;
+            btnPrint.FlatStyle = FlatStyle.System;
+            btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
+            btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
+            btnPrint.Location = new Point(637, 679);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(178, 56);
+            btnPrint.TabIndex = 91;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = true;
+            btnPrint.Click += btnPrint_Click;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = SystemColors.ControlLightLight;
+            panel5.Controls.Add(lblSortby);
+            panel5.Controls.Add(cmbYearLevel);
+            panel5.Controls.Add(cmbGrade);
+            panel5.Controls.Add(cmbSection);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1470, 72);
+            panel5.TabIndex = 1;
+            // 
+            // lblSortby
+            // 
+            lblSortby.AutoSize = true;
+            lblSortby.Location = new Point(21, 36);
+            lblSortby.Name = "lblSortby";
+            lblSortby.Size = new Size(59, 20);
+            lblSortby.TabIndex = 156;
+            lblSortby.Text = "Sort By:";
+            // 
+            // cmbYearLevel
+            // 
+            cmbYearLevel.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbYearLevel.FormattingEnabled = true;
+            cmbYearLevel.Location = new Point(474, 28);
+            cmbYearLevel.Name = "cmbYearLevel";
+            cmbYearLevel.Size = new Size(171, 28);
+            cmbYearLevel.TabIndex = 155;
+            cmbYearLevel.SelectedIndexChanged += cmbSection_SelectedIndexChanged;
+            // 
+            // cmbGrade
+            // 
+            cmbGrade.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbGrade.FormattingEnabled = true;
+            cmbGrade.Location = new Point(285, 28);
+            cmbGrade.Name = "cmbGrade";
+            cmbGrade.Size = new Size(171, 28);
+            cmbGrade.TabIndex = 154;
+            cmbGrade.SelectedIndexChanged += cmbSection_SelectedIndexChanged;
+            // 
+            // cmbSection
+            // 
+            cmbSection.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSection.FormattingEnabled = true;
+            cmbSection.Location = new Point(99, 28);
+            cmbSection.Name = "cmbSection";
+            cmbSection.Size = new Size(171, 28);
+            cmbSection.TabIndex = 153;
+            cmbSection.SelectedIndexChanged += cmbSection_SelectedIndexChanged;
             // 
             // Column1
             // 
@@ -212,96 +350,6 @@
             ColDelete.ReadOnly = true;
             ColDelete.Width = 6;
             // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(panel2);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1462, 849);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Student Registration";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(3, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1456, 863);
-            panel2.TabIndex = 1;
-            // 
-            // tabPage3
-            // 
-            tabPage3.Controls.Add(panel3);
-            tabPage3.Location = new Point(4, 29);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1462, 849);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Student Assessment";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(3, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1456, 863);
-            panel3.TabIndex = 1;
-            // 
-            // tabPage4
-            // 
-            tabPage4.Controls.Add(panel4);
-            tabPage4.Location = new Point(4, 29);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1462, 849);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Payment";
-            tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1462, 863);
-            panel4.TabIndex = 1;
-            // 
-            // printDialog1
-            // 
-            printDialog1.UseEXDialog = true;
-            // 
-            // printDocument1
-            // 
-            printDocument1.PrintPage += printDocument1_PrintPage;
-            // 
-            // btnPrint
-            // 
-            btnPrint.AccessibleRole = AccessibleRole.IpAddress;
-            btnPrint.Anchor = AnchorStyles.Left;
-            btnPrint.FlatAppearance.BorderColor = Color.Firebrick;
-            btnPrint.FlatStyle = FlatStyle.System;
-            btnPrint.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
-            btnPrint.ForeColor = Color.FromArgb(64, 64, 64);
-            btnPrint.Location = new Point(1285, 10);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(178, 56);
-            btnPrint.TabIndex = 91;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = true;
-            btnPrint.Click += btnPrint_Click;
-            // 
-            // panel5
-            // 
-            panel5.BackColor = SystemColors.ControlLightLight;
-            panel5.Controls.Add(btnPrint);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(1470, 72);
-            panel5.TabIndex = 1;
-            // 
             // UserControlReports
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -319,6 +367,7 @@
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -337,6 +386,11 @@
         private Button btnPrint;
         private Panel panel1;
         private DataGridView dataGridView1;
+        private Panel panel5;
+        private Label lblSortby;
+        private ComboBox cmbYearLevel;
+        private ComboBox cmbGrade;
+        private ComboBox cmbSection;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
@@ -344,6 +398,5 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewImageColumn ColEdit;
         private DataGridViewImageColumn ColDelete;
-        private Panel panel5;
     }
 }

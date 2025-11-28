@@ -83,6 +83,43 @@ namespace EventDriven.Project.Logic.Repository
             return list;
         }
 
+
+        public async Task<List<StudentAssessment>> GetSectionGradeYear()
+        {
+            var query = @"SELECT DISTINCT SectionName, GradeLevel, YearName 
+                  FROM vwStudentAssessment 
+                  ORDER BY SectionName, GradeLevel, YearName";
+
+            var list = new List<StudentAssessment>();
+
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync(); // use async
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        list.Add(ReadAssessment2(reader));
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        // Fixed ReadAssessment for the query
+        private StudentAssessment ReadAssessment2(SqlDataReader r)
+        {
+            return new StudentAssessment
+            {
+                StudentSection = r["SectionName"] as string,
+                GradeLevel = r["GradeLevel"] as string,
+                year = r["YearName"] as string
+            };
+        }
+
         private StudentAssessment ReadAssessment(SqlDataReader r)
         {
             return new StudentAssessment
@@ -95,6 +132,7 @@ namespace EventDriven.Project.Logic.Repository
                 StudentSection = r["StudentSection"] as string,
                 GWA = r["GWA"] == DBNull.Value ? null : (decimal?)r["GWA"],
                 Status = r["Status"].ToString(),
+
 
                 RegistrationId = r["RegistrationId"] as int?,
                 RegistrationSection = r["RegistrationSection"] as string,

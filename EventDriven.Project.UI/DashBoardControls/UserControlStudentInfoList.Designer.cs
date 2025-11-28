@@ -50,6 +50,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             Column5 = new DataGridViewTextBoxColumn();
             ColEdit = new DataGridViewImageColumn();
             ColDelete = new DataGridViewImageColumn();
+            Section = new DataGridViewTextBoxColumn();
             panel4 = new Panel();
             btnSearchStuIn = new Button();
             txtSearch = new TextBox();
@@ -140,7 +141,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 30;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColEdit, ColDelete });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColEdit, ColDelete, Section });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.SeaShell;
             dataGridViewCellStyle3.Font = new Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -234,6 +235,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             ColDelete.ReadOnly = true;
             ColDelete.Width = 6;
             // 
+            // Section
+            // 
+            Section.HeaderText = "Section";
+            Section.MinimumWidth = 6;
+            Section.Name = "Section";
+            Section.ReadOnly = true;
+            Section.Visible = false;
+            Section.Width = 125;
+            // 
             // panel4
             // 
             panel4.BackColor = Color.White;
@@ -269,6 +279,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(447, 27);
             txtSearch.TabIndex = 146;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // btnAddStuIn
             // 
@@ -342,5 +353,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         private Button btnAddStuIn;
         private TabControl tabControl1;
         private Panel panel1;
+        private DataGridViewTextBoxColumn Section;
     }
 }

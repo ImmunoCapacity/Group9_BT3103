@@ -4,6 +4,7 @@ using EventDriven.Project.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 
 namespace EventDriven.Project.Businesslogic.Controller
 {
@@ -41,6 +42,21 @@ namespace EventDriven.Project.Businesslogic.Controller
                 throw new Exception($"Error adding student: {ex.Message}");
             }
         }
+
+        //public async Task<string> GetYearById(int i, UserModel authenticationKey)
+        //{
+        //    if (authenticate(authenticationKey) == false) throw new Exception("You are not Logged in");
+        //    if (i == null) throw new Exception("Missing parameter: Year ID");
+
+        //    try
+        //    {
+        //        return await studentRepository.GetAcademicYearById(i);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error getting Year of student: {ex.Message}");
+        //    }
+        //}
 
         // UPDATE student
         public async Task<StudentModel> UpdateAsync(StudentModel model, UserModel authenticationKey)

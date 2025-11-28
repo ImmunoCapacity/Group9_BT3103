@@ -28,7 +28,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             InitializeComponent();
             studentController = new StudentController();
             LoadStudents();
-            
+
         }
         private async void LoadStudents()
         {
@@ -53,7 +53,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         private void refresh(object sender, EventArgs e)
         {
@@ -66,7 +66,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             studentInformationControl.ClearForm();
             tabControl1.SelectedIndex = 1;
         }
-        
+
 
         private void edit(int studentId)
         {
@@ -92,7 +92,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
             else if (columnName == "ColDelete")
             {
-                if(role != "Admin")
+                if (role != "Admin")
                 {
                     MessageBox.Show("Only Admin can delete student records.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -104,7 +104,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (confirm == DialogResult.Yes)
                 {
-                    await studentController.DeleteAsync(studentId,  authenticationKey);
+                    await studentController.DeleteAsync(studentId, authenticationKey);
                     LoadStudents(); // refresh grid
                 }
             }
@@ -161,5 +161,15 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed
+                SearchStudent(txtSearch.Text.Trim());  // Fixed: Pass the trimmed text as parameter
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

@@ -91,6 +91,7 @@ namespace EventDriven.Project.Logic.Repository
             using (SqlConnection conn = new SqlConnection(connect.connectionString))
             {
                 string query = @"SELECT 
+            
                             StudentId,
                             StudentName,
                             GradeLevel,

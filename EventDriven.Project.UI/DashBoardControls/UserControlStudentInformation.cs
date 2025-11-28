@@ -421,7 +421,7 @@ namespace EventDriven.Project.UI
         public async void Save()
         {
             if (!ValidateStudentForm())
-            {
+            {       
                 MessageBox.Show("Please correct the highlighted fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

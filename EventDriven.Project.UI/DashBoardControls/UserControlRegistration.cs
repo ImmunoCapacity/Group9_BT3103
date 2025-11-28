@@ -705,8 +705,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         $"Email: {txtEmail.Text}",
         $"Guardian: {txtGuardian.Text}",
         $"Grade Level to Enroll: {cmbGradeLevel.Text}",
-        $"Section: {cmbSection.Text}",
-        $"Student Type: {status}"
+        $"Section: {cmbSection.Text}"
     };
 
             int studentHeight = CalculateSectionHeight(g, studentInfo, bodyFont, 8);

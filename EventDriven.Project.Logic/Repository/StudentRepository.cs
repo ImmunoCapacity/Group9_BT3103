@@ -47,7 +47,7 @@ namespace EventDriven.Project.Businesslogic.Repository
                         FatherContact=@FatherContact, MotherName=@MotherName, MotherContact=@MotherContact, ParentAddress=@ParentAddress, 
                         GuardianName=@GuardianName, GuardianRelationship=@GuardianRelationship, GuardianContact=@GuardianContact, GuardianAddress=@GuardianAddress, 
                         Suffix=@Suffix, Section=@Section, Gender=@Gender, Email=@Email, LastSchool=@LastSchool, LastGrade=@LastGrade, Address=@Address, Contact=@Contact, 
-                    GWA=@GWA, AcademicYearId=@AcademicYearId WHERE Id=@Id";
+                    GWA=@GWA WHERE Id=@Id";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
             {
@@ -114,6 +114,11 @@ namespace EventDriven.Project.Businesslogic.Repository
             studentToUpdate.Status = "Inactive";
             return studentToUpdate;
         }
+
+       ///// public async Task<string> GetAcademicYearById(int i)
+       // {
+
+       // }
 
 
 
