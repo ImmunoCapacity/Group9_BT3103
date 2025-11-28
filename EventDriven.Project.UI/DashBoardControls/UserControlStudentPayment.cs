@@ -50,7 +50,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             this.authenticationKey = authenticationKey;
             InitializeComponent();
             paymentController = new PaymentController();
-            cmbPaymentStatus.Text = "Unpaid";
+            cmbIfPay.Text = "Unpaid";
             LoadStudents();
 
         }
@@ -64,7 +64,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
-                dataGridView1.Rows.Clear();
                 dataGridView2.Rows.Clear();
 
                 List<StudentPaymentInfo> payments = await paymentController.GetAllStudentPayment(authenticationKey);
@@ -72,15 +71,19 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 foreach (var payment in payments)
                 {
-                    if (cmbPaymentStatus.Text.Equals("Unpaid") && payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
+                    if (cmbIfPay.Text.Equals("Unpaid") && payment.TuitionFee > payment.TotalPaid && payment.PaymentMethod != null)
                     {
-                        // ==== DataGridView1 (Summary List) ====
-                        addPaymentToDataGrid(payment);
+                        insertIntoDatagrid(payment);
                     }
-                    else if (cmbPaymentStatus.Text.Equals("Paid") && payment.TuitionFee <= payment.TotalPaid && payment.PaymentMethod != null)
+                    else if (cmbIfPay.Text.Equals("Paid") && payment.TuitionFee <= payment.TotalPaid && payment.PaymentMethod != null)
                     {
-                        addPaymentToDataGrid(payment);
+                        insertIntoDatagrid(payment);
                     }
+
+                    // ==== DataGridView1 (Summary List) ====
+
+
+
                 }
 
             }
@@ -89,20 +92,10 @@ namespace EventDriven.Project.UI.DashBoardControls
                 MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            dataGridView1.Columns["Column1"].ValueType = typeof(int);
             dataGridView2.Columns["dataGridViewTextBoxColumn1"].ValueType = typeof(int);
 
             // Sort both tables by ID
-            dataGridView1.Sort(dataGridView1.Columns["Column1"], ListSortDirection.Ascending);
             dataGridView2.Sort(dataGridView2.Columns["dataGridViewTextBoxColumn1"], ListSortDirection.Ascending);
-
-            // ============================================
-            // ✅ Add Peso Formatting to Both Grids
-            // ============================================
-            // DataGridView1
-            dataGridView1.Columns["Column4"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition Fee
-            dataGridView1.Columns["Column5"].DefaultCellStyle.Format = "₱#,0.00"; // Total Paid
-            dataGridView1.Columns["Column7"].DefaultCellStyle.Format = "₱#,0.00"; // Remaining Balance
 
             // DataGridView2
             dataGridView2.Columns["dataGridViewTextBoxColumn4"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition Fee
@@ -111,31 +104,20 @@ namespace EventDriven.Project.UI.DashBoardControls
             dataGridView2.Columns["Column11"].DefaultCellStyle.Format = "₱#,0.00"; // Tuition
         }
 
-        private void addPaymentToDataGrid(StudentPaymentInfo payment)
+        private void insertIntoDatagrid(StudentPaymentInfo payment)
         {
-            dataGridView1.Rows.Add(
+            // ==== DataGridView2 (Next Payment Breakdown) ====
+            dataGridView2.Rows.Add(
                             payment.StudentId,
                             payment.StudentName,
                             payment.GradeLevel,
                             payment.TuitionFee,
+                            payment.NextAmountDue,
                             payment.TotalPaid,
                             payment.RemainingBalance,
-                            payment.PaymentMethod
-                        );
-
-            // ==== DataGridView2 (Next Payment Breakdown) ====
-            dataGridView2.Rows.Add(
-                payment.StudentId,
-                payment.StudentName,
-                payment.GradeLevel,
-                payment.TuitionFee,
-                payment.NextAmountDue,
-                payment.TotalPaid,
-                payment.RemainingBalance,
-                payment.NextDueDate,
-                payment.NextScheduleDescription,
-                payment.PaymentMethod
-            );
+                            payment.NextDueDate,
+                            payment.NextScheduleDescription,
+                            payment.PaymentMethod);
         }
 
         private PaymentModel currentPayment;
@@ -144,12 +126,6 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
-                // 1️⃣ Ensure a student is selected
-                if (dataGridView1.CurrentRow == null)
-                {
-                    MessageBox.Show("Please select a student first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
                 // 2️⃣ Validate and get Student ID
                 if (!int.TryParse(lbId.Text, out int studentId))
@@ -251,15 +227,12 @@ namespace EventDriven.Project.UI.DashBoardControls
             if (string.IsNullOrWhiteSpace(searchValue))
             {
                 // Show all rows if search is empty
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                    row.Visible = true;
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                     row.Visible = true;
                 return;
             }
 
             // only digits
-            match(dataGridView1, searchValue);
             match(dataGridView2, searchValue);
         }
 
@@ -302,35 +275,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         string tuitionFee;
         string grade;
         string name;
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Make sure user clicked a valid row (not header or empty space)
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                // Example: assuming these are the column names or indexes
-                name = row.Cells["Column2"].Value?.ToString() ?? "";
-                grade = row.Cells["Column3"].Value?.ToString() ?? "";
-                tuitionFee = "₱" + row.Cells["Column4"].Value?.ToString() ?? "0.00";
-                lbName.Text = row.Cells["Column2"].Value?.ToString() ?? "";
-                lbBalance.Text = "₱" + row.Cells["Column7"].Value?.ToString() ?? "0.00";
-                lbChange.Text = "₱0.00";
-                lbId.Text = row.Cells["Column1"].Value?.ToString() ?? "0";
-                if (row.Cells["Column12"].Value.ToString().Equals("Full"))
-                {
-                    rbFullPayment.Checked = true;
-                    txtPaymentReceived.Text = "₱" + lbBalance.Text;
-
-                }
-                else
-                {
-                    rbPartialPayment.Checked = true;
-                    txtPaymentReceived.Text = "₱0.00";
-
-                }
-            }
-        }
+        
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
@@ -377,13 +322,13 @@ namespace EventDriven.Project.UI.DashBoardControls
         {
             try
             {
-                if (dataGridView1.CurrentRow == null)
+                if (dataGridView2.CurrentRow == null)
                 {
                     MessageBox.Show("Please select a student first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                int selectedIndex = dataGridView1.CurrentRow.Index;
+                int selectedIndex = dataGridView2.CurrentRow.Index;
                 currentStudentPayment = allPayments[selectedIndex];
 
                 PrintPreviewDialog preview = new PrintPreviewDialog();
@@ -406,6 +351,7 @@ namespace EventDriven.Project.UI.DashBoardControls
             {
                 return;
             }
+
             Graphics g = e.Graphics;
             int leftMargin = e.MarginBounds.Left;
             int topMargin = e.MarginBounds.Top;
@@ -466,16 +412,16 @@ namespace EventDriven.Project.UI.DashBoardControls
             yPos += 50;
 
             // Student Information Section
-            g.DrawString("Student Information", subHeaderFont, blackBrush, leftMargin, yPos);
-            yPos += (int)g.MeasureString("Student Information", subHeaderFont).Height + 10;
+            g.DrawString("Student Payment Information", subHeaderFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Student Payment Information", subHeaderFont).Height + 10;
 
             string[] studentInfo = {
                 $"Student ID: {currentPayment.StudentId}",
                 $"Name: {currentPayment.Name}",
                 $"Grade Level: {currentPayment.Grade}",
-                $"Tuition Fee: ₱{tuitionFee}",
+                $"Tuition Fee: {tuitionFee}",
                 $"Total Paid: ₱{currentPayment.AmountPaid:N2}",
-                $"Remaining Balance: ₱{lbBalance.Text}"
+                $"Remaining Balance: {lbBalance.Text}"
             };
 
             int studentHeight = CalculateSectionHeight(g, studentInfo, bodyFont, 8);
@@ -517,9 +463,9 @@ namespace EventDriven.Project.UI.DashBoardControls
 
             yPos += 30;
 
-            // Registrar Signature (left)
-            g.DrawString("Registrar:", bodyFont, blackBrush, leftMargin, yPos);
-            yPos += (int)g.MeasureString("Registrar:", bodyFont).Height + 30;
+            // Cashier Signature (left)
+            g.DrawString("Cashier:", bodyFont, blackBrush, leftMargin, yPos);
+            yPos += (int)g.MeasureString("Cashier:", bodyFont).Height + 30;
             g.DrawLine(Pens.Black, leftMargin, yPos, leftMargin + sigLineLength, yPos);
             yPos += 5;
             g.DrawString("Zarah Austria", bodyFont, blackBrush, leftMargin, yPos);
@@ -566,22 +512,59 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void txtPaymentReceived_TextChanged(object sender, EventArgs e)
         {
-            // Remove existing peso sign if user types it manually
-            string input = txtPaymentReceived.Text.Replace("₱", "").Trim();
+            // Prevent recursive events
+            txtPaymentReceived.TextChanged -= txtPaymentReceived_TextChanged;
 
-            // Only allow numbers and dot
-            if (decimal.TryParse(input, out decimal value))
+            string input = txtPaymentReceived.Text.Replace(",", "");
+
+            if (string.IsNullOrEmpty(input))
             {
-                // Format with peso sign
-                txtPaymentReceived.Text = "₱" + value.ToString("N2");
-                txtPaymentReceived.SelectionStart = txtPaymentReceived.Text.Length; // Keep cursor at end
+                txtPaymentReceived.TextChanged += txtPaymentReceived_TextChanged;
+                return;
             }
-            else if (string.IsNullOrEmpty(input))
+
+            // Allow digits and ONE decimal point
+            string cleaned = "";
+            bool decimalFound = false;
+
+            foreach (char c in input)
             {
-                txtPaymentReceived.Text = "₱0.00";
+                if (char.IsDigit(c))
+                {
+                    cleaned += c;
+                }
+                else if (c == '.' && !decimalFound)
+                {
+                    cleaned += c;
+                    decimalFound = true;
+                }
+            }
+
+            // Format the number
+            if (decimal.TryParse(cleaned, out decimal value))
+            {
+                int decimalPlaces = cleaned.Contains(".")
+                    ? cleaned.Length - cleaned.IndexOf('.') - 1
+                    : 0;
+
+                // Build format string dynamically (N0, N1, N2, ...)
+                string format = "N" + decimalPlaces;
+
+                txtPaymentReceived.Text = value.ToString(format);
                 txtPaymentReceived.SelectionStart = txtPaymentReceived.Text.Length;
             }
+            else
+            {
+                txtPaymentReceived.Text = cleaned;
+                txtPaymentReceived.SelectionStart = txtPaymentReceived.Text.Length;
+            }
+
+            txtPaymentReceived.TextChanged += txtPaymentReceived_TextChanged;
         }
+
+
+
+
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
@@ -594,7 +577,145 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
-        private void cmbPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnSOA_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView2.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select a student first.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Get the Student ID from the selected row (assuming it's in the first column)
+                int selectedStudentId = Convert.ToInt32(dataGridView2.CurrentRow.Cells["dataGridViewTextBoxColumn1"].Value);
+
+                // Find the matching StudentPaymentInfo in allPayments by StudentId
+                currentStudentPayment = allPayments.FirstOrDefault(p => p.StudentId == selectedStudentId);
+
+                if (currentStudentPayment == null)
+                {
+                    MessageBox.Show("Selected student not found in payment records.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                PrintPreviewDialog preview = new PrintPreviewDialog();
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.DefaultPageSettings.Landscape = false;
+                printDoc.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 500);
+
+                printDoc.PrintPage += printDocument_SOA_PrintPage; // custom handler
+                preview.Document = printDoc;
+                preview.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+        private void printDocument_SOA_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            if (currentStudentPayment == null)
+                return;
+
+            Graphics g = e.Graphics;
+            int left = e.MarginBounds.Left;
+            int top = e.MarginBounds.Top;
+            int right = e.MarginBounds.Right;
+            int bottom = e.MarginBounds.Bottom;
+            int width = right - left;
+
+            Font headerFont = new Font("Segoe UI", 18, FontStyle.Bold);
+            Font titleFont = new Font("Segoe UI", 14, FontStyle.Bold);
+            Font tableHeaderFont = new Font("Segoe UI", 11, FontStyle.Bold);
+            Font tableFont = new Font("Segoe UI", 11);
+
+            Pen borderPen = new Pen(Color.Black, 1);
+            Brush black = Brushes.Black;
+            Brush darkRed = Brushes.DarkRed;
+
+            int y = top;
+
+            // ================= OUTER BORDER =====================
+            Rectangle border = new Rectangle(left - 10, top - 10, width + 20, bottom - top + 20);
+            g.DrawRectangle(borderPen, border);
+
+            // ================= HEADER BOX =====================
+            Rectangle headerBox = new Rectangle(left, y, width, 120);
+            g.DrawRectangle(borderPen, headerBox);
+
+            int innerY = y + 10;
+
+            // ---------------- LOGO ----------------
+            try
+            {
+                Image logo = Properties.Resources.logo;
+                if (logo != null)
+                {
+                    int lw = 120;
+                    int lh = 50;
+                    int lx = left + (width - lw) / 2;
+                    g.DrawImage(logo, lx, innerY, lw, lh);
+                    innerY += lh + 10;
+                }
+            }
+            catch { }
+
+            // ---------------- SCHOOL NAME ----------------
+            string schoolName = "ROSEWOOD ACADEMY INC.";
+            SizeF schoolSize = g.MeasureString(schoolName, headerFont);
+            g.DrawString(schoolName, headerFont, darkRed, left + (width - schoolSize.Width) / 2, innerY);
+            innerY += (int)schoolSize.Height + 10;
+
+            // ---------------- FORM TITLE ----------------
+            string title = "STATEMENT OF ACCOUNT";
+            SizeF titleSize = g.MeasureString(title, titleFont);
+            g.DrawString(title, titleFont, black, left + (width - titleSize.Width) / 2, innerY);
+
+            y += 150; // Move below header
+
+            // ================= SMALL TABLE TITLE =====================
+            g.DrawString("Student Information", titleFont, black, left, y);
+            y += 35;
+
+            // ================= SMALL TABLE BORDER =====================
+            int rowHeight = 30;
+            int tableHeight = rowHeight * 2 + 20; // header + data row
+            Rectangle tableBox = new Rectangle(left, y, width, tableHeight);
+            g.DrawRectangle(borderPen, tableBox);
+
+            int tx = left + 10;
+            int ty = y + 10;
+
+            // ================= TABLE HEADER =====================
+            g.DrawString("ID", tableHeaderFont, black, tx, ty);
+            g.DrawString("Name", tableHeaderFont, black, tx + 60, ty);
+            g.DrawString("Tuition Fee", tableHeaderFont, black, tx + 220, ty);
+            g.DrawString("Due Date", tableHeaderFont, black, tx + 400, ty);
+
+            ty += rowHeight;
+
+            // ================= TABLE DATA =====================
+            string id = currentStudentPayment.StudentId.ToString();
+            string name = currentStudentPayment.StudentName;
+            string tuition = "₱ " + currentStudentPayment.TuitionFee.ToString("N2");
+            string dueDate = currentStudentPayment.NextDueDate?.ToString("MMM dd yyyy") ?? "N/A";
+
+            g.DrawString(id, tableFont, black, tx, ty);
+            g.DrawString(name, tableFont, black, tx + 60, ty);
+            g.DrawString(tuition, tableFont, black, tx + 220, ty);
+            g.DrawString(dueDate, tableFont, black, tx + 400, ty);
+
+            e.HasMorePages = false;
+        }
+
+
+        private void cmbIfPay_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadStudents();
         }

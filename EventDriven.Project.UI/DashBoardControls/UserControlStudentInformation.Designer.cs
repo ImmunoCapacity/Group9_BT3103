@@ -453,9 +453,9 @@
             label11.Font = new Font("Sitka Text", 10.1999989F, FontStyle.Bold);
             label11.Location = new Point(310, 714);
             label11.Name = "label11";
-            label11.Size = new Size(121, 24);
+            label11.Size = new Size(128, 24);
             label11.TabIndex = 61;
-            label11.Text = "Sudent Type:";
+            label11.Text = "Student Type:";
             // 
             // label10
             // 

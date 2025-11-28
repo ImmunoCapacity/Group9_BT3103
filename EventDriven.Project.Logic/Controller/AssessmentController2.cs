@@ -81,6 +81,35 @@ namespace EventDriven.Project.Logic.Controller
                 throw new Exception($"Error retrieving all assessments: {ex.Message}");
             }
         }
+        public async Task<List<StudentAssessment>> GetSectionGradeYear(UserModel authenticationKey)
+        {
+            if (!Authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+
+            try
+            {
+                return await assessmentRepository.GetSectionGradeYear();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving all assessments: {ex.Message}");
+            }
+        }
+        public async Task<int> getNumEnrolled(UserModel authenticationKey)
+        {
+            if (!Authenticate(authenticationKey))
+                throw new Exception("You are not Logged in");
+            try
+            {
+                // Call the repository method
+                var repo = new AssessmentRepository();
+                return await repo.getNumberofEnrolledStudents();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving enrolled students: {ex.Message}");
+            }
+        }
 
         public async Task<List<StudentAssessment>> GetAllEnrolledAsync(UserModel authenticationKey)
         {

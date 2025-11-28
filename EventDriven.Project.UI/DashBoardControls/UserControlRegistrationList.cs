@@ -168,14 +168,20 @@ namespace EventDriven.Project.UI.DashBoardControls
             }
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                e.SuppressKeyPress = true;  // Remove beep sound
-                SearchStudent(txtSearch.Text.Trim());
+                // Trigger the search when Enter is pressed
+                SearchStudent(txtSearch.Text.Trim());  // Fixed: Pass the trimmed text as parameter
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
             }
         }
-
     }
 }

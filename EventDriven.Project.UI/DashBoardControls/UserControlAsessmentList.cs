@@ -191,7 +191,7 @@ namespace EventDriven.Project.UI.DashBoardControls
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadyear();   
+            loadyear();
         }
         private async void loadyear()
         {
@@ -203,6 +203,17 @@ namespace EventDriven.Project.UI.DashBoardControls
                 bool match = false;
                 match = row.Cells["Column1"].Value.ToString().Contains(id.ToString());
                 row.Visible = match;
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Trigger the search when Enter is pressed
+                SearchStudent(txtSearch.Text.Trim());  // Fixed: Call the async method
+                // Optional: Prevent the beep sound on Enter
+                e.SuppressKeyPress = true;
             }
         }
     }

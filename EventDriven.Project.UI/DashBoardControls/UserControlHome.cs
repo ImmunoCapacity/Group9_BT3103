@@ -68,8 +68,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 int totalRegisteredStudents = RegisteredStudents.Count();
 
                 // Fetch enrolled students using AssessmentController
-                var enrolledStudents = await assessmentController2.GetAllEnrolledAsync(authenticationKey);
-                int totalEnrolledStudents = enrolledStudents.Count(sp => sp.EnrollmentStatus.Equals("Enrolled"));
+                int totalEnrolledStudents = await assessmentController2.getNumEnrolled(authenticationKey);
                 // Display in the labels
                 lblPaid.Text = $"Paid: {totalPaidStudents}";  // Adjust label name if needed
                 lblUnpaid.Text = $"UnPaid: {totalUnpaidStudents}";  // Adjust label name if needed

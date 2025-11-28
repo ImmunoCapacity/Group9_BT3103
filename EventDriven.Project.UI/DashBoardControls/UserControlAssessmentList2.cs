@@ -21,7 +21,7 @@ namespace EventDriven.Project.UI.DashBoardControls
         AssessmentController2 assessmentController2;
         private AcademicYearController academicYearController;
         private List<AcademicYearModel> academicYearModels;
-
+        private List<StudentAssessment> allAssessments; // Store all assessments for filtering
 
         public UserControlAssessmentList2(string role, MainForm main, UserModel authenticationKey)
         {
@@ -33,105 +33,116 @@ namespace EventDriven.Project.UI.DashBoardControls
             LoadStudents();
             action();
             loadyear();
-
         }
 
         private async void LoadStudents()
         {
-            loadyear();
-            List<StudentAssessment> allAssessments =
-                await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
+            try
+            {
+                allAssessments = await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
 
-            // Group by student to remove duplicates caused by multiple schedules/payments
-            var datasource = allAssessments
-                .GroupBy(s => s.StudentId)
-                .Select(g => new
-                {
-                    Id = g.Key,
-                    FullName = $"{g.First().FirstName} {g.First().MiddleName} {g.First().LastName}".Replace("  ", " ").Trim(),
-                    Grade = g.First().GradeLevel,
-                    Section = g.First().StudentSection,
-                    GWA = g.First().GWA,
-                    Status = g.First().Status,
-                    year = g.First().year
+                // Group by student to remove duplicates caused by multiple schedules/payments
+                var datasource = allAssessments
+                    .GroupBy(s => s.StudentId)
+                    .Select(g => new
+                    {
+                        Id = g.Key,
+                        FullName = $"{g.First().FirstName} {g.First().MiddleName} {g.First().LastName}".Replace("  ", " ").Trim(),
+                        Grade = g.First().GradeLevel,
+                        Section = g.First().StudentSection,
+                        GWA = g.First().GWA,
+                        Status = g.First().Status,
+                        Year = g.First().year
+                    })
+                    .ToList();
 
-                })
-                .ToList();
+                dataGridView1.DataSource = datasource;
 
-            dataGridView1.DataSource = datasource;
+                // Adjust column headers
+                dataGridView1.Columns["Id"].HeaderText = "Student ID";
+                dataGridView1.Columns["FullName"].HeaderText = "Name";
+                dataGridView1.Columns["Grade"].HeaderText = "Grade";
+                dataGridView1.Columns["Section"].HeaderText = "Section";
+                dataGridView1.Columns["GWA"].HeaderText = "GWA";
+                dataGridView1.Columns["Status"].HeaderText = "Status";
+                dataGridView1.Columns["Year"].HeaderText = "Year";
 
-            // Adjust column headers
-            dataGridView1.Columns["Id"].HeaderText = "Student ID";
-            dataGridView1.Columns["FullName"].HeaderText = "Name";
-            dataGridView1.Columns["Grade"].HeaderText = "Grade";
-            dataGridView1.Columns["Section"].HeaderText = "Section";
-            dataGridView1.Columns["GWA"].HeaderText = "GWA";
-            dataGridView1.Columns["Status"].HeaderText = "Status";
-            dataGridView1.Columns["Year"].HeaderText = "Year";
-            //dataGridView1.Columns["Year"].Visible = false;
+                // Auto-size columns to fit content
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView1.AutoResizeColumns();
 
-            // Auto-size columns to fit content
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.AutoResizeColumns();
+                // Optional: set alignment
+                dataGridView1.Columns["GWA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Columns["Grade"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView1.Columns["Section"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            // Optional: set alignment
-            dataGridView1.Columns["GWA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns["Grade"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns["Section"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                // Optional: prevent user from resizing
+                dataGridView1.AllowUserToResizeColumns = false;
 
-            // Optional: prevent user from resizing
-            dataGridView1.AllowUserToResizeColumns = false;
-            // Populate ComboBox with distinct years
-
-            var lastYear = datasource
-            .Select(s => s.year)
-            .Distinct()
-            .OrderBy(y => y)
-            .LastOrDefault();
-
-
-            comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(
-                datasource
-                    .Select(s => s.year)
+                // Populate ComboBox with distinct years
+                var years = datasource
+                    .Select(s => s.Year)
                     .Distinct()
                     .OrderBy(y => y)
-                    .Cast<object>()
-                    .ToArray()
-            );
-            comboBox1.SelectedItem = lastYear;
+                    .ToList();
 
+                comboBox1.Items.Clear();
+                comboBox1.Items.AddRange(years.Cast<object>().ToArray());
 
+                // Select the last year if available
+                if (years.Any())
+                {
+                    comboBox1.SelectedItem = years.Last();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
 
         private async void btnSearchStuIn_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.Trim();
-
-            if (string.IsNullOrEmpty(searchText))
-            {
-                // If search is empty, load all students
-                List<StudentAssessment> allStudents = await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
-                dataGridView1.DataSource = allStudents;
-                return;
-            }
-
-            // Load all students (or you could create a specific search query in your repository)
-            List<StudentAssessment> allStudentsList = await assessmentController2.GetAllAssessmentsAsync(authenticationKey);
-
-            // Filter by Id, FirstName, or LastName
-            var filtered = allStudentsList
-                .Where(s =>
-                    s.StudentId.ToString().Contains(searchText) ||
-                    s.FirstName.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
-                    s.LastName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            dataGridView1.DataSource = filtered;
-            loadyear();
+            await SearchStudent(txtSearch.Text.Trim());
         }
 
+        private async Task SearchStudent(string searchText)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    // If search is empty, reload all students
+                    LoadStudents();
+                    return;
+                }
+
+                // Filter the allAssessments list
+                var filtered = allAssessments
+                    .Where(s =>
+                        s.StudentId.ToString().Contains(searchText) ||
+                        s.FirstName.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                        s.LastName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    .GroupBy(s => s.StudentId)
+                    .Select(g => new
+                    {
+                        Id = g.Key,
+                        FullName = $"{g.First().FirstName} {g.First().MiddleName} {g.First().LastName}".Replace("  ", " ").Trim(),
+                        Grade = g.First().GradeLevel,
+                        Section = g.First().StudentSection,
+                        GWA = g.First().GWA,
+                        Status = g.First().Status,
+                        Year = g.First().year
+                    })
+                    .ToList();
+
+                dataGridView1.DataSource = filtered;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching students: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
@@ -139,7 +150,7 @@ namespace EventDriven.Project.UI.DashBoardControls
                 return;
 
             // Get the StudentId from the selected row
-            int studentId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value); // "Id" if using mapped datasource
+            int studentId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value);
 
             // Clear any existing controls in panel1
             panel1.Controls.Clear();
@@ -162,44 +173,53 @@ namespace EventDriven.Project.UI.DashBoardControls
             panel1.Controls.Clear();
             info.Dock = DockStyle.Fill;   // ✅ makes UserControl scale
             panel1.Controls.Add(info);
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             loadyear();
         }
-        private async void loadyear()
+
+        private void loadyear()
         {
             try
             {
-                if (comboBox1.Text == null) { return; }
+                if (string.IsNullOrEmpty(comboBox1.Text))
+                {
+                    // If no year selected, show all rows
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        row.Visible = true;
+                    }
+                    return;
+                }
+
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.IsNewRow) continue;
 
-                    bool match = false;
-                    match = row.Cells["Year"].Value.ToString().Contains(comboBox1.Text);
+                    bool match = row.Cells["Year"].Value?.ToString().Contains(comboBox1.Text) ?? false;
                     row.Visible = match;
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Error filtering by year: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private async void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                // Trigger the search when Enter is pressed
+                SearchStudent(txtSearch.Text.Trim());  // Fixed: Call the async method
+                // Optional: Prevent the beep sound on Enter
                 e.SuppressKeyPress = true;
-                btnSearchStuIn_Click(sender, e);
             }
         }
 
