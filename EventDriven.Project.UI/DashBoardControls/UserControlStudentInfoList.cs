@@ -124,18 +124,25 @@ namespace EventDriven.Project.UI.DashBoardControls
             SearchStudent(txtSearch.Text.Trim());
         }
 
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SearchStudent(txtSearch.Text.Trim());
+            }
+        }
 
         private void SearchStudent(string searchValue)
         {
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                // Show all rows if search is empty
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                     row.Visible = true;
                 return;
             }
 
-            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$"); // only digits
+            bool isNumber = Regex.IsMatch(searchValue, @"^\d+$");
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -145,31 +152,28 @@ namespace EventDriven.Project.UI.DashBoardControls
 
                 if (isNumber)
                 {
-                    // search by ID (exact match)
                     match = row.Cells["Column1"].Value.ToString().Contains(searchValue);
                     row.Visible = match;
                 }
                 else
                 {
-                    // search by Name (partial match)
                     match = row.Cells["Column2"].Value.ToString()
-                                .ToLower()
-                                .Contains(searchValue.ToLower());
+                                  .ToLower()
+                                  .Contains(searchValue.ToLower());
+                    row.Visible = match;
                 }
-
-                row.Visible = match;
             }
         }
 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                // Trigger the search when Enter is pressed
-                SearchStudent(txtSearch.Text.Trim());  // Fixed: Pass the trimmed text as parameter
-                // Optional: Prevent the beep sound on Enter
-                e.SuppressKeyPress = true;
-            }
-        }
+        //private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        // Trigger the search when Enter is pressed
+        //        SearchStudent(txtSearch.Text.Trim());  // Fixed: Pass the trimmed text as parameter
+        //        // Optional: Prevent the beep sound on Enter
+        //        e.SuppressKeyPress = true;
+        //    }
+        //}
     }
 }

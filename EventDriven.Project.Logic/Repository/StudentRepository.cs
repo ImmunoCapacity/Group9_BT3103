@@ -287,5 +287,31 @@ namespace EventDriven.Project.Businesslogic.Repository
 
             };
         }
+
+        // GET all enrolled students
+        public async Task<List<StudentModel>> GetEnrolledStudentsAsync()
+        {
+            var query = @"SELECT Id, FirstName, MiddleName, LastName, Status, BirthDate, GradeLevel, Nationality,
+                                 FatherName, FatherContact, MotherName, MotherContact, ParentAddress,
+                                 GuardianName, GuardianRelationship, GuardianContact, GuardianAddress,
+                                 Suffix, Section, Gender, Email, LastSchool, LastGrade, Address, Contact, GWA
+                          FROM tblStudents
+                          WHERE Status = 'Enrolled'  -- Adjust status value if needed (e.g., 'Active')
+                          ORDER BY LastName, FirstName";  // Optional: Order by name
+            var list = new List<StudentModel>();
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        list.Add(ReadStudent(reader));
+                    }
+                }
+            }
+            return list;
+        }
     }
 }

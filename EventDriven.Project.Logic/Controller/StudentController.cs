@@ -126,6 +126,21 @@ namespace EventDriven.Project.Businesslogic.Controller
             }
         }
 
+        // GET all enrolled students
+        public async Task<List<StudentModel>> GetEnrolledStudentsAsync(UserModel authenticationKey)
+        {
+            if (!authenticate(authenticationKey))
+                throw new Exception("You are not logged in.");
+            try
+            {
+                return await studentRepository.GetEnrolledStudentsAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving enrolled students: {ex.Message}");
+            }
+        }
+
 
         // GET student by Id
         public async Task<StudentModel> GetByIdAsync(int id, UserModel authenticationKey)

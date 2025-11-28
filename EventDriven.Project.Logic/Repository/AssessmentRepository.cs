@@ -11,10 +11,11 @@ namespace EventDriven.Project.Logic.Repository
     public class AssessmentRepository
     {
 
-        public async Task UpdateStudentStatusAsync(int studentId, string newStatus)
+        public async Task UpdateStudentStatusAsync(int studentId, string requirement, string enrollment)
         {
             var query = @"UPDATE tblStudents
-                  SET Status = @Status
+                  SET AssessmentStatus = @requirement,
+                      EnrollmentStatus = @enrollment
                   WHERE Id = @StudentId";
 
             using (SqlConnection connection = new SqlConnection(connect.connectionString))
@@ -22,7 +23,8 @@ namespace EventDriven.Project.Logic.Repository
                 await connection.OpenAsync();
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Status", newStatus);
+                    command.Parameters.AddWithValue("@requirement", requirement);
+                    command.Parameters.AddWithValue("@enrollment", enrollment);
                     command.Parameters.AddWithValue("@StudentId", studentId);
 
                     int rowsAffected = await command.ExecuteNonQueryAsync();
@@ -32,6 +34,7 @@ namespace EventDriven.Project.Logic.Repository
                 }
             }
         }
+
 
         public async Task<List<StudentAssessment>> GetAssessmentAsync(int studentId)
         {
@@ -61,8 +64,7 @@ namespace EventDriven.Project.Logic.Repository
         }
         public async Task<List<StudentAssessment>> GetAllAssessmentsAsync()
         {
-            var query = @"SELECT * FROM vwStudentAssessment WHERE YearName IS NOT NULL
-";
+            var query = @"SELECT * FROM vwStudentAssessment WHERE YearName IS NOT NULL";
 
             var list = new List<StudentAssessment>();
 
@@ -120,6 +122,50 @@ namespace EventDriven.Project.Logic.Repository
             };
         }
 
+        public async Task<List<StudentAssessment>> GetAllEnrolledAsync()
+        {
+            var query = @"SELECT * FROM tblStudents 
+                  WHERE EnrollmentStatus = 'Enrolled'";
+
+            var list = new List<StudentAssessment>();
+
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        list.Add(ReadAssessment(reader));
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        public async Task<int> getNumberofEnrolledStudents()
+        {
+            var query = @"SELECT Count(*) FROM tblStudents 
+                  WHERE EnrollmentStatus = 'Enrolled'";
+
+            int enrolled;
+
+            using (SqlConnection connection = new SqlConnection(connect.connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                     enrolled = (int)await command.ExecuteScalarAsync();
+                }
+            }
+            return enrolled;
+        }
+
+
         private StudentAssessment ReadAssessment(SqlDataReader r)
         {
             return new StudentAssessment
@@ -132,6 +178,8 @@ namespace EventDriven.Project.Logic.Repository
                 StudentSection = r["StudentSection"] as string,
                 GWA = r["GWA"] == DBNull.Value ? null : (decimal?)r["GWA"],
                 Status = r["Status"].ToString(),
+                AssessmentStatus = r["AssessmentStatus"].ToString(),
+                EnrollmentStatus = r["EnrollmentStatus"].ToString(),
 
 
                 RegistrationId = r["RegistrationId"] as int?,
@@ -161,5 +209,6 @@ namespace EventDriven.Project.Logic.Repository
                 year = r["YearName"] as string
             };
         }
+
     }
 }

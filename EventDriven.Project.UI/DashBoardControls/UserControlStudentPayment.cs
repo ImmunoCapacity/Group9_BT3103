@@ -52,7 +52,9 @@ namespace EventDriven.Project.UI.DashBoardControls
             paymentController = new PaymentController();
             cmbIfPay.Text = "Unpaid";
             LoadStudents();
+
         }
+
 
         //private string getTuitionFee()
         //{

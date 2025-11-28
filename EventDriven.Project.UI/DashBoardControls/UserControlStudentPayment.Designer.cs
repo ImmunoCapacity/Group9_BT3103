@@ -86,6 +86,7 @@
             // 
             splitContainerPayment.Dock = DockStyle.Fill;
             splitContainerPayment.Location = new Point(0, 0);
+            splitContainerPayment.Margin = new Padding(3, 2, 3, 2);
             splitContainerPayment.Name = "splitContainerPayment";
             // 
             // splitContainerPayment.Panel1
@@ -105,9 +106,8 @@
             splitContainerPayment.Panel2.Controls.Add(lbName);
             splitContainerPayment.Panel2.Controls.Add(label2);
             splitContainerPayment.Panel2.Controls.Add(panel3);
-            splitContainerPayment.Size = new Size(1451, 988);
-            splitContainerPayment.SplitterDistance = 854;
-            splitContainerPayment.SplitterWidth = 5;
+            splitContainerPayment.Size = new Size(1270, 741);
+            splitContainerPayment.SplitterDistance = 747;
             splitContainerPayment.TabIndex = 0;
             // 
             // dataGridView2
@@ -147,8 +147,7 @@
             dataGridView2.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridView2.EnableHeadersVisualStyles = false;
             dataGridView2.GridColor = Color.SeaShell;
-            dataGridView2.Location = new Point(0, 113);
-            dataGridView2.Margin = new Padding(3, 4, 3, 4);
+            dataGridView2.Location = new Point(0, 85);
             dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
             dataGridView2.ReadOnly = true;
@@ -175,7 +174,7 @@
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
-            dataGridViewTextBoxColumn1.Width = 54;
+            dataGridViewTextBoxColumn1.Width = 43;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -193,7 +192,7 @@
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
-            dataGridViewTextBoxColumn3.Width = 122;
+            dataGridViewTextBoxColumn3.Width = 96;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -202,7 +201,7 @@
             dataGridViewTextBoxColumn4.MinimumWidth = 6;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.ReadOnly = true;
-            dataGridViewTextBoxColumn4.Width = 113;
+            dataGridViewTextBoxColumn4.Width = 92;
             // 
             // Column11
             // 
@@ -219,7 +218,7 @@
             dataGridViewTextBoxColumn5.MinimumWidth = 6;
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             dataGridViewTextBoxColumn5.ReadOnly = true;
-            dataGridViewTextBoxColumn5.Width = 103;
+            dataGridViewTextBoxColumn5.Width = 84;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -228,7 +227,7 @@
             dataGridViewTextBoxColumn6.MinimumWidth = 6;
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
-            dataGridViewTextBoxColumn6.Width = 170;
+            dataGridViewTextBoxColumn6.Width = 137;
             // 
             // Column8
             // 
@@ -237,7 +236,7 @@
             Column8.MinimumWidth = 6;
             Column8.Name = "Column8";
             Column8.ReadOnly = true;
-            Column8.Width = 102;
+            Column8.Width = 80;
             // 
             // Column9
             // 
@@ -246,7 +245,7 @@
             Column9.MinimumWidth = 6;
             Column9.Name = "Column9";
             Column9.ReadOnly = true;
-            Column9.Width = 119;
+            Column9.Width = 96;
             // 
             // Column10
             // 
@@ -260,9 +259,9 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(385, 80);
+            label5.Location = new Point(337, 60);
             label5.Name = "label5";
-            label5.Size = new Size(107, 29);
+            label5.Size = new Size(84, 23);
             label5.TabIndex = 166;
             label5.Text = "Incoming";
             // 
@@ -273,8 +272,9 @@
             panel1.Controls.Add(txtSearch);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(854, 77);
+            panel1.Size = new Size(747, 58);
             panel1.TabIndex = 148;
             // 
             // cmbIfPay
@@ -297,7 +297,7 @@
             btnSearchStuIn.Location = new Point(713, 19);
             btnSearchStuIn.Margin = new Padding(3, 4, 3, 4);
             btnSearchStuIn.Name = "btnSearchStuIn";
-            btnSearchStuIn.Size = new Size(120, 45);
+            btnSearchStuIn.Size = new Size(105, 34);
             btnSearchStuIn.TabIndex = 148;
             btnSearchStuIn.Text = "Search";
             btnSearchStuIn.UseVisualStyleBackColor = false;
@@ -308,7 +308,7 @@
             txtSearch.Location = new Point(201, 30);
             txtSearch.Margin = new Padding(3, 3, 10, 3);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(499, 27);
+            txtSearch.Size = new Size(437, 23);
             txtSearch.TabIndex = 147;
             txtSearch.KeyDown += txtSearch_KeyDown;
             // 
@@ -331,18 +331,19 @@
             // 
             panel2.BackColor = Color.SeaShell;
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(27, 13);
+            panel2.Location = new Point(24, 10);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(539, 51);
+            panel2.Size = new Size(472, 38);
             panel2.TabIndex = 165;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Sitka Text", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(126, 9);
+            label1.Location = new Point(110, 7);
             label1.Name = "label1";
-            label1.Size = new Size(268, 33);
+            label1.Size = new Size(221, 28);
             label1.TabIndex = 0;
             label1.Text = "Payment Information:";
             // 
@@ -350,9 +351,9 @@
             // 
             lbId.AutoSize = true;
             lbId.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbId.Location = new Point(134, 135);
+            lbId.Location = new Point(117, 101);
             lbId.Name = "lbId";
-            lbId.Size = new Size(26, 29);
+            lbId.Size = new Size(20, 23);
             lbId.TabIndex = 164;
             lbId.Text = "0";
             // 
@@ -360,9 +361,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(87, 135);
+            label3.Location = new Point(76, 101);
             label3.Name = "label3";
-            label3.Size = new Size(44, 29);
+            label3.Size = new Size(35, 23);
             label3.TabIndex = 163;
             label3.Text = "ID:";
             // 
@@ -370,7 +371,7 @@
             // 
             lbName.AutoSize = true;
             lbName.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbName.Location = new Point(134, 89);
+            lbName.Location = new Point(117, 67);
             lbName.Name = "lbName";
             lbName.Size = new Size(133, 29);
             lbName.TabIndex = 150;
@@ -380,9 +381,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(53, 89);
+            label2.Location = new Point(46, 67);
             label2.Name = "label2";
-            label2.Size = new Size(78, 29);
+            label2.Size = new Size(61, 23);
             label2.TabIndex = 1;
             label2.Text = "Name:";
             // 
@@ -401,7 +402,8 @@
             panel3.Controls.Add(btnPay);
             panel3.Controls.Add(label8);
             panel3.Controls.Add(label7);
-            panel3.Location = new Point(47, 192);
+            panel3.Location = new Point(41, 144);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
             panel3.Size = new Size(497, 660);
             panel3.TabIndex = 162;
@@ -421,9 +423,9 @@
             lbBalance.AutoSize = true;
             lbBalance.BackColor = Color.SeaShell;
             lbBalance.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbBalance.Location = new Point(277, 221);
+            lbBalance.Location = new Point(242, 166);
             lbBalance.Name = "lbBalance";
-            lbBalance.Size = new Size(72, 29);
+            lbBalance.Size = new Size(57, 23);
             lbBalance.TabIndex = 162;
             lbBalance.Text = "₱0.00";
             // 
@@ -432,9 +434,9 @@
             lbChange.AutoSize = true;
             lbChange.BackColor = Color.SeaShell;
             lbChange.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbChange.Location = new Point(155, 172);
+            lbChange.Location = new Point(136, 129);
             lbChange.Name = "lbChange";
-            lbChange.Size = new Size(72, 29);
+            lbChange.Size = new Size(57, 23);
             lbChange.TabIndex = 161;
             lbChange.Text = "₱0.00";
             lbChange.Click += lbChange_Click;
@@ -443,9 +445,10 @@
             // 
             rbPartialPayment.AutoSize = true;
             rbPartialPayment.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
-            rbPartialPayment.Location = new Point(61, 421);
+            rbPartialPayment.Location = new Point(53, 316);
+            rbPartialPayment.Margin = new Padding(3, 2, 3, 2);
             rbPartialPayment.Name = "rbPartialPayment";
-            rbPartialPayment.Size = new Size(193, 33);
+            rbPartialPayment.Size = new Size(157, 27);
             rbPartialPayment.TabIndex = 160;
             rbPartialPayment.Text = "Partial Payment";
             rbPartialPayment.UseVisualStyleBackColor = true;
@@ -459,7 +462,7 @@
             btnPrint.Location = new Point(147, 555);
             btnPrint.Margin = new Padding(3, 4, 3, 4);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(218, 45);
+            btnPrint.Size = new Size(191, 34);
             btnPrint.TabIndex = 161;
             btnPrint.Text = "Print Receipt";
             btnPrint.UseVisualStyleBackColor = false;
@@ -470,9 +473,10 @@
             rbFullPayment.AutoSize = true;
             rbFullPayment.Checked = true;
             rbFullPayment.Font = new Font("Sitka Text", 12F, FontStyle.Bold);
-            rbFullPayment.Location = new Point(61, 347);
+            rbFullPayment.Location = new Point(53, 260);
+            rbFullPayment.Margin = new Padding(3, 2, 3, 2);
             rbFullPayment.Name = "rbFullPayment";
-            rbFullPayment.Size = new Size(165, 33);
+            rbFullPayment.Size = new Size(134, 27);
             rbFullPayment.TabIndex = 0;
             rbFullPayment.TabStop = true;
             rbFullPayment.Text = "Full Payment";
@@ -483,9 +487,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(51, 304);
+            label4.Location = new Point(45, 228);
             label4.Name = "label4";
-            label4.Size = new Size(175, 29);
+            label4.Size = new Size(141, 23);
             label4.TabIndex = 151;
             label4.Text = "Payment Status:";
             // 
@@ -494,18 +498,18 @@
             label6.AutoSize = true;
             label6.BackColor = Color.SeaShell;
             label6.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(50, 79);
+            label6.Location = new Point(44, 59);
             label6.Name = "label6";
-            label6.Size = new Size(200, 29);
+            label6.Size = new Size(161, 23);
             label6.TabIndex = 153;
             label6.Text = "Payment Received:";
             // 
             // txtPaymentReceived
             // 
-            txtPaymentReceived.Location = new Point(61, 111);
-            txtPaymentReceived.Margin = new Padding(3, 3, 10, 3);
+            txtPaymentReceived.Location = new Point(53, 83);
+            txtPaymentReceived.Margin = new Padding(3, 2, 9, 2);
             txtPaymentReceived.Name = "txtPaymentReceived";
-            txtPaymentReceived.Size = new Size(277, 27);
+            txtPaymentReceived.Size = new Size(243, 23);
             txtPaymentReceived.TabIndex = 154;
             txtPaymentReceived.Text = "0.00";
             txtPaymentReceived.TextChanged += txtPaymentReceived_TextChanged;
@@ -519,7 +523,7 @@
             btnPay.Location = new Point(147, 502);
             btnPay.Margin = new Padding(3, 4, 3, 4);
             btnPay.Name = "btnPay";
-            btnPay.Size = new Size(216, 45);
+            btnPay.Size = new Size(189, 34);
             btnPay.TabIndex = 159;
             btnPay.Text = "Pay";
             btnPay.UseVisualStyleBackColor = false;
@@ -530,9 +534,9 @@
             label8.AutoSize = true;
             label8.BackColor = Color.SeaShell;
             label8.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(59, 221);
+            label8.Location = new Point(52, 166);
             label8.Name = "label8";
-            label8.Size = new Size(211, 29);
+            label8.Size = new Size(168, 23);
             label8.TabIndex = 157;
             label8.Text = "Remaining Balance:";
             // 
@@ -541,9 +545,9 @@
             label7.AutoSize = true;
             label7.BackColor = Color.SeaShell;
             label7.Font = new Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(61, 172);
+            label7.Location = new Point(53, 129);
             label7.Name = "label7";
-            label7.Size = new Size(94, 29);
+            label7.Size = new Size(73, 23);
             label7.TabIndex = 155;
             label7.Text = "Change:";
             // 
@@ -554,7 +558,6 @@
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
             Column6.ReadOnly = true;
-            Column6.Width = 125;
             // 
             // printDocument1
             // 
@@ -566,11 +569,12 @@
             // 
             // UserControlStudentPayment
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(splitContainerPayment);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UserControlStudentPayment";
-            Size = new Size(1451, 988);
+            Size = new Size(1270, 741);
             splitContainerPayment.Panel1.ResumeLayout(false);
             splitContainerPayment.Panel1.PerformLayout();
             splitContainerPayment.Panel2.ResumeLayout(false);

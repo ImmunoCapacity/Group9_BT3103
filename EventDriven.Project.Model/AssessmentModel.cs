@@ -13,5 +13,6 @@ namespace EventDriven.Project.Model
         public string Section { get; set; }
         public string Requirements { get; set; }
         public string PaymentMethod { get; set; }
+        public string Status { get; set; }
     }
 }

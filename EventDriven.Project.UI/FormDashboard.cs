@@ -48,21 +48,13 @@ namespace EventDriven.Project.UI
         private void btnStudentReg_Click(object sender, EventArgs e)
         {
             highlightButton(sender as Button);
-            //ShowControl(new UserControlStudentRegistration(role, main));
             ShowControl(new UserControlStudentInfoList(role, main, authenticationKey));
-
-            //ShowControl(new StudentInfoList());
-
-            //StudentInfoList studentInfoList = new StudentInfoList();
-            //studentInfoList.TopLevel = false;
-            //panel2.Controls.Add(studentInfoList);
-            //studentInfoList.BringToFront();
-            //studentInfoList.Show();
         }
 
         private void visibleRole(string role)
         {
-            btnStudentInfo.Visible = true;
+            btnHome.Visible = true;
+            btnStudentInfor.Visible = true;
             btnHistory.Visible = true;
             btnStudentReg.Visible = true;
             btnPayments.Visible = true;
@@ -75,7 +67,7 @@ namespace EventDriven.Project.UI
             }
             else if (role.Equals("Cashier"))
             {
-                btnStudentInfo.Visible = false;
+                btnStudentInfor.Visible = false;
                 btnStudentReg.Visible = false;
                 btnAssessment.Visible = false;
             }
@@ -108,6 +100,7 @@ namespace EventDriven.Project.UI
                 selected.UseVisualStyleBackColor = false;
             }
         }
+
 
         private async void FormDashboard_Load(object sender, EventArgs e)
         {
@@ -169,12 +162,17 @@ namespace EventDriven.Project.UI
             main.OpenChildForm(new FormUserRoles(main));
         }
 
-
-        private void btnStudentInfo_Click(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
             highlightButton(sender as Button);
             //ShowControl(new UserControlStudentRegistration(role, main));
             ShowControl(new UserControlStudentInfoList(role, main, authenticationKey));
+        }
+
+        private void btnStudentInfo_Click(object sender, EventArgs e)
+        {
+            highlightButton(sender as Button);
+            ShowControl(new UserControlHome(role, main, authenticationKey));
         }
 
         private void btnHistory_Click_1(object sender, EventArgs e)
@@ -266,5 +264,14 @@ namespace EventDriven.Project.UI
             }
         }
 
+        private void flowLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
